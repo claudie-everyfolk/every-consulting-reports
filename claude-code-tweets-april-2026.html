@@ -9,13 +9,9 @@
     <meta property="og:type" content="article">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Newsreader:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Newsreader:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
     <style>
-        *, *::before, *::after {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
         body {
             background: #FDFAF7;
@@ -23,517 +19,828 @@
             font-family: 'Newsreader', Georgia, serif;
             line-height: 1.7;
             -webkit-font-smoothing: antialiased;
-        }
-
-        .container {
-            max-width: 760px;
-            margin: 0 auto;
-            padding: 60px 24px 80px;
-        }
-
-        /* Header */
-        header {
-            margin-bottom: 48px;
-        }
-
-        header h1 {
-            font-family: 'Newsreader', Georgia, serif;
-            font-size: 48px;
-            font-weight: 500;
-            letter-spacing: -0.02em;
-            line-height: 1.1;
-            margin-bottom: 12px;
-        }
-
-        header .subtitle {
-            font-family: 'Newsreader', Georgia, serif;
-            font-size: 20px;
-            color: #2D2D2D;
-            font-weight: 400;
-            margin-bottom: 8px;
-        }
-
-        header .meta {
-            font-family: 'Inter', sans-serif;
-            font-size: 13px;
-            color: rgba(0,0,0,0.6);
-            letter-spacing: 0.01em;
-        }
-
-        /* Legend */
-        .legend {
-            font-family: 'Inter', sans-serif;
-            font-size: 14px;
-            color: rgba(0,0,0,0.6);
-            margin-bottom: 48px;
-            padding-bottom: 24px;
-            border-bottom: 1px solid #E2E3E4;
-            line-height: 1.6;
-        }
-
-        .legend .tag-example {
-            display: inline-block;
-            font-size: 11px;
-            font-weight: 600;
-            letter-spacing: 0.06em;
-            text-transform: uppercase;
-            padding: 3px 10px;
-            border-radius: 100px;
-            vertical-align: middle;
-            margin: 0 2px;
-        }
-
-        .tag-example.key-shift {
-            background: #088190;
-            color: #fff;
-        }
-
-        .tag-example.noise {
-            background: #E2E3E4;
-            color: rgba(0,0,0,0.6);
-        }
-
-        /* Entries */
-        article.entry {
-            padding: 50px 0;
-            border-bottom: 1px solid #E2E3E4;
-        }
-
-        article.entry:first-of-type {
-            padding-top: 0;
-        }
-
-        article.entry:last-of-type {
-            border-bottom: none;
-        }
-
-        .signal-tag {
-            display: inline-block;
-            font-family: 'Inter', sans-serif;
-            font-size: 11px;
-            font-weight: 600;
-            letter-spacing: 0.06em;
-            text-transform: uppercase;
-            padding: 3px 10px;
-            border-radius: 100px;
-            margin-bottom: 16px;
-        }
-
-        .signal-tag.key-shift {
-            background: #088190;
-            color: #fff;
-        }
-
-        .signal-tag.noise {
-            background: #E2E3E4;
-            color: rgba(0,0,0,0.6);
-        }
-
-        .entry h2 {
-            font-family: 'Newsreader', Georgia, serif;
-            font-size: 28px;
-            font-weight: 500;
-            line-height: 1.3;
-            letter-spacing: -0.01em;
-            margin-bottom: 8px;
-        }
-
-        .entry h2 a {
-            color: #111111;
-            text-decoration: underline;
-            text-decoration-color: rgba(0,0,0,0.25);
-            text-underline-offset: 3px;
-            transition: text-decoration-color 0.2s ease;
-        }
-
-        .entry h2 a:hover {
-            color: #088190;
-            text-decoration-color: #088190;
-        }
-
-        .entry .author {
-            font-family: 'Inter', sans-serif;
-            font-size: 14px;
-            color: rgba(0,0,0,0.6);
-            margin-bottom: 20px;
-        }
-
-        .entry .author a {
-            color: rgba(0,0,0,0.6);
-            text-decoration: underline;
-            text-decoration-color: rgba(0,0,0,0.2);
-            text-underline-offset: 2px;
-            transition: color 0.2s ease, text-decoration-color 0.2s ease;
-        }
-
-        .entry .author a:hover {
-            color: #088190;
-            text-decoration-color: #088190;
-        }
-
-        .entry .summary {
-            font-size: 18px;
-            color: #2D2D2D;
-            margin-bottom: 24px;
-        }
-
-        /* Details / Key Learnings */
-        .entry details {
-            margin-bottom: 20px;
-        }
-
-        .entry details summary {
-            font-family: 'Inter', sans-serif;
-            font-size: 14px;
-            font-weight: 500;
-            color: #111111;
-            cursor: pointer;
-            list-style: none;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            user-select: none;
-            padding: 8px 0;
-        }
-
-        .entry details summary::-webkit-details-marker {
-            display: none;
-        }
-
-        .entry details summary::before {
-            content: "\25B8";
-            font-size: 12px;
-            transition: transform 0.2s ease;
-            display: inline-block;
-        }
-
-        .entry details[open] summary::before {
-            transform: rotate(90deg);
-        }
-
-        .entry details .learnings {
-            padding: 12px 0 4px 18px;
+            height: 100vh;
             overflow: hidden;
         }
 
-        .entry details .learnings ul {
-            list-style: disc;
-            padding-left: 18px;
+        /* ── Header ── */
+        .page-header {
+            background: #FDFAF7;
+            border-bottom: 1px solid #E2E3E4;
+            padding: 28px 32px 20px;
         }
 
-        .entry details .learnings li {
-            font-size: 16px;
-            color: #2D2D2D;
-            margin-bottom: 10px;
-            line-height: 1.6;
+        .page-header h1 {
+            font-family: 'Newsreader', Georgia, serif;
+            font-size: 36px;
+            font-weight: 500;
+            letter-spacing: -0.02em;
+            line-height: 1.1;
+            margin-bottom: 6px;
         }
 
-        .entry .why-it-matters {
+        .page-header .subtitle {
+            font-family: 'Newsreader', Georgia, serif;
             font-size: 17px;
-            font-style: italic;
-            color: rgba(0,0,0,0.6);
-            margin-bottom: 16px;
+            color: #2D2D2D;
+            font-weight: 400;
+            margin-bottom: 4px;
         }
 
-        .entry .links {
-            font-family: 'Inter', sans-serif;
-            font-size: 14px;
+        .page-header .meta-row {
             display: flex;
-            gap: 20px;
+            align-items: center;
+            gap: 24px;
+            flex-wrap: wrap;
+            margin-top: 10px;
+        }
+
+        .page-header .meta {
+            font-family: 'Inter', sans-serif;
+            font-size: 13px;
+            color: rgba(0,0,0,0.55);
+        }
+
+        .page-header .legend {
+            font-family: 'Inter', sans-serif;
+            font-size: 13px;
+            color: rgba(0,0,0,0.55);
+            display: flex;
+            align-items: center;
+            gap: 6px;
             flex-wrap: wrap;
         }
 
-        .entry .links a {
-            color: #2D2D2D;
-            text-decoration: underline;
-            text-decoration-color: rgba(0,0,0,0.3);
-            text-underline-offset: 2px;
-            transition: color 0.2s ease, text-decoration-color 0.2s ease;
+        .tag-pill {
+            display: inline-block;
+            font-family: 'Inter', sans-serif;
+            font-size: 10px;
+            font-weight: 600;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+            padding: 2px 8px;
+            border-radius: 100px;
+            white-space: nowrap;
         }
 
-        .entry .links a:hover {
+        .tag-pill.key-shift { background: #088190; color: #fff; }
+        .tag-pill.noise { background: #E2E3E4; color: rgba(0,0,0,0.6); }
+
+        /* ── Layout ── */
+        .inbox-layout {
+            display: flex;
+            height: calc(100vh - 120px);
+        }
+
+        /* ── Left Panel ── */
+        .left-panel {
+            width: 35%;
+            min-width: 280px;
+            max-width: 420px;
+            background: #F5F2EE;
+            border-right: 1px solid #E2E3E4;
+            overflow-y: auto;
+            flex-shrink: 0;
+        }
+
+        .entry-item {
+            padding: 16px 20px;
+            border-bottom: 1px solid #E2E3E4;
+            cursor: pointer;
+            border-left: 3px solid transparent;
+            transition: background 0.15s ease, border-color 0.15s ease;
+        }
+
+        .entry-item:hover {
+            background: #EFECE7;
+        }
+
+        .entry-item.active {
+            background: #FDFAF7;
+            border-left-color: #088190;
+        }
+
+        .entry-item .item-tag {
+            margin-bottom: 6px;
+        }
+
+        .entry-item .item-title {
+            font-family: 'Newsreader', Georgia, serif;
+            font-size: 16px;
+            font-weight: 500;
+            line-height: 1.3;
+            margin-bottom: 4px;
+            color: #111;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .entry-item .item-author {
+            font-family: 'Inter', sans-serif;
+            font-size: 12px;
+            color: rgba(0,0,0,0.5);
+            margin-bottom: 6px;
+        }
+
+        .entry-item .item-summary {
+            font-family: 'Inter', sans-serif;
+            font-size: 12px;
+            color: rgba(0,0,0,0.55);
+            line-height: 1.5;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        /* ── Right Panel ── */
+        .right-panel {
+            flex: 1;
+            overflow-y: auto;
+            padding: 36px 48px 60px;
+            background: #FDFAF7;
+        }
+
+        .detail-header {
+            margin-bottom: 32px;
+            padding-bottom: 24px;
+            border-bottom: 1px solid #E2E3E4;
+        }
+
+        .detail-header .tag-pill { margin-bottom: 12px; }
+
+        .detail-header h2 {
+            font-family: 'Newsreader', Georgia, serif;
+            font-size: 30px;
+            font-weight: 500;
+            line-height: 1.25;
+            letter-spacing: -0.01em;
+            margin-bottom: 8px;
+        }
+
+        .detail-header .detail-author {
+            font-family: 'Inter', sans-serif;
+            font-size: 14px;
+            color: rgba(0,0,0,0.55);
+            margin-bottom: 4px;
+        }
+
+        .detail-header .detail-date {
+            font-family: 'Inter', sans-serif;
+            font-size: 13px;
+            color: rgba(0,0,0,0.4);
+        }
+
+        .detail-header .detail-links {
+            margin-top: 12px;
+            font-family: 'Inter', sans-serif;
+            font-size: 13px;
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+
+        /* ── Sections ── */
+        .section-block {
+            border-bottom: 1px solid #E2E3E4;
+        }
+
+        .section-block:last-child { border-bottom: none; }
+
+        .section-toggle {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            width: 100%;
+            padding: 16px 0;
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-family: 'Inter', sans-serif;
+            font-size: 14px;
+            font-weight: 600;
+            color: #111;
+            text-align: left;
+        }
+
+        .section-toggle:hover { color: #088190; }
+
+        .section-toggle .chevron {
+            font-size: 11px;
+            transition: transform 0.2s ease;
+            display: inline-block;
+            flex-shrink: 0;
+        }
+
+        .section-toggle .chevron.open { transform: rotate(90deg); }
+
+        .section-content {
+            display: none;
+            padding: 0 0 20px 0;
+        }
+
+        .section-content.open { display: block; }
+
+        .section-content p,
+        .section-content li {
+            font-family: 'Newsreader', Georgia, serif;
+            font-size: 16px;
+            color: #2D2D2D;
+            line-height: 1.7;
+            margin-bottom: 12px;
+        }
+
+        .section-content ul, .section-content ol {
+            padding-left: 22px;
+            margin-bottom: 12px;
+        }
+
+        .section-content li { margin-bottom: 8px; }
+
+        .section-content strong { color: #111; }
+
+        .section-content code {
+            font-family: 'SF Mono', 'Fira Code', monospace;
+            font-size: 14px;
+            background: #F0EDEA;
+            padding: 1px 5px;
+            border-radius: 3px;
+        }
+
+        .section-content .verdict-box {
+            background: #F5F2EE;
+            padding: 14px 18px;
+            margin-bottom: 16px;
+        }
+
+        .section-content .verdict-box .verdict-label {
+            font-family: 'Inter', sans-serif;
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: #088190;
+            margin-bottom: 4px;
+        }
+
+        .section-content .verdict-box .verdict-text {
+            font-family: 'Newsreader', Georgia, serif;
+            font-size: 16px;
+            color: #2D2D2D;
+            line-height: 1.6;
+        }
+
+        .section-content h4 {
+            font-family: 'Inter', sans-serif;
+            font-size: 13px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+            color: rgba(0,0,0,0.5);
+            margin: 20px 0 8px;
+        }
+
+        .section-content blockquote {
+            border-left: 2px solid #088190;
+            padding-left: 16px;
+            margin: 16px 0;
+            font-style: italic;
+            color: rgba(0,0,0,0.6);
+        }
+
+        .section-content blockquote p { color: rgba(0,0,0,0.6); }
+
+        .section-content a {
+            color: #2D2D2D;
+            text-decoration: underline;
+            text-decoration-color: rgba(0,0,0,0.25);
+            text-underline-offset: 2px;
+            transition: color 0.15s, text-decoration-color 0.15s;
+        }
+
+        .section-content a:hover {
             color: #088190;
             text-decoration-color: #088190;
         }
 
-        /* Big Picture */
-        section.big-picture {
-            padding-top: 50px;
-            border-top: 1px solid #E2E3E4;
-            margin-top: 50px;
+        .go-deeper-list {
+            list-style: none !important;
+            padding-left: 0 !important;
         }
 
-        .big-picture h2 {
-            font-family: 'Newsreader', Georgia, serif;
-            font-size: 32px;
-            font-weight: 500;
-            margin-bottom: 24px;
-            letter-spacing: -0.01em;
+        .go-deeper-list li {
+            padding-left: 0;
+            margin-bottom: 10px;
         }
 
-        .big-picture .actionable-insight {
-            font-size: 18px;
-            color: #2D2D2D;
-            margin-bottom: 32px;
-            line-height: 1.7;
-        }
-
-        .big-picture h3 {
-            font-family: 'Newsreader', Georgia, serif;
-            font-size: 22px;
-            font-weight: 500;
-            margin-bottom: 16px;
-        }
-
-        .big-picture ol {
-            padding-left: 24px;
-            margin-bottom: 32px;
-        }
-
-        .big-picture ol li {
-            font-size: 17px;
-            color: #2D2D2D;
-            margin-bottom: 12px;
-            line-height: 1.6;
-        }
-
-        .big-picture .coda {
+        .go-deeper-list li a {
             font-family: 'Inter', sans-serif;
             font-size: 14px;
-            color: rgba(0,0,0,0.6);
-            line-height: 1.7;
-            padding: 20px 0;
-            border-top: 1px solid #E2E3E4;
-            margin-top: 16px;
         }
 
-        /* Footer */
-        footer {
-            margin-top: 60px;
-            padding-top: 32px;
+        /* ── Links ── */
+        a { color: #2D2D2D; text-decoration: underline; text-decoration-color: rgba(0,0,0,0.25); text-underline-offset: 2px; transition: color 0.15s, text-decoration-color 0.15s; }
+        a:hover { color: #088190; text-decoration-color: #088190; }
+
+        /* ── Footer ── */
+        .detail-footer {
+            margin-top: 40px;
+            padding-top: 20px;
             border-top: 1px solid #E2E3E4;
             font-family: 'Inter', sans-serif;
-            font-size: 13px;
-            color: rgba(0,0,0,0.5);
-            line-height: 1.8;
+            font-size: 12px;
+            color: rgba(0,0,0,0.4);
         }
 
-        /* Mobile */
-        @media (max-width: 600px) {
-            .container {
-                padding: 40px 18px 60px;
+        /* ── Mobile ── */
+        @media (max-width: 900px) {
+            body { overflow: auto; height: auto; }
+
+            .inbox-layout {
+                flex-direction: column;
+                height: auto;
             }
 
-            header h1 {
-                font-size: 36px;
+            .left-panel {
+                width: 100%;
+                max-width: none;
+                min-width: 0;
+                border-right: none;
+                border-bottom: 1px solid #E2E3E4;
+                overflow-y: visible;
+                max-height: none;
             }
 
-            header .subtitle {
-                font-size: 17px;
+            .left-panel.collapsed .entry-item:not(.active) { display: none; }
+            .left-panel.collapsed .entry-item.active { cursor: default; }
+
+            .mobile-back {
+                display: block !important;
+                padding: 12px 20px;
+                font-family: 'Inter', sans-serif;
+                font-size: 13px;
+                color: #088190;
+                cursor: pointer;
+                border-bottom: 1px solid #E2E3E4;
+                background: #F5F2EE;
             }
 
-            .entry h2 {
-                font-size: 23px;
-            }
-
-            .entry .summary {
-                font-size: 16px;
-            }
-
-            .entry details .learnings li {
-                font-size: 15px;
-            }
-
-            .big-picture h2 {
-                font-size: 26px;
-            }
-
-            article.entry {
-                padding: 36px 0;
+            .right-panel {
+                padding: 24px 20px 48px;
             }
         }
+
+        @media (min-width: 901px) {
+            .mobile-back { display: none !important; }
+        }
+
+        /* Scrollbar */
+        .left-panel::-webkit-scrollbar, .right-panel::-webkit-scrollbar { width: 6px; }
+        .left-panel::-webkit-scrollbar-thumb, .right-panel::-webkit-scrollbar-thumb { background: rgba(0,0,0,0.12); border-radius: 3px; }
+        .left-panel::-webkit-scrollbar-track, .right-panel::-webkit-scrollbar-track { background: transparent; }
     </style>
 </head>
 <body>
-    <div class="container">
-        <header>
-            <h1>Signal Digest</h1>
-            <p class="subtitle">What actually matters in AI &mdash; curated by Claudie for the Every Consulting team</p>
-            <p class="meta">Last updated April 1, 2026</p>
-        </header>
 
-        <nav class="legend">
-            Each entry is tagged: <span class="tag-example key-shift">Key Shift</span> signals a genuine change in how we should think or act. <span class="tag-example noise">Noise</span> means useful context but nothing new for the team.
-        </nav>
-
-        <!-- Entry 1: Jesse Pujji -->
-        <article class="entry">
-            <span class="signal-tag key-shift">Key Shift</span>
-            <h2><a href="https://x.com/jspujji/status/2034616093386678778" target="_blank" rel="noopener">How to Use Claude Cowork Like a Second Employee</a></h2>
-            <p class="author">Jesse Pujji &middot; <a href="https://x.com/jspujji" target="_blank" rel="noopener">@jspujji</a></p>
-            <p class="summary">Reframes AI setup from &ldquo;prompting&rdquo; to &ldquo;management.&rdquo; Treat Cowork as a new hire &mdash; write onboarding docs (who-i-am.md, how-i-talk.md), set workspace boundaries, define &ldquo;done&rdquo; clearly. The quality of the onboarding packet determines the ceiling.</p>
-            <details>
-                <summary>Key Learnings</summary>
-                <div class="learnings">
-                    <ul>
-                        <li>The &ldquo;employee onboarding&rdquo; mental model changes everything &mdash; more intuitive for non-technical users than &ldquo;write a system prompt&rdquo;</li>
-                        <li>Context files beat prompt engineering: invest once in persistent markdown files that compound across sessions</li>
-                        <li>Skills = certifications for your AI employee &mdash; repeatable, specialized workflows</li>
-                        <li>&ldquo;No more than 5 clarifying questions&rdquo; prevents analysis-paralysis loops</li>
-                        <li>Dedicated workspace folder = blast radius control before you trust the output</li>
-                    </ul>
-                </div>
-            </details>
-            <p class="why-it-matters">This is the exact frame we should use in bootcamps. &ldquo;Onboard your AI&rdquo; lands better than &ldquo;write prompts.&rdquo;</p>
-            <div class="links">
-                <a href="https://x.com/jspujji/status/2034616093386678778" target="_blank" rel="noopener">View on X</a>
-            </div>
-        </article>
-
-        <!-- Entry 2: Ejaaz -->
-        <article class="entry">
-            <span class="signal-tag key-shift">Key Shift</span>
-            <h2><a href="https://x.com/cryptopunk7213/status/2034767628464513365" target="_blank" rel="noopener">Anthropic&rsquo;s Claude Code Shipping Spree</a></h2>
-            <p class="author">Ejaaz &middot; <a href="https://x.com/cryptopunk7213" target="_blank" rel="noopener">@cryptopunk7213</a></p>
-            <p class="summary">Catalogs everything Anthropic shipped in 4 weeks: texting Claude Code, 10,000+ skills + MCP, Claude Security, persistent memory, Channels, autonomous cron-jobs, 1M context, new models, 30+ plugins. Frames it as Anthropic completing an &ldquo;OpenClaw-killer.&rdquo;</p>
-            <details>
-                <summary>Key Learnings</summary>
-                <div class="learnings">
-                    <ul>
-                        <li>The velocity is the story &mdash; no competitor matched this shipping cadence</li>
-                        <li>Persistent memory + channels + cron-jobs = always-on agent (qualitatively different from a chatbot)</li>
-                        <li>The MCP/skills ecosystem (10,000+) makes Claude Code a platform, not just a product</li>
-                        <li>Product surface expanded from &ldquo;developer tool&rdquo; to &ldquo;knowledge worker replacement&rdquo;</li>
-                    </ul>
-                </div>
-            </details>
-            <p class="why-it-matters">Clients need to understand this isn&rsquo;t incremental &mdash; it&rsquo;s a phase change. &ldquo;Always-on autonomous agent&rdquo; is what we should be selling in discovery.</p>
-            <div class="links">
-                <a href="https://x.com/cryptopunk7213/status/2034767628464513365" target="_blank" rel="noopener">View on X</a>
-            </div>
-        </article>
-
-        <!-- Entry 3: Ruben Hassid -->
-        <article class="entry">
-            <span class="signal-tag noise">Noise</span>
-            <h2><a href="https://x.com/rubenhassid" target="_blank" rel="noopener">How to Set Up Claude So It Never Forgets You</a></h2>
-            <p class="author">Ruben Hassid &middot; <a href="https://x.com/rubenhassid" target="_blank" rel="noopener">@rubenhassid</a></p>
-            <p class="summary">&ldquo;Text files over prompts&rdquo; &mdash; take everything you know and put it in .md files. CLAUDE.md is the sleeper feature. Abandon prompt libraries entirely. Simple first-prompt template: &ldquo;Read the uploaded files completely before responding.&rdquo;</p>
-            <details>
-                <summary>Key Learnings</summary>
-                <div class="learnings">
-                    <ul>
-                        <li>CLAUDE.md is &ldquo;solid and underused by beginners&rdquo; &mdash; the auto-maintained memory file most users never discover</li>
-                        <li>The investment should go into markdown documentation, not prompt libraries</li>
-                        <li>&ldquo;Claude now knows you like an old coworker&rdquo; &mdash; scoped memory improves over time</li>
-                        <li>First-prompt template (&ldquo;Read files, then ask clarifying questions&rdquo;) prevents generic output</li>
-                    </ul>
-                </div>
-            </details>
-            <p class="why-it-matters">Solid advice but not novel for our team. However, Hassid&rsquo;s consumer-friendly framing makes it good reference material for non-technical bootcamp audiences.</p>
-            <div class="links">
-                <a href="https://x.com/rubenhassid" target="_blank" rel="noopener">View on X</a>
-                <a href="https://ruben.substack.com/" target="_blank" rel="noopener">Read Article</a>
-            </div>
-        </article>
-
-        <!-- Entry 4: Pawel Huryn -->
-        <article class="entry">
-            <span class="signal-tag key-shift">Key Shift</span>
-            <h2><a href="https://www.productcompass.pm/p/claude-md-snippets" target="_blank" rel="noopener">Three Blocks That Make Claude Get Smarter Every Session</a></h2>
-            <p class="author">Pawel Huryn &middot; <a href="https://x.com/PawelHuryn" target="_blank" rel="noopener">@PawelHuryn</a></p>
-            <p class="summary">Three CLAUDE.md blocks that create a self-improving AI. Knowledge Architecture uses a hypothesis-to-rule promotion system (confirm 3x to promote, contradict to demote). Decision Journal logs reasoning with alternatives. Quality Gate provides objective evaluation criteria. After one month, 24 autonomous rules emerged.</p>
-            <details>
-                <summary>Key Learnings</summary>
-                <div class="learnings">
-                    <ul>
-                        <li>Hypothesis-to-rule promotion is genuinely novel &mdash; scientific method applied to AI memory</li>
-                        <li>24 project-specific rules emerged organically in one month without explicit prompting</li>
-                        <li>Decision Journal with 3+ alternatives had 80% success rate vs. overconfident quick decisions</li>
-                        <li>Quality Gates fix the #1 failure mode: &ldquo;agents confidently praise their own mediocre work&rdquo;</li>
-                        <li>The distinction: this is &ldquo;memory with reflection,&rdquo; not just memory &mdash; compounding comes from the reflection loop</li>
-                    </ul>
-                </div>
-            </details>
-            <p class="why-it-matters">Most directly applicable for advanced clients. The hypothesis-promotion system is a teachable &ldquo;paradigm&rdquo; &mdash; exactly the kind of thing we deliver.</p>
-            <div class="links">
-                <a href="https://x.com/PawelHuryn" target="_blank" rel="noopener">View on X</a>
-                <a href="https://www.productcompass.pm/p/claude-md-snippets" target="_blank" rel="noopener">Read Article</a>
-            </div>
-        </article>
-
-        <!-- Entry 5: Himanshu -->
-        <article class="entry">
-            <span class="signal-tag key-shift">Key Shift</span>
-            <h2><a href="https://x.com/himanshustwts/status/2038924027411222533" target="_blank" rel="noopener">Claude Code Memory Architecture Deep Dive</a></h2>
-            <p class="author">Himanshu &middot; <a href="https://x.com/himanshustwts" target="_blank" rel="noopener">@himanshustwts</a></p>
-            <p class="summary">Source-code-level analysis of Claude Code&rsquo;s memory internals. Three-layer system: Auto Memory (persistent), Session Memory (intra-session, 12K cap), Extract Memories (background agent). MEMORY.md is a 200-line pointer index, not a data store. AutoDream consolidates during inactivity.</p>
-            <details>
-                <summary>Key Learnings</summary>
-                <div class="learnings">
-                    <ul>
-                        <li>Three-layer memory architecture operates at different timescales (persistent, session, background extraction)</li>
-                        <li>MEMORY.md is an index of pointers capped at 200 lines &mdash; the memory system is a search index, not a database</li>
-                        <li>AutoDream runs four phases during inactivity: Orient, Gather, Consolidate, Prune &mdash; Claude literally &ldquo;sleeps on it&rdquo;</li>
-                        <li>Four-type memory taxonomy: User, Feedback, Project, Reference &mdash; each drives different retrieval relevance</li>
-                        <li>36.8GB memory leak from 292 agents led to hard architectural caps &mdash; multi-agent safety learned through production pain</li>
-                    </ul>
-                </div>
-            </details>
-            <p class="why-it-matters">Ground truth from leaked source code. When clients ask &ldquo;how does Claude remember?&rdquo; we can explain the real architecture. AutoDream is a powerful metaphor for long-running deployments.</p>
-            <div class="links">
-                <a href="https://x.com/himanshustwts/status/2038924027411222533" target="_blank" rel="noopener">View on X</a>
-            </div>
-        </article>
-
-        <!-- Entry 6: Boris Cherny -->
-        <article class="entry">
-            <span class="signal-tag key-shift">Key Shift</span>
-            <h2><a href="https://x.com/bcherny/status/2036286592089022699" target="_blank" rel="noopener">The Anthropic Labs Insider Story</a></h2>
-            <p class="author">Boris Cherny &middot; <a href="https://x.com/bcherny" target="_blank" rel="noopener">@bcherny</a> &mdash; Head of Claude Code</p>
-            <p class="summary">Head of Claude Code reveals the tiny Anthropic Labs team shipped MCP, Skills, Claude Desktop, and Claude Code. Plain glob+grep beat vector databases for context retrieval. Boris ships 20&ndash;30 PRs/day via 5 parallel Claude instances. Prototypes replaced PRDs entirely.</p>
-            <details>
-                <summary>Key Learnings</summary>
-                <div class="learnings">
-                    <ul>
-                        <li>&ldquo;Search over retrieval&rdquo; beat every fancy approach &mdash; plain glob and grep, driven by the model, outperformed vector databases</li>
-                        <li>20&ndash;30 PRs/day workflow: 5 parallel instances, start in plan mode, iterate, then one-shot execution</li>
-                        <li>&ldquo;Prototypes over PRDs&rdquo; killed the old product process &mdash; they couldn&rsquo;t have shipped this with static mocks</li>
-                        <li>Cowork was built in ~10 days and grew faster than Claude Code at launch &mdash; non-technical users were the bigger market</li>
-                        <li>Meta-skill shifted from &ldquo;deep work&rdquo; to &ldquo;context switching&rdquo; &mdash; orchestrating multiple AI instances</li>
-                        <li>&ldquo;Update your CLAUDE.md after every correction&rdquo; &mdash; simplest possible compounding practice</li>
-                    </ul>
-                </div>
-            </details>
-            <p class="why-it-matters">The most authoritative source in the batch. &ldquo;Search over retrieval&rdquo; alone should change how we advise clients on RAG. The parallel-instances workflow is the most concrete productivity framework.</p>
-            <div class="links">
-                <a href="https://x.com/bcherny/status/2036286592089022699" target="_blank" rel="noopener">View on X</a>
-                <a href="https://howborisusesclaudecode.com/" target="_blank" rel="noopener">Read Article</a>
-                <a href="https://newsletter.pragmaticengineer.com/p/building-claude-code-with-boris-cherny" target="_blank" rel="noopener">Pragmatic Engineer Interview</a>
-            </div>
-        </article>
-
-        <!-- Big Picture -->
-        <section class="big-picture">
-            <h2>What This Tells Us</h2>
-            <p class="actionable-insight">The single most actionable insight: the shift from &ldquo;prompting&rdquo; to &ldquo;onboarding&rdquo; (Pujji) combined with &ldquo;update CLAUDE.md after every correction&rdquo; (Cherny). These two practices together create compounding AI capability with minimal effort. One reframes the relationship; the other gives it a ratchet. Neither requires technical sophistication &mdash; both are teachable in a single bootcamp session.</p>
-
-            <h3>Five non-obvious insights across all sources</h3>
-            <ol>
-                <li><strong>Memory is architecture, not feature.</strong> Claude Code runs a three-layer system with background consolidation (AutoDream). Clients who treat memory as &ldquo;just context&rdquo; will plateau; those who design for it will compound.</li>
-                <li><strong>Search beats retrieval.</strong> Boris Cherny confirmed that plain glob+grep, directed by the model, outperforms vector databases for context retrieval. This directly challenges the RAG-first advice most clients receive.</li>
-                <li><strong>The hypothesis-promotion pattern is a new primitive.</strong> Huryn&rsquo;s &ldquo;confirm 3x to promote, contradict to demote&rdquo; system is a teachable paradigm &mdash; scientific method applied to AI memory. No one else is teaching this.</li>
-                <li><strong>The meta-skill is now orchestration, not execution.</strong> Boris runs 5 parallel Claude instances. The bottleneck shifted from &ldquo;can you code fast&rdquo; to &ldquo;can you context-switch and manage multiple agents.&rdquo; This has training implications.</li>
-                <li><strong>The platform shift happened in 4 weeks.</strong> Ejaaz&rsquo;s catalog shows Claude Code crossed from developer tool to knowledge-worker platform in a single shipping sprint. Clients who evaluated it even two months ago saw a fundamentally different product.</li>
-            </ol>
-
-            <p class="coda">5 of 6 sources tagged as Key Shift. The dominant theme: Claude Code&rsquo;s memory, personalization, and autonomous capabilities represent a genuine platform shift &mdash; not incremental improvement.</p>
-        </section>
-
-        <footer>
-            <p>Curated by Claudie, Chief of Staff @ Every Consulting</p>
-            <p>This digest evolves &mdash; new entries are added from daily X browsing. Only signal, never noise.</p>
-        </footer>
+<div class="page-header">
+    <h1>Signal Digest</h1>
+    <p class="subtitle">What actually matters in AI &mdash; curated by Claudie for the Every Consulting team</p>
+    <div class="meta-row">
+        <span class="meta">Last updated April 1, 2026</span>
+        <span class="legend">
+            <span class="tag-pill key-shift">Key Shift</span> = ground is moving &nbsp;&middot;&nbsp;
+            <span class="tag-pill noise">Noise</span> = solid but not new
+        </span>
     </div>
+</div>
+
+<div class="inbox-layout">
+
+<!-- ── Left Panel ── -->
+<div class="left-panel" id="leftPanel">
+    <div class="mobile-back" id="mobileBack" style="display:none;">&larr; Back to list</div>
+
+    <div class="entry-item active" data-index="0">
+        <span class="tag-pill key-shift item-tag">Key Shift</span>
+        <div class="item-title">How to Use Claude Cowork Like a Second Employee</div>
+        <div class="item-author">Jesse Pujji (@jspujji)</div>
+        <div class="item-summary">Founder who built a staffing empire now teaches people to replace those same hires with Claude Cowork.</div>
+    </div>
+
+    <div class="entry-item" data-index="1">
+        <span class="tag-pill key-shift item-tag">Key Shift</span>
+        <div class="item-title">Anthropic&rsquo;s Claude Code Shipping Spree</div>
+        <div class="item-author">Ejaaz (@cryptopunk7213)</div>
+        <div class="item-summary">74 releases in 52 days &mdash; building a full autonomous agent platform.</div>
+    </div>
+
+    <div class="entry-item" data-index="2">
+        <span class="tag-pill noise item-tag">Noise</span>
+        <div class="item-title">How to Set Up Claude So It Never Forgets You</div>
+        <div class="item-author">Ruben Hassid (@rubenhassid)</div>
+        <div class="item-summary">Popular AI educator repackages Claude&rsquo;s documented features as a personal-brand methodology.</div>
+    </div>
+
+    <div class="entry-item" data-index="3">
+        <span class="tag-pill key-shift item-tag">Key Shift</span>
+        <div class="item-title">Three Blocks That Make Claude Get Smarter Every Session</div>
+        <div class="item-author">Pawel Huryn (@PawelHuryn)</div>
+        <div class="item-summary">A concrete CLAUDE.md framework that turns Claude Code into a self-improving system.</div>
+    </div>
+
+    <div class="entry-item" data-index="4">
+        <span class="tag-pill key-shift item-tag">Key Shift</span>
+        <div class="item-title">Claude Code Memory Architecture Deep Dive</div>
+        <div class="item-author">Himanshu (@himanshustwts)</div>
+        <div class="item-summary">Source-code-level analysis reveals a production-grade persistent memory architecture.</div>
+    </div>
+
+    <div class="entry-item" data-index="5">
+        <span class="tag-pill key-shift item-tag">Key Shift</span>
+        <div class="item-title">The Anthropic Labs Insider Story</div>
+        <div class="item-author">Boris Cherny (@bcherny)</div>
+        <div class="item-summary">Head of Claude Code reveals the operational playbook behind 20&ndash;30 PRs/day.</div>
+    </div>
+</div>
+
+<!-- ── Right Panel ── -->
+<div class="right-panel" id="rightPanel">
+    <!-- Content injected by JS -->
+</div>
+
+</div>
+
+<script>
+var entries = [
+
+// ── Entry 0: Jesse Pujji ──
+{
+    tag: "key-shift",
+    tagLabel: "Key Shift",
+    title: "How to Use Claude Cowork Like a Second Employee",
+    author: 'Jesse Pujji (<a href="https://x.com/jspujji" target="_blank" rel="noopener">@jspujji</a>)',
+    date: "April 1, 2026",
+    links: '<a href="https://x.com/jspujji/status/2034616093386678778" target="_blank" rel="noopener">View tweet</a> <a href="https://www.linkedin.com/pulse/how-use-claude-cowork-like-second-employee-jesse-pujji-6mqtc" target="_blank" rel="noopener">Read article</a>',
+    sections: [
+        {
+            title: "Worth Your Time?",
+            open: true,
+            html: '<div class="verdict-box"><div class="verdict-label">Verdict: Read</div><div class="verdict-text">The staffing industry\u2019s own operators are now writing the playbook for making their services obsolete.</div></div><p>Not for the tactical tips (which are solid but available elsewhere), but for <em>who is saying it and why</em>. Jesse Pujji built GrowthAssistant \u2014 a company that places offshore marketing talent at scale for $3,500/month. When the guy whose business model is \u201chire humans to do knowledge work\u201d starts publishing guides on how to replace those humans with Claude Cowork, that is a leading indicator worth paying attention to.</p>'
+        },
+        {
+            title: "What\u2019s Actually Happening",
+            open: false,
+            html: '<p>Pujji\u2019s article walks through a practical setup for treating Claude Cowork as a persistent, capable worker: dedicated workspace folders, context files (about-me.md, brand-voice.md, working-preferences.md), skills/plugins for repeatable workflows, global instructions that persist across sessions, and Projects for scoped memory.</p><p>But the structural story is bigger than the tips.</p><h4>What\u2019s actually driving this</h4><ol><li><strong>Cowork has crossed the usability threshold.</strong> When Pujji describes pointing Claude at a folder of 4 months of messy files and having it categorize, rename (YYYY-MM-DD format), organize into subfolders, and generate a summary log \u2014 that is work a junior operations hire does. Cowork does it in minutes, not days, and doesn\u2019t need onboarding beyond a context file.</li><li><strong>The \u201cemployee\u201d metaphor is deliberate and strategic.</strong> He\u2019s not saying \u201cuse this tool.\u201d He\u2019s saying \u201cthis is a second employee.\u201d That framing shifts the buyer\u2019s mental model from \u201csoftware subscription\u201d to \u201cheadcount decision.\u201d At $20\u2013200/month vs. $3,500+/month for a GrowthAssistant placement, the math is brutal.</li><li><strong>The skills/plugins ecosystem is the real moat.</strong> Pujji highlights that \u201cCowork + skills is like an employee with a specific certification.\u201d With 1,236+ skills already in the directory and custom skill creation via /skill-creator, the ecosystem is building the equivalent of a specialized labor marketplace.</li></ol><h4>Who benefits from this narrative?</h4><ul><li><strong>Pujji personally</strong> \u2014 positions himself as a thought leader at the intersection of talent and AI, hedging his own business model.</li><li><strong>Anthropic</strong> \u2014 the \u201csecond employee\u201d framing justifies premium pricing. If users think of Cowork as headcount, $200/month for Max feels like a steal.</li><li><strong>Early adopters</strong> \u2014 companies that restructure workflows around Cowork now get a compounding advantage.</li></ul><h4>Structural shift or cyclical noise?</h4><p><strong>Structural shift, unambiguously.</strong> The capabilities described (file system access, multi-step autonomous execution, persistent memory via Projects, scheduled tasks, 38+ app connectors) represent a qualitative break from chatbot-era AI. When the tool can read your files, make a plan, execute it, and deliver finished output \u2014 that is labor substitution, not productivity enhancement.</p>'
+        },
+        {
+            title: "What\u2019s Not Being Said",
+            open: false,
+            html: '<ol><li><strong>The GrowthAssistant conflict of interest.</strong> Pujji never mentions that he runs a staffing company placing the exact type of worker Cowork threatens. This is either remarkable self-awareness or strategic positioning \u2014 probably both.</li><li><strong>Failure modes and quality ceilings.</strong> The article presents the happy path. It doesn\u2019t discuss: Cowork misreading files and producing confident but wrong output, the 50% success rate on complex Dispatch tasks, the fact that scheduled tasks die when the desktop app closes, or the absence of audit logs and compliance exports.</li><li><strong>The token economics.</strong> One Cowork session consumes 20+ regular chat equivalents. At scale, the \u201csecond employee\u201d burns through usage limits fast. The 5-hour reset window on Max plans creates unpredictable availability.</li><li><strong>No mention of the team/org gap.</strong> Cowork Projects don\u2019t share across team members. No cloud sync. No collaboration features. The \u201csecond employee\u201d metaphor breaks down when this employee can\u2019t talk to anyone else on your team.</li></ol><blockquote><p>\u201cPujji is conflating task automation with employment. A second employee brings judgment, institutional knowledge, relationship context, and the ability to handle ambiguity across domains simultaneously. Cowork handles well-scoped, file-based tasks with clear success criteria. The gap between \u2018organizes my folder\u2019 and \u2018manages my client relationship\u2019 is not a gap that closes with more context files.\u201d</p></blockquote><p>Fair point. But the counter-counter: the gap is closing faster than most people expect, and the set of tasks that qualify as \u201cwell-scoped with clear success criteria\u201d is much larger than most knowledge workers want to admit.</p>'
+        },
+        {
+            title: "Bigger Picture",
+            open: false,
+            html: '<h4>AI/AGI trajectory</h4><p>Cowork represents the <strong>agentic layer</strong> that the industry has been promising since 2024:</p><ul><li><strong>2023\u20132024:</strong> Chat interfaces. Human drives, AI assists.</li><li><strong>2025:</strong> Computer use, basic tool calling. AI can touch the environment but needs hand-holding.</li><li><strong>2026 (now):</strong> Persistent agentic systems with file access, memory, scheduling, and app connectors. AI drives, human reviews.</li><li><strong>2027 (likely):</strong> Multi-agent systems where Cowork-like agents coordinate with each other, share context, and handle end-to-end workflows with minimal human intervention.</li></ul><h4>Labor market transformation</h4><p>This is the article that staffing industry analysts should be reading. The disruption path is clear:</p><ol><li><strong>Phase 1 (now):</strong> AI handles individual tasks that junior hires do. Headcount grows slower.</li><li><strong>Phase 2 (6\u201312 months):</strong> AI handles workflows that span multiple tasks. Headcount starts shrinking for operational roles.</li><li><strong>Phase 3 (12\u201324 months):</strong> AI handles the coordination between workflows. Middle management layer compresses.</li></ol><p>The offshore staffing industry ($300B+ globally) is directly in the blast radius. Pujji writing this article is the equivalent of a coal executive publishing a guide to solar panel installation.</p>'
+        },
+        {
+            title: "What\u2019s Coming Next",
+            open: false,
+            html: '<h4>Most probable next developments</h4><ol><li><strong>Cowork gets team/org features.</strong> Shared Projects, cloud sync, role-based access. Expect Q2\u2013Q3 2026.</li><li><strong>Staffing companies pivot to \u201cAI + human\u201d hybrid models.</strong> GrowthAssistant will likely start offering \u201cAI-augmented assistants\u201d \u2014 human operators who use Cowork as their execution layer, handling 3\u20135x the workload.</li><li><strong>Skills marketplace becomes a business.</strong> With 1,236+ skills and growing, expect monetization: premium skills, certified skill creators, enterprise skill libraries. This is the app store moment for agentic AI.</li><li><strong>Microsoft Copilot Cowork enters direct competition.</strong> Already announced (March 2026) at $99/user/month bundled with M365 E7.</li></ol><h4>Non-obvious second-order effects</h4><ul><li><strong>Rise of \u201cAI operations\u201d as a job function.</strong> The people who write the best context files, design the best skills, and architect the best Project structures will become highly valuable. This is literally what Every Consulting teaches.</li><li><strong>Insurance and liability questions.</strong> When your \u201csecond employee\u201d makes a mistake that costs money, who is liable?</li><li><strong>Credential inflation for humans.</strong> If AI can do the baseline knowledge work, human workers differentiate on judgment, creativity, and relationship skills.</li></ul>'
+        },
+        {
+            title: "Go Deeper",
+            open: false,
+            html: '<h4>Foundational documents</h4><ul class="go-deeper-list"><li><a href="https://claude.com/product/cowork" target="_blank" rel="noopener">Anthropic Claude Cowork product page</a></li><li><a href="https://support.claude.com/en/articles/13345190-get-started-with-cowork" target="_blank" rel="noopener">Anthropic Cowork help center</a></li><li><a href="https://support.claude.com/en/articles/14116274-organize-your-tasks-with-projects-in-cowork" target="_blank" rel="noopener">Cowork Projects documentation</a></li><li><a href="https://support.claude.com/en/articles/12512180-use-skills-in-claude" target="_blank" rel="noopener">Skills documentation</a></li></ul><h4>Key people to follow</h4><ul><li><strong>Jesse Pujji</strong> (<a href="https://x.com/jspujji" target="_blank" rel="noopener">@jspujji</a>) \u2014 Will continue publishing at the intersection of talent/staffing and AI</li><li><strong>Ruben Hassid</strong> (How to AI on Substack) \u2014 Consistently good Cowork coverage with practical depth</li><li><strong>Anthropic product team</strong> \u2014 Watch for Projects V2, team features, enterprise connectors</li></ul><h4>Reference articles</h4><ul class="go-deeper-list"><li><a href="https://ruben.substack.com/p/claude-cowork-project" target="_blank" rel="noopener">Ruben Hassid: Claude Cowork + Project</a></li><li><a href="https://findskill.ai/blog/claude-cowork-guide/" target="_blank" rel="noopener">FindSkill.ai Cowork Guide</a></li><li><a href="https://www.cnbc.com/2026/02/24/anthropic-claude-cowork-office-worker.html" target="_blank" rel="noopener">CNBC: Anthropic updates Claude Cowork tool</a></li><li><a href="https://aragonresearch.com/anthropic-claude-cowork/" target="_blank" rel="noopener">Aragon Research: Anthropic Democratizes Agentic AI</a></li></ul>'
+        },
+        {
+            title: "What This Means for Us",
+            open: false,
+            html: '<p><strong>This article validates Every Consulting\u2019s entire thesis</strong> \u2014 but it also signals that the window for differentiation is narrowing.</p><ol><li><strong>The \u201ccontext file\u201d approach is exactly what we teach.</strong> Pujji\u2019s setup (about-me.md, brand-voice.md, working-preferences.md, global instructions) maps directly to what our trainers call \u201cparadigms.\u201d We should reference this article in sales conversations: \u201cEven the CEO of a staffing company is telling people to do what we teach.\u201d</li><li><strong>Skills creation is the next training module.</strong> Custom skills via /skill-creator turn Cowork from a general tool into a specialized one. We should build a training track specifically on \u201cdesigning AI skills for your team\u2019s workflows.\u201d</li><li><strong>The \u201csecond employee\u201d framing changes the ROI conversation.</strong> Stop comparing AI to \u201cproductivity tools\u201d and start comparing to headcount. A $50k\u2013$100k engagement that saves one $80k/year hire pays for itself in under 18 months. That is a CFO-friendly pitch.</li></ol><h4>How to adjust trainings</h4><ul><li><strong>For non-technical teams (Brooker):</strong> Lead with Cowork setup. The context file + skills + Projects pattern is accessible, practical, and immediately valuable.</li><li><strong>For technical teams (Mike):</strong> Position Cowork as the gateway drug to Claude Code. Show how the same patterns work at a deeper level for engineering workflows.</li><li><strong>For discovery sessions:</strong> Use the Pujji framework as a diagnostic. Ask clients: \u201cWhich of your team\u2019s tasks could be described to an AI in a context file? Which require human judgment that can\u2019t be documented?\u201d</li></ul><h4>Strategic risk to monitor</h4><p>If Cowork gets good enough fast enough, mid-tier clients ($50k for training) might conclude they can self-serve using articles like Pujji\u2019s. The defense: our value is not in teaching people to click buttons, it is in understanding their specific workflows deeply enough to design the right context files, skills, and paradigms.</p>'
+        }
+    ]
+},
+
+// ── Entry 1: Ejaaz ──
+{
+    tag: "key-shift",
+    tagLabel: "Key Shift",
+    title: "Anthropic\u2019s Claude Code Shipping Spree",
+    author: 'Ejaaz (<a href="https://x.com/cryptopunk7213" target="_blank" rel="noopener">@cryptopunk7213</a>)',
+    date: "April 1, 2026",
+    links: '<a href="https://x.com/cryptopunk7213/status/2034767628464513365" target="_blank" rel="noopener">View tweet</a>',
+    sections: [
+        {
+            title: "Worth Your Time?",
+            open: true,
+            html: '<div class="verdict-box"><div class="verdict-label">Verdict: Read</div><div class="verdict-text">Anthropic just built a full autonomous agent OS in public view, and most people are still calling it \u201ca coding tool.\u201d</div></div><p>Not for the tweet itself \u2014 Ejaaz is a hype aggregator, not an analyst \u2014 but for what the underlying shipping velocity signals. 74 releases in 52 days across four product surfaces (Claude Code, Cowork, API, Models) is not normal. This is a company executing a platform land-grab before the market calcifies.</p>'
+        },
+        {
+            title: "What\u2019s Actually Happening",
+            open: false,
+            html: '<p>Anthropic is shipping on parallel tracks simultaneously \u2014 developer tools, desktop automation, API infrastructure, and core models \u2014 with no team blocking another. This is not a feature dump. It is a deliberate strategy to make Claude the default substrate for AI-assisted work across every surface.</p><h4>What shipped in ~4 weeks (Feb 3 \u2013 Mar 24, 2026)</h4><ul><li><strong>Claude Code (28 releases):</strong> Skills ecosystem (10,000+), MCP integrations, security scanning, worktrees, channels (Telegram/Discord), scheduled tasks, voice mode, remote control, agent teams</li><li><strong>Cowork (15 releases):</strong> Windows launch, Slack/GSuite connectors, Dispatch (persistent agents), scheduled tasks, Excel/PowerPoint sync</li><li><strong>API &amp; Infra (18 releases):</strong> Opus 4.6 + Sonnet 4.6, 1M context GA, 64K output tokens, 2x off-peak usage, cloud task scheduling</li><li><strong>Models &amp; Platform (13 releases):</strong> Computer use, persistent memory, interactive rich output, free tier expansions</li></ul><p><strong>Structural shift, not cyclical noise.</strong> The shift is from \u201cAI tool\u201d to \u201cAI platform.\u201d Claude Code is no longer a terminal coding assistant. It is becoming an agent runtime with scheduling, persistence, multi-channel communication, and autonomous execution. This is an OS-level play.</p>'
+        },
+        {
+            title: "What\u2019s Not Being Said",
+            open: false,
+            html: '<ul><li><strong>Reliability at scale is unproven.</strong> Shipping features fast does not mean they work reliably in production. Enterprise clients care about uptime, determinism, and auditability.</li><li><strong>Rate limiting is real.</strong> The 2x off-peak usage announcement implicitly acknowledges capacity constraints. Claude Max subscribers hit session limits regularly.</li><li><strong>OpenClaw comparison is misleading.</strong> OpenClaw (247K GitHub stars) is an open-source life-automation agent on messaging platforms. Claude Code Channels copies the interface paradigm but the underlying products serve different use cases.</li><li><strong>The security surface area just exploded.</strong> Autonomous cron jobs, computer use, persistent memory, and multi-channel access create a massive attack surface.</li></ul><blockquote><p>Anthropic is building breadth when the market will reward depth. Shipping 74 features in 52 days means none of them are deeply refined. The company that wins enterprise will be the one whose agents complete complex multi-step workflows reliably 95%+ of the time \u2014 not the one with the longest feature list.</p></blockquote>'
+        },
+        {
+            title: "Bigger Picture",
+            open: false,
+            html: '<p>We are firmly in the <strong>agent platform wars</strong> phase. The stack is consolidating around: model layer \u2192 agent runtime \u2192 interface layer. Anthropic is trying to own the full stack from model to interface.</p><h4>Competitive landscape</h4><ul><li><strong>OpenAI</strong> \u2014 Codex (focused on code generation), ChatGPT with plugins. Slower shipping but deeper integration with existing enterprise workflows via Microsoft.</li><li><strong>Google</strong> \u2014 Gemini 2.5 Pro, but no equivalent agent platform. Funding Anthropic ($5B for data centers) while competing with them.</li><li><strong>OpenClaw</strong> \u2014 Open-source, community-driven, messaging-first. Creator (Peter Steinberger) joined OpenAI in Feb 2026.</li><li><strong>Cursor/Windsurf/Cline</strong> \u2014 IDE-embedded agents. Being squeezed from above by Claude Code\u2019s expanding surface area.</li></ul><p>The meta-pattern: every major AI lab is converging on \u201cpersistent, autonomous agent that operates across all your tools.\u201d Differentiation will come from reliability, security posture, and enterprise integration \u2014 not feature count.</p>'
+        },
+        {
+            title: "What\u2019s Coming Next",
+            open: false,
+            html: '<h4>Most probable</h4><ul><li>Anthropic ships a managed agent hosting service \u2014 \u201cClaude Workers\u201d or similar \u2014 where enterprises deploy persistent Claude agents with SLAs, audit logs, and compliance controls.</li><li>Computer Use moves from research preview to GA within 60 days.</li></ul><h4>Non-obvious second-order effects</h4><ul><li><strong>Internal IT teams become gatekeepers again.</strong> As Claude gains the ability to control computers, browse the web, send emails, and run scheduled tasks autonomously, security and IT teams will demand new governance frameworks. This creates a consulting opportunity.</li><li><strong>\u201cAI employee\u201d framing accelerates budget reallocation.</strong> CFOs start comparing agent subscription costs to headcount costs \u2014 potentially unlocking much larger deal sizes.</li><li><strong>Skill marketplace becomes the new app store.</strong> 10,000+ skills as markdown files means a long tail of community-created capabilities.</li></ul>'
+        },
+        {
+            title: "Go Deeper",
+            open: false,
+            html: '<h4>Key sources</h4><ul class="go-deeper-list"><li><a href="https://www.productcompass.pm/p/claude-shipping-calendar" target="_blank" rel="noopener">Product Compass: 74 Releases in 52 Days</a> \u2014 best structured breakdown</li><li><a href="https://venturebeat.com/orchestration/anthropic-just-shipped-an-openclaw-killer-called-claude-code-channels" target="_blank" rel="noopener">VentureBeat: Claude Code Channels as OpenClaw response</a></li><li><a href="https://www.crowdstrike.com/en-us/blog/what-security-teams-need-to-know-about-openclaw-ai-super-agent/" target="_blank" rel="noopener">CrowdStrike: OpenClaw Security Analysis</a></li><li><a href="https://www.datacamp.com/blog/openclaw-vs-claude-code" target="_blank" rel="noopener">DataCamp: OpenClaw vs Claude Code</a></li><li><a href="https://thenewstack.io/claude-dispatch-versus-openclaw/" target="_blank" rel="noopener">The New Stack: Claude Dispatch vs OpenClaw</a></li><li><a href="https://dev.to/jan_lucasandmann_bb9257c/claude-code-to-ai-os-blueprint-skills-hooks-agents-mcp-setup-in-2026-46gg" target="_blank" rel="noopener">DEV Community: Claude Code as AI OS Blueprint</a></li></ul><h4>People</h4><ul><li><strong>Ejaaz</strong> (<a href="https://x.com/cryptopunk7213" target="_blank" rel="noopener">@cryptopunk7213</a>) \u2014 high-signal for tracking retail AI sentiment</li><li><strong>Peter Steinberger</strong> \u2014 OpenClaw creator, now at OpenAI</li><li><strong>Dario Amodei</strong> \u2014 projecting $70B ARR in 2027, profitability in 2028</li></ul>'
+        },
+        {
+            title: "What This Means for Us",
+            open: false,
+            html: '<ol><li><strong>Update training curriculum now.</strong> Claude Code is no longer \u201ca coding assistant.\u201d Trainings need to cover: skills creation, MCP integrations, scheduled tasks, Channels, and the persistent memory model. Mike\u2019s workshops should incorporate worktrees, agent teams, and the /schedule workflow. Brooker\u2019s non-tech trainings should cover Cowork + Dispatch.</li><li><strong>New consulting offering: Agent Governance.</strong> The security surface of autonomous AI agents will terrify enterprise security teams. Every should develop a \u201cResponsible Agent Deployment\u201d framework \u2014 discovery sessions that map which agent capabilities are appropriate for which workflows, with guardrails.</li><li><strong>Reframe the sales conversation.</strong> When a hedge fund PM asks \u201ccan Claude replace my junior analyst?\u201d, we need a ready answer that is honest (not yet for critical workflows) but forward-looking.</li><li><strong>Skills-as-deliverable.</strong> The 10,000+ skills ecosystem means we can now deliver custom Claude Code skills as a tangible consulting artifact. A client engagement could produce: process maps, custom prompts, AND installable Claude Code skills.</li><li><strong>Watch the OpenClaw-to-Claude migration.</strong> Some clients\u2019 developers may already be running OpenClaw. Offering a \u201csecure migration to Claude Code Channels\u201d as a service could be a quick-win add-on.</li></ol>'
+        }
+    ]
+},
+
+// ── Entry 2: Ruben Hassid ──
+{
+    tag: "noise",
+    tagLabel: "Noise",
+    title: "How to Set Up Claude So It Never Forgets You",
+    author: 'Ruben Hassid (<a href="https://x.com/rubenhassid" target="_blank" rel="noopener">@rubenhassid</a>)',
+    date: "April 1, 2026",
+    links: '<a href="https://x.com/rubenhassid" target="_blank" rel="noopener">View on X</a> <a href="https://ruben.substack.com/p/i-am-just-a-text-file" target="_blank" rel="noopener">Read article</a>',
+    sections: [
+        {
+            title: "Worth Your Time?",
+            open: true,
+            html: '<div class="verdict-box"><div class="verdict-label">Verdict: Skim</div><div class="verdict-text">Well-produced onboarding content for Claude\u2019s existing features, dressed up as a proprietary methodology.</div></div><p>Hassid writes clearly and his audience is massive (425k+ subscribers), which means this content shapes how a large segment of non-technical users think about Claude. But the underlying material is a repackaging of Anthropic\u2019s own documentation \u2014 CLAUDE.md, Projects, Skills \u2014 into a personal-brand framework. If you already use Claude Code or have set up persistent context files, there is nothing new here.</p>'
+        },
+        {
+            title: "What\u2019s Actually Happening",
+            open: false,
+            html: '<p>Hassid is running a three-article sequence that builds from philosophy to implementation:</p><ol><li><strong>\u201cI am just a text file\u201d</strong> \u2014 The thesis. Your creative voice is reducible to a markdown file of constraints (80% \u201cwhat I never do\u201d). Use Claude\u2019s Cowork mode to interview yourself across 100 questions in seven categories, then export as a portable .md file.</li><li><strong>\u201cClaude.\u201d</strong> \u2014 The setup guide. Stop maintaining prompt libraries. Feed Claude structured text files (brand rules, writing samples, past work) as persistent context.</li><li><strong>\u201cClaude Skills\u201d</strong> \u2014 The automation layer. Build slash-command workflows using Claude\u2019s Skill Creator or his consultancy\u2019s tool (<a href="https://makemyskill.com" target="_blank" rel="noopener">makemyskill.com</a>).</li></ol><h4>Who benefits?</h4><ul><li>Hassid builds authority and drives traffic to his consultancy (GPC / makemyskill.com). The paid tier includes his actual voice file as a template \u2014 classic lead magnet.</li><li>Anthropic benefits from someone with 425k subscribers evangelizing Claude\u2019s stickiest features.</li><li>Readers at the \u201cjust upgraded from free ChatGPT\u201d level get genuine value.</li></ul><h4>Structural shift or cyclical noise?</h4><p>The underlying shift is real: the move from prompt engineering to context architecture. But Hassid is <em>describing</em>, not driving, that shift. The features he documents have existed for months. This is adoption-layer content, not frontier content.</p>'
+        },
+        {
+            title: "What\u2019s Not Being Said",
+            open: false,
+            html: '<ul><li><strong>No mention of CLAUDE.md as a codebase-level feature.</strong> Hassid treats these files as personal voice documents. He never touches the developer-facing reality: CLAUDE.md files checked into repositories that shape how Claude Code operates across entire engineering teams.</li><li><strong>No discussion of limitations at scale.</strong> A single voice file works for one person. What happens when a 50-person team needs consistent but role-differentiated AI behavior?</li><li><strong>The \u201cI am just a text file\u201d conclusion is philosophically shallow.</strong> Self-reported authenticity of AI-generated content by the person who trained the AI is not validation \u2014 it is confirmation bias.</li><li><strong>makemyskill.com is a commercial product buried in tutorial content.</strong> Not inherently wrong, but the audience may not register this.</li></ul><blockquote><p>\u201cText files over prompts\u201d inverts prematurely. The discipline of writing good prompts teaches you what good context looks like. Skipping straight to \u201cjust dump files\u201d produces bloated, unfocused context documents that waste tokens and degrade output quality.</p></blockquote>'
+        },
+        {
+            title: "Bigger Picture",
+            open: false,
+            html: '<p>This content sits at the <strong>adoption curve\u2019s early majority</strong> \u2014 the phase where documented-but-underused features get repackaged as \u201cdiscoveries\u201d by influencers with large audiences. Same pattern as ChatGPT Custom Instructions in 2023 and GPTs in early 2024.</p><p>The deeper trend: <strong>AI configuration is becoming a professional service.</strong> Hassid has already monetized it. Anthropic is building the infrastructure for it. The question is whether \u201csetting up your AI\u201d becomes a one-time task or an ongoing service.</p><p>For consulting specifically, this maps to a real client pain point: \u201cWe bought Claude Team seats but everyone uses it differently and the output is inconsistent.\u201d The solution is exactly what Hassid describes \u2014 but at organizational scale.</p>'
+        },
+        {
+            title: "What\u2019s Coming Next",
+            open: false,
+            html: '<ul><li><strong>Hassid will productize further.</strong> Expect a \u201cvoice file audit\u201d service or a course on makemyskill.com within the quarter.</li><li><strong>Anthropic will lean into the Skills ecosystem.</strong> Expect a Skills marketplace with reviews, ratings, and featured creators \u2014 a GPT Store equivalent, hopefully with better curation.</li><li><strong>\u201cAI configuration consultant\u201d becomes a recognized role.</strong> Life coaches who help you build your voice file. Brand consultants who build your company\u2019s CLAUDE.md.</li><li><strong>Context architecture will eat prompt engineering.</strong> The phrase \u201cprompt engineering\u201d will feel dated within 12 months.</li></ul>'
+        },
+        {
+            title: "Go Deeper",
+            open: false,
+            html: '<p>The move is not to copy Hassid\u2019s content \u2014 it is to operate one layer above it.</p><p>Hassid teaches individuals how to set up their personal Claude. Every Consulting should be the firm that does this at organizational scale: voice files that encode a company\u2019s analytical frameworks, Skills that standardize workflows across departments, CLAUDE.md files that ship inside client repositories.</p><ul class="go-deeper-list"><li><a href="https://ruben.substack.com/p/i-am-just-a-text-file" target="_blank" rel="noopener">Ruben Hassid: \u201cI am just a text file\u201d</a></li><li><a href="https://x.com/rubenhassid" target="_blank" rel="noopener">Ruben Hassid on X</a></li><li><a href="https://makemyskill.com" target="_blank" rel="noopener">makemyskill.com</a> \u2014 his skill-creation tool</li></ul>'
+        },
+        {
+            title: "What This Means for Us",
+            open: false,
+            html: '<p><strong>Direct relevance: Medium.</strong> The content teaches us nothing new \u2014 we already live this. But the signal matters in three ways:</p><ol><li><strong>Client awareness is rising.</strong> When a 425k-subscriber newsletter explains CLAUDE.md and Skills, expect incoming clients to arrive with partial knowledge and strong opinions. That is our entry point: \u201cYou built your personal voice file. Now let us build your organization\u2019s AI operating system.\u201d</li><li><strong>The language is shifting.</strong> \u201cContext architecture\u201d over \u201cprompt engineering.\u201d \u201cConfiguration\u201d over \u201cprompting.\u201d We should adopt this language in sales materials and training decks.</li><li><strong>Competitor intelligence.</strong> Hassid\u2019s GPC consultancy and makemyskill.com are entering adjacent territory. Consumer-grade and individual-focused, so not direct competitors today. But if they move upmarket toward team/enterprise setups, they have distribution advantages we lack. Worth monitoring.</li></ol>'
+        }
+    ]
+},
+
+// ── Entry 3: Pawel Huryn ──
+{
+    tag: "key-shift",
+    tagLabel: "Key Shift",
+    title: "Three Blocks That Make Claude Get Smarter Every Session",
+    author: 'Pawel Huryn (<a href="https://x.com/PawelHuryn" target="_blank" rel="noopener">@PawelHuryn</a>)',
+    date: "April 1, 2026",
+    links: '<a href="https://x.com/PawelHuryn" target="_blank" rel="noopener">View on X</a> <a href="https://www.productcompass.pm/p/claude-md-snippets" target="_blank" rel="noopener">Read article</a>',
+    sections: [
+        {
+            title: "Worth Your Time?",
+            open: true,
+            html: '<div class="verdict-box"><div class="verdict-label">Verdict: Read</div><div class="verdict-text">A copy-paste framework for turning Claude\u2019s memory from passive storage into an active learning system \u2014 and it actually works.</div></div><p>This is the most actionable piece on persistent AI configuration published this quarter. Not theory \u2014 tested over a month with measurable output (24 autonomously generated rules). Directly applicable to how we configure Claude for clients.</p>'
+        },
+        {
+            title: "What\u2019s Actually Happening",
+            open: false,
+            html: '<h4>The three blocks</h4><ol><li><strong>Knowledge Architecture</strong> \u2014 A hypothesis-to-rule promotion system. Claude maintains domain folders (<code>/knowledge/pricing/</code>, <code>/knowledge/onboarding/</code>) with three tiers: raw observations (<code>knowledge.md</code>), unconfirmed patterns (<code>hypotheses.md</code>), and confirmed rules (<code>rules.md</code>). When a hypothesis is confirmed 3+ times across sessions, it auto-promotes to a rule. When contradicted, rules demote back to hypotheses.</li><li><strong>Decision Journal</strong> \u2014 Structured decision records (inspired by Architecture Decision Records) with retrieval-first ordering. Before making any cross-session decision, Claude greps <code>/decisions/</code> for prior rulings. Each record captures context, alternatives, reasoning, trade-offs, and a <code>Supersedes</code> field for decision chains.</li><li><strong>Quality Gate</strong> (paywalled) \u2014 Gives Claude concrete, project-specific evaluation criteria so it can judge its own output against defined standards rather than defaulting to \u201clooks good to me.\u201d</li></ol><h4>Why this is novel</h4><p>The individual ideas are not new. What\u2019s novel is:</p><ul><li>Packaging them as copy-paste CLAUDE.md blocks that require zero infrastructure</li><li>The hypothesis-to-rule promotion loop, which creates genuine cross-session learning without external tooling</li><li>The compounding effect: after one month, Claude was operating with 24 rules the user never wrote</li></ul>'
+        },
+        {
+            title: "What\u2019s Not Being Said",
+            open: false,
+            html: '<ul><li><strong>Scalability ceiling.</strong> 24 rules after a month is impressive for a solo builder. But what happens at 200 rules? 500? No pruning, archival, or conflict-resolution mechanism described.</li><li><strong>Rule quality is unverified.</strong> Promoting after 3 confirmations sounds rigorous, but Claude is both the observer and the judge. Confirmation bias is baked in.</li><li><strong>No team coordination story.</strong> When multiple people contribute sessions, whose hypotheses get promoted? Decision conflicts between team members aren\u2019t addressed.</li><li><strong>The 24 rules are unexamined.</strong> \u201cClaude wrote 24 rules\u201d is impressive as a demonstration. \u201cClaude wrote 24 <em>good</em> rules\u201d is a different claim.</li></ul><blockquote><p>The hypothesis-to-rule promotion creates a false sense of rigor. In practice, Claude will tend to confirm its own hypotheses because it generated them and is motivated to find supporting evidence. What you actually want is an adversarial review step \u2014 a second pass that tries to disprove each hypothesis before promotion.</p></blockquote>'
+        },
+        {
+            title: "Bigger Picture",
+            open: false,
+            html: '<p>This is a leading indicator: <strong>AI configuration is becoming a form of programming.</strong> CLAUDE.md files, system prompts, and agent instructions are evolving from \u201chelpful notes\u201d into structured codebases with their own design patterns, testing, and version control.</p><h4>The trajectory</h4><ul><li><strong>2024:</strong> Prompt engineering (one-shot instructions)</li><li><strong>2025:</strong> Persistent configuration files (.claude/settings, CLAUDE.md)</li><li><strong>2026:</strong> Self-evolving configuration (rules that emerge from use)</li><li><strong>Next:</strong> Configuration that adapts autonomously based on outcomes, with human review of the delta</li></ul><p>The gap between \u201cusers who configure well\u201d and \u201cusers who don\u2019t\u201d will widen significantly. Configuration literacy is becoming as important as prompt literacy was two years ago.</p>'
+        },
+        {
+            title: "What\u2019s Coming Next",
+            open: false,
+            html: '<p><strong>Most probable:</strong> Anthropic (or the community) ships a first-party \u201cknowledge layer\u201d that does this natively \u2014 structured memory with promotion/demotion, built into Claude Code rather than bolted on via markdown files.</p><h4>Non-obvious second-order effects</h4><ul><li><strong>CLAUDE.md sharing becomes a market.</strong> If these configurations compound value, they become valuable IP. Expect \u201cstarter CLAUDE.md\u201d repos for specific domains the way we saw prompt libraries in 2024.</li><li><strong>Consulting firms will sell configuration.</strong> The real deliverable shifts from \u201cwe trained your team\u201d to \u201cwe configured your AI systems and the configuration keeps learning after we leave.\u201d</li><li><strong>Quality gates create an audit trail.</strong> For regulated industries (finance, healthcare), the Decision Journal + Quality Gate combination creates a compliance-friendly record of AI-assisted decisions.</li></ul>'
+        },
+        {
+            title: "Go Deeper",
+            open: false,
+            html: '<h4>Key sources</h4><ul class="go-deeper-list"><li><a href="https://www.productcompass.pm/p/claude-md-snippets" target="_blank" rel="noopener">Pawel Huryn: Three CLAUDE.md Blocks (Product Compass)</a></li></ul><h4>Related work and people</h4><ul><li>Anthropic\u2019s internal finding on agent self-evaluation confidence \u2014 agents praise their own work even when mediocre</li><li><strong>Boris Cherny</strong>\u2019s approach to CLAUDE.md at Anthropic (corrections as rules, checked into git)</li><li>Architecture Decision Records (ADR) pattern \u2014 the Decision Journal is a direct adaptation</li><li><strong>Robert Ogilvy</strong> \u2014 credited for the retrieval-first ordering and Supersedes field</li><li><strong>Pawel Huryn</strong> (<a href="https://x.com/PawelHuryn" target="_blank" rel="noopener">@PawelHuryn</a>) \u2014 Product Compass newsletter, prolific on Claude Code configuration patterns. Maintains pm-skills repo (100+ agentic skills for PMs)</li><li><strong>VoltAgent/awesome-agent-skills</strong> \u2014 community catalog of Claude Code skills (135+ agents, 42 commands)</li></ul>'
+        },
+        {
+            title: "What This Means for Us",
+            open: false,
+            html: '<h4>For client trainings</h4><ul><li><strong>This should become a standard module.</strong> \u201cConfiguring Claude for persistent learning\u201d is a concrete, high-value skill we can teach in 30 minutes.</li><li><strong>The Decision Journal is a natural fit for enterprise clients.</strong> Bloomberg, NYT, hedge funds \u2014 these organizations already value decision documentation. Framing it as \u201cautomated ADRs\u201d will resonate.</li><li><strong>The Quality Gate addresses a real client pain point.</strong> Every client who\u2019s tried AI agents has experienced \u201cClaude says it\u2019s done but it\u2019s wrong.\u201d</li></ul><h4>For our own practice</h4><ul><li>Our CLAUDE.md already uses many of these patterns. The article validates our approach and gives us language to explain it.</li><li>Consider adopting the hypothesis-to-rule promotion explicitly \u2014 the 3-confirmation threshold is a useful discipline.</li><li>The \u201c24 rules in a month\u201d metric is a compelling sales proof point.</li></ul><h4>For deliverables</h4><ul><li><strong>Add CLAUDE.md configuration as a standard deliverable.</strong> Knowledge Architecture + Decision Journal + Quality Gate is a natural extension of our \u201cCustom prompts\u201d offering \u2014 a deliverable that keeps improving after we leave.</li><li><strong>The configuration becomes the paradigm.</strong> Our \u201cParadigms\u201d deliverable could literally be a configured CLAUDE.md with domain-specific knowledge folders pre-seeded from discovery sessions.</li></ul>'
+        }
+    ]
+},
+
+// ── Entry 4: Himanshu ──
+{
+    tag: "key-shift",
+    tagLabel: "Key Shift",
+    title: "Claude Code Memory Architecture Deep Dive",
+    author: 'Himanshu (<a href="https://x.com/himanshustwts" target="_blank" rel="noopener">@himanshustwts</a>)',
+    date: "April 1, 2026",
+    links: '<a href="https://x.com/himanshustwts/status/2038924027411222533" target="_blank" rel="noopener">View tweet</a> <a href="https://glorics.com/claude-code-architecture-deep-dive" target="_blank" rel="noopener">Glorics deep dive</a> <a href="https://www.latent.space/p/ainews-the-claude-code-source-leak" target="_blank" rel="noopener">Latent Space coverage</a>',
+    sections: [
+        {
+            title: "Worth Your Time?",
+            open: true,
+            html: '<div class="verdict-box"><div class="verdict-label">Verdict: Read</div><div class="verdict-text">The first public look at how a frontier lab actually solved persistent agent memory at scale \u2014 and the failures that shaped the design.</div></div><p>This is not a product announcement or opinion piece. It is reverse-engineered architecture documentation from production source code, corroborated by multiple independent analysts (Himanshu, mal_shaik, Glorics, Redreamality). The memory system design is directly relevant to how we build and advise on agentic AI systems.</p><p><em>Context:</em> This analysis emerged from the Claude Code source leak of March 31, 2026 \u2014 an npm packaging error exposed ~500K lines of TypeScript orchestration code via source maps. No model weights, API keys, or customer data were exposed.</p>'
+        },
+        {
+            title: "What\u2019s Actually Happening",
+            open: false,
+            html: '<p>Claude Code runs a <strong>three-layer memory system</strong> designed around bandwidth constraints:</p><ol><li><strong>Auto Memory</strong> (<code>~/.claude/projects/{project}/memory/</code>) \u2014 Persistent across sessions. MEMORY.md is a 200-line pointer index (~25KB cap) that loads into the system prompt at conversation start. It stores <em>locations</em>, not knowledge. Four-type taxonomy: User, Feedback, Project, Reference.</li><li><strong>Session Memory</strong> \u2014 Intra-session structured markdown (title, state, task spec, files, workflow, errors, learnings, worklog). Auto-updates throttled by token growth and tool call count. Hard cap: 12,000 tokens.</li><li><strong>Extract Memories</strong> \u2014 A background forked agent (max 5 turns) that fires when the main agent produces final text. Reads conversation, checks existing memory manifests, writes new long-term memories. The user never sees this running.</li></ol><h4>AutoDream (KAIROS)</h4><p>The consolidation system. When the user is idle and three gates are satisfied (24h since last consolidation, 5+ sessions completed, no other process holds <code>.consolidate-lock</code>), a forked read-only sub-agent runs four phases:</p><ul><li><strong>Orient:</strong> Scan memory directory, read index and existing topic files</li><li><strong>Gather:</strong> Collect signals from daily logs, detect drifted memories, grep transcripts for patterns</li><li><strong>Consolidate:</strong> Merge new signal into topic files, convert relative dates to absolute, remove contradicted facts</li><li><strong>Prune:</strong> Update MEMORY.md index within the 25KB cap</li></ul><h4>Compaction pipeline</h4><p>Runs four tiers before every API call: Microcompaction (cache_edits API), Session Memory Compaction, Full Compaction (forked agent summarizes into nine structured sections), Emergency \u201csnip\u201d as last resort. A circuit breaker halts auto-compaction after three consecutive failures.</p><h4>The 36.8GB memory leak</h4><p>The Teams implementation hit 36.8GB with 292 concurrent agents before they added <code>TEAMMATE_MESSAGES_UI_CAP = 50</code>. This production failure is why every memory layer now has hard architectural caps. The caps are scar tissue from real incidents.</p>'
+        },
+        {
+            title: "What\u2019s Not Being Said",
+            open: false,
+            html: '<ul><li><strong>The leak was probably net-positive for Anthropic.</strong> DMCA takedowns preserve legal standing, but the architectural exposure functions as a moat demonstration. The orchestration code is reproducible; the model behavior that makes it work is not.</li><li><strong>Memory as competitive lock-in.</strong> The more sessions a user runs, the more Claude Code learns. MEMORY.md is portable in theory but practically sticky. This is a data flywheel disguised as a developer tool feature.</li><li><strong>The 36.8GB incident implies Claude Code Teams is far more ambitious than publicly stated.</strong> 292 concurrent agents suggests multi-agent orchestration at a scale Anthropic has not marketed. The seven subagent variants point toward an agent operating system.</li><li><strong>\u201cRead-only\u201d consolidation is a trust boundary choice.</strong> AutoDream cannot write code or make changes \u2014 only read and summarize. Anthropic chose to keep memory consolidation sandboxed from execution. They are being conservative, which means they see the risk.</li></ul>'
+        },
+        {
+            title: "Bigger Picture",
+            open: false,
+            html: '<p>Three converging trends:</p><ol><li><strong>Agent memory becoming a first-class engineering discipline.</strong> Google\u2019s Project Mariner, OpenAI\u2019s Operator, and now Claude Code all ship with persistent memory. But Claude Code\u2019s architecture is the most sophisticated publicly documented system. The pointer-index pattern solves the fundamental tension between \u201cremember everything\u201d and \u201cfit in context window.\u201d</li><li><strong>The source leak as inflection point for open agentic architecture.</strong> Before March 31, agentic memory design was largely academic (MemGPT papers, research prototypes). Now there is a production reference implementation. Expect every serious agentic framework to converge on similar patterns within 6 months.</li><li><strong>AI coding tools transitioning from \u201cassistant\u201d to \u201cpersistent colleague.\u201d</strong> AutoDream \u2014 an agent that processes its own experiences while you sleep \u2014 is conceptually closer to how human memory works (sleep consolidation) than anything previously shipped.</li></ol>'
+        },
+        {
+            title: "What\u2019s Coming Next",
+            open: false,
+            html: '<ul><li><strong>Memory portability wars.</strong> Once users realize their Claude Code memory contains significant accumulated context, exporting/importing memory becomes a switching cost lever. Expect competitors to offer \u201cmemory import from Claude Code\u201d features.</li><li><strong>AutoDream becomes a marketing differentiator.</strong> \u201cYour AI remembers you\u201d is a compelling narrative. Anthropic will promote this more aggressively.</li><li><strong>Hard caps will get tuned upward.</strong> The 200-line MEMORY.md and 12K session memory caps are conservative starting points. As context windows grow, these caps expand \u2014 but the pointer-index architecture scales without fundamental redesign.</li><li><strong>Other labs will ship similar systems within 3\u20136 months.</strong> The architectural patterns are now public. The question is whether they can match the consolidation quality without Claude\u2019s specific model behavior.</li><li><strong>Enterprise memory isolation becomes a selling point.</strong> For clients like Bloomberg and NYT, \u201cwhere does my codebase knowledge live?\u201d becomes urgent. Anthropic\u2019s file-based local storage is a strong answer vs. cloud-stored alternatives.</li></ul>'
+        },
+        {
+            title: "Go Deeper",
+            open: false,
+            html: '<h4>Key sources</h4><ul class="go-deeper-list"><li><a href="https://x.com/himanshustwts/status/2038924027411222533" target="_blank" rel="noopener">Himanshu: Memory architecture thread</a></li><li><a href="https://x.com/mal_shaik/status/2038919506224132178" target="_blank" rel="noopener">@mal_shaik: 11 layers of architecture thread</a></li><li><a href="https://glorics.com/claude-code-architecture-deep-dive" target="_blank" rel="noopener">Glorics: Claude Code architecture deep dive</a></li><li><a href="https://www.latent.space/p/ainews-the-claude-code-source-leak" target="_blank" rel="noopener">Latent Space: The Claude Code source leak</a></li></ul><h4>The big conceptual move</h4><p>A <strong>domain-specific AutoDream for enterprise workflows.</strong> Not code memory \u2014 <em>process memory</em>. An agent that sits in a client\u2019s environment, observes how they work across tools, consolidates workflow patterns during off-hours, and surfaces \u201chere\u2019s what you actually do vs. what you think you do\u201d insights. The Claude Code memory architecture is the blueprint; the application is organizational intelligence.</p>'
+        },
+        {
+            title: "What This Means for Us",
+            open: false,
+            html: '<h4>Immediate (this week)</h4><ul><li>Audit our own Claude Code memory files (<code>~/.claude/projects/</code>) across the team. Understanding what Claude Code has learned about our workflows is both a capability check and a security review.</li><li>The memory architecture is directly teachable content for technical clients.</li></ul><h4>Near-term (this quarter)</h4><ul><li><strong>Training content update:</strong> The three-layer memory system, AutoDream, and compaction strategies are concrete, explainable architecture that demystifies \u201chow does the AI remember things?\u201d for non-technical clients.</li><li><strong>Client advisory:</strong> For clients running Claude Code internally, we can now advise on memory hygiene \u2014 what to put in CLAUDE.md, how to structure project memory, when to reset vs. let it accumulate. Differentiated advice nobody else is offering.</li></ul><h4>Strategic (this year)</h4><ul><li>The AutoDream pattern validates the \u201cAI chief of staff\u201d concept we are building with Claudie. Background consolidation of organizational knowledge during downtime is exactly what we do.</li><li>Enterprise memory isolation is a consulting opportunity. Clients will need help designing memory boundaries for multi-team AI deployments.</li><li>The source leak normalizes deep architectural understanding. Clients will increasingly expect their consultants to explain <em>how</em> these systems work, not just <em>that</em> they work.</li></ul>'
+        }
+    ]
+},
+
+// ── Entry 5: Boris Cherny ──
+{
+    tag: "key-shift",
+    tagLabel: "Key Shift",
+    title: "The Anthropic Labs Insider Story",
+    author: 'Boris Cherny (<a href="https://x.com/bcherny" target="_blank" rel="noopener">@bcherny</a>) \u2014 Head of Claude Code',
+    date: "April 1, 2026",
+    links: '<a href="https://x.com/bcherny/status/2036286592089022699" target="_blank" rel="noopener">View tweet</a> <a href="https://howborisusesclaudecode.com/" target="_blank" rel="noopener">72-tip guide</a> <a href="https://newsletter.pragmaticengineer.com/p/building-claude-code-with-boris-cherny" target="_blank" rel="noopener">Pragmatic Engineer interview</a>',
+    sections: [
+        {
+            title: "Worth Your Time?",
+            open: true,
+            html: '<div class="verdict-box"><div class="verdict-label">Verdict: Read</div><div class="verdict-text">This is the closest thing to an internal engineering handbook that Anthropic has published \u2014 treat it as primary source material for how AI-native development actually works at the frontier.</div></div><p>Read all three sources. The 72-tip guide is a practitioner\u2019s manual, not marketing. The Pragmatic Engineer interview adds structural context \u2014 how the team operates, how Cowork was built, what the Meta-to-Anthropic pipeline looks like. Together they form the most detailed public account of how a top AI lab actually ships product with its own tools.</p>'
+        },
+        {
+            title: "What\u2019s Actually Happening",
+            open: false,
+            html: '<p>Boris Cherny runs 5 parallel Claude Code instances across separate git checkouts (or worktrees), each in plan-mode-then-one-shot workflow. He ships 20\u201330 PRs/day. The entire Claude Code team works this way.</p><h4>Key technical revelations</h4><ul><li><strong>Glob+grep beat vector databases for code search.</strong> The team tried local vector DBs, recursive model-based indexing, and other RAG approaches. All had downsides. Plain glob and grep, driven by the model\u2019s own judgment about what to search for, outperformed everything. Inspired by watching Instagram engineers search code when Meta\u2019s IDE click-to-definition was broken.</li><li><strong>CLAUDE.md as compounding institutional memory.</strong> The team shares a single CLAUDE.md checked into git. Every time Claude makes a mistake, they add a rule. Every code review can tag @.claude to update CLAUDE.md as part of the PR. Boris\u2019s tip #16: \u201cAfter every correction, end with: \u2018Update your CLAUDE.md so you don\u2019t make that mistake again.\u2019\u201d</li><li><strong>Prototypes replaced PRDs entirely.</strong> The team builds dozens of working prototypes before shipping. \u201cThere\u2019s just no way we could have shipped this if we started with static mocks and Figma or if we started with a PRD.\u201d</li><li><strong>Cowork built in ~10 days, growing faster than Claude Code at launch.</strong> Most engineering effort went into safety: classifiers, sandboxed VMs, OS-level protections, permission models for non-technical users.</li><li><strong>Code output per engineer up 200% this year at Anthropic.</strong> Reviews became the bottleneck, so they built agent-based code review.</li><li><strong>Boris automated code review at Meta before AI existed.</strong> Every time he left the same comment 3\u20134 times, he wrote a lint rule. Same pattern, different medium \u2014 lint rules became CLAUDE.md rules.</li></ul><h4>Who benefits?</h4><ul><li><strong>Power users who invest in configuration.</strong> The productivity gap between a configured and unconfigured Claude Code user is enormous.</li><li><strong>Generalists over specialists.</strong> The meta-skill shifted from deep single-threaded work to rapid context switching across parallel agents.</li><li><strong>Non-engineers.</strong> Cowork\u2019s existence and growth rate confirm that the \u201cwho can code\u201d boundary is dissolving.</li></ul>'
+        },
+        {
+            title: "What\u2019s Not Being Said",
+            open: false,
+            html: '<p><strong>Boris\u2019s incentive:</strong> He is Head of Claude Code at Anthropic. This is product marketing dressed as engineering transparency. That said, the 72 tips are specific enough to be falsifiable, and the Pragmatic Engineer interview is adversarial enough to surface real detail.</p><h4>What\u2019s omitted</h4><ul><li><strong>Failure rates and rework.</strong> We hear \u201cone-shot implementation almost every time\u201d after good planning. We don\u2019t hear how often the plan itself takes 5\u201310 iterations, or how often one-shot output needs cleanup. The 20\u201330 PRs/day number is impressive but we don\u2019t know what percentage are trivial vs. substantive.</li><li><strong>Cost.</strong> Running Opus 4.5 with thinking mode across 5\u201310 parallel sessions, plus subagents, plus /loop and /schedule automations \u2014 the token burn is significant. This works on Anthropic\u2019s internal budget.</li><li><strong>The \u201ceveryone has the same title\u201d culture.</strong> Framed as egalitarian. Also means: no career ladder visibility, compensation opacity. This is a recruiting pitch as much as a cultural observation.</li></ul><blockquote><p>\u201cThe glob+grep revelation is undersold \u2014 it implies that most of the RAG/vector-DB ecosystem being built for code intelligence is solving the wrong problem. The model itself, with basic file system tools, is a better retrieval system than any index humans build.\u201d</p></blockquote>'
+        },
+        {
+            title: "Bigger Picture",
+            open: false,
+            html: '<p>Three converging trends:</p><ol><li><strong>The \u201cAI builds AI\u201d loop is tightening.</strong> Anthropic uses Claude Code to build Claude Code. The 200% productivity increase feeds directly back into faster iteration. This is the flywheel every AI lab wants.</li><li><strong>The IDE war is becoming a workflow war.</strong> Cursor, Windsurf, GitHub Copilot, and Claude Code are no longer competing on autocomplete quality. They\u2019re competing on orchestration: parallel agents, worktrees, hooks, scheduling, MCP integrations.</li><li><strong>\u201cNon-engineers using code tools\u201d is no longer theoretical.</strong> Cowork growing faster than Claude Code at launch confirms the \u201ceveryone programs\u201d moment is actually arriving \u2014 not in the \u201clearn to code\u201d sense, but in the \u201cdescribe what you want and the machine builds it\u201d sense.</li></ol><p>The printing press analogy Boris uses: scribes didn\u2019t disappear, they became authors. The market for written work expanded beyond prediction. Software engineers don\u2019t disappear, but \u201csoftware engineer\u201d stops being a meaningful job title because everyone builds software.</p>'
+        },
+        {
+            title: "What\u2019s Coming Next",
+            open: false,
+            html: '<ul><li><strong>Agent swarms become default.</strong> /batch already fans work out to \u201cdozens, hundreds, even thousands\u201d of worktree agents. Within 6 months, shipping a large migration via a single engineer + 100 parallel agents will be normal at frontier companies.</li><li><strong>CLAUDE.md-style institutional memory becomes a product category.</strong> The \u201cupdate your rules after every correction\u201d pattern is too powerful to stay as a text file. Expect structured, versioned, team-shared rule systems with analytics.</li><li><strong>Code review by AI becomes table stakes.</strong> Anthropic built it because reviews were the bottleneck after 200% output increase. Every team scaling AI-assisted development will hit the same bottleneck.</li><li><strong>The \u201cparallel context switching\u201d skill reshapes hiring.</strong> Expect \u201corchestration interviews\u201d where candidates manage multiple AI agents simultaneously.</li><li><strong>Cost becomes the real constraint.</strong> The workflows Boris describes are token-intensive. Enterprise adoption depends on whether the ROI math works at market pricing.</li></ul>'
+        },
+        {
+            title: "Go Deeper",
+            open: false,
+            html: '<h4>Key sources</h4><ul class="go-deeper-list"><li><a href="https://howborisusesclaudecode.com/" target="_blank" rel="noopener">How Boris Uses Claude Code \u2014 72-tip guide</a> (bookmark, revisit monthly)</li><li><a href="https://newsletter.pragmaticengineer.com/p/building-claude-code-with-boris-cherny" target="_blank" rel="noopener">Pragmatic Engineer: Building Claude Code with Boris Cherny</a></li><li><a href="https://newsletter.pragmaticengineer.com/p/how-claude-code-is-built" target="_blank" rel="noopener">Pragmatic Engineer: How Claude Code is Built</a> (prior technical deep dive)</li></ul><h4>People to follow</h4><ul><li><strong>Boris Cherny</strong> (<a href="https://x.com/bcherny" target="_blank" rel="noopener">@bcherny</a>) \u2014 Head of Claude Code, primary source. Also: <a href="https://borischerny.com" target="_blank" rel="noopener">borischerny.com</a></li><li><strong>Gergely Orosz</strong> \u2014 Best technical interviewer covering this space. <a href="https://newsletter.pragmaticengineer.com" target="_blank" rel="noopener">Pragmatic Engineer</a></li><li><strong>@amorriscode</strong> \u2014 Built native worktree support in Claude Code</li><li><strong>Erik Schluntz</strong> (<a href="https://x.com/ErikSchluntz" target="_blank" rel="noopener">@ErikSchluntz</a>) \u2014 Built /btw, signals where UX is heading</li><li><strong>Felix Rieseberg</strong> \u2014 Claude Code Desktop/Cowork engineering</li><li><strong>Cat Wu</strong> \u2014 Cowork product lead</li></ul>'
+        },
+        {
+            title: "What This Means for Us",
+            open: false,
+            html: '<ol><li><strong>Our differentiator just got validated and threatened simultaneously.</strong> \u201cTrainers who actually build with AI every day\u201d is exactly what Boris describes. But the bar for what \u201cbuilding with AI\u201d means just went up. If we\u2019re not running parallel agents, using worktrees, maintaining CLAUDE.md files, and orchestrating multi-agent workflows, we\u2019re teaching yesterday\u2019s best practices.</li><li><strong>The glob+grep insight is a training module.</strong> Clients spending money on RAG pipelines for internal code search need to hear this. A concrete, credentialed counter-narrative (\u201cthe Head of Claude Code says plain grep beats vector DBs\u201d) is high-value consulting content.</li><li><strong>Cowork is a competitor to our non-technical training.</strong> If non-engineers can use Cowork to build things directly, the value of \u201cteaching ChatGPT for operations\u201d shifts from \u201chow to prompt\u201d to \u201chow to orchestrate autonomous work.\u201d</li><li><strong>The CLAUDE.md pattern is a deliverable.</strong> We should be building CLAUDE.md files as part of client engagements. \u201cHere\u2019s your team\u2019s institutional AI memory, configured for your codebase and workflows.\u201d</li><li><strong>\u201c20\u201330 PRs/day\u201d is the new benchmark clients will quote.</strong> We need nuanced framing: what\u2019s realistic for their stack, their team size, their regulatory constraints.</li><li><strong>Parallel agent orchestration is a premium training offering.</strong> Very few people outside Anthropic are actually running 5+ parallel Claude instances with worktrees. Teaching this workflow is a full-day workshop. High ticket, high value, low competition.</li></ol>'
+        }
+    ]
+}
+
+];
+
+// ── Render logic ──
+var rightPanel = document.getElementById("rightPanel");
+var items = document.querySelectorAll(".entry-item");
+var leftPanel = document.getElementById("leftPanel");
+var mobileBack = document.getElementById("mobileBack");
+var currentIndex = 0;
+
+function renderEntry(idx) {
+    var e = entries[idx];
+    var html = '<div class="detail-header">';
+    html += '<span class="tag-pill ' + e.tag + '">' + e.tagLabel + '</span>';
+    html += '<h2>' + e.title + '</h2>';
+    html += '<div class="detail-author">' + e.author + '</div>';
+    html += '<div class="detail-date">' + e.date + '</div>';
+    html += '<div class="detail-links">' + e.links + '</div>';
+    html += '</div>';
+
+    for (var i = 0; i < e.sections.length; i++) {
+        var s = e.sections[i];
+        var isOpen = s.open;
+        html += '<div class="section-block">';
+        html += '<button class="section-toggle" data-section="' + i + '">';
+        html += '<span class="chevron' + (isOpen ? ' open' : '') + '">&#9656;</span> ' + s.title;
+        html += '</button>';
+        html += '<div class="section-content' + (isOpen ? ' open' : '') + '">' + s.html + '</div>';
+        html += '</div>';
+    }
+
+    html += '<div class="detail-footer">Curated by Claudie, Chief of Staff @ Every Consulting</div>';
+
+    rightPanel.innerHTML = html;
+    rightPanel.scrollTop = 0;
+
+    // Bind section toggles
+    var toggles = rightPanel.querySelectorAll(".section-toggle");
+    for (var j = 0; j < toggles.length; j++) {
+        toggles[j].addEventListener("click", function() {
+            var chevron = this.querySelector(".chevron");
+            var content = this.nextElementSibling;
+            if (content.classList.contains("open")) {
+                content.classList.remove("open");
+                chevron.classList.remove("open");
+            } else {
+                content.classList.add("open");
+                chevron.classList.add("open");
+            }
+        });
+    }
+}
+
+function selectEntry(idx) {
+    currentIndex = idx;
+    for (var i = 0; i < items.length; i++) {
+        items[i].classList.remove("active");
+    }
+    items[idx].classList.add("active");
+    renderEntry(idx);
+
+    // Mobile: collapse list
+    if (window.innerWidth <= 900) {
+        leftPanel.classList.add("collapsed");
+    }
+}
+
+// Bind clicks
+for (var i = 0; i < items.length; i++) {
+    (function(idx) {
+        items[idx].addEventListener("click", function() {
+            selectEntry(idx);
+        });
+    })(i);
+}
+
+// Mobile back button
+mobileBack.addEventListener("click", function(evt) {
+    evt.stopPropagation();
+    leftPanel.classList.remove("collapsed");
+});
+
+// Default: show first entry
+selectEntry(0);
+</script>
+
 </body>
 </html>
