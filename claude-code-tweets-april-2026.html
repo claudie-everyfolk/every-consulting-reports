@@ -3,10 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>What the Internet Is Saying About Claude Code</title>
+    <title>Signal Digest — Every Consulting</title>
+    <meta property="og:title" content="Signal Digest — Every Consulting">
+    <meta property="og:description" content="What actually matters in AI — curated by Claudie for the Every Consulting team.">
+    <meta property="og:type" content="article">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Newsreader:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
-
         *, *::before, *::after {
             box-sizing: border-box;
             margin: 0;
@@ -14,181 +18,338 @@
         }
 
         body {
-            background-color: #0f0f0f;
-            color: #e0e0e0;
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            line-height: 1.6;
-            min-height: 100vh;
+            background: #FDFAF7;
+            color: #111111;
+            font-family: 'Newsreader', Georgia, serif;
+            line-height: 1.7;
+            -webkit-font-smoothing: antialiased;
         }
 
         .container {
-            max-width: 800px;
+            max-width: 760px;
             margin: 0 auto;
             padding: 60px 24px 80px;
         }
 
+        /* Header */
         header {
-            text-align: center;
-            margin-bottom: 56px;
+            margin-bottom: 48px;
         }
 
         header h1 {
-            font-size: 2.2rem;
-            font-weight: 700;
-            color: #ffffff;
+            font-family: 'Newsreader', Georgia, serif;
+            font-size: 48px;
+            font-weight: 500;
             letter-spacing: -0.02em;
+            line-height: 1.1;
             margin-bottom: 12px;
         }
 
         header .subtitle {
-            font-size: 1.05rem;
-            color: #888;
+            font-family: 'Newsreader', Georgia, serif;
+            font-size: 20px;
+            color: #2D2D2D;
             font-weight: 400;
+            margin-bottom: 8px;
         }
 
-        .divider {
-            width: 48px;
-            height: 2px;
-            background: linear-gradient(90deg, #d4a574, #a67c52);
-            margin: 24px auto 0;
-            border-radius: 1px;
+        header .meta {
+            font-family: 'Inter', sans-serif;
+            font-size: 13px;
+            color: rgba(0,0,0,0.6);
+            letter-spacing: 0.01em;
         }
 
-        .tweet-card {
-            background: #1a1a1a;
-            border: 1px solid #2a2a2a;
-            border-radius: 12px;
-            padding: 28px 28px 24px;
-            margin-bottom: 20px;
-            transition: border-color 0.2s ease;
+        /* Legend */
+        .legend {
+            font-family: 'Inter', sans-serif;
+            font-size: 14px;
+            color: rgba(0,0,0,0.6);
+            margin-bottom: 48px;
+            padding-bottom: 24px;
+            border-bottom: 1px solid #E2E3E4;
+            line-height: 1.6;
         }
 
-        .tweet-card:hover {
-            border-color: #3a3a3a;
-        }
-
-        .tweet-header {
-            display: flex;
-            align-items: baseline;
-            gap: 10px;
-            margin-bottom: 12px;
-            flex-wrap: wrap;
-        }
-
-        .tweet-author {
+        .legend .tag-example {
+            display: inline-block;
+            font-size: 11px;
             font-weight: 600;
-            color: #ffffff;
-            font-size: 1rem;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+            padding: 3px 10px;
+            border-radius: 100px;
+            vertical-align: middle;
+            margin: 0 2px;
         }
 
-        .tweet-handle {
-            color: #666;
-            font-size: 0.875rem;
+        .tag-example.key-shift {
+            background: #088190;
+            color: #fff;
         }
 
-        .tweet-title {
-            font-size: 1.15rem;
+        .tag-example.noise {
+            background: #E2E3E4;
+            color: rgba(0,0,0,0.6);
+        }
+
+        /* Entries */
+        article.entry {
+            padding: 50px 0;
+            border-bottom: 1px solid #E2E3E4;
+        }
+
+        article.entry:first-of-type {
+            padding-top: 0;
+        }
+
+        article.entry:last-of-type {
+            border-bottom: none;
+        }
+
+        .signal-tag {
+            display: inline-block;
+            font-family: 'Inter', sans-serif;
+            font-size: 11px;
             font-weight: 600;
-            color: #d4a574;
-            margin-bottom: 12px;
-            line-height: 1.4;
-        }
-
-        .tweet-body {
-            color: #b0b0b0;
-            font-size: 0.925rem;
-            line-height: 1.7;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+            padding: 3px 10px;
+            border-radius: 100px;
             margin-bottom: 16px;
         }
 
-        .tweet-link {
-            display: inline-flex;
+        .signal-tag.key-shift {
+            background: #088190;
+            color: #fff;
+        }
+
+        .signal-tag.noise {
+            background: #E2E3E4;
+            color: rgba(0,0,0,0.6);
+        }
+
+        .entry h2 {
+            font-family: 'Newsreader', Georgia, serif;
+            font-size: 28px;
+            font-weight: 500;
+            line-height: 1.3;
+            letter-spacing: -0.01em;
+            margin-bottom: 8px;
+        }
+
+        .entry h2 a {
+            color: #111111;
+            text-decoration: underline;
+            text-decoration-color: rgba(0,0,0,0.25);
+            text-underline-offset: 3px;
+            transition: text-decoration-color 0.2s ease;
+        }
+
+        .entry h2 a:hover {
+            color: #088190;
+            text-decoration-color: #088190;
+        }
+
+        .entry .author {
+            font-family: 'Inter', sans-serif;
+            font-size: 14px;
+            color: rgba(0,0,0,0.6);
+            margin-bottom: 20px;
+        }
+
+        .entry .author a {
+            color: rgba(0,0,0,0.6);
+            text-decoration: underline;
+            text-decoration-color: rgba(0,0,0,0.2);
+            text-underline-offset: 2px;
+            transition: color 0.2s ease, text-decoration-color 0.2s ease;
+        }
+
+        .entry .author a:hover {
+            color: #088190;
+            text-decoration-color: #088190;
+        }
+
+        .entry .summary {
+            font-size: 18px;
+            color: #2D2D2D;
+            margin-bottom: 24px;
+        }
+
+        /* Details / Key Learnings */
+        .entry details {
+            margin-bottom: 20px;
+        }
+
+        .entry details summary {
+            font-family: 'Inter', sans-serif;
+            font-size: 14px;
+            font-weight: 500;
+            color: #111111;
+            cursor: pointer;
+            list-style: none;
+            display: flex;
             align-items: center;
             gap: 6px;
-            color: #888;
-            text-decoration: none;
-            font-size: 0.825rem;
+            user-select: none;
+            padding: 8px 0;
+        }
+
+        .entry details summary::-webkit-details-marker {
+            display: none;
+        }
+
+        .entry details summary::before {
+            content: "\25B8";
+            font-size: 12px;
+            transition: transform 0.2s ease;
+            display: inline-block;
+        }
+
+        .entry details[open] summary::before {
+            transform: rotate(90deg);
+        }
+
+        .entry details .learnings {
+            padding: 12px 0 4px 18px;
+            overflow: hidden;
+        }
+
+        .entry details .learnings ul {
+            list-style: disc;
+            padding-left: 18px;
+        }
+
+        .entry details .learnings li {
+            font-size: 16px;
+            color: #2D2D2D;
+            margin-bottom: 10px;
+            line-height: 1.6;
+        }
+
+        .entry .why-it-matters {
+            font-size: 17px;
+            font-style: italic;
+            color: rgba(0,0,0,0.6);
+            margin-bottom: 16px;
+        }
+
+        .entry .links {
+            font-family: 'Inter', sans-serif;
+            font-size: 14px;
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .entry .links a {
+            color: #2D2D2D;
+            text-decoration: underline;
+            text-decoration-color: rgba(0,0,0,0.3);
+            text-underline-offset: 2px;
+            transition: color 0.2s ease, text-decoration-color 0.2s ease;
+        }
+
+        .entry .links a:hover {
+            color: #088190;
+            text-decoration-color: #088190;
+        }
+
+        /* Big Picture */
+        section.big-picture {
+            padding-top: 50px;
+            border-top: 1px solid #E2E3E4;
+            margin-top: 50px;
+        }
+
+        .big-picture h2 {
+            font-family: 'Newsreader', Georgia, serif;
+            font-size: 32px;
             font-weight: 500;
-            transition: color 0.2s ease;
+            margin-bottom: 24px;
+            letter-spacing: -0.01em;
         }
 
-        .tweet-link:hover {
-            color: #d4a574;
-        }
-
-        .tweet-link svg {
-            width: 14px;
-            height: 14px;
-            fill: currentColor;
-        }
-
-        .common-thread {
-            background: #141414;
-            border: 1px solid #2a2a2a;
-            border-left: 3px solid #d4a574;
-            border-radius: 8px;
-            padding: 24px 28px;
-            margin-top: 48px;
-            margin-bottom: 48px;
-        }
-
-        .common-thread h2 {
-            font-size: 1rem;
-            font-weight: 600;
-            color: #d4a574;
-            text-transform: uppercase;
-            letter-spacing: 0.08em;
-            margin-bottom: 12px;
-        }
-
-        .common-thread p {
-            color: #b0b0b0;
-            font-size: 0.925rem;
+        .big-picture .actionable-insight {
+            font-size: 18px;
+            color: #2D2D2D;
+            margin-bottom: 32px;
             line-height: 1.7;
         }
 
+        .big-picture h3 {
+            font-family: 'Newsreader', Georgia, serif;
+            font-size: 22px;
+            font-weight: 500;
+            margin-bottom: 16px;
+        }
+
+        .big-picture ol {
+            padding-left: 24px;
+            margin-bottom: 32px;
+        }
+
+        .big-picture ol li {
+            font-size: 17px;
+            color: #2D2D2D;
+            margin-bottom: 12px;
+            line-height: 1.6;
+        }
+
+        .big-picture .coda {
+            font-family: 'Inter', sans-serif;
+            font-size: 14px;
+            color: rgba(0,0,0,0.6);
+            line-height: 1.7;
+            padding: 20px 0;
+            border-top: 1px solid #E2E3E4;
+            margin-top: 16px;
+        }
+
+        /* Footer */
         footer {
-            text-align: center;
-            padding-top: 24px;
-            border-top: 1px solid #1e1e1e;
+            margin-top: 60px;
+            padding-top: 32px;
+            border-top: 1px solid #E2E3E4;
+            font-family: 'Inter', sans-serif;
+            font-size: 13px;
+            color: rgba(0,0,0,0.5);
+            line-height: 1.8;
         }
 
-        footer p {
-            color: #555;
-            font-size: 0.8rem;
-            font-weight: 400;
-        }
-
-        .card-number {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            width: 24px;
-            height: 24px;
-            background: #222;
-            border-radius: 6px;
-            font-size: 0.75rem;
-            font-weight: 600;
-            color: #666;
-            margin-right: 4px;
-            flex-shrink: 0;
-        }
-
+        /* Mobile */
         @media (max-width: 600px) {
             .container {
-                padding: 40px 16px 60px;
+                padding: 40px 18px 60px;
             }
 
             header h1 {
-                font-size: 1.6rem;
+                font-size: 36px;
             }
 
-            .tweet-card {
-                padding: 20px 18px 18px;
+            header .subtitle {
+                font-size: 17px;
             }
 
-            .tweet-title {
-                font-size: 1.05rem;
+            .entry h2 {
+                font-size: 23px;
+            }
+
+            .entry .summary {
+                font-size: 16px;
+            }
+
+            .entry details .learnings li {
+                font-size: 15px;
+            }
+
+            .big-picture h2 {
+                font-size: 26px;
+            }
+
+            article.entry {
+                padding: 36px 0;
             }
         }
     </style>
@@ -196,118 +357,182 @@
 <body>
     <div class="container">
         <header>
-            <h1>What the Internet Is Saying About Claude Code</h1>
-            <p class="subtitle">Tweets Natalia Tagged Us In &mdash; April 2026</p>
-            <div class="divider"></div>
+            <h1>Signal Digest</h1>
+            <p class="subtitle">What actually matters in AI &mdash; curated by Claudie for the Every Consulting team</p>
+            <p class="meta">Last updated April 1, 2026</p>
         </header>
 
-        <main>
-            <div class="tweet-card">
-                <div class="tweet-header">
-                    <span class="card-number">1</span>
-                    <span class="tweet-author">Jesse Pujji</span>
-                    <span class="tweet-handle">@jspujji</span>
-                </div>
-                <div class="tweet-title">How to Use Claude Cowork Like a Second Employee</div>
-                <p class="tweet-body">
-                    Positions Cowork as an agentic desktop tool that gives Claude direct read/write access to your folders. You define "done," Claude makes a plan, breaks it into sub-tasks, and delivers finished files.
-                </p>
-                <a href="https://x.com/jspujji/status/2034616093386678778" target="_blank" rel="noopener" class="tweet-link">
-                    <svg viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
-                    View on X
-                </a>
-            </div>
+        <nav class="legend">
+            Each entry is tagged: <span class="tag-example key-shift">Key Shift</span> signals a genuine change in how we should think or act. <span class="tag-example noise">Noise</span> means useful context but nothing new for the team.
+        </nav>
 
-            <div class="tweet-card">
-                <div class="tweet-header">
-                    <span class="card-number">2</span>
-                    <span class="tweet-author">Ejaaz</span>
-                    <span class="tweet-handle">@cryptopunk7213</span>
+        <!-- Entry 1: Jesse Pujji -->
+        <article class="entry">
+            <span class="signal-tag key-shift">Key Shift</span>
+            <h2><a href="https://x.com/jspujji/status/2034616093386678778" target="_blank" rel="noopener">How to Use Claude Cowork Like a Second Employee</a></h2>
+            <p class="author">Jesse Pujji &middot; <a href="https://x.com/jspujji" target="_blank" rel="noopener">@jspujji</a></p>
+            <p class="summary">Reframes AI setup from &ldquo;prompting&rdquo; to &ldquo;management.&rdquo; Treat Cowork as a new hire &mdash; write onboarding docs (who-i-am.md, how-i-talk.md), set workspace boundaries, define &ldquo;done&rdquo; clearly. The quality of the onboarding packet determines the ceiling.</p>
+            <details>
+                <summary>Key Learnings</summary>
+                <div class="learnings">
+                    <ul>
+                        <li>The &ldquo;employee onboarding&rdquo; mental model changes everything &mdash; more intuitive for non-technical users than &ldquo;write a system prompt&rdquo;</li>
+                        <li>Context files beat prompt engineering: invest once in persistent markdown files that compound across sessions</li>
+                        <li>Skills = certifications for your AI employee &mdash; repeatable, specialized workflows</li>
+                        <li>&ldquo;No more than 5 clarifying questions&rdquo; prevents analysis-paralysis loops</li>
+                        <li>Dedicated workspace folder = blast radius control before you trust the output</li>
+                    </ul>
                 </div>
-                <div class="tweet-title">Anthropic's Claude Code Shipping Spree</div>
-                <p class="tweet-body">
-                    Frames it as Anthropic completing an "OpenClaw-killer." Lists everything shipped in 4 weeks: texting Claude Code, skills + MCP, Claude Security, persistent memory, Channels, autonomous capabilities, 1M context, new models, 30+ plugins.
-                </p>
-                <a href="https://x.com/cryptopunk7213/status/2034767628464513365" target="_blank" rel="noopener" class="tweet-link">
-                    <svg viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
-                    View on X
-                </a>
+            </details>
+            <p class="why-it-matters">This is the exact frame we should use in bootcamps. &ldquo;Onboard your AI&rdquo; lands better than &ldquo;write prompts.&rdquo;</p>
+            <div class="links">
+                <a href="https://x.com/jspujji/status/2034616093386678778" target="_blank" rel="noopener">View on X</a>
             </div>
+        </article>
 
-            <div class="tweet-card">
-                <div class="tweet-header">
-                    <span class="card-number">3</span>
-                    <span class="tweet-author">Ruben Hassid</span>
-                    <span class="tweet-handle">@rubenhassid</span>
+        <!-- Entry 2: Ejaaz -->
+        <article class="entry">
+            <span class="signal-tag key-shift">Key Shift</span>
+            <h2><a href="https://x.com/cryptopunk7213/status/2034767628464513365" target="_blank" rel="noopener">Anthropic&rsquo;s Claude Code Shipping Spree</a></h2>
+            <p class="author">Ejaaz &middot; <a href="https://x.com/cryptopunk7213" target="_blank" rel="noopener">@cryptopunk7213</a></p>
+            <p class="summary">Catalogs everything Anthropic shipped in 4 weeks: texting Claude Code, 10,000+ skills + MCP, Claude Security, persistent memory, Channels, autonomous cron-jobs, 1M context, new models, 30+ plugins. Frames it as Anthropic completing an &ldquo;OpenClaw-killer.&rdquo;</p>
+            <details>
+                <summary>Key Learnings</summary>
+                <div class="learnings">
+                    <ul>
+                        <li>The velocity is the story &mdash; no competitor matched this shipping cadence</li>
+                        <li>Persistent memory + channels + cron-jobs = always-on agent (qualitatively different from a chatbot)</li>
+                        <li>The MCP/skills ecosystem (10,000+) makes Claude Code a platform, not just a product</li>
+                        <li>Product surface expanded from &ldquo;developer tool&rdquo; to &ldquo;knowledge worker replacement&rdquo;</li>
+                    </ul>
                 </div>
-                <div class="tweet-title">How to Set Up Claude So It Never Forgets You</div>
-                <p class="tweet-body">
-                    Walks through setting up Claude's persistent memory. Import ChatGPT history, build a personal profile, scoped memory that improves over time.
-                </p>
-                <a href="https://x.com/rubenhassid" target="_blank" rel="noopener" class="tweet-link">
-                    <svg viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
-                    View on X
-                </a>
+            </details>
+            <p class="why-it-matters">Clients need to understand this isn&rsquo;t incremental &mdash; it&rsquo;s a phase change. &ldquo;Always-on autonomous agent&rdquo; is what we should be selling in discovery.</p>
+            <div class="links">
+                <a href="https://x.com/cryptopunk7213/status/2034767628464513365" target="_blank" rel="noopener">View on X</a>
             </div>
+        </article>
 
-            <div class="tweet-card">
-                <div class="tweet-header">
-                    <span class="card-number">4</span>
-                    <span class="tweet-author">Pawel Huryn</span>
-                    <span class="tweet-handle">@PawelHuryn</span>
+        <!-- Entry 3: Ruben Hassid -->
+        <article class="entry">
+            <span class="signal-tag noise">Noise</span>
+            <h2><a href="https://x.com/rubenhassid" target="_blank" rel="noopener">How to Set Up Claude So It Never Forgets You</a></h2>
+            <p class="author">Ruben Hassid &middot; <a href="https://x.com/rubenhassid" target="_blank" rel="noopener">@rubenhassid</a></p>
+            <p class="summary">&ldquo;Text files over prompts&rdquo; &mdash; take everything you know and put it in .md files. CLAUDE.md is the sleeper feature. Abandon prompt libraries entirely. Simple first-prompt template: &ldquo;Read the uploaded files completely before responding.&rdquo;</p>
+            <details>
+                <summary>Key Learnings</summary>
+                <div class="learnings">
+                    <ul>
+                        <li>CLAUDE.md is &ldquo;solid and underused by beginners&rdquo; &mdash; the auto-maintained memory file most users never discover</li>
+                        <li>The investment should go into markdown documentation, not prompt libraries</li>
+                        <li>&ldquo;Claude now knows you like an old coworker&rdquo; &mdash; scoped memory improves over time</li>
+                        <li>First-prompt template (&ldquo;Read files, then ask clarifying questions&rdquo;) prevents generic output</li>
+                    </ul>
                 </div>
-                <div class="tweet-title">Three Blocks That Make Claude Get Smarter Every Session</div>
-                <p class="tweet-body">
-                    Three CLAUDE.md blocks: Knowledge Architecture (learning loop), Decision Journal (logged reasoning), Quality Gate (evaluation criteria). After one month, 24 rules emerged organically.
-                </p>
-                <a href="https://www.productcompass.pm/p/claude-md-snippets" target="_blank" rel="noopener" class="tweet-link">
-                    <svg viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
-                    Read Article
-                </a>
+            </details>
+            <p class="why-it-matters">Solid advice but not novel for our team. However, Hassid&rsquo;s consumer-friendly framing makes it good reference material for non-technical bootcamp audiences.</p>
+            <div class="links">
+                <a href="https://x.com/rubenhassid" target="_blank" rel="noopener">View on X</a>
+                <a href="https://ruben.substack.com/" target="_blank" rel="noopener">Read Article</a>
             </div>
+        </article>
 
-            <div class="tweet-card">
-                <div class="tweet-header">
-                    <span class="card-number">5</span>
-                    <span class="tweet-author">Himanshu</span>
-                    <span class="tweet-handle">@himanshustwts</span>
+        <!-- Entry 4: Pawel Huryn -->
+        <article class="entry">
+            <span class="signal-tag key-shift">Key Shift</span>
+            <h2><a href="https://www.productcompass.pm/p/claude-md-snippets" target="_blank" rel="noopener">Three Blocks That Make Claude Get Smarter Every Session</a></h2>
+            <p class="author">Pawel Huryn &middot; <a href="https://x.com/PawelHuryn" target="_blank" rel="noopener">@PawelHuryn</a></p>
+            <p class="summary">Three CLAUDE.md blocks that create a self-improving AI. Knowledge Architecture uses a hypothesis-to-rule promotion system (confirm 3x to promote, contradict to demote). Decision Journal logs reasoning with alternatives. Quality Gate provides objective evaluation criteria. After one month, 24 autonomous rules emerged.</p>
+            <details>
+                <summary>Key Learnings</summary>
+                <div class="learnings">
+                    <ul>
+                        <li>Hypothesis-to-rule promotion is genuinely novel &mdash; scientific method applied to AI memory</li>
+                        <li>24 project-specific rules emerged organically in one month without explicit prompting</li>
+                        <li>Decision Journal with 3+ alternatives had 80% success rate vs. overconfident quick decisions</li>
+                        <li>Quality Gates fix the #1 failure mode: &ldquo;agents confidently praise their own mediocre work&rdquo;</li>
+                        <li>The distinction: this is &ldquo;memory with reflection,&rdquo; not just memory &mdash; compounding comes from the reflection loop</li>
+                    </ul>
                 </div>
-                <div class="tweet-title">Claude Code Memory Architecture Deep Dive</div>
-                <p class="tweet-body">
-                    Source-code-level analysis of Claude Code's memory internals. "Constrained, structured, and self-healing." 5.9K likes, 755K views.
-                </p>
-                <a href="https://x.com/himanshustwts/status/2038924027411222533" target="_blank" rel="noopener" class="tweet-link">
-                    <svg viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
-                    View on X
-                </a>
+            </details>
+            <p class="why-it-matters">Most directly applicable for advanced clients. The hypothesis-promotion system is a teachable &ldquo;paradigm&rdquo; &mdash; exactly the kind of thing we deliver.</p>
+            <div class="links">
+                <a href="https://x.com/PawelHuryn" target="_blank" rel="noopener">View on X</a>
+                <a href="https://www.productcompass.pm/p/claude-md-snippets" target="_blank" rel="noopener">Read Article</a>
             </div>
+        </article>
 
-            <div class="tweet-card">
-                <div class="tweet-header">
-                    <span class="card-number">6</span>
-                    <span class="tweet-author">Boris Cherny</span>
-                    <span class="tweet-handle">@bcherny</span>
+        <!-- Entry 5: Himanshu -->
+        <article class="entry">
+            <span class="signal-tag key-shift">Key Shift</span>
+            <h2><a href="https://x.com/himanshustwts/status/2038924027411222533" target="_blank" rel="noopener">Claude Code Memory Architecture Deep Dive</a></h2>
+            <p class="author">Himanshu &middot; <a href="https://x.com/himanshustwts" target="_blank" rel="noopener">@himanshustwts</a></p>
+            <p class="summary">Source-code-level analysis of Claude Code&rsquo;s memory internals. Three-layer system: Auto Memory (persistent), Session Memory (intra-session, 12K cap), Extract Memories (background agent). MEMORY.md is a 200-line pointer index, not a data store. AutoDream consolidates during inactivity.</p>
+            <details>
+                <summary>Key Learnings</summary>
+                <div class="learnings">
+                    <ul>
+                        <li>Three-layer memory architecture operates at different timescales (persistent, session, background extraction)</li>
+                        <li>MEMORY.md is an index of pointers capped at 200 lines &mdash; the memory system is a search index, not a database</li>
+                        <li>AutoDream runs four phases during inactivity: Orient, Gather, Consolidate, Prune &mdash; Claude literally &ldquo;sleeps on it&rdquo;</li>
+                        <li>Four-type memory taxonomy: User, Feedback, Project, Reference &mdash; each drives different retrieval relevance</li>
+                        <li>36.8GB memory leak from 292 agents led to hard architectural caps &mdash; multi-agent safety learned through production pain</li>
+                    </ul>
                 </div>
-                <div class="tweet-title">The Anthropic Labs Insider Story</div>
-                <p class="tweet-body">
-                    Head of Claude Code reveals the tiny Anthropic Labs team shipped MCP, Skills, Claude Desktop, AND Claude Code. Boris ships 20&ndash;30 PRs daily using 5 parallel Claude Code instances.
-                </p>
-                <a href="https://x.com/bcherny/status/2036286592089022699" target="_blank" rel="noopener" class="tweet-link">
-                    <svg viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
-                    View on X
-                </a>
+            </details>
+            <p class="why-it-matters">Ground truth from leaked source code. When clients ask &ldquo;how does Claude remember?&rdquo; we can explain the real architecture. AutoDream is a powerful metaphor for long-running deployments.</p>
+            <div class="links">
+                <a href="https://x.com/himanshustwts/status/2038924027411222533" target="_blank" rel="noopener">View on X</a>
             </div>
+        </article>
 
-            <div class="common-thread">
-                <h2>Common Thread</h2>
-                <p>
-                    Claude Code's memory, personalization, and autonomous capabilities are the dominant topic right now. The Huryn and Hassid pieces would make strong reference material for client trainings.
-                </p>
+        <!-- Entry 6: Boris Cherny -->
+        <article class="entry">
+            <span class="signal-tag key-shift">Key Shift</span>
+            <h2><a href="https://x.com/bcherny/status/2036286592089022699" target="_blank" rel="noopener">The Anthropic Labs Insider Story</a></h2>
+            <p class="author">Boris Cherny &middot; <a href="https://x.com/bcherny" target="_blank" rel="noopener">@bcherny</a> &mdash; Head of Claude Code</p>
+            <p class="summary">Head of Claude Code reveals the tiny Anthropic Labs team shipped MCP, Skills, Claude Desktop, and Claude Code. Plain glob+grep beat vector databases for context retrieval. Boris ships 20&ndash;30 PRs/day via 5 parallel Claude instances. Prototypes replaced PRDs entirely.</p>
+            <details>
+                <summary>Key Learnings</summary>
+                <div class="learnings">
+                    <ul>
+                        <li>&ldquo;Search over retrieval&rdquo; beat every fancy approach &mdash; plain glob and grep, driven by the model, outperformed vector databases</li>
+                        <li>20&ndash;30 PRs/day workflow: 5 parallel instances, start in plan mode, iterate, then one-shot execution</li>
+                        <li>&ldquo;Prototypes over PRDs&rdquo; killed the old product process &mdash; they couldn&rsquo;t have shipped this with static mocks</li>
+                        <li>Cowork was built in ~10 days and grew faster than Claude Code at launch &mdash; non-technical users were the bigger market</li>
+                        <li>Meta-skill shifted from &ldquo;deep work&rdquo; to &ldquo;context switching&rdquo; &mdash; orchestrating multiple AI instances</li>
+                        <li>&ldquo;Update your CLAUDE.md after every correction&rdquo; &mdash; simplest possible compounding practice</li>
+                    </ul>
+                </div>
+            </details>
+            <p class="why-it-matters">The most authoritative source in the batch. &ldquo;Search over retrieval&rdquo; alone should change how we advise clients on RAG. The parallel-instances workflow is the most concrete productivity framework.</p>
+            <div class="links">
+                <a href="https://x.com/bcherny/status/2036286592089022699" target="_blank" rel="noopener">View on X</a>
+                <a href="https://howborisusesclaudecode.com/" target="_blank" rel="noopener">Read Article</a>
+                <a href="https://newsletter.pragmaticengineer.com/p/building-claude-code-with-boris-cherny" target="_blank" rel="noopener">Pragmatic Engineer Interview</a>
             </div>
-        </main>
+        </article>
+
+        <!-- Big Picture -->
+        <section class="big-picture">
+            <h2>What This Tells Us</h2>
+            <p class="actionable-insight">The single most actionable insight: the shift from &ldquo;prompting&rdquo; to &ldquo;onboarding&rdquo; (Pujji) combined with &ldquo;update CLAUDE.md after every correction&rdquo; (Cherny). These two practices together create compounding AI capability with minimal effort. One reframes the relationship; the other gives it a ratchet. Neither requires technical sophistication &mdash; both are teachable in a single bootcamp session.</p>
+
+            <h3>Five non-obvious insights across all sources</h3>
+            <ol>
+                <li><strong>Memory is architecture, not feature.</strong> Claude Code runs a three-layer system with background consolidation (AutoDream). Clients who treat memory as &ldquo;just context&rdquo; will plateau; those who design for it will compound.</li>
+                <li><strong>Search beats retrieval.</strong> Boris Cherny confirmed that plain glob+grep, directed by the model, outperforms vector databases for context retrieval. This directly challenges the RAG-first advice most clients receive.</li>
+                <li><strong>The hypothesis-promotion pattern is a new primitive.</strong> Huryn&rsquo;s &ldquo;confirm 3x to promote, contradict to demote&rdquo; system is a teachable paradigm &mdash; scientific method applied to AI memory. No one else is teaching this.</li>
+                <li><strong>The meta-skill is now orchestration, not execution.</strong> Boris runs 5 parallel Claude instances. The bottleneck shifted from &ldquo;can you code fast&rdquo; to &ldquo;can you context-switch and manage multiple agents.&rdquo; This has training implications.</li>
+                <li><strong>The platform shift happened in 4 weeks.</strong> Ejaaz&rsquo;s catalog shows Claude Code crossed from developer tool to knowledge-worker platform in a single shipping sprint. Clients who evaluated it even two months ago saw a fundamentally different product.</li>
+            </ol>
+
+            <p class="coda">5 of 6 sources tagged as Key Shift. The dominant theme: Claude Code&rsquo;s memory, personalization, and autonomous capabilities represent a genuine platform shift &mdash; not incremental improvement.</p>
+        </section>
 
         <footer>
-            <p>Curated by Claudie, Chief of Staff @ Every Consulting &mdash; April 1, 2026</p>
+            <p>Curated by Claudie, Chief of Staff @ Every Consulting</p>
+            <p>This digest evolves &mdash; new entries are added from daily X browsing. Only signal, never noise.</p>
         </footer>
     </div>
 </body>
