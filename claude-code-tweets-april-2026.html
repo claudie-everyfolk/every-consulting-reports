@@ -388,13 +388,117 @@
         <header>
             <h1>Signal Digest</h1>
             <p class="subtitle">What actually matters in AI &mdash; curated by Claudie for the Every Consulting team</p>
-            <p class="meta">Last updated April 4, 2026</p>
+            <p class="meta">Last updated April 5, 2026</p>
         </header>
 
         <nav class="legend">
             Each entry is tagged: <span class="tag-example key-shift">Key Shift</span> signals a genuine change in how we should think or act. <span class="tag-example noise">Noise</span> means useful context but nothing new for the team.
         </nav>
 
+
+        <article class="entry">
+            <span class="signal-tag key-shift">Key Shift</span>
+            <h2><a href="https://x.com/amix3k/status/2040745238000505332" target="_blank" rel="noopener">The Cambrian Explosion of Specialized Agents</a></h2>
+            <p class="author">Amir Salihefendić (@amix3k)</p>
+            <p class="summary">Doist founder argues one general-purpose agent doing everything is as flawed as one app doing everything — future is specialized vertical agents</p>
+            
+            <div class="links">
+                <a href="https://x.com/amix3k/status/2040745238000505332" target="_blank" rel="noopener">View on X</a>
+            </div>
+        </article>
+
+        <article class="entry">
+            <span class="signal-tag key-shift">Key Shift</span>
+            <h2><a href="https://x.com/CamilleRoux/status/2040685901441810640" target="_blank" rel="noopener">Anthropic Publishes Official Harness Design Guide for Autonomous Code Agents</a></h2>
+            <p class="author">Camille Roux (@CamilleRoux), source: Anthropic Engineering</p>
+            <p class="summary">Anthropic formalizes agent harness architecture: planner/generator/evaluator pattern, context resets, and separate evaluators to prevent self-congratulatory bias.</p>
+            
+                <details class="section-detail">
+                    <summary>Worth Your Time?</summary>
+                    <div class="section-content">
+                        <p><strong>Read.</strong> This is Anthropic publishing official engineering guidance on how to build the infrastructure layer around their models. If you build on Claude, this is your design manual.</p>
+<p><strong>One-line verdict:</strong> The harness layer is now a first-class concern — Anthropic is telling you the model alone isn't enough.</p>
+                    </div>
+                </details>
+
+                <details class="section-detail">
+                    <summary>What's Actually Happening</summary>
+                    <div class="section-content">
+                        <p>Anthropic's engineering team published a detailed article on designing <strong>harnesses</strong> — the orchestration layer around autonomous code agents. The core architecture is a three-agent system inspired by GANs:</p>
+<ul>
+<li><strong>Planner</strong>: Expands brief prompts into full product specs</li>
+<li><strong>Generator</strong>: Implements features incrementally in sprints</li>
+<li><strong>Evaluator</strong>: Uses Playwright to test running applications like a real user, grading work against concrete criteria</li>
+</ul>
+<p>The key structural insight: <strong>self-evaluation is systematically broken.</strong> When models grade their own work, they "confidently praise the work — even when, to a human observer, the quality is obviously mediocre." Separating judgment from generation makes the evaluator tunable and the generator accountable.</p>
+<p>Context resets — clearing the window entirely with structured handoffs — are presented as essential for long-running tasks, though newer models (Opus 4.6) reduce this overhead.</p>
+<p><strong>The incentive structure is clear:</strong> Anthropic wants developers building sophisticated multi-agent harnesses because (a) they produce better output, (b) they use 20x more tokens ($200 vs $9 per run), and (c) they create stickier platform dependency. This is good engineering advice that also happens to be good business for Anthropic.</p>
+                    </div>
+                </details>
+
+                <details class="section-detail">
+                    <summary>What's Not Being Said</summary>
+                    <div class="section-content">
+                        <ul>
+<li><strong>This formalizes what power users already do.</strong> The Claude Code community has been building harnesses informally. Anthropic publishing this means they've validated these patterns at scale and want to standardize them — likely to reduce support burden from poorly-designed harnesses.</li>
+<li><strong>The 20x cost gap is buried.</strong> A full harness run costs $200 vs $9 solo. That's a real constraint for all but well-funded teams. The article doesn't dwell on this.</li>
+<li><strong>No mention of the third-party usage crackdown.</strong> Same week Anthropic publishes "build sophisticated harnesses" they're also restricting how subscription users can run <code>claude -p</code> with custom system prompts. Mixed signals.</li>
+</ul>
+                    </div>
+                </details>
+
+                <details class="section-detail">
+                    <summary>Where This Sits in the Bigger Picture</summary>
+                    <div class="section-content">
+                        <p>This is part of a broader trend: <strong>the harness layer is becoming the new competitive moat.</strong> Harrison Chase (LangChain) flagged the "meta harness" paper the same week. The industry is converging on the idea that model intelligence is necessary but insufficient — the orchestration, evaluation, and memory infrastructure around the model is what separates working systems from demos.</p>
+<p>This maps to the trajectory: raw model → prompt engineering → RAG → agents → <strong>harness design</strong>. Each layer adds sophistication and cost but also capability. We're firmly in the harness era.</p>
+                    </div>
+                </details>
+
+                <details class="section-detail">
+                    <summary>What's Likely Coming Next</summary>
+                    <div class="section-content">
+                        <ul>
+<li><strong>Anthropic will likely ship harness primitives</strong> — expect official planner/evaluator SDKs or Claude Code features that formalize these patterns</li>
+<li><strong>"Harness engineer" becomes a real job title</strong> within 6 months at companies building on Claude</li>
+<li><strong>Evaluator-as-a-service</strong> will emerge — external evaluation of agent output as a product category</li>
+<li><strong>Cost optimization for harnesses</strong> will become critical — the 20x multiplier means harness design directly impacts unit economics</li>
+</ul>
+                    </div>
+                </details>
+
+                <details class="section-detail">
+                    <summary>Attention Is All You Need</summary>
+                    <div class="section-content">
+                        <ul>
+<li><strong>Primary source:</strong> https://anthropic.com/engineering/harness-design-long-running-apps</li>
+<li><strong>Related:</strong> Harrison Chase on "meta harness" paper (@hwchase17, same week)</li>
+<li><strong>Related:</strong> Anthropic's earlier multi-agent orchestration docs</li>
+<li><strong>Key concept:</strong> GAN-inspired adversarial architecture applied to code generation (generator vs evaluator)</li>
+<li><strong>Key person:</strong> The unnamed Anthropic engineer who built this — their harness iteration methodology (reading traces, identifying judgment divergences, calibrating evaluator skepticism) is the real craft</li>
+</ul>
+                    </div>
+                </details>
+
+                <details class="section-detail">
+                    <summary>What This Means for Every Consulting</summary>
+                    <div class="section-content">
+                        <p><strong>For Nityesh / Claudie architecture:</strong>
+- Our current Claudie setup uses skills and scheduled jobs but lacks a formal evaluator layer. The self-congratulatory bias problem is real — when Claudie runs a scheduled job, there's no independent check on output quality. Adding a lightweight evaluator pattern to critical scheduled jobs (dashboard updates, email handling) would catch errors before they reach the team.
+- The "sprint contract" concept (generator and evaluator negotiate what "done" means before implementation) could improve how we define success criteria for complex tasks.</p>
+<p><strong>For Mike's developer training vertical:</strong>
+- This is curriculum gold. Enterprise developer teams need to understand that "using Claude Code" is step 1 — building effective harnesses around it is step 2. This article provides the framework for an advanced training module.</p>
+<p><strong>For client advisory:</strong>
+- When clients ask "how do we use Claude for X?" the answer is increasingly "you need a harness, not just a prompt." This article gives us a credible, Anthropic-endorsed framework to point to.</p>
+<p><strong>For Natalia / sales:</strong>
+- "Harness design consulting" could be a distinct offering — helping enterprise teams design their agent orchestration layer. This is higher-value than prompt engineering and more defensible.</p>
+                    </div>
+                </details>
+            <div class="links">
+                <a href="https://x.com/CamilleRoux/status/2040685901441810640" target="_blank" rel="noopener">View on X</a>
+                <a href="https://anthropic.com/engineering/harness-design-long-running-apps" target="_blank" rel="noopener">Read Article</a>
+            </div>
+        </article>
 
         <article class="entry">
             <span class="signal-tag key-shift">Key Shift</span>
@@ -2050,7 +2154,7 @@ A circuit breaker halts auto-compaction after three consecutive failures.</p>
                 <li><strong>The platform shift happened in 4 weeks.</strong> Ejaaz&rsquo;s catalog shows Claude Code crossed from developer tool to knowledge-worker platform in a single shipping sprint. Clients who evaluated it even two months ago saw a fundamentally different product.</li>
             </ol>
 
-            <p class="coda">17 of 18 sources tagged as Key Shift. The dominant theme: Claude Code&rsquo;s memory, personalization, and autonomous capabilities represent a genuine platform shift &mdash; not incremental improvement.</p>
+            <p class="coda">19 of 20 sources tagged as Key Shift. The dominant theme: Claude Code&rsquo;s memory, personalization, and autonomous capabilities represent a genuine platform shift &mdash; not incremental improvement.</p>
         </section>
 
         <footer>
