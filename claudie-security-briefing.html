@@ -384,7 +384,6 @@
 <span class="comment"># against a blocklist of dangerous patterns and compositions.</span></code></pre>
       <p>This won't catch every possible attack vector &mdash; a determined attacker can find creative shell constructs. But it blocks the common patterns and raises the bar significantly. Combined with observability (every command is logged), novel bypass attempts get caught and added to the blocklist.</p>
 
-      <p><strong>Restricted permissions.</strong> Scheduled jobs and non-admin sessions run with restricted permission modes. Even if a compromised package gets past quarantine, the harness blocks dangerous tool calls &mdash; limiting the blast radius of what it can actually do.</p>
     </div>
 
     <h3>Prompt-based protection</h3>
