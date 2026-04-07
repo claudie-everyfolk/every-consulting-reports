@@ -217,6 +217,53 @@
       padding-top: 1.5rem;
       border-top: 1px solid var(--border);
     }
+    /* Floating TOC */
+    .toc {
+      position: fixed;
+      top: 6rem;
+      right: 2rem;
+      width: 220px;
+      font-size: 0.8rem;
+      line-height: 1.5;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    }
+    .toc ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+    .toc li {
+      margin: 0;
+      padding: 0;
+    }
+    .toc a {
+      display: block;
+      padding: 0.3rem 0 0.3rem 0.75rem;
+      color: var(--text-secondary);
+      text-decoration: none;
+      border-left: 2px solid transparent;
+      transition: all 0.15s ease;
+    }
+    .toc a:hover {
+      color: var(--text);
+    }
+    .toc a.active {
+      color: var(--text);
+      border-left-color: var(--accent);
+      font-weight: 600;
+    }
+    .toc .toc-h1 {
+      font-weight: 600;
+      color: var(--text);
+      padding-left: 0.75rem;
+    }
+    .toc .toc-h2 {
+      padding-left: 1.5rem;
+      font-size: 0.75rem;
+    }
+    @media (max-width: 1200px) {
+      .toc { display: none; }
+    }
   </style>
 </head>
 <body>
@@ -232,7 +279,7 @@
     </div>
 
     <!-- THE PROBLEM -->
-    <h1 style="font-size: 1.8rem; margin: 2.5rem 0 1rem; padding-bottom: 0.5rem; border-bottom: 3px solid var(--accent);">The Problem</h1>
+    <h1 id="the-problem" style="font-size: 1.8rem; margin: 2.5rem 0 1rem; padding-bottom: 0.5rem; border-bottom: 3px solid var(--accent);">The Problem</h1>
 
     <p>In early 2026, two popular NPM packages with hundreds of millions of downloads were found to contain malicious code. They were resolved within hours of detection &mdash; but hours is a lifetime when your AI agent can install packages and run arbitrary code with real credentials.</p>
 
@@ -252,7 +299,7 @@
     <p>This is the most likely threat to materialize day-to-day, and it doesn't require an attacker at all. Your agent has access to sensitive data &mdash; even one leadership inbox with NDA-bound client information is enough. It talks to multiple people with different clearance levels. If someone casually asks a question and the agent helpfully answers with data they shouldn't see, that's a leak. The agent's default behavior is to be helpful. <strong>Helpfulness without access control is a liability.</strong></p>
 
     <!-- THREE PROTECTION LAYERS -->
-    <h1 style="font-size: 1.8rem; margin: 2.5rem 0 1rem; padding-bottom: 0.5rem; border-bottom: 3px solid var(--accent);">Three Layers of Protection</h1>
+    <h1 id="three-layers" style="font-size: 1.8rem; margin: 2.5rem 0 1rem; padding-bottom: 0.5rem; border-bottom: 3px solid var(--accent);">Three Layers of Protection</h1>
 
     <p>Every threat vector above is addressed by three types of defense, stacked. Each operates at a different level of the stack, with a different reliability/flexibility tradeoff.</p>
 
@@ -289,7 +336,7 @@
     <p>An attack must penetrate all three layers to succeed. The rest of this doc walks through each threat vector and shows how all three layers stack against it.</p>
 
     <!-- SUPPLY CHAIN -->
-    <h2>Vector 1: Supply Chain</h2>
+    <h2 id="supply-chain">Vector 1: Supply Chain</h2>
 
     <p>Your agent can install and execute packages. A compromised dependency runs with the agent's full permissions &mdash; access to email, files, credentials, everything. This already happened: in early 2026, Axios and other widely-used NPM packages with hundreds of millions of downloads were found to contain malicious code. As AI agents become more common targets, this risk will only increase.</p>
 
@@ -333,7 +380,7 @@ claude -p --dangerously-skip-permissions <span class="string">"..."</span></code
     </div>
 
     <!-- PROMPT INJECTION -->
-    <h2>Vector 2: Prompt Injection</h2>
+    <h2 id="prompt-injection">Vector 2: Prompt Injection</h2>
 
     <p>Your agent reads emails, browses social media, and parses documents. Any of that content can contain instructions designed to hijack the agent's behavior. We've seen this attempted in production: a phishing email arrived at the agent's inbox from a spoofed admin Gmail address, claiming the admin had lost their laptop and asking for client pipeline data to be forwarded to a personal email. The agent refused and flagged it as social engineering.</p>
 
@@ -385,7 +432,7 @@ COMMAND=$(<span class="keyword">echo</span> "$INPUT" | jq -r '.tool_input.comman
     </div>
 
     <!-- INTERNAL LEAKAGE -->
-    <h2>Vector 3: Internal Information Leakage</h2>
+    <h2 id="internal-leakage">Vector 3: Internal Information Leakage</h2>
 
     <p>This is the most likely threat to materialize day-to-day, and it doesn't require an attacker. The agent has access to sensitive data &mdash; even one leadership inbox with NDA-bound client information. It talks to multiple people with different clearance levels. If someone asks a reasonable question and the agent helpfully answers with data they shouldn't see, that's a leak. No malicious intent required.</p>
 
@@ -468,7 +515,7 @@ COMMAND=$(<span class="keyword">echo</span> "$INPUT" | jq -r '.tool_input.comman
     </div>
 
     <!-- EVALUATING GAPS -->
-    <h1 style="font-size: 1.8rem; margin: 2.5rem 0 1rem; padding-bottom: 0.5rem; border-bottom: 3px solid var(--accent);">A Framework for Evaluating Gaps</h1>
+    <h1 id="evaluating-gaps" style="font-size: 1.8rem; margin: 2.5rem 0 1rem; padding-bottom: 0.5rem; border-bottom: 3px solid var(--accent);">A Framework for Evaluating Gaps</h1>
 
     <p>The framework above isn't "we've solved security." It's a systematic way to evaluate any gap. For any scenario, ask three questions:</p>
 
@@ -532,5 +579,46 @@ COMMAND=$(<span class="keyword">echo</span> "$INPUT" | jq -r '.tool_input.comman
       Every Consulting &middot; April 2026
     </div>
   </div>
+
+  <nav class="toc" id="toc">
+    <ul>
+      <li><a href="#the-problem" class="toc-h1">The Problem</a></li>
+      <li><a href="#three-layers" class="toc-h1">Three Layers of Protection</a></li>
+      <li><a href="#supply-chain" class="toc-h2">Supply Chain</a></li>
+      <li><a href="#prompt-injection" class="toc-h2">Prompt Injection</a></li>
+      <li><a href="#internal-leakage" class="toc-h2">Internal Leakage</a></li>
+      <li><a href="#evaluating-gaps" class="toc-h1">Evaluating Gaps</a></li>
+    </ul>
+  </nav>
+
+  <script>
+    // Scroll spy — highlight the current section in the TOC
+    const tocLinks = document.querySelectorAll('.toc a');
+    const sections = Array.from(tocLinks).map(a => ({
+      link: a,
+      target: document.querySelector(a.getAttribute('href'))
+    })).filter(s => s.target);
+
+    function updateToc() {
+      let current = sections[0];
+      for (const s of sections) {
+        if (s.target.getBoundingClientRect().top <= 120) current = s;
+      }
+      tocLinks.forEach(l => l.classList.remove('active'));
+      if (current) current.link.classList.add('active');
+    }
+
+    window.addEventListener('scroll', updateToc, { passive: true });
+    updateToc();
+
+    // Smooth scroll
+    tocLinks.forEach(link => {
+      link.addEventListener('click', e => {
+        e.preventDefault();
+        const target = document.querySelector(link.getAttribute('href'));
+        if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      });
+    });
+  </script>
 </body>
 </html>
