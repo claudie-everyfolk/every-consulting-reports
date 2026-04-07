@@ -299,12 +299,18 @@
     <p>This is the most likely threat to materialize day-to-day, and it doesn't require an attacker at all. Your agent has access to sensitive data &mdash; even one leadership inbox with NDA-bound client information is enough. It talks to multiple people with different clearance levels. If someone casually asks a question and the agent helpfully answers with data they shouldn't see, that's a leak. The agent's default behavior is to be helpful. <strong>Helpfulness without access control is a liability.</strong></p>
 
     <!-- THREE PROTECTION LAYERS -->
-    <h1 id="three-layers" style="font-size: 1.8rem; margin: 2.5rem 0 1rem; padding-bottom: 0.5rem; border-bottom: 3px solid var(--accent);">Three Layers of Protection</h1>
+    <h1 id="three-layers" style="font-size: 1.8rem; margin: 2.5rem 0 1rem; padding-bottom: 0.5rem; border-bottom: 3px solid var(--accent);">Four Layers of Protection</h1>
 
-    <p>Every threat vector above is addressed by three types of defense, stacked. Each operates at a different level of the stack, with a different reliability/flexibility tradeoff.</p>
+    <p>Every threat vector above is addressed by four types of defense, stacked. As you move down the stack, reliability decreases and flexibility increases. This is by design &mdash; each layer compensates for the weaknesses of the ones above it.</p>
 
     <table class="ring-table">
       <tr><th>Layer</th><th>What it is</th><th>Reliability</th><th>Flexibility</th></tr>
+      <tr>
+        <td><strong>Least Access</strong></td>
+        <td>The agent gets its own identity and accounts &mdash; not a mirror of someone's full access. Data is shared selectively, just like onboarding a real employee. What was never shared can never be leaked.</td>
+        <td>Highest &mdash; data that doesn't exist in the agent's world can't be exfiltrated by any means</td>
+        <td>Lowest &mdash; binary decision made at setup time, can't adapt dynamically</td>
+      </tr>
       <tr>
         <td><strong>Programmatic</strong></td>
         <td>Code-level blocks that the model cannot override. Permission modes, PreToolUse hooks, identity gates. A dumb bash script that pattern-matches and kills.</td>
@@ -320,20 +326,20 @@
       <tr>
         <td><strong>Observability</strong></td>
         <td>Session logging, conversation viewer, thinking token inspection, forensic investigation skills. Prevents nothing. Catches everything.</td>
-        <td>High &mdash; logs don't lie</td>
-        <td>High &mdash; helps you tighten the other two layers iteratively</td>
+        <td>Lowest &mdash; detection after the fact, not prevention</td>
+        <td>Highest &mdash; can detect anything, no limits on what you can surface. Informs all other layers.</td>
       </tr>
     </table>
 
-    <p>The key insight: <strong>you don't rely on any single layer.</strong> Prompt-based controls are the most flexible but the least reliable under adversarial pressure &mdash; a sufficiently clever injection could convince the model to ignore them. But that's fine, because the programmatic layer catches what the prompt layer misses. And the observability layer catches the near-misses that neither prevented, so you can tighten your rules before a real breach occurs.</p>
+    <p>The key insight: <strong>you don't rely on any single layer.</strong> The Least Access layer is the most reliable but the least flexible &mdash; you decide what to share at setup time and can't adapt on the fly. The Programmatic layer enforces hard rules the model can't override. The Prompt-based layer handles nuance that code can't express. And the Observability layer catches what all three missed, so you can tighten your defenses iteratively.</p>
 
     <p>A valid criticism of prompt-based security is that you're relying on the AI to follow instructions &mdash; and that's true. It has two weaknesses: malicious prompt injection that overrides the instructions, and the model simply getting confused under complex context. But it also has a unique strength: it gets better with every model release, as models improve at instruction-following and detecting injection attempts. The other layers don't improve on their own.</p>
 
     <div style="text-align: center; margin: 2rem 0;">
-      <img src="security-layers-diagram.png" alt="Three concentric security layers: Programmatic (outermost), Prompt-based (middle), Observability (innermost)" style="max-width: 500px; width: 100%; border-radius: 8px;">
+      <img src="security-layers-diagram.png" alt="Four concentric security layers: Least Access (outermost), Programmatic, Prompt-based, Observability (innermost)" style="max-width: 500px; width: 100%; border-radius: 8px;">
     </div>
 
-    <p>An attack must penetrate all three layers to succeed. The rest of this doc walks through each threat vector and shows how all three layers stack against it.</p>
+    <p>An attack must penetrate all four layers to succeed. The rest of this doc walks through each threat vector and shows how all four layers stack against it.</p>
 
     <!-- SUPPLY CHAIN -->
     <h2 id="supply-chain">Vector 1: Supply Chain</h2>
@@ -342,6 +348,10 @@
 
     <table class="ring-table">
       <tr><th>Layer</th><th>How it protects against supply chain attacks</th></tr>
+      <tr>
+        <td><strong>Least Access</strong></td>
+        <td>The agent runs on its own account with only the data explicitly shared with it. A compromised dependency can only access what the agent has &mdash; not the full contents of a leadership inbox or admin account.</td>
+      </tr>
       <tr>
         <td><strong>Programmatic</strong></td>
         <td>Scheduled jobs and non-admin sessions run with restricted permissions (<code>dontAsk</code>). Even if a compromised package tries to exfiltrate data, the harness blocks dangerous tool calls.</td>
@@ -386,6 +396,10 @@ claude -p --dangerously-skip-permissions <span class="string">"..."</span></code
 
     <table class="ring-table">
       <tr><th>Layer</th><th>How it protects against prompt injection</th></tr>
+      <tr>
+        <td><strong>Least Access</strong></td>
+        <td>Even if an injection succeeds in manipulating the agent, the blast radius is limited to what the agent can actually access &mdash; its own account, not someone else's full inbox or credentials.</td>
+      </tr>
       <tr>
         <td><strong>Programmatic</strong></td>
         <td>PreToolUse hooks kill high-risk commands (email send) before execution. Browsing jobs run with <code>dontAsk</code> permissions. Unknown Slack IDs get silent ignore at the bot level.</td>
@@ -438,6 +452,10 @@ COMMAND=$(<span class="keyword">echo</span> "$INPUT" | jq -r '.tool_input.comman
 
     <table class="ring-table">
       <tr><th>Layer</th><th>How it protects against internal leakage</th></tr>
+      <tr>
+        <td><strong>Least Access</strong></td>
+        <td>The agent only has data that was explicitly shared with it. Instead of giving it a leadership inbox, share specific documents and emails selectively. What the agent doesn't have, it can't leak.</td>
+      </tr>
       <tr>
         <td><strong>Programmatic</strong></td>
         <td>Per-user permission tiers block non-admin users from accessing email, calendars, session logs, and config files. Identity-aware file browser hides restricted paths entirely.</td>
@@ -583,7 +601,7 @@ COMMAND=$(<span class="keyword">echo</span> "$INPUT" | jq -r '.tool_input.comman
   <nav class="toc" id="toc">
     <ul>
       <li><a href="#the-problem" class="toc-h1">The Problem</a></li>
-      <li><a href="#three-layers" class="toc-h1">Three Layers of Protection</a></li>
+      <li><a href="#three-layers" class="toc-h1">Four Layers of Protection</a></li>
       <li><a href="#supply-chain" class="toc-h2">Supply Chain</a></li>
       <li><a href="#prompt-injection" class="toc-h2">Prompt Injection</a></li>
       <li><a href="#internal-leakage" class="toc-h2">Internal Leakage</a></li>
