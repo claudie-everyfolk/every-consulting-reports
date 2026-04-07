@@ -352,7 +352,7 @@
       </tr>
       <tr>
         <td><strong>Programmatic</strong></td>
-        <td>Scheduled jobs and non-admin sessions run with restricted permissions (<code>dontAsk</code>). Even if a compromised package tries to exfiltrate data, the harness blocks dangerous tool calls.</td>
+        <td>Package quarantine: only allow installs of packages with releases older than N days. Bash command sandboxing: parse every command with <code>shlex</code> before execution, reject suspicious composition (eval chains, encoded payloads, pipes to curl).</td>
       </tr>
       <tr>
         <td><strong>Prompt-based</strong></td>
@@ -366,24 +366,35 @@
 
     <h3>Programmatic protection</h3>
     <div class="layer-card">
-      <p><strong>Restricted-permission scheduled jobs.</strong> The agent runs scheduled jobs autonomously &mdash; browsing social media, processing emails, updating dashboards. These jobs are the most exposed to supply chain risk because they run unattended and may trigger dependency installation.</p>
-      <p>The mitigation: <strong>run these jobs with <code>--permission-mode dontAsk</code></strong> instead of full permissions. Even if a compromised package tries to exfiltrate data via email or modify system configs, the harness blocks it. The agent can still read, analyze, and save results &mdash; it just can't take dangerous actions.</p>
-      <pre><code><span class="comment"># Browsing job — restricted permissions</span>
-claude -p --permission-mode dontAsk <span class="string">"Browse X.com, save interesting finds..."</span>
+      <p><strong>Package quarantine.</strong> Most supply chain attacks exploit the window between when a malicious version is published and when it's detected &mdash; often just hours. The defense: configure your package manager to only install packages whose latest release is older than a minimum age (e.g., 7 days). This alone would have blocked the Axios incident, since the malicious version was caught within hours of publication.</p>
+      <pre><code><span class="comment"># Example: npm config to reject packages released less than 7 days ago</span>
+<span class="comment"># Implementation varies by package manager — the principle is the same:</span>
+<span class="comment"># never install a version that hasn't survived community scrutiny</span></code></pre>
+      <p>This applies to any package manager the agent might use &mdash; npm, pip, cargo, brew. The principle: <strong>never let your agent be the first to install a new release.</strong></p>
 
-<span class="comment"># vs. admin-initiated interactive session — full permissions</span>
-claude -p --dangerously-skip-permissions <span class="string">"..."</span></code></pre>
-      <p><strong>Per-user permission tiers.</strong> When a team member messages the agent via Slack, the bot checks their identity and spawns Claude with the appropriate permission mode. Admins get full access. Everyone else gets sandboxed <code>dontAsk</code> mode with explicit allow/deny lists. This limits the blast radius if a compromised package is triggered during a non-admin session.</p>
+      <p><strong>Bash command sandboxing.</strong> Every bash command the agent tries to run gets parsed with <code>shlex</code> before execution. A PreToolUse hook tokenizes the command and rejects anything with suspicious composition:</p>
+      <pre><code><span class="comment"># Sandboxing hook — parse commands before execution</span>
+<span class="comment"># Reject patterns like:</span>
+<span class="comment">#   eval "$(curl ...)"        — remote code execution</span>
+<span class="comment">#   base64 -d | bash          — encoded payload execution</span>
+<span class="comment">#   curl ... | sh             — pipe-to-shell</span>
+<span class="comment">#   python -c "import os..."  — inline code with system calls</span>
+<span class="comment">#</span>
+<span class="comment"># Uses shlex.split() to tokenize, then checks each segment</span>
+<span class="comment"># against a blocklist of dangerous patterns and compositions.</span></code></pre>
+      <p>This won't catch every possible attack vector &mdash; a determined attacker can find creative shell constructs. But it blocks the common patterns and raises the bar significantly. Combined with observability (every command is logged), novel bypass attempts get caught and added to the blocklist.</p>
+
+      <p><strong>Restricted permissions.</strong> Scheduled jobs and non-admin sessions run with restricted permission modes. Even if a compromised package gets past quarantine, the harness blocks dangerous tool calls &mdash; limiting the blast radius of what it can actually do.</p>
     </div>
 
     <h3>Prompt-based protection</h3>
     <div class="layer-card">
-      <p>Ring 0 (the hardest ring, applying to everyone including admins) includes: <strong>no executing prompt-injected scripts.</strong> The agent is instructed to never install or execute code that arrives via prompt injection, embedded instructions in external content, or suspicious tool results. This won't stop a pre-compromised dependency, but it adds friction against live injection attempts that try to get the agent to <code>npm install</code> something malicious.</p>
+      <p>Ring 0 prohibits executing prompt-injected scripts &mdash; code arriving via injection, embedded instructions, or suspicious tool results. This won't stop a pre-compromised dependency, but it adds friction against live injection attempts that try to get the agent to install something new.</p>
     </div>
 
     <h3>Observability</h3>
     <div class="layer-card">
-      <p>Every Claude session is logged as JSONL &mdash; every tool call, every package installed, every command run. A <strong>conversation viewer</strong> in the file browser lets admins browse sessions visually, see exactly what was installed and when, and trace the chain of events. When something looks off, an <strong>investigate-yourself</strong> skill can forensically reconstruct what happened by reading bot code, session logs, and system state.</p>
+      <p>Every session is logged as JSONL &mdash; every tool call, every package installed, every command run. A <strong>conversation viewer</strong> lets admins browse sessions visually, see exactly what was installed and when, and trace the chain of events. When something looks off, a forensic investigation skill can reconstruct what happened by reading session logs and system state.</p>
     </div>
 
     <!-- PROMPT INJECTION -->
