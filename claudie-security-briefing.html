@@ -299,9 +299,9 @@
     <p>This is the most likely threat to materialize day-to-day, and it doesn't require an attacker at all. Your agent has access to sensitive data &mdash; even one leadership inbox with NDA-bound client information is enough. It talks to multiple people with different clearance levels. If someone casually asks a question and the agent helpfully answers with data they shouldn't see, that's a leak. The agent's default behavior is to be helpful. <strong>Helpfulness without access control is a liability.</strong></p>
 
     <!-- THREE PROTECTION LAYERS -->
-    <h1 id="three-layers" style="font-size: 1.8rem; margin: 2.5rem 0 1rem; padding-bottom: 0.5rem; border-bottom: 3px solid var(--accent);">Four Layers of Protection</h1>
+    <h1 id="four-layers" style="font-size: 1.8rem; margin: 2.5rem 0 1rem; padding-bottom: 0.5rem; border-bottom: 3px solid var(--accent);">Four Layers of Protection</h1>
 
-    <p>Every threat vector above is addressed by four types of defense, stacked. As you move down the stack, reliability decreases and flexibility increases. This is by design &mdash; each layer compensates for the weaknesses of the ones above it.</p>
+    <p>Every threat vector above is addressed by four types of defense, stacked. As you move down the stack, reliability decreases and flexibility increases &mdash; each layer compensates for the weaknesses of the ones above it.</p>
 
     <table class="ring-table">
       <tr><th>Layer</th><th>What it is</th><th>Reliability</th><th>Flexibility</th></tr>
@@ -331,8 +331,6 @@
       </tr>
     </table>
 
-    <p>The key insight: <strong>you don't rely on any single layer.</strong> The Least Access layer is the most reliable but the least flexible &mdash; you decide what to share at setup time and can't adapt on the fly. The Programmatic layer enforces hard rules the model can't override. The Prompt-based layer handles nuance that code can't express. And the Observability layer catches what all three missed, so you can tighten your defenses iteratively.</p>
-
     <p>A valid criticism of prompt-based security is that you're relying on the AI to follow instructions &mdash; and that's true. It has two weaknesses: malicious prompt injection that overrides the instructions, and the model simply getting confused under complex context. But it also has a unique strength: it gets better with every model release, as models improve at instruction-following and detecting injection attempts. The other layers don't improve on their own.</p>
 
     <div style="text-align: center; margin: 2rem 0;">
@@ -344,7 +342,7 @@
     <!-- SUPPLY CHAIN -->
     <h2 id="supply-chain">Vector 1: Supply Chain</h2>
 
-    <p>Your agent can install and execute packages. A compromised dependency runs with the agent's full permissions &mdash; access to email, files, credentials, everything. This already happened: in early 2026, Axios and other widely-used NPM packages with hundreds of millions of downloads were found to contain malicious code. As AI agents become more common targets, this risk will only increase.</p>
+    <p>Here's how the four layers stack against compromised dependencies.</p>
 
     <table class="ring-table">
       <tr><th>Layer</th><th>How it protects against supply chain attacks</th></tr>
@@ -386,13 +384,12 @@ claude -p --dangerously-skip-permissions <span class="string">"..."</span></code
     <h3>Observability</h3>
     <div class="layer-card">
       <p>Every Claude session is logged as JSONL &mdash; every tool call, every package installed, every command run. A <strong>conversation viewer</strong> in the file browser lets admins browse sessions visually, see exactly what was installed and when, and trace the chain of events. When something looks off, an <strong>investigate-yourself</strong> skill can forensically reconstruct what happened by reading bot code, session logs, and system state.</p>
-      <p>You can't prevent every supply chain attack. But you can see what happened, how far it got, and what it touched.</p>
     </div>
 
     <!-- PROMPT INJECTION -->
     <h2 id="prompt-injection">Vector 2: Prompt Injection</h2>
 
-    <p>Your agent reads emails, browses social media, and parses documents. Any of that content can contain instructions designed to hijack the agent's behavior. We've seen this attempted in production: a phishing email arrived at the agent's inbox from a spoofed admin Gmail address, claiming the admin had lost their laptop and asking for client pipeline data to be forwarded to a personal email. The agent refused and flagged it as social engineering.</p>
+    <p>Here's how the four layers stack against external content manipulating agent behavior.</p>
 
     <table class="ring-table">
       <tr><th>Layer</th><th>How it protects against prompt injection</th></tr>
@@ -448,7 +445,7 @@ COMMAND=$(<span class="keyword">echo</span> "$INPUT" | jq -r '.tool_input.comman
     <!-- INTERNAL LEAKAGE -->
     <h2 id="internal-leakage">Vector 3: Internal Information Leakage</h2>
 
-    <p>This is the most likely threat to materialize day-to-day, and it doesn't require an attacker. The agent has access to sensitive data &mdash; even one leadership inbox with NDA-bound client information. It talks to multiple people with different clearance levels. If someone asks a reasonable question and the agent helpfully answers with data they shouldn't see, that's a leak. No malicious intent required.</p>
+    <p>Here's how the four layers stack against the agent accidentally sharing data across trust boundaries.</p>
 
     <table class="ring-table">
       <tr><th>Layer</th><th>How it protects against internal leakage</th></tr>
@@ -493,7 +490,7 @@ COMMAND=$(<span class="keyword">echo</span> "$INPUT" | jq -r '.tool_input.comman
 
     <h3>Prompt-based protection</h3>
     <div class="layer-card">
-      <p>This is where the prompt layer earns its keep. <strong>Ring-based access control</strong> is a document loaded into the agent's context at every conversation start. It defines concentric rings where each inherits all restrictions from rings above:</p>
+      <p><strong>Ring-based access control</strong> is a document loaded into the agent's context at every conversation start. Concentric rings where each inherits all restrictions from above:</p>
       <table class="ring-table">
         <tr><th>Ring</th><th>Who</th><th>Key restrictions</th></tr>
         <tr>
@@ -535,15 +532,14 @@ COMMAND=$(<span class="keyword">echo</span> "$INPUT" | jq -r '.tool_input.comman
     <!-- EVALUATING GAPS -->
     <h1 id="evaluating-gaps" style="font-size: 1.8rem; margin: 2.5rem 0 1rem; padding-bottom: 0.5rem; border-bottom: 3px solid var(--accent);">A Framework for Evaluating Gaps</h1>
 
-    <p>The framework above isn't "we've solved security." It's a systematic way to evaluate any gap. For any scenario, ask three questions:</p>
+    <p>For any scenario, ask four questions &mdash; one per layer:</p>
 
     <ol>
+      <li>Does <strong>least access</strong> prevent it? (Was the data even shared with the agent?)</li>
       <li>Does the <strong>programmatic layer</strong> catch it?</li>
       <li>Does the <strong>prompt-based layer</strong> catch it?</li>
       <li>Does the <strong>observability layer</strong> catch it?</li>
     </ol>
-
-    <p>Three possible outcomes:</p>
 
     <table class="ring-table">
       <tr><th>Outcome</th><th>Classification</th><th>Action</th></tr>
@@ -593,6 +589,50 @@ COMMAND=$(<span class="keyword">echo</span> "$INPUT" | jq -r '.tool_input.comman
       <p class="threat-result">Classification: Known risk. Prompt-level control is acceptable here because browser actions are lower-stakes than email exfiltration. Observability provides the safety net.</p>
     </div>
 
+    <!-- APPLY THIS -->
+    <h2 id="apply-this">Apply this to your own setup</h2>
+
+    <p>Pick your agent's five highest-stakes actions (sending email, accessing files, running code, posting to channels, modifying configs). Run each through the four-layer evaluation above. You'll know exactly where your gaps are.</p>
+
+    <p>Or let your agent do it. Copy the prompt below, paste it into your AI agent, and it will launch four parallel evaluations &mdash; one per security layer &mdash; against your actual setup.</p>
+
+    <div class="layer-card" style="position: relative;">
+      <button onclick="navigator.clipboard.writeText(document.getElementById('audit-prompt').innerText).then(() => { this.innerText = 'Copied!'; setTimeout(() => this.innerText = 'Copy', 2000) })" style="position: absolute; top: 0.75rem; right: 0.75rem; background: var(--accent); color: white; border: none; padding: 0.4rem 0.8rem; border-radius: 4px; font-size: 0.8rem; cursor: pointer;">Copy</button>
+      <pre id="audit-prompt" style="background: #1a1a1a; color: #e0e0e0; padding: 1.25rem; border-radius: 8px; white-space: pre-wrap; font-size: 0.82rem; line-height: 1.5;"><code>Read the security framework at:
+https://claudie-everyfolk.github.io/every-consulting-reports/claudie-security-briefing.html
+
+Then launch 4 parallel subagents to audit our setup against each layer:
+
+Agent 1 — LEAST ACCESS AUDIT
+Inventory every account, API key, inbox, and data source this agent can
+access. For each one, answer: does the agent actually need this to do its
+job? Flag anything that could be scoped down or removed entirely.
+
+Agent 2 — PROGRAMMATIC LAYER AUDIT
+List every tool the agent can call. For each high-risk tool (email send,
+file write, code execution, external API calls), check: is there a
+permission mode, deny rule, or pre-execution hook that blocks misuse?
+Flag any high-risk tool with no programmatic guard.
+
+Agent 3 — PROMPT-BASED LAYER AUDIT
+Read the agent's system prompt and any access control documents. Check:
+are there clear rules about who can access what? Are there instructions
+for handling sensitive data in public channels? Are there rules against
+external communication? Flag any gap where the agent has access to
+sensitive data but no prompt-level instruction about who can see it.
+
+Agent 4 — OBSERVABILITY AUDIT
+Check: are all agent sessions logged? Can you inspect tool calls, thinking
+tokens, and full conversation history? Is there a way to search past
+sessions for specific actions? Try to find the last time the agent accessed
+sensitive data and verify you can trace the full chain of events.
+
+After all four agents complete, compile a single report:
+- What's covered at multiple layers (non-threats)
+- What's covered by prompt + observability only (known risks)
+- What's not covered by any layer (true gaps — fix these first)</code></pre>
+    </div>
+
     <div class="footer">
       Every Consulting &middot; April 2026
     </div>
@@ -601,11 +641,12 @@ COMMAND=$(<span class="keyword">echo</span> "$INPUT" | jq -r '.tool_input.comman
   <nav class="toc" id="toc">
     <ul>
       <li><a href="#the-problem" class="toc-h1">The Problem</a></li>
-      <li><a href="#three-layers" class="toc-h1">Four Layers of Protection</a></li>
+      <li><a href="#four-layers" class="toc-h1">Four Layers of Protection</a></li>
       <li><a href="#supply-chain" class="toc-h2">Supply Chain</a></li>
       <li><a href="#prompt-injection" class="toc-h2">Prompt Injection</a></li>
       <li><a href="#internal-leakage" class="toc-h2">Internal Leakage</a></li>
       <li><a href="#evaluating-gaps" class="toc-h1">Evaluating Gaps</a></li>
+      <li><a href="#apply-this" class="toc-h2">Apply to your setup</a></li>
     </ul>
   </nav>
 
