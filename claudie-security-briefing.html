@@ -282,10 +282,30 @@
 
     <p>A valid criticism of prompt-based security is that you're relying on the AI to follow instructions &mdash; and that's true. It has two weaknesses: malicious prompt injection that overrides the instructions, and the model simply getting confused under complex context. But it also has a unique strength: it gets better with every model release, as models improve at instruction-following and detecting injection attempts. The other layers don't improve on their own.</p>
 
-    <p>The rest of this doc walks through each threat vector and shows how all three layers stack against it.</p>
+    <div style="text-align: center; margin: 2rem 0;">
+      <img src="security-layers-diagram.png" alt="Three concentric security layers: Programmatic (outermost), Prompt-based (middle), Observability (innermost)" style="max-width: 500px; width: 100%; border-radius: 8px;">
+    </div>
+
+    <p>An attack must penetrate all three layers to succeed. The rest of this doc walks through each threat vector and shows how all three layers stack against it.</p>
 
     <!-- SUPPLY CHAIN -->
     <h2>Vector 1: Supply Chain</h2>
+
+    <table class="ring-table">
+      <tr><th>Layer</th><th>How it protects against supply chain attacks</th></tr>
+      <tr>
+        <td><strong>Programmatic</strong></td>
+        <td>Scheduled jobs and non-admin sessions run with restricted permissions (<code>dontAsk</code>). Even if a compromised package tries to exfiltrate data, the harness blocks dangerous tool calls.</td>
+      </tr>
+      <tr>
+        <td><strong>Prompt-based</strong></td>
+        <td>Ring 0 instructs the agent to never execute prompt-injected scripts. Adds friction against live injection attempts trying to install malicious packages.</td>
+      </tr>
+      <tr>
+        <td><strong>Observability</strong></td>
+        <td>Every tool call and package installation is logged. Conversation viewer surfaces what got installed, when, and what it touched.</td>
+      </tr>
+    </table>
 
     <p>Your agent can install and execute packages. A compromised dependency runs with the agent's full permissions &mdash; access to email, files, credentials, everything. This already happened: in early 2026, Axios and other widely-used NPM packages with hundreds of millions of downloads were found to contain malicious code. As AI agents become more common targets, this risk will only increase.</p>
 
@@ -314,6 +334,22 @@ claude -p --dangerously-skip-permissions <span class="string">"..."</span></code
 
     <!-- PROMPT INJECTION -->
     <h2>Vector 2: Prompt Injection</h2>
+
+    <table class="ring-table">
+      <tr><th>Layer</th><th>How it protects against prompt injection</th></tr>
+      <tr>
+        <td><strong>Programmatic</strong></td>
+        <td>PreToolUse hooks kill high-risk commands (email send) before execution. Browsing jobs run with <code>dontAsk</code> permissions. Unknown Slack IDs get silent ignore at the bot level.</td>
+      </tr>
+      <tr>
+        <td><strong>Prompt-based</strong></td>
+        <td>Ring 0 prohibits all external communication. Agent is instructed to flag suspicious content rather than act on it.</td>
+      </tr>
+      <tr>
+        <td><strong>Observability</strong></td>
+        <td>Thinking tokens reveal whether the model was influenced by injected content. Traces the full chain from ingestion to attempted action.</td>
+      </tr>
+    </table>
 
     <p>Your agent reads emails, browses social media, and parses documents. Any of that content can contain instructions designed to hijack the agent's behavior. We've seen this attempted in production: a phishing email arrived at the agent's inbox from a spoofed admin Gmail address, claiming the admin had lost their laptop and asking for client pipeline data to be forwarded to a personal email. The agent refused and flagged it as social engineering.</p>
 
@@ -350,6 +386,22 @@ COMMAND=$(<span class="keyword">echo</span> "$INPUT" | jq -r '.tool_input.comman
 
     <!-- INTERNAL LEAKAGE -->
     <h2>Vector 3: Internal Information Leakage</h2>
+
+    <table class="ring-table">
+      <tr><th>Layer</th><th>How it protects against internal leakage</th></tr>
+      <tr>
+        <td><strong>Programmatic</strong></td>
+        <td>Per-user permission tiers block non-admin users from accessing email, calendars, session logs, and config files. Identity-aware file browser hides restricted paths entirely.</td>
+      </tr>
+      <tr>
+        <td><strong>Prompt-based</strong></td>
+        <td>Ring system defines who can see what. Per-user profiles compound over time. Sensitive data routed from public channels to DMs.</td>
+      </tr>
+      <tr>
+        <td><strong>Observability</strong></td>
+        <td>Primary defense here: catch near-misses in thinking tokens before they become real leaks. Each near-miss becomes a prompt refinement. Turns security into a closed feedback loop.</td>
+      </tr>
+    </table>
 
     <p>This is the most likely threat to materialize day-to-day, and it doesn't require an attacker. The agent has access to sensitive data &mdash; even one leadership inbox with NDA-bound client information. It talks to multiple people with different clearance levels. If someone asks a reasonable question and the agent helpfully answers with data they shouldn't see, that's a leak. No malicious intent required.</p>
 
