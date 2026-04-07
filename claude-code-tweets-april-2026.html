@@ -388,13 +388,88 @@
         <header>
             <h1>Signal Digest</h1>
             <p class="subtitle">What actually matters in AI &mdash; curated by Claudie for the Every Consulting team</p>
-            <p class="meta">Last updated April 6, 2026</p>
+            <p class="meta">Last updated April 7, 2026</p>
         </header>
 
         <nav class="legend">
             Each entry is tagged: <span class="tag-example key-shift">Key Shift</span> signals a genuine change in how we should think or act. <span class="tag-example noise">Noise</span> means useful context but nothing new for the team.
         </nav>
 
+
+        <article class="entry">
+            <span class="signal-tag key-shift">Key Shift</span>
+            <h2><a href="https://x.com/garrytan/status/2041388847930712399" target="_blank" rel="noopener">Claude Cowork File Exfiltration — Unremediated Vulnerability Extends to New Products</a></h2>
+            <p class="author">Garry Tan (@garrytan)</p>
+            <p class="summary">Known file exfiltration vulnerability in Claude's coding environment now extends to Cowork, highlighting how security debt propagates as AI products expand.</p>
+            
+                <details class="section-detail">
+                    <summary>Worth Your Time?</summary>
+                    <div class="section-content">
+                        <p><strong>Read.</strong> This isn't just a bug report — it's a pattern. A vulnerability found in Claude.ai chat by Johann Rehberger has now propagated to Cowork, Claude's collaborative coding environment. When Garry Tan (Y Combinator president) amplifies a security issue to his 1M+ followers, the reputational and adoption consequences are real.</p>
+                    </div>
+                </details>
+
+                <details class="section-detail">
+                    <summary>What's Actually Happening</summary>
+                    <div class="section-content">
+                        <p>Anthropic shipped Cowork (their collaborative Claude coding environment) on top of the same infrastructure that had a known file exfiltration vulnerability. The vulnerability allows attackers to exfiltrate user files through Claude's coding interface. Johann Rehberger originally disclosed this in the Claude.ai chat context — before Cowork existed. Now it extends to a product where users are explicitly working with sensitive codebases and files.</p>
+<p>The structural issue: Anthropic is shipping products faster than they're remediating security debt. Cowork inherited the vulnerability because the underlying execution environment wasn't patched before the new product launched on top of it.</p>
+                    </div>
+                </details>
+
+                <details class="section-detail">
+                    <summary>What's Not Being Said</summary>
+                    <div class="section-content">
+                        <ul>
+<li><strong>Anthropic's security posture is under strain.</strong> They're in a feature race (Cowork, Claude Code, Agent SDK, MCP) while security researchers find holes in the foundation.</li>
+<li><strong>"Unremediated" is the key word.</strong> This wasn't a zero-day — it was a known, disclosed vulnerability that shipped into a new product anyway.</li>
+<li><strong>Enterprise adoption risk.</strong> If Bloomberg or NYT security teams see this, it raises questions about Claude for production codework.</li>
+</ul>
+                    </div>
+                </details>
+
+                <details class="section-detail">
+                    <summary>Where This Sits in the Bigger Picture</summary>
+                    <div class="section-content">
+                        <p>This is part of a broader pattern in the AI industry: the speed of product shipping outpacing security hardening. Every major AI lab is in a feature arms race, and security is getting the classic "we'll fix it later" treatment. The difference now is that these tools have access to real user files, real codebases, real enterprise data — the blast radius of a vulnerability isn't just a chatbot saying something weird, it's actual data exfiltration.</p>
+<p>For the AI coding tools market specifically, this is a trust inflection point. Developers are being asked to give these tools deep filesystem access. Each unpatched vuln erodes that trust.</p>
+                    </div>
+                </details>
+
+                <details class="section-detail">
+                    <summary>What's Likely Coming Next</summary>
+                    <div class="section-content">
+                        <ul>
+<li>Anthropic will likely patch this quickly now that it has Garry Tan's amplification. Public pressure from a 1M-follower account accelerates remediation timelines.</li>
+<li>Expect more security researchers to probe Cowork and Claude Code specifically — the "new product, old vulnerability" pattern is a known target.</li>
+<li>Enterprise security teams will add this to their risk assessments for Claude adoption. Competitors (Cursor, Copilot) will quietly use this in sales conversations.</li>
+</ul>
+                    </div>
+                </details>
+
+                <details class="section-detail">
+                    <summary>Attention Is All You Need</summary>
+                    <div class="section-content">
+                        <ul>
+<li><strong>Johann Rehberger</strong> — the original researcher who disclosed the vulnerability. Follow his work for Claude-specific security research.</li>
+<li><strong>Garry Tan's thread</strong> — likely contains technical details or links to the original disclosure.</li>
+<li>Watch Anthropic's security advisories and changelog for patches.</li>
+</ul>
+                    </div>
+                </details>
+
+                <details class="section-detail">
+                    <summary>What This Means for Every Consulting</summary>
+                    <div class="section-content">
+                        <p><strong>For our own infrastructure:</strong> We run on Claude Code with deep filesystem access. We need to understand whether this specific attack vector (prompt injection → file exfiltration) applies to our setup, and whether our Ring 0 restrictions on prompt-injected scripts provide adequate mitigation.</p>
+<p><strong>For client training:</strong> When teaching teams to use Claude Code or Claude for development work, we need to include security awareness — what data to keep out of the context, how prompt injection works, why you don't paste untrusted content into Claude alongside sensitive files.</p>
+<p><strong>For sales/positioning:</strong> This is actually an opportunity. "We don't just teach teams to use AI — we teach them to use it safely" is a differentiator, especially for finance clients with strict security requirements.</p>
+                    </div>
+                </details>
+            <div class="links">
+                <a href="https://x.com/garrytan/status/2041388847930712399" target="_blank" rel="noopener">View on X</a>
+            </div>
+        </article>
 
         <article class="entry">
             <span class="signal-tag key-shift">Key Shift</span>
@@ -2527,7 +2602,7 @@ A circuit breaker halts auto-compaction after three consecutive failures.</p>
                 <li><strong>The platform shift happened in 4 weeks.</strong> Ejaaz&rsquo;s catalog shows Claude Code crossed from developer tool to knowledge-worker platform in a single shipping sprint. Clients who evaluated it even two months ago saw a fundamentally different product.</li>
             </ol>
 
-            <p class="coda">24 of 25 sources tagged as Key Shift. The dominant theme: Claude Code&rsquo;s memory, personalization, and autonomous capabilities represent a genuine platform shift &mdash; not incremental improvement.</p>
+            <p class="coda">25 of 26 sources tagged as Key Shift. The dominant theme: Claude Code&rsquo;s memory, personalization, and autonomous capabilities represent a genuine platform shift &mdash; not incremental improvement.</p>
         </section>
 
         <footer>
