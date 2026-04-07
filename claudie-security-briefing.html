@@ -291,6 +291,8 @@
     <!-- SUPPLY CHAIN -->
     <h2>Vector 1: Supply Chain</h2>
 
+    <p>Your agent can install and execute packages. A compromised dependency runs with the agent's full permissions &mdash; access to email, files, credentials, everything. This already happened: in early 2026, Axios and other widely-used NPM packages with hundreds of millions of downloads were found to contain malicious code. As AI agents become more common targets, this risk will only increase.</p>
+
     <table class="ring-table">
       <tr><th>Layer</th><th>How it protects against supply chain attacks</th></tr>
       <tr>
@@ -306,8 +308,6 @@
         <td>Every tool call and package installation is logged. Conversation viewer surfaces what got installed, when, and what it touched.</td>
       </tr>
     </table>
-
-    <p>Your agent can install and execute packages. A compromised dependency runs with the agent's full permissions &mdash; access to email, files, credentials, everything. This already happened: in early 2026, Axios and other widely-used NPM packages with hundreds of millions of downloads were found to contain malicious code. As AI agents become more common targets, this risk will only increase.</p>
 
     <h3>Programmatic protection</h3>
     <div class="layer-card">
@@ -335,6 +335,8 @@ claude -p --dangerously-skip-permissions <span class="string">"..."</span></code
     <!-- PROMPT INJECTION -->
     <h2>Vector 2: Prompt Injection</h2>
 
+    <p>Your agent reads emails, browses social media, and parses documents. Any of that content can contain instructions designed to hijack the agent's behavior. We've seen this attempted in production: a phishing email arrived at the agent's inbox from a spoofed admin Gmail address, claiming the admin had lost their laptop and asking for client pipeline data to be forwarded to a personal email. The agent refused and flagged it as social engineering.</p>
+
     <table class="ring-table">
       <tr><th>Layer</th><th>How it protects against prompt injection</th></tr>
       <tr>
@@ -350,8 +352,6 @@ claude -p --dangerously-skip-permissions <span class="string">"..."</span></code
         <td>Thinking tokens reveal whether the model was influenced by injected content. Traces the full chain from ingestion to attempted action.</td>
       </tr>
     </table>
-
-    <p>Your agent reads emails, browses social media, and parses documents. Any of that content can contain instructions designed to hijack the agent's behavior. We've seen this attempted in production: a phishing email arrived at the agent's inbox from a spoofed admin Gmail address, claiming the admin had lost their laptop and asking for client pipeline data to be forwarded to a personal email. The agent refused and flagged it as social engineering.</p>
 
     <h3>Programmatic protection</h3>
     <div class="layer-card">
@@ -387,6 +387,8 @@ COMMAND=$(<span class="keyword">echo</span> "$INPUT" | jq -r '.tool_input.comman
     <!-- INTERNAL LEAKAGE -->
     <h2>Vector 3: Internal Information Leakage</h2>
 
+    <p>This is the most likely threat to materialize day-to-day, and it doesn't require an attacker. The agent has access to sensitive data &mdash; even one leadership inbox with NDA-bound client information. It talks to multiple people with different clearance levels. If someone asks a reasonable question and the agent helpfully answers with data they shouldn't see, that's a leak. No malicious intent required.</p>
+
     <table class="ring-table">
       <tr><th>Layer</th><th>How it protects against internal leakage</th></tr>
       <tr>
@@ -402,8 +404,6 @@ COMMAND=$(<span class="keyword">echo</span> "$INPUT" | jq -r '.tool_input.comman
         <td>Primary defense here: catch near-misses in thinking tokens before they become real leaks. Each near-miss becomes a prompt refinement. Turns security into a closed feedback loop.</td>
       </tr>
     </table>
-
-    <p>This is the most likely threat to materialize day-to-day, and it doesn't require an attacker. The agent has access to sensitive data &mdash; even one leadership inbox with NDA-bound client information. It talks to multiple people with different clearance levels. If someone asks a reasonable question and the agent helpfully answers with data they shouldn't see, that's a leak. No malicious intent required.</p>
 
     <h3>Programmatic protection</h3>
     <div class="layer-card">
