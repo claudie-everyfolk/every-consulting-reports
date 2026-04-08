@@ -228,6 +228,9 @@
     <h3 style="font-size: 0.95rem;">Relevance for our clients</h3>
     <p>High. A Bloomberg or NYT wanting to deploy internal agents should look at this before building from scratch. The security model addresses most of what our <a href="https://claudie-everyfolk.github.io/every-consulting-reports/claudie-security-briefing.html">security article</a> warns about &mdash; out of the box. Worth adding to our training curriculum as a recommended deployment path for enterprise teams.</p>
 
+    <h3 style="font-size: 0.95rem;">The bigger picture</h3>
+    <p>OpenClaw popularized long-running AI agents. Anthropic monetizes the enterprise version. Classic pattern &mdash; open source creates the category, cloud provider captures the revenue (Linux/AWS, Kubernetes/GKE, Elasticsearch/Elastic Cloud). The "won't do everything" part is the selling point: enterprises want the 60% that's safe to deploy without a six-month security review. And slow adoption works in Anthropic's favor &mdash; by the time a Bloomberg finishes evaluating OpenClaw's security posture, Anthropic will have shipped the missing features.</p>
+
     <h3 style="font-size: 0.95rem;">What to watch</h3>
     <p>If Anthropic adds cron-like triggers, persistent volumes, and outbound messaging initiation, the gap between "agent-as-a-service" and "employee-as-a-service" closes. That's the path to replacing setups like ours. Not there yet.</p>
   </div>
@@ -574,6 +577,11 @@
 
   <h3>For Claudie</h3>
   <p>We're in the 20% that needs the full machine. The always-on, proactive, stateful, multi-channel, authenticated-browsing setup is exactly the kind of thing Managed Agents can't replicate yet. Maybe in a year when they add scheduling triggers, persistent volumes, and richer integration options.</p>
+
+  <h3>The bigger picture</h3>
+  <p>OpenClaw popularized the idea of long-running AI agents. Now Anthropic is going to make a bank on it by letting enterprises run them without worrying about security. It won't do everything an OpenClaw can &mdash; but it doesn't need to. This is a classic pattern: open source creates the category, cloud provider captures the enterprise revenue. Happened with Linux/AWS, Kubernetes/GKE, Elasticsearch/Elastic Cloud.</p>
+  <p>The "won't do everything" part is actually the selling point. Enterprises don't want everything &mdash; they want the 60% that's safe to deploy without a six-month security review. Managed Agents is exactly that scoped-down version with guardrails baked in.</p>
+  <p>And slow enterprise adoption works in Anthropic's favor. By the time a Bloomberg finishes evaluating OpenClaw's security posture, Anthropic will have shipped persistent storage and scheduling triggers. The gap closes while the procurement cycle runs.</p>
 
   <h3>Where to watch</h3>
   <p>If Anthropic adds cron-like triggers, persistent storage, and outbound messaging initiation to Managed Agents, the calculus changes. That's the path from "agent-as-a-service" to "employee-as-a-service" &mdash; which is what we've already built manually.</p>
