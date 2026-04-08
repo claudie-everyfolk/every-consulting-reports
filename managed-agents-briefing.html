@@ -203,16 +203,33 @@
 
 <div class="container">
 
-  <!-- TL;DR -->
+  <!-- Pulse Check -->
   <div class="tldr">
-    <h2>TL;DR</h2>
-    <ul>
-      <li><strong>Managed Agents is Anthropic's fully managed, cloud-hosted agent infrastructure.</strong> You define an agent config, they run it in sandboxed containers. Public beta since March 2026.</li>
-      <li><strong>Not the same as Agent SDK.</strong> SDK = "build your car." Managed Agents = "here's a fleet service."</li>
-      <li><strong>Security model is strong.</strong> Container isolation, credential vaults, networking controls. Structurally prevents prompt injection from accessing credentials.</li>
-      <li><strong>Not a replacement for Claudie's setup</strong> &mdash; can't replicate scheduled jobs, persistent state, authenticated browsing, or proactive messaging. But highly relevant for our clients.</li>
-      <li><strong>Not exactly an OpenClaw alternative</strong> &mdash; competitors the way Linux competes with AWS. Philosophically opposite.</li>
-    </ul>
+    <h2>Pulse Check</h2>
+
+    <h3 style="margin-top:0; font-size: 0.95rem;">What it is</h3>
+    <p>Anthropic now hosts and runs your AI agents for you. You define the agent (model + prompt + tools + MCP servers), they give it a sandboxed container, and Claude executes autonomously inside &mdash; running code, browsing the web, reading/writing files. Public beta since March 2026. Think of it as <strong>Heroku for AI agents</strong>: you describe the work, they handle the infrastructure.</p>
+
+    <h3 style="font-size: 0.95rem;">How it's different from Agent SDK</h3>
+    <p>Agent SDK = "here's an engine, build your car." Managed Agents = "here's a fleet service, tell us where to drive." Same built-in tools (bash, file ops, web search), but Managed Agents adds container isolation, credential vaults, self-evaluation loops, and multi-agent orchestration on top. You don't manage any infrastructure.</p>
+
+    <h3 style="font-size: 0.95rem;">Why the security model matters</h3>
+    <p>The strongest part. Each session runs in an isolated container. Credentials are stored in vaults <em>outside</em> the sandbox &mdash; Claude calls MCP tools through a proxy that fetches tokens, makes the external call, and returns only the result. The agent never touches raw credentials, even under prompt injection. Networking can be locked to an explicit allowlist. This is structurally better than scoping rules that degrade as models get smarter. For enterprise clients worried about giving agents real access, this is the product.</p>
+
+    <h3 style="font-size: 0.95rem;">How it compares to OpenClaw</h3>
+    <p>Competitors the way Linux competes with AWS. OpenClaw is open-source, self-hosted, model-agnostic, 352k GitHub stars &mdash; you run a daemon on your own machine. Managed Agents is cloud-hosted, Claude-only, enterprise-focused. OpenClaw gives you control and data ownership. Managed Agents gives you security and zero setup. Philosophically opposite.</p>
+
+    <h3 style="font-size: 0.95rem;">What Anthropic wants</h3>
+    <p>To own the runtime, not just the model. Target: enterprises stuck between "we have an API key" and "we have agents in production." Early adopters include Notion, Rakuten, Asana, and Sentry. Pricing: standard token costs + $0.08/session-hour compute + $10/1k web searches.</p>
+
+    <h3 style="font-size: 0.95rem;">Could it replace Claudie?</h3>
+    <p>No. It handles ~35% of what Claudie does (reactive Slack conversations, basic tool use). The other 65% &mdash; 12 scheduled jobs, persistent filesystem, Chrome automation with logged-in sessions, proactive messaging, email watching, gws CLI &mdash; requires an always-on machine with full system access. Managed Agents is designed for request-response work in sandboxed containers, not autonomous employees. A hybrid is possible but splits the brain without clear upside.</p>
+
+    <h3 style="font-size: 0.95rem;">Relevance for our clients</h3>
+    <p>High. A Bloomberg or NYT wanting to deploy internal agents should look at this before building from scratch. The security model addresses most of what our <a href="https://claudie-everyfolk.github.io/every-consulting-reports/claudie-security-briefing.html">security article</a> warns about &mdash; out of the box. Worth adding to our training curriculum as a recommended deployment path for enterprise teams.</p>
+
+    <h3 style="font-size: 0.95rem;">What to watch</h3>
+    <p>If Anthropic adds cron-like triggers, persistent volumes, and outbound messaging initiation, the gap between "agent-as-a-service" and "employee-as-a-service" closes. That's the path to replacing setups like ours. Not there yet.</p>
   </div>
 
   <!-- TOC -->
