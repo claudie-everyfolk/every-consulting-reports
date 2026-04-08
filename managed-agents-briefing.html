@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Claude Managed Agents — Research Briefing</title>
+  <style>
+    :root {
+      --bg: #fafafa;
+      --surface: #ffffff;
+      --text: #1a1a1a;
+      --text-secondary: #555;
+      --accent: #1a1a1a;
+      --border: #e0e0e0;
+      --highlight: #f5f0eb;
+      --tag-bg: #f0ece6;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Georgia', serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.7;
+    }
+    .header {
+      background: var(--accent);
+      color: white;
+      padding: 3rem 2rem;
+      text-align: center;
+    }
+    .header h1 {
+      font-size: 2rem;
+      font-weight: 400;
+      letter-spacing: -0.02em;
+      margin-bottom: 0.5rem;
+    }
+    .header .subtitle {
+      font-size: 1rem;
+      opacity: 0.7;
+      font-style: italic;
+    }
+    .container {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 2rem 1.5rem 4rem;
+    }
+    .tldr {
+      background: var(--highlight);
+      border-left: 4px solid var(--accent);
+      padding: 1.5rem 2rem;
+      margin: 2rem 0;
+      border-radius: 0 8px 8px 0;
+    }
+    .tldr h2 {
+      font-size: 1.1rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 1rem;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    }
+    .tldr ul { padding-left: 1.2rem; }
+    .tldr li { margin-bottom: 0.5rem; font-size: 0.95rem; }
+    h2 {
+      font-size: 1.4rem;
+      margin: 2.5rem 0 1rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 1px solid var(--border);
+      font-weight: 600;
+    }
+    h3 {
+      font-size: 1.1rem;
+      margin: 1.5rem 0 0.75rem;
+      font-weight: 600;
+    }
+    h4 {
+      font-size: 1rem;
+      margin: 1.2rem 0 0.5rem;
+      font-weight: 600;
+    }
+    p { margin-bottom: 1rem; font-size: 0.95rem; }
+    ul, ol { padding-left: 1.5rem; margin-bottom: 1rem; }
+    li { margin-bottom: 0.4rem; font-size: 0.95rem; }
+    strong { font-weight: 700; }
+    em { color: var(--text-secondary); }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1rem 0 1.5rem;
+      font-size: 0.9rem;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    }
+    thead {
+      background: var(--accent);
+      color: white;
+    }
+    th {
+      padding: 0.75rem 1rem;
+      text-align: left;
+      font-weight: 600;
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    td {
+      padding: 0.65rem 1rem;
+      border-bottom: 1px solid var(--border);
+    }
+    tbody tr:hover { background: var(--highlight); }
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1.25rem 1.5rem;
+      margin-bottom: 1rem;
+    }
+    .card h4 {
+      margin-top: 0;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    }
+    .card ul { margin-bottom: 0; }
+    .verdict {
+      background: var(--accent);
+      color: white;
+      padding: 1.5rem 2rem;
+      border-radius: 8px;
+      margin: 2rem 0;
+      font-size: 0.95rem;
+      line-height: 1.6;
+    }
+    .verdict strong { color: white; }
+    .callout {
+      background: var(--highlight);
+      border-radius: 8px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+      font-size: 0.95rem;
+    }
+    .toc {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1.5rem 2rem;
+      margin: 2rem 0;
+    }
+    .toc h3 {
+      margin-top: 0;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      font-size: 0.9rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+    .toc ol { font-size: 0.9rem; }
+    .toc a { color: var(--text); text-decoration: none; border-bottom: 1px solid var(--border); }
+    .toc a:hover { border-bottom-color: var(--accent); }
+    .security-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+      margin: 1rem 0;
+    }
+    .security-grid .card { margin-bottom: 0; }
+    .tag {
+      display: inline-block;
+      background: var(--tag-bg);
+      padding: 0.15rem 0.5rem;
+      border-radius: 4px;
+      font-size: 0.8rem;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      margin-right: 0.3rem;
+    }
+    .tag.green { background: #e6f4ea; color: #1e7e34; }
+    .tag.red { background: #fce8e6; color: #c62828; }
+    .tag.amber { background: #fff8e1; color: #f57f17; }
+    code {
+      background: var(--tag-bg);
+      padding: 0.15rem 0.4rem;
+      border-radius: 3px;
+      font-size: 0.85em;
+    }
+    .footer {
+      text-align: center;
+      padding: 2rem;
+      font-size: 0.8rem;
+      color: var(--text-secondary);
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    }
+    @media (max-width: 600px) {
+      .header { padding: 2rem 1rem; }
+      .header h1 { font-size: 1.5rem; }
+      .container { padding: 1rem; }
+      table { font-size: 0.8rem; }
+      th, td { padding: 0.5rem; }
+      .security-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="header">
+  <h1>Claude Managed Agents</h1>
+  <div class="subtitle">Research Briefing for Every Consulting &middot; April 8, 2026</div>
+</div>
+
+<div class="container">
+
+  <!-- TL;DR -->
+  <div class="tldr">
+    <h2>TL;DR</h2>
+    <ul>
+      <li><strong>Managed Agents is Anthropic's fully managed, cloud-hosted agent infrastructure.</strong> You define an agent config, they run it in sandboxed containers. Public beta since March 2026.</li>
+      <li><strong>Not the same as Agent SDK.</strong> SDK = "build your car." Managed Agents = "here's a fleet service."</li>
+      <li><strong>Security model is strong.</strong> Container isolation, credential vaults, networking controls. Structurally prevents prompt injection from accessing credentials.</li>
+      <li><strong>Not a replacement for Claudie's setup</strong> &mdash; can't replicate scheduled jobs, persistent state, authenticated browsing, or proactive messaging. But highly relevant for our clients.</li>
+      <li><strong>Not exactly an OpenClaw alternative</strong> &mdash; competitors the way Linux competes with AWS. Philosophically opposite.</li>
+    </ul>
+  </div>
+
+  <!-- TOC -->
+  <div class="toc">
+    <h3>Contents</h3>
+    <ol>
+      <li><a href="#what">What it is</a></li>
+      <li><a href="#sdk">Agent SDK vs. Managed Agents</a></li>
+      <li><a href="#claudie">Could it power Claudie?</a></li>
+      <li><a href="#security">Security analysis</a></li>
+      <li><a href="#positioning">Anthropic's positioning</a></li>
+      <li><a href="#openclaw">OpenClaw comparison</a></li>
+      <li><a href="#pricing">Pricing &amp; details</a></li>
+      <li><a href="#engineering">Engineering deep dive</a></li>
+      <li><a href="#take">Our take</a></li>
+    </ol>
+  </div>
+
+  <!-- Section 1 -->
+  <h2 id="what">1. What It Is</h2>
+  <p>Fully managed, cloud-hosted agent infrastructure from Anthropic. Instead of building your own agent loop, sandbox, and tool execution &mdash; you define an agent config (model + system prompt + tools + MCP servers), define an environment (a container with packages and networking rules), and start sessions. Claude runs autonomously inside Anthropic's cloud containers.</p>
+
+  <p><strong>Four primitives:</strong></p>
+  <div class="security-grid">
+    <div class="card">
+      <h4>Agent</h4>
+      <p style="margin:0">Reusable, versioned configuration: model, system prompt, tools, MCP servers, skills, callable agents.</p>
+    </div>
+    <div class="card">
+      <h4>Environment</h4>
+      <p style="margin:0">Container template with packages (pip, npm, apt, cargo, gem, go), networking rules, and mounted files.</p>
+    </div>
+    <div class="card">
+      <h4>Session</h4>
+      <p style="margin:0">Running agent instance. Persistent filesystem and conversation history. This is where work happens.</p>
+    </div>
+    <div class="card">
+      <h4>Events</h4>
+      <p style="margin:0">Bidirectional SSE protocol. User events in, agent events out. Tool confirmations, status changes, span evaluations.</p>
+    </div>
+  </div>
+
+  <p><strong>Built-in tools</strong> (<code>agent_toolset_20260401</code>): Bash, Read, Write, Edit, Glob, Grep, Web Fetch, Web Search. Plus custom tools (your app executes them) and MCP toolsets (connect to remote MCP servers).</p>
+
+  <!-- Section 2 -->
+  <h2 id="sdk">2. Agent SDK vs. Managed Agents</h2>
+
+  <table>
+    <thead>
+      <tr><th></th><th>Agent SDK</th><th>Managed Agents</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><strong>What you get</strong></td><td>Python/TS framework, you run it</td><td>Fully managed cloud service</td></tr>
+      <tr><td><strong>Infrastructure</strong></td><td>Your machines, your sandbox</td><td>Anthropic's containers</td></tr>
+      <tr><td><strong>Best for</strong></td><td>Custom loops, local execution, fine control</td><td>Async tasks, minimal infra, enterprise deploys</td></tr>
+      <tr><td><strong>State management</strong></td><td>You manage</td><td>Persistent sessions + memory stores server-side</td></tr>
+      <tr><td><strong>Multi-agent</strong></td><td>You orchestrate</td><td>Built-in coordinator/delegate model</td></tr>
+      <tr><td><strong>Setup effort</strong></td><td>Medium &mdash; wire up the loop</td><td>Low &mdash; define config, start session</td></tr>
+    </tbody>
+  </table>
+
+  <div class="callout">
+    <strong>The metaphor:</strong> Agent SDK is "here's the engine, build your car." Managed Agents is "here's a fleet service, tell us where to drive." They share the same built-in toolset but Managed Agents adds container isolation, credential vaults, outcomes (self-evaluation loops), and managed multi-agent orchestration on top.
+  </div>
+
+  <!-- Section 3 -->
+  <h2 id="claudie">3. Could It Power Claudie?</h2>
+
+  <p><strong>Short answer: No. Not as a replacement. Possibly as a complement.</strong></p>
+
+  <h3>What Managed Agents could handle (~35%)</h3>
+  <ul>
+    <li>Slack conversations (reactive message handling)</li>
+    <li>Identity/voice/access control via system prompt</li>
+    <li>MCP tool connections (Google Workspace)</li>
+    <li>Basic tool execution (bash, file ops, web search)</li>
+  </ul>
+
+  <h3>What it cannot handle (~65%)</h3>
+  <table>
+    <thead>
+      <tr><th>Capability</th><th>Why it breaks</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><strong>12 launchd scheduled jobs</strong></td><td>No cron equivalent. Morning briefs, hourly check-ins, pipeline refreshes, X browsing</td></tr>
+      <tr><td><strong>Persistent local file system</strong></td><td>Diary, teammate profiles, bookmarks, discoveries &mdash; all accumulate on disk over time</td></tr>
+      <tr><td><strong>dev-browser (Chrome automation)</strong></td><td>Authenticated browsing with copied Chrome profiles. No managed platform can replicate logged-in sessions</td></tr>
+      <tr><td><strong>Email watcher daemon</strong></td><td>Long-running process + gws CLI + spawning sub-Claude instances</td></tr>
+      <tr><td><strong>Proactive messaging</strong></td><td>Initiates conversations &mdash; morning briefs, alerts, email notifications</td></tr>
+      <tr><td><strong>gws CLI</strong></td><td>Custom binary, not an MCP server. Would need wrapping</td></tr>
+      <tr><td><strong>macOS Keychain</strong></td><td>Stores X and LinkedIn credentials</td></tr>
+      <tr><td><strong>Tailscale + Cloudflare Tunnel</strong></td><td>Network topology specific to local machine</td></tr>
+      <tr><td><strong><code>claude -p</code> self-spawning</strong></td><td>Scheduled jobs and email handler spawn fresh Claude Code processes</td></tr>
+    </tbody>
+  </table>
+
+  <div class="verdict">
+    <strong>The fundamental mismatch:</strong> Claudie is not a chatbot with tools &mdash; it's an autonomous employee on a dedicated computer. Managed Agents is designed for request-response agent work in sandboxed containers, not always-on, stateful, proactive operation. A hybrid approach (Managed Agents for bounded tasks, Mac mini as home base) is possible but splits the brain without clear upside.
+  </div>
+
+  <!-- Section 4 -->
+  <h2 id="security">4. Security Analysis</h2>
+
+  <p>Compared against our four-layer security framework from <a href="https://claudie-everyfolk.github.io/every-consulting-reports/claudie-security-briefing.html">"Securing an Always-On AI Employee"</a>:</p>
+
+  <h3>Layer 1: Least Access</h3>
+  <div class="security-grid">
+    <div class="card">
+      <h4>Our approach</h4>
+      <ul>
+        <li>Claudie gets own accounts (claudie@every.to)</li>
+        <li>Per-user permission tiers set at process spawn</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h4>Managed Agents</h4>
+      <ul>
+        <li>Isolated containers per session <span class="tag green">stronger</span></li>
+        <li>No built-in "who triggered this" concept <span class="tag red">gap</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <h3>Layer 2: Programmatic Controls</h3>
+  <div class="security-grid">
+    <div class="card">
+      <h4>Our approach</h4>
+      <ul>
+        <li>PreToolUse hooks block dangerous actions</li>
+        <li>Identity gates reject unknown Slack IDs before Claude spawns</li>
+        <li><code>dontAsk</code> mode for browsing jobs</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h4>Managed Agents</h4>
+      <ul>
+        <li><code>always_allow</code> / <code>always_ask</code> per tool</li>
+        <li>MCP defaults to <code>always_ask</code> <span class="tag green">safe default</span></li>
+        <li>Networking: <code>limited</code> mode with allowed_hosts <span class="tag green">new</span></li>
+        <li>No custom hook logic <span class="tag red">gap</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <h3>Layer 3: Prompt-based Controls</h3>
+  <div class="security-grid">
+    <div class="card">
+      <h4>Our approach</h4>
+      <ul>
+        <li>Ring-based access control in system prompt</li>
+        <li>Per-user teammate profiles with overrides</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h4>Managed Agents</h4>
+      <ul>
+        <li>System prompt is fully configurable <span class="tag green">equivalent</span></li>
+        <li>No dynamic per-user prompt adjustment <span class="tag amber">limited</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <h3>Layer 4: Observability</h3>
+  <div class="security-grid">
+    <div class="card">
+      <h4>Our approach</h4>
+      <ul>
+        <li>Session JSONL logs</li>
+        <li>Thinking token inspection</li>
+        <li>Forensic investigation</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h4>Managed Agents</h4>
+      <ul>
+        <li>Events API streams everything <span class="tag green">stronger</span></li>
+        <li>Span events with outcome evaluations <span class="tag green">new</span></li>
+        <li>Persistent, queryable session history</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="verdict">
+    <strong>The verdict:</strong> Managed Agents is stronger on container isolation and weaker on per-user access control. Their container sandboxing eliminates our "session inheritance" gap. Their networking controls provide programmatic enforcement we don't have for browser restrictions. But they have no equivalent to our PreToolUse hooks or per-user identity gating. For enterprises, the sandbox-first approach is exactly right. For our autonomous setup, it trades flexibility for safety in ways that break our operating model.
+  </div>
+
+  <!-- Section 5 -->
+  <h2 id="positioning">5. What Anthropic Wants People to Use It For</h2>
+
+  <p><strong>Positioning: "The gap between 'we have an API key' and 'we have agents running in production.'"</strong></p>
+
+  <h3>Named early adopters</h3>
+  <ul>
+    <li><strong>Notion</strong> &mdash; custom agents for parallel task execution</li>
+    <li><strong>Rakuten</strong> &mdash; multi-departmental deployment across product, sales, marketing, finance, HR</li>
+    <li><strong>Asana</strong> &mdash; "AI Teammates" inside project management</li>
+    <li><strong>Sentry</strong> &mdash; agent-driven bug patching with automated PR generation</li>
+  </ul>
+
+  <h3>Best-fit use cases</h3>
+  <ul>
+    <li>Long-running execution (minutes to hours, many tool calls)</li>
+    <li>Cloud infrastructure needs (secure containers, pre-installed packages)</li>
+    <li>Teams without infra capacity to build agent loops/sandboxes</li>
+    <li>Stateful multi-turn workflows</li>
+    <li>Multi-agent orchestration (coordinator delegates to specialists)</li>
+  </ul>
+
+  <div class="callout">
+    <strong>The subtext:</strong> Anthropic wants to own the runtime, not just the model. If you're running agents on their models, they'd rather you do it in their cloud where they control safety, can observe behavior, and capture the compute margin ($0.08/session-hour on top of token costs).
+  </div>
+
+  <!-- Section 6 -->
+  <h2 id="openclaw">6. OpenClaw Comparison</h2>
+
+  <p><strong>OpenClaw:</strong> Open-source (MIT), self-hosted personal AI assistant. 352k GitHub stars. TypeScript. You run a "Gateway" daemon on your machine that connects to 20+ messaging channels (WhatsApp, Telegram, Slack, Discord, Signal, iMessage, etc.). Model-agnostic. 5,700+ community skills on ClawHub. Founded by Peter Steinberger; now stewarded by a non-profit after he joined OpenAI in Feb 2026.</p>
+
+  <table>
+    <thead>
+      <tr><th></th><th>OpenClaw</th><th>Managed Agents</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><strong>Who runs it</strong></td><td>You, on your hardware</td><td>Anthropic, in their cloud</td></tr>
+      <tr><td><strong>Model lock-in</strong></td><td>None (Claude, GPT, DeepSeek, Ollama, etc.)</td><td>Claude only</td></tr>
+      <tr><td><strong>Data ownership</strong></td><td>Full &mdash; everything local</td><td>Data on Anthropic's servers</td></tr>
+      <tr><td><strong>Target user</strong></td><td>Technical individuals wanting control</td><td>Enterprises wanting managed deployment</td></tr>
+      <tr><td><strong>Extensibility</strong></td><td>5,700+ community skills, write your own</td><td>YAML/API-defined tools, MCP servers</td></tr>
+      <tr><td><strong>Setup</strong></td><td>30-60 min, technical</td><td>~30 seconds</td></tr>
+      <tr><td><strong>Cost</strong></td><td>Free + your API costs</td><td>Platform pricing + tokens + $0.08/session-hr</td></tr>
+    </tbody>
+  </table>
+
+  <div class="callout">
+    <strong>They're competitors the way Linux is a competitor to AWS.</strong> Technically overlapping, philosophically opposite. OpenClaw = "own your AI, run it yourself." Managed Agents = "let us handle the hard parts." Claudie's architecture is actually closer to OpenClaw's philosophy &mdash; always-on daemon on a real machine, multi-channel presence, persistent state, full system access. We just built it on Claude Code instead of OpenClaw's Gateway.
+  </div>
+
+  <!-- Section 7 -->
+  <h2 id="pricing">7. Pricing &amp; Details</h2>
+
+  <table>
+    <thead>
+      <tr><th>Item</th><th>Cost</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Token costs</td><td>Standard Anthropic API pricing</td></tr>
+      <tr><td>Compute runtime</td><td>$0.08 per session-hour (active only; idle doesn't count)</td></tr>
+      <tr><td>Web search</td><td>$10 per 1,000 searches</td></tr>
+    </tbody>
+  </table>
+
+  <h3>Research Preview features (require access request)</h3>
+  <ul>
+    <li><strong>Outcomes</strong> &mdash; define success criteria + rubric, separate grader model evaluates, agent iterates up to 20x</li>
+    <li><strong>Multi-agent</strong> &mdash; coordinator/delegate pattern, shared filesystem, isolated context windows. One level of delegation only.</li>
+    <li><strong>Memory stores</strong> &mdash; persistent cross-session memory, workspace-scoped, with version history and redaction</li>
+  </ul>
+
+  <h3>Other details</h3>
+  <ul>
+    <li><strong>SDK support:</strong> Python, TypeScript, Go, Java, C#, Ruby, PHP. CLI tool (<code>ant</code>) via Homebrew.</li>
+    <li><strong>Models:</strong> All Claude 4.5+ models. Fast mode for Opus 4.6.</li>
+    <li><strong>Rate limits:</strong> 60 creates/min, 600 reads/min.</li>
+    <li><strong>Branding rule:</strong> Partners cannot use "Claude Code" or "Claude Cowork" branding.</li>
+  </ul>
+
+  <!-- Section 8 -->
+  <h2 id="engineering">8. Engineering Deep Dive</h2>
+
+  <p><em>From <a href="https://www.anthropic.com/engineering/managed-agents">"Scaling Managed Agents: Decoupling the brain from the hands"</a> by Lance Martin, Gabe Cemaj, Michael Cohen (updated April 8, 2026).</em></p>
+
+  <p>The core insight: <strong>separate the brain (Claude) from the hands (execution environments) from the memory (session log).</strong> Each can fail, scale, or be replaced independently.</p>
+
+  <h3>The stale harness problem</h3>
+  <p>Harnesses encode assumptions about model limitations that become obsolete as models improve. Sonnet 4.5 had "context anxiety" &mdash; wrapping up tasks prematurely near context limits. They added context resets. When Opus 4.5 shipped, the behavior disappeared and those resets became dead weight.</p>
+  <p>Design philosophy: build interfaces stable enough to outlast any particular model's quirks. Inspired by how OS abstractions (<code>read()</code>) survived 50 years of hardware changes.</p>
+
+  <h3>Architecture evolution</h3>
+
+  <div class="card">
+    <h4>V1: Monolithic container</h4>
+    <p>Session, harness, and sandbox all in one container. Three fatal problems:</p>
+    <ol>
+      <li><strong>Pet problem</strong> &mdash; container failures meant lost sessions. Hand-nursing individual containers.</li>
+      <li><strong>Debugging opacity</strong> &mdash; WebSocket streams couldn't distinguish harness bugs from network drops from container failures.</li>
+      <li><strong>Network coupling</strong> &mdash; assumed all resources were adjacent. Customers with VPCs couldn't connect without network peering.</li>
+    </ol>
+  </div>
+
+  <div class="card">
+    <h4>V2: Decoupled (current)</h4>
+    <p>Three independent interfaces:</p>
+    <ul>
+      <li><strong>Session</strong> &mdash; append-only event log, lives outside everything else</li>
+      <li><strong>Harness</strong> &mdash; stateless loop calling Claude, routing tool calls. Crashes? Reboot, replay from session log.</li>
+      <li><strong>Sandbox</strong> &mdash; containers are "cattle," not "pets." Provisioned on demand via <code>execute(name, input) &rarr; string</code></li>
+    </ul>
+  </div>
+
+  <h3>Security architecture</h3>
+  <p><strong>Original problem:</strong> Untrusted code generated by Claude ran in the same container as credentials. Prompt injection just needed to convince Claude to read its own environment variables.</p>
+  <p><strong>Failed approach:</strong> Narrow token scoping &mdash; but this "encodes assumptions about what Claude cannot achieve, and Claude's intelligence grows."</p>
+  <p><strong>Structural fix:</strong> Ensure tokens <em>never reach the sandbox</em> where Claude's code executes.</p>
+
+  <div class="security-grid">
+    <div class="card">
+      <h4>Bundled auth (Git)</h4>
+      <p style="margin:0">Access token used only during container init to clone the repo. Token wires to local git remote. <code>git push/pull</code> work without Claude ever seeing the token.</p>
+    </div>
+    <div class="card">
+      <h4>Vault-based auth (MCP/OAuth)</h4>
+      <p style="margin:0">OAuth tokens stored in vault outside sandbox. Claude calls MCP tools via proxy. Proxy fetches credentials, makes external call, returns only the result. Harness is credential-unaware.</p>
+    </div>
+  </div>
+
+  <div class="callout">
+    <strong>This is architecturally stronger than our setup.</strong> We put credentials (Keychain, gws tokens) on the same machine where Claude executes code. Their design makes it structurally impossible for the agent to access raw credentials &mdash; even with prompt injection. Our Layer 2 catches dangerous tool calls, but their approach eliminates the attack surface entirely.
+  </div>
+
+  <h3>Context management</h3>
+  <p>Long tasks exceed context windows. Their insight: the session log IS the external memory. Claude interrogates it with <code>getEvents()</code> &mdash; positional slices of the event stream. Rewind, fast-forward, re-read specific moments. The harness transforms events before they enter context, optimizing for prompt cache hits.</p>
+  <p>Philosophy: separate <em>durable storage</em> (session) from <em>context management</em> (harness) because future models' needs can't be predicted.</p>
+
+  <h3>Scaling</h3>
+  <ul>
+    <li><strong>Many brains:</strong> Containers provisioned only when needed. Sessions not requiring a sandbox start inference immediately. p50 TTFT dropped ~60%, p95 dropped &gt;90%.</li>
+    <li><strong>Many hands:</strong> Each execution environment is a tool &mdash; <code>execute(name, input) &rarr; string</code>. The harness doesn't know if the sandbox is a container, a phone, or (their words) "a Pok&eacute;mon emulator." Brains can pass hands to each other.</li>
+  </ul>
+
+  <h3>The meta-harness philosophy</h3>
+  <p>Managed Agents is deliberately a "meta-harness" &mdash; unopinionated about what specific harness Claude needs. Claude Code works for broad tasks. Task-specific harnesses work for narrow domains. The platform accommodates any, "matching Claude's intelligence over time."</p>
+  <p><strong>Opinionated about interfaces</strong> (session + sandbox + scaling). <strong>Unopinionated about implementations.</strong></p>
+
+  <!-- Section 9 -->
+  <h2 id="take">9. Our Take</h2>
+
+  <div class="verdict">
+    <strong>This is Anthropic building the Heroku for AI agents.</strong> And like Heroku, it'll be the right answer for 80% of deployments &mdash; the ones where you want "it just works" more than "I control everything."
+  </div>
+
+  <h3>For our clients</h3>
+  <p>Extremely relevant. A Bloomberg or NYT wanting to deploy internal agents should absolutely look at this over building from scratch. The security model alone (container isolation + networking controls + vaults + permission policies) addresses most of what our security article warns about &mdash; and they get it out of the box.</p>
+
+  <h3>For Claudie</h3>
+  <p>We're in the 20% that needs the full machine. The always-on, proactive, stateful, multi-channel, authenticated-browsing setup is exactly the kind of thing Managed Agents can't replicate yet. Maybe in a year when they add scheduling triggers, persistent volumes, and richer integration options.</p>
+
+  <h3>Where to watch</h3>
+  <p>If Anthropic adds cron-like triggers, persistent storage, and outbound messaging initiation to Managed Agents, the calculus changes. That's the path from "agent-as-a-service" to "employee-as-a-service" &mdash; which is what we've already built manually.</p>
+
+  <div class="callout">
+    <strong>Key docs:</strong>
+    <a href="https://platform.claude.com/docs/en/managed-agents/overview">Overview</a> &middot;
+    <a href="https://platform.claude.com/docs/en/managed-agents/quickstart">Quickstart</a> &middot;
+    <a href="https://platform.claude.com/docs/en/managed-agents/agent-setup">Agent Setup</a> &middot;
+    <a href="https://platform.claude.com/docs/en/managed-agents/environments">Environments</a> &middot;
+    <a href="https://platform.claude.com/docs/en/managed-agents/tools">Tools</a> &middot;
+    <a href="https://platform.claude.com/docs/en/managed-agents/permission-policies">Permissions</a> &middot;
+    <a href="https://platform.claude.com/docs/en/managed-agents/vaults">Vaults</a> &middot;
+    <a href="https://platform.claude.com/docs/en/managed-agents/memory">Memory</a> &middot;
+    <a href="https://platform.claude.com/docs/en/managed-agents/multi-agent">Multi-Agent</a> &middot;
+    <a href="https://www.anthropic.com/engineering/managed-agents">Engineering Article</a>
+  </div>
+
+</div>
+
+<div class="footer">
+  Prepared by Claudie &middot; Every Consulting &middot; April 8, 2026
+</div>
+
+</body>
+</html>
