@@ -503,6 +503,80 @@
 
         <article class="entry">
             <span class="signal-tag key-shift">Key Shift</span>
+            <h2><a href="https://x.com/petergyang" target="_blank" rel="noopener">Peter Yang: All-You-Can-Use AI Subscriptions Won't Last</a></h2>
+            <p class="author">Peter Yang (@petergyang)</p>
+            <p class="summary">Prominent AI commentator argues Claude Max and ChatGPT Pro unlimited tiers are structurally unsustainable, citing Anthropic's OpenClaw cutoff as evidence</p>
+            
+                <details class="section-detail">
+                    <summary>Worth Your Time?</summary>
+                    <div class="section-content">
+                        <p><strong>READ</strong> — This isn't speculation. It's pattern-matching on actual moves Anthropic has already made.</p>
+                    </div>
+                </details>
+
+                <details class="section-detail">
+                    <summary>What's Actually Happening</summary>
+                    <div class="section-content">
+                        <p>Peter Yang is making the case that flat-rate "unlimited" AI subscriptions (Claude Max at $200/mo, ChatGPT Pro at $200/mo) are loss leaders that won't survive contact with real usage patterns. The structural argument: as agents move from chatbot-style interactions to background processing (running 24/7, consuming millions of tokens per day), the economics of unlimited pricing collapse. Anthropic cutting off OpenClaw (third-party harness access) is the first visible crack — they're already triaging who gets to use the capacity.</p>
+<p>The incentives are clear: Anthropic needs revenue, but heavy users (agent operators running <code>claude -p</code> on cron) consume orders of magnitude more tokens than casual users. The arbitrage between $200/month and actual compute cost is unsustainable at scale.</p>
+                    </div>
+                </details>
+
+                <details class="section-detail">
+                    <summary>What's Not Being Said</summary>
+                    <div class="section-content">
+                        <p>Yang frames this as "subscriptions won't last" but the real question is: what replaces them? The likely answer isn't "no more AI access" — it's usage-based pricing, tiered rate limits, or enterprise contracts. The gap Yang doesn't address: for small teams running persistent agents (like us), the migration from flat-rate to usage-based could 10-50x the monthly cost overnight.</p>
+<p>The contrarian read: Anthropic might actually <em>want</em> heavy agent users — they're the stickiest customers and the best proof of product-market fit. The cutoffs may be about controlling <em>redistribution</em>, not <em>usage</em>.</p>
+                    </div>
+                </details>
+
+                <details class="section-detail">
+                    <summary>Where This Sits in the Bigger Picture</summary>
+                    <div class="section-content">
+                        <p>This is part of the broader AI infrastructure repricing that's happening across the industry. OpenAI raised prices. Google restructured Gemini tiers. Anthropic is tightening access. The "AI is basically free" window is closing, and the teams that built infrastructure during that window (including Every Consulting) need to plan for what comes next.</p>
+<p>This also connects to the Chinese open-source AI model trend (Peter Yang's other tweet today) — as proprietary models get more expensive, open-source alternatives become more attractive as fallbacks.</p>
+                    </div>
+                </details>
+
+                <details class="section-detail">
+                    <summary>What's Likely Coming Next</summary>
+                    <div class="section-content">
+                        <ul>
+<li>Anthropic will likely introduce rate limits or usage tiers within Claude Max within 2-3 months</li>
+<li><code>claude -p</code> (programmatic access via CLI) may be the first feature to get restricted, since it enables the heaviest automated usage</li>
+<li>Enterprise agreements with guaranteed capacity will emerge as the path for teams that need reliable agent infrastructure</li>
+<li>Local model capabilities (Ollama, llama.cpp) will continue improving as a hedge</li>
+</ul>
+                    </div>
+                </details>
+
+                <details class="section-detail">
+                    <summary>Attention Is All You Need</summary>
+                    <div class="section-content">
+                        <ul>
+<li>Watch Anthropic's pricing page and terms of service for any changes to Claude Max</li>
+<li>Track Peter Yang's deep dive article for specific data points</li>
+<li>Monitor the Anthropic developer forums for signals about <code>claude -p</code> policy changes</li>
+<li>Karpathy's recent content on running local models is relevant preparation</li>
+</ul>
+                    </div>
+                </details>
+
+                <details class="section-detail">
+                    <summary>What This Means for Every Consulting</summary>
+                    <div class="section-content">
+                        <p><strong>For our own infrastructure:</strong> This is a direct threat. Claudie runs entirely on Claude Max via <code>claude -p</code>. Every scheduled job — email watcher, signal digest, pipeline refreshes, morning briefs — depends on this single subscription. The memory file from April 5 identified this risk; this tweet confirms it's now publicly visible. Nityesh needs to execute the fallback plan items this week, not this month.</p>
+<p><strong>For client advisory:</strong> This is exactly the kind of insight our clients pay for. "The AI pricing you're building on today won't be the pricing in 6 months" is a valuable advisory conversation — especially for clients building agent-heavy workflows. We should be proactively raising this with clients who are making infrastructure bets.</p>
+<p><strong>For training curriculum:</strong> Mike and Brooker should start incorporating "what happens when the pricing changes" into training sessions. Teaching people to build on AI without teaching them about platform risk is incomplete.</p>
+                    </div>
+                </details>
+            <div class="links">
+                <a href="https://x.com/petergyang" target="_blank" rel="noopener">View on X</a>
+            </div>
+        </article>
+
+        <article class="entry">
+            <span class="signal-tag key-shift">Key Shift</span>
             <h2><a href="https://x.com/garrytan/status/2041388847930712399" target="_blank" rel="noopener">Claude Cowork File Exfiltration — Unremediated Vulnerability Extends to New Products</a></h2>
             <p class="author">Garry Tan (@garrytan)</p>
             <p class="summary">Known file exfiltration vulnerability in Claude's coding environment now extends to Cowork, highlighting how security debt propagates as AI products expand.</p>
@@ -2840,7 +2914,7 @@ A circuit breaker halts auto-compaction after three consecutive failures.</p>
                 <li><strong>The platform shift happened in 4 weeks.</strong> Ejaaz&rsquo;s catalog shows Claude Code crossed from developer tool to knowledge-worker platform in a single shipping sprint. Clients who evaluated it even two months ago saw a fundamentally different product.</li>
             </ol>
 
-            <p class="coda">33 of 34 sources tagged as Key Shift. The dominant theme: Claude Code&rsquo;s memory, personalization, and autonomous capabilities represent a genuine platform shift &mdash; not incremental improvement.</p>
+            <p class="coda">34 of 35 sources tagged as Key Shift. The dominant theme: Claude Code&rsquo;s memory, personalization, and autonomous capabilities represent a genuine platform shift &mdash; not incremental improvement.</p>
         </section>
 
         <footer>
