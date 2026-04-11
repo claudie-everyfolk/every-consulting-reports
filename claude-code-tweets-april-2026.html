@@ -597,6 +597,90 @@
 
         <article class="entry">
             <span class="signal-tag key-shift">Key Shift</span>
+            <h2><a href="https://x.com/RLanceMartin/status/2042756608133075000" target="_blank" rel="noopener">Scaling Managed Agents: Decoupling the Brain from the Hands</a></h2>
+            <p class="author">Lance Martin (@RLanceMartin), Anthropic</p>
+            <p class="summary">Anthropic's official engineering architecture for long-horizon agent tasks separates planning from execution — validating the harness-based approach.</p>
+            
+                <details class="section-detail">
+                    <summary>Worth Your Time?</summary>
+                    <div class="section-content">
+                        <p><strong>Read</strong> — Anthropic's engineering team publishing their internal architecture for managed agents is a primary source, not commentary. This is the vendor telling you how to build on their platform.</p>
+                    </div>
+                </details>
+
+                <details class="section-detail">
+                    <summary>What's Actually Happening</summary>
+                    <div class="section-content">
+                        <p>Anthropic is formalizing the architectural pattern where the "brain" (Claude's reasoning) is decoupled from the "hands" (tool execution, file I/O, browser automation). This isn't new in practice — it's how most serious agent deployments already work — but Anthropic codifying it as their recommended pattern signals:
+- They're building infrastructure to support this natively (Managed Agents API)
+- They expect long-horizon tasks (hours/days, not minutes) to become standard
+- The harness layer is where the real engineering complexity lives, not the model</p>
+<p>The structural incentive: Anthropic wants developers building on their platform, not wrapping OpenAI. Publishing the "right way" to build agents on Claude creates switching costs.</p>
+                    </div>
+                </details>
+
+                <details class="section-detail">
+                    <summary>What's Not Being Said</summary>
+                    <div class="section-content">
+                        <ul>
+<li>This implicitly acknowledges that Claude Code's current single-session model is insufficient for real production agent work</li>
+<li>The "decoupling" framing also decouples Anthropic from liability — if the harness is yours, the mistakes are yours</li>
+<li>No mention of pricing implications for long-horizon tasks that might run for hours</li>
+</ul>
+                    </div>
+                </details>
+
+                <details class="section-detail">
+                    <summary>Where This Sits in the Bigger Picture</summary>
+                    <div class="section-content">
+                        <p>This is part of the broader shift from "AI as tool" to "AI as worker." The agent harness pattern is essentially building the equivalent of an operating system for AI workers — process management, resource allocation, error recovery, state persistence. We're watching the emergence of a new software category.</p>
+<p>Harrison Chase (LangChain) posted the same day about agent harnesses being "the first stable agent abstractions" — convergent thinking from both the vendor and the ecosystem.</p>
+                    </div>
+                </details>
+
+                <details class="section-detail">
+                    <summary>What's Likely Coming Next</summary>
+                    <div class="section-content">
+                        <ul>
+<li>Managed Agents pricing tiers (compute-hours, not just tokens)</li>
+<li>Third-party harness frameworks competing for the execution layer</li>
+<li>Enterprise procurement of "agent infrastructure" as a category</li>
+<li>The planning/execution split will drive specialized models — small fast models for execution, large reasoning models for planning</li>
+</ul>
+                    </div>
+                </details>
+
+                <details class="section-detail">
+                    <summary>Attention Is All You Need</summary>
+                    <div class="section-content">
+                        <ul>
+<li><strong>Primary source:</strong> Anthropic engineering blog on managed agents</li>
+<li><strong>Key person:</strong> Lance Martin — Anthropic's developer relations, previously LangChain</li>
+<li><strong>Adjacent:</strong> Harrison Chase's thread on agent harnesses</li>
+<li><strong>Framework:</strong> The orchestrator/worker pattern from distributed systems, now applied to AI agents</li>
+</ul>
+                    </div>
+                </details>
+
+                <details class="section-detail">
+                    <summary>What This Means for Every Consulting</summary>
+                    <div class="section-content">
+                        <ul>
+<li><strong>Client advice:</strong> Enterprise clients building agent systems should adopt this architecture now rather than building monolithic agent scripts. The planning/execution split is becoming canonical.</li>
+<li><strong>Training implications:</strong> Mike's developer curriculum should include managed agents architecture. This is the pattern enterprises will standardize on.</li>
+<li><strong>Internal:</strong> Claudie's architecture (Claude Code brain + launchd/dev-browser/gws hands) already follows this pattern intuitively. Worth formalizing and documenting as a reference implementation.</li>
+<li><strong>Sales:</strong> "We've been running a production agent on this architecture for months" is a compelling proof point in sales conversations.</li>
+</ul>
+                    </div>
+                </details>
+            <div class="links">
+                <a href="https://x.com/RLanceMartin/status/2042756608133075000" target="_blank" rel="noopener">View on X</a>
+                <a href="https://anthropic.com/engineering/managed-agents" target="_blank" rel="noopener">Read Article</a>
+            </div>
+        </article>
+
+        <article class="entry">
+            <span class="signal-tag key-shift">Key Shift</span>
             <h2><a href="https://x.com/a16z/status/2042014774691819943" target="_blank" rel="noopener">Sinofsky: The Algorithmic Thinking Gap Is Why AI Can't Diffuse Through Firms</a></h2>
             <p class="author">Steven Sinofsky (via @a16z)</p>
             <p class="summary">Former Windows chief names the core bottleneck in enterprise AI adoption: most workers can't articulate their own workflows algorithmically.</p>
@@ -3305,7 +3389,7 @@ A circuit breaker halts auto-compaction after three consecutive failures.</p>
                 <li><strong>The platform shift happened in 4 weeks.</strong> Ejaaz&rsquo;s catalog shows Claude Code crossed from developer tool to knowledge-worker platform in a single shipping sprint. Clients who evaluated it even two months ago saw a fundamentally different product.</li>
             </ol>
 
-            <p class="coda">40 of 41 sources tagged as Key Shift. The dominant theme: Claude Code&rsquo;s memory, personalization, and autonomous capabilities represent a genuine platform shift &mdash; not incremental improvement.</p>
+            <p class="coda">41 of 42 sources tagged as Key Shift. The dominant theme: Claude Code&rsquo;s memory, personalization, and autonomous capabilities represent a genuine platform shift &mdash; not incremental improvement.</p>
         </section>
 
         <footer>
