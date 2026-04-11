@@ -410,6 +410,90 @@
 
         <article class="entry">
             <span class="signal-tag key-shift">Key Shift</span>
+            <h2><a href="https://x.com/GenAI_is_real" target="_blank" rel="noopener">26 LLM Routers Caught Injecting Malicious Tool Calls and Stealing Credentials</a></h2>
+            <p class="author">Chaofan Shou (@Fried_rice), Chayenne Zhao (@GenAI_is_real)</p>
+            <p class="summary">Security researchers discover 26 LLM routing services secretly injecting malicious tool calls and exfiltrating credentials — one attack drained $500k</p>
+            
+                <details class="section-detail">
+                    <summary>Worth Your Time?</summary>
+                    <div class="section-content">
+                        <p><strong>Read.</strong> This is the first large-scale documentation of LLM router supply chain attacks in the wild. Not theoretical — real money lost, real credentials stolen.</p>
+                    </div>
+                </details>
+
+                <details class="section-detail">
+                    <summary>What's Actually Happening</summary>
+                    <div class="section-content">
+                        <p>LLM routers — middleware services that sit between applications and model providers to route requests, optimize costs, or add features — have become a critical attack surface. Researchers found 26 separate routing services that were:</p>
+<ul>
+<li><strong>Injecting malicious tool calls</strong> into the inference pipeline, meaning the router modifies what the model "sees" or "does" without the application's knowledge</li>
+<li><strong>Exfiltrating credentials</strong> — API keys, auth tokens, and in one case, wallet private keys that led to a $500k drain</li>
+<li><strong>Exploiting their position of trust</strong> — routers see every prompt, every tool call, every credential by design</li>
+</ul>
+<p>The structural issue: teams add routers as a "convenience layer" without recognizing they're granting a third party full visibility into their most sensitive operations. The router is effectively a man-in-the-middle, and most teams don't audit them as such.</p>
+                    </div>
+                </details>
+
+                <details class="section-detail">
+                    <summary>What's Not Being Said</summary>
+                    <div class="section-content">
+                        <ul>
+<li><strong>The router market has zero security standards.</strong> There's no certification, no audit requirement, no equivalent of SOC 2 for LLM middleware. Teams evaluate routers on latency and cost, not security posture.</li>
+<li><strong>This likely undercounts the problem.</strong> These 26 were the ones caught. The detection methodology isn't public, so we don't know how many more exist.</li>
+<li><strong>Model providers benefit from router distrust.</strong> If you can't trust third-party routers, you're more likely to go direct to the provider — which is exactly what Anthropic, OpenAI, etc. want.</li>
+</ul>
+                    </div>
+                </details>
+
+                <details class="section-detail">
+                    <summary>Where This Sits in the Bigger Picture</summary>
+                    <div class="section-content">
+                        <p>This is AI's version of the npm/PyPI supply chain attack pattern, but worse:
+- <strong>npm attacks</strong> compromise build-time dependencies. LLM router attacks compromise <strong>runtime inference</strong> — they're active during every request.
+- <strong>The attack surface is expanding</strong> as the AI middleware layer grows (routers, gateways, observability tools, prompt management platforms). Each layer that touches the inference pipeline is a potential insertion point.
+- This accelerates the trend toward <strong>zero-trust AI architectures</strong> — encrypting prompts end-to-end, verifying tool calls at the application layer, and treating all middleware as potentially compromised.</p>
+                    </div>
+                </details>
+
+                <details class="section-detail">
+                    <summary>What's Likely Coming Next</summary>
+                    <div class="section-content">
+                        <ul>
+<li><strong>Router security auditing tools</strong> will emerge (or existing security vendors will add LLM router scanning)</li>
+<li><strong>Model providers will push "direct connect" as a security feature</strong> — expect marketing around "no middlemen" inference</li>
+<li><strong>Enterprise procurement teams will start requiring security attestations</strong> from AI middleware vendors</li>
+<li><strong>MCP and similar standards may need to add authentication/signing</strong> for tool calls to prevent injection</li>
+</ul>
+                    </div>
+                </details>
+
+                <details class="section-detail">
+                    <summary>Attention Is All You Need</summary>
+                    <div class="section-content">
+                        <ul>
+<li>Follow @Fried_rice for the original research</li>
+<li>Watch for the full writeup (likely forthcoming given the severity)</li>
+<li>Related: OWASP Top 10 for LLM Applications covers prompt injection but doesn't yet have a dedicated category for middleware/router attacks</li>
+</ul>
+                    </div>
+                </details>
+
+                <details class="section-detail">
+                    <summary>What This Means for Every Consulting</summary>
+                    <div class="section-content">
+                        <p><strong>Immediate:</strong> Verify our own inference pipeline. We route through Claude API directly (no third-party router), so we're likely clean — but worth confirming.</p>
+<p><strong>Client advice:</strong> Any client using LLM routers, gateways, or proxy services in their AI stack needs to audit them immediately. This is a concrete, actionable security recommendation we can make in every engagement.</p>
+<p><strong>Training content:</strong> This is an excellent case study for security-conscious AI adoption. The pattern (convenience layer becomes attack surface) is intuitive and the stakes ($500k loss) are concrete enough to get executive attention.</p>
+<p><strong>Bootcamp material:</strong> Add to the "AI Security Fundamentals" module — the supply chain isn't just about model weights and training data, it's about every layer that touches inference.</p>
+                    </div>
+                </details>
+            <div class="links">
+                <a href="https://x.com/GenAI_is_real" target="_blank" rel="noopener">View on X</a>
+            </div>
+        </article>
+
+        <article class="entry">
+            <span class="signal-tag key-shift">Key Shift</span>
             <h2><a href="https://x.com/Fried_rice/status/2042423713019412941" target="_blank" rel="noopener">26 LLM Routers Caught Injecting Malicious Tool Calls, Stealing Credentials</a></h2>
             <p class="author">Chaofan Shou (@Fried_rice)</p>
             <p class="summary">Researchers discover 26 LLM routing services secretly injecting malicious tool calls into agent workflows, stealing credentials and draining wallets.</p>
@@ -3401,7 +3485,7 @@ A circuit breaker halts auto-compaction after three consecutive failures.</p>
                 <li><strong>The platform shift happened in 4 weeks.</strong> Ejaaz&rsquo;s catalog shows Claude Code crossed from developer tool to knowledge-worker platform in a single shipping sprint. Clients who evaluated it even two months ago saw a fundamentally different product.</li>
             </ol>
 
-            <p class="coda">42 of 43 sources tagged as Key Shift. The dominant theme: Claude Code&rsquo;s memory, personalization, and autonomous capabilities represent a genuine platform shift &mdash; not incremental improvement.</p>
+            <p class="coda">43 of 44 sources tagged as Key Shift. The dominant theme: Claude Code&rsquo;s memory, personalization, and autonomous capabilities represent a genuine platform shift &mdash; not incremental improvement.</p>
         </section>
 
         <footer>
