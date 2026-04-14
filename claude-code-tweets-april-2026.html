@@ -398,6 +398,96 @@
 
         <article class="entry">
             <span class="signal-tag key-shift">Key Shift</span>
+            <h2><a href="https://x.com/claudeai/status/2044095086460309790" target="_blank" rel="noopener">Claude Code Routines: Anthropic's Play for Always-On AI Agents</a></h2>
+            <p class="author">Claude (@claudeai)</p>
+            <p class="summary">Anthropic launches Routines — scheduled, event-driven, API-triggered Claude Code execution on their infra. The /schedule feature is now Routines.</p>
+            
+                <details class="section-detail">
+                    <summary>Worth Your Time?</summary>
+                    <div class="section-content">
+                        <p><strong>Read</strong> — This is a product announcement that directly affects how AI agents (including Claudie) are architected. One-line verdict: Anthropic is building the infrastructure layer for always-on AI employees, which validates our approach and creates a strategic fork in the road.</p>
+                    </div>
+                </details>
+
+                <details class="section-detail">
+                    <summary>What's Actually Happening</summary>
+                    <div class="section-content">
+                        <p>Anthropic launched "Routines" in Claude Code research preview. A routine is a configured prompt + repo + connectors that can execute on a schedule, from an API call, or in response to an event — all running on Anthropic's web infrastructure.</p>
+<p>The structural reality: Anthropic is moving from "AI tool you use" to "AI infrastructure you depend on." This is a platform play. They're not just selling model access — they're selling compute, scheduling, event handling, and orchestration. The incentive is clear: lock in power users by becoming the execution layer, not just the intelligence layer.</p>
+<p>The shift is real: <code>/schedule</code> in Claude Code CLI is now "Routines" with no migration needed. This wasn't a rebrand — it's an infrastructure upgrade that removes the laptop-open requirement.</p>
+                    </div>
+                </details>
+
+                <details class="section-detail">
+                    <summary>What's Not Being Said</summary>
+                    <div class="section-content">
+                        <ul>
+<li><strong>Pricing model</strong>: No mention of how Routines will be billed. Will heavy scheduling (like our 17 launchd jobs) fit within Claude Max, or will this become a separate tier?</li>
+<li><strong>Local tool access</strong>: Routines run on Anthropic's infra, meaning no access to local filesystems, authenticated browsers, or custom CLIs. The gap between what Routines can do and what a local Mac mini agent can do is significant.</li>
+<li><strong>Reliability guarantees</strong>: "Research preview" means no SLA. For teams running production agents, this matters.</li>
+<li><strong>Contrarian view</strong>: This could be Anthropic's way of normalizing always-on AI agent costs before introducing usage-based pricing that makes local hosting look cheap.</li>
+</ul>
+                    </div>
+                </details>
+
+                <details class="section-detail">
+                    <summary>Where This Sits in the Bigger Picture</summary>
+                    <div class="section-content">
+                        <p>This sits at the intersection of three trends:
+1. <strong>AI agents going autonomous</strong> — from reactive chatbots to proactive workers
+2. <strong>Platform consolidation</strong> — cloud providers (now AI providers) wanting to own the execution layer
+3. <strong>The "AI employee" narrative</strong> — Routines makes "hire an AI" literal rather than metaphorical</p>
+<p>The AI trajectory: every major AI lab is building toward always-on agents. OpenAI has Operator and scheduled tasks, Google has agent frameworks. Anthropic's Routines is their entry. The labor market implication: roles that are "check this every day and take action" are now automatable out of the box.</p>
+                    </div>
+                </details>
+
+                <details class="section-detail">
+                    <summary>What's Likely Coming Next</summary>
+                    <div class="section-content">
+                        <ul>
+<li><strong>Connector marketplace</strong>: Anthropic will expand "connectors" beyond repos to include Slack, email, databases — mimicking what Claudie already does with MCP + gws + Slack bot</li>
+<li><strong>Pricing tier for Routines</strong>: Almost certainly a paid feature beyond a free tier of N runs/month</li>
+<li><strong>Enterprise Routines</strong>: SOC 2, audit logs, role-based access — what our consulting clients need before trusting this</li>
+<li><strong>Second-order effect</strong>: Companies that built local AI agent infrastructure (like us) become the experts who help enterprises evaluate Routines vs self-hosted</li>
+</ul>
+                    </div>
+                </details>
+
+                <details class="section-detail">
+                    <summary>Attention Is All You Need</summary>
+                    <div class="section-content">
+                        <ul>
+<li><strong>Primary source</strong>: Claude Code changelog / Anthropic blog (expected to follow the tweet)</li>
+<li><strong>Key people</strong>: The Claude Code team at Anthropic; Boris Cherny (@bcherny) who's been active in replies</li>
+<li><strong>Compare with</strong>: OpenAI's scheduled tasks in ChatGPT, LangChain's Deep Agents v0.5 (also released today — async subagents on Agent Protocol)</li>
+</ul>
+                    </div>
+                </details>
+
+                <details class="section-detail">
+                    <summary>What This Means for Every Consulting</summary>
+                    <div class="section-content">
+                        <p><strong>For Claudie's infrastructure:</strong>
+- We should NOT migrate wholesale. Our Mac mini setup has 17 launchd jobs, many requiring local tools (dev-browser, qmd, file system). Routines can't replace these.
+- Worth experimenting with 2-3 GWS-heavy jobs (dashboards-update, weekly-kickoff) as Routines once it stabilizes.
+- Our local-first architecture is now a competitive advantage: we understand both approaches.</p>
+<p><strong>For client advice:</strong>
+- This is perfect training material: "Here's how to set up an AI agent that runs on a schedule — and here's when you need your own infrastructure instead."
+- Finance clients will want to know: can Routines handle compliance requirements? (Answer: not yet, research preview)
+- The trust/governance conversation just got more concrete: "Routines runs on Anthropic's servers — are you comfortable with that for your data?"</p>
+<p><strong>For training curriculum:</strong>
+- Add a module: "Routines vs Self-Hosted AI Agents — When to Use What"
+- Use Claudie as the case study for the self-hosted approach
+- Routines is the easy on-ramp; our Mac mini setup is the power user path</p>
+                    </div>
+                </details>
+            <div class="links">
+                <a href="https://x.com/claudeai/status/2044095086460309790" target="_blank" rel="noopener">View on X</a>
+            </div>
+        </article>
+
+        <article class="entry">
+            <span class="signal-tag key-shift">Key Shift</span>
             <h2><a href="https://x.com/rsarver/status/2043585980599353461" target="_blank" rel="noopener">Stella: Open-Source AI Chief of Staff Goes Public</a></h2>
             <p class="author">Ryan Sarver (@rsarver)</p>
             <p class="summary">Former a16z partner open-sources an AI Chief of Staff with skills, cron jobs, memory, and entity graphs — validating the pattern Every Consulting built with Claudie.</p>
@@ -3736,7 +3826,7 @@ A circuit breaker halts auto-compaction after three consecutive failures.</p>
                 <li><strong>The platform shift happened in 4 weeks.</strong> Ejaaz&rsquo;s catalog shows Claude Code crossed from developer tool to knowledge-worker platform in a single shipping sprint. Clients who evaluated it even two months ago saw a fundamentally different product.</li>
             </ol>
 
-            <p class="coda">52 of 53 sources tagged as Key Shift. The dominant theme: Claude Code&rsquo;s memory, personalization, and autonomous capabilities represent a genuine platform shift &mdash; not incremental improvement.</p>
+            <p class="coda">53 of 54 sources tagged as Key Shift. The dominant theme: Claude Code&rsquo;s memory, personalization, and autonomous capabilities represent a genuine platform shift &mdash; not incremental improvement.</p>
         </section>
 
         <footer>
