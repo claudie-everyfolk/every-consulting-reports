@@ -388,13 +388,95 @@
         <header>
             <h1>Signal Digest</h1>
             <p class="subtitle">What actually matters in AI &mdash; curated by Claudie for the Every Consulting team</p>
-            <p class="meta">Last updated April 14, 2026</p>
+            <p class="meta">Last updated April 15, 2026</p>
         </header>
 
         <nav class="legend">
             Each entry is tagged: <span class="tag-example key-shift">Key Shift</span> signals a genuine change in how we should think or act. <span class="tag-example noise">Noise</span> means useful context but nothing new for the team.
         </nav>
 
+
+        <article class="entry">
+            <span class="signal-tag key-shift">Key Shift</span>
+            <h2><a href="https://x.com/pedronauck/status/2044098967852445931" target="_blank" rel="noopener">824 Malicious Skills on ClawHub: Agent Marketplaces Are the New npm</a></h2>
+            <p class="author">pedronauck (@pedronauck)</p>
+            <p class="summary">First major supply chain attack wave hits agent skill marketplaces — 824 malicious skills found on ClawHub with data exfiltration, cryptominers, and backdoors.</p>
+            
+                <details class="section-detail">
+                    <summary>Worth Your Time?</summary>
+                    <div class="section-content">
+                        <p><strong>Read</strong> — This is the first documented mass supply chain compromise of an AI agent skill marketplace. One-line verdict: the security threat model for AI agents just shifted from "what if" to "it's happening."</p>
+                    </div>
+                </details>
+
+                <details class="section-detail">
+                    <summary>What's Actually Happening</summary>
+                    <div class="section-content">
+                        <p>824 malicious skills were discovered on ClawHub, OpenClaw's skill marketplace. The payloads include data exfiltration tools, cryptominers, and backdoors — all disguised as legitimate agent tools. This is structurally identical to the npm/PyPI supply chain attacks of 2022-2024, but with a critical amplifier: AI agents typically have shell access, API keys, and broad filesystem permissions.</p>
+<p>The incentive structure is obvious. Agent skill marketplaces are growing fast (multi-agent adoption up 1,445%), but governance is lagging. Companies average 12 agents with no central control. Attackers go where the trust is implicit and the surface is wide — and agent skills are exactly that.</p>
+                    </div>
+                </details>
+
+                <details class="section-detail">
+                    <summary>What's Not Being Said</summary>
+                    <div class="section-content">
+                        <ul>
+<li>Most agent frameworks encourage installing third-party skills with minimal vetting. The "just add this skill" UX mirrors early npm's "just npm install it" culture.</li>
+<li>The 824 number is what was <em>found</em>. The actual compromised count is likely higher — many malicious skills may pass basic static analysis because the payload only activates at runtime via agent execution.</li>
+<li>OpenClaw/ClawHub is just one marketplace. Claude Code's plugin ecosystem, Cursor's extensions, and every other agent harness with a marketplace face the same structural vulnerability.</li>
+</ul>
+                    </div>
+                </details>
+
+                <details class="section-detail">
+                    <summary>Where This Sits in the Bigger Picture</summary>
+                    <div class="section-content">
+                        <p>This is the inevitable consequence of the agent adoption curve. Every major software distribution mechanism has gone through this: npm (event-stream, ua-parser-js), PyPI (typosquatting waves), Docker Hub (cryptominer images), VS Code extensions (malicious extensions in 2025). Agent skill marketplaces are just the latest — and potentially most dangerous — instance because:</p>
+<ol>
+<li>Agents have broader permissions than typical software dependencies</li>
+<li>Skills execute in the context of the agent's full capability set (shell, API keys, file access)</li>
+<li>The review/audit culture hasn't caught up — there's no equivalent of npm audit or Snyk for agent skills yet</li>
+</ol>
+<p>This sits at the intersection of two trends: the rapid scaling of multi-agent systems and the chronic underinvestment in agent security tooling.</p>
+                    </div>
+                </details>
+
+                <details class="section-detail">
+                    <summary>What's Likely Coming Next</summary>
+                    <div class="section-content">
+                        <ul>
+<li><strong>Marketplace lockdowns</strong>: ClawHub and similar platforms will implement mandatory skill review, signing, and sandboxing. This will slow the marketplace growth but is inevitable.</li>
+<li><strong>Agent skill auditing tools</strong>: Expect startups building "Snyk for agent skills" — static and dynamic analysis of agent plugins before installation.</li>
+<li><strong>Enterprise skill whitelisting</strong>: Companies will restrict agent skill installation to pre-approved lists, similar to how enterprises manage npm registries.</li>
+<li><strong>Regulatory attention</strong>: If agent-mediated data exfiltration hits a regulated industry (finance, healthcare), expect compliance frameworks to specifically address agent supply chains.</li>
+</ul>
+                    </div>
+                </details>
+
+                <details class="section-detail">
+                    <summary>Attention Is All You Need</summary>
+                    <div class="section-content">
+                        <ul>
+<li>Original tweet thread: https://x.com/pedronauck/status/2044098967852445931</li>
+<li>For background on supply chain attacks in software ecosystems: the npm event-stream incident (2018) and PyPI typosquatting campaigns (2023-2024) provide the structural template</li>
+<li>Key people to watch: security researchers who pivoted from npm/PyPI supply chain work to agent ecosystems</li>
+</ul>
+                    </div>
+                </details>
+
+                <details class="section-detail">
+                    <summary>What This Means for Every Consulting</summary>
+                    <div class="section-content">
+                        <p><strong>Client advice</strong>: Any client deploying agents with third-party skills needs a supply chain security conversation <em>now</em>. This is especially urgent for finance clients (Bloomberg, hedge funds) where data exfiltration via a compromised agent skill could be catastrophic.</p>
+<p><strong>Training implications</strong>: Mike's developer-focused training should include a module on agent security hygiene — vetting skills, understanding permission scopes, preferring first-party or audited skills. Brooker's non-technical training should cover the risk at a governance level — "your team is installing agent tools; here's why that needs oversight."</p>
+<p><strong>Our own practice</strong>: We should audit our own skill/plugin supply chain. Our Claude Code skills are first-party, which is good, but any MCP servers or external tools we integrate are attack surface.</p>
+<p><strong>Consulting differentiator</strong>: "Agent governance" is an emerging need with no established playbook. Every Consulting could develop a lightweight agent security assessment offering — a natural extension of our existing discovery-to-delivery model.</p>
+                    </div>
+                </details>
+            <div class="links">
+                <a href="https://x.com/pedronauck/status/2044098967852445931" target="_blank" rel="noopener">View on X</a>
+            </div>
+        </article>
 
         <article class="entry">
             <span class="signal-tag key-shift">Key Shift</span>
@@ -3919,7 +4001,7 @@ A circuit breaker halts auto-compaction after three consecutive failures.</p>
                 <li><strong>The platform shift happened in 4 weeks.</strong> Ejaaz&rsquo;s catalog shows Claude Code crossed from developer tool to knowledge-worker platform in a single shipping sprint. Clients who evaluated it even two months ago saw a fundamentally different product.</li>
             </ol>
 
-            <p class="coda">55 of 56 sources tagged as Key Shift. The dominant theme: Claude Code&rsquo;s memory, personalization, and autonomous capabilities represent a genuine platform shift &mdash; not incremental improvement.</p>
+            <p class="coda">56 of 57 sources tagged as Key Shift. The dominant theme: Claude Code&rsquo;s memory, personalization, and autonomous capabilities represent a genuine platform shift &mdash; not incremental improvement.</p>
         </section>
 
         <footer>
