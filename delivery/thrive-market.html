@@ -3,103 +3,382 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Thrive Market — Session Delivery Tracker</title>
+<title>Thrive Market — Session Operations Center</title>
 <style>
   * { margin: 0; padding: 0; box-sizing: border-box; }
-  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #f8f9fa; color: #1a1a2e; padding: 32px; line-height: 1.5; }
-  .container { max-width: 1000px; margin: 0 auto; }
-  h1 { font-size: 24px; font-weight: 700; margin-bottom: 4px; }
-  .subtitle { color: #666; font-size: 14px; margin-bottom: 24px; }
-  .meta { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; background: #fff; border: 1px solid #e0e0e0; border-radius: 8px; padding: 20px; margin-bottom: 24px; font-size: 14px; }
-  .meta-item { display: flex; gap: 8px; }
-  .meta-label { font-weight: 600; color: #444; min-width: 120px; }
-  .meta-value { color: #1a1a2e; }
-  .status-done { color: #15803d; font-weight: 600; }
-  .status-pending { color: #b45309; font-weight: 600; }
-  .status-overdue { color: #dc2626; font-weight: 700; }
-  .status-na { color: #9ca3af; }
-  .status-scheduled { color: #2563eb; font-weight: 600; }
-  h2 { font-size: 18px; font-weight: 700; margin: 28px 0 12px; padding-bottom: 6px; border-bottom: 2px solid #1a3a5c; }
-  table { width: 100%; border-collapse: collapse; background: #fff; border: 1px solid #e0e0e0; border-radius: 8px; overflow: hidden; margin-bottom: 24px; font-size: 13px; }
-  th { background: #1a3a5c; color: #fff; text-align: left; padding: 10px 12px; font-weight: 600; font-size: 12px; text-transform: uppercase; letter-spacing: 0.5px; }
-  td { padding: 10px 12px; border-bottom: 1px solid #f0f0f0; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #f0f2f5; color: #1a1a2e; padding: 32px; line-height: 1.5; }
+  .container { max-width: 1060px; margin: 0 auto; }
+
+  /* Header */
+  .page-header { background: #1a3a5c; color: #fff; border-radius: 10px; padding: 24px 28px; margin-bottom: 20px; }
+  .page-header h1 { font-size: 22px; font-weight: 700; letter-spacing: -0.3px; }
+  .page-header .tagline { color: #93b4d4; font-size: 13px; margin-top: 2px; }
+  .header-meta { display: flex; flex-wrap: wrap; gap: 18px; margin-top: 16px; font-size: 13px; }
+  .header-meta-item { display: flex; gap: 6px; align-items: center; }
+  .header-meta-item .hm-label { color: #93b4d4; font-weight: 500; }
+  .header-meta-item .hm-val { color: #fff; font-weight: 600; }
+  .header-meta-item a { color: #7ec8e3; text-decoration: none; }
+  .header-meta-item a:hover { text-decoration: underline; }
+
+  /* Alerts */
+  .alert { border-radius: 8px; padding: 12px 16px; margin-bottom: 16px; font-size: 13px; display: flex; align-items: flex-start; gap: 10px; }
+  .alert-red { background: #fef2f2; border: 1px solid #fca5a5; color: #7f1d1d; }
+  .alert-yellow { background: #fefce8; border: 1px solid #fde047; color: #713f12; }
+  .alert-icon { font-size: 16px; flex-shrink: 0; margin-top: 1px; }
+  .alert strong { font-weight: 700; }
+
+  /* Sections */
+  h2 { font-size: 15px; font-weight: 700; margin: 28px 0 10px; padding-bottom: 7px; border-bottom: 2px solid #1a3a5c; color: #1a3a5c; text-transform: uppercase; letter-spacing: 0.6px; }
+
+  /* Status table */
+  table { width: 100%; border-collapse: collapse; background: #fff; border: 1px solid #dde3ec; border-radius: 8px; overflow: hidden; margin-bottom: 20px; font-size: 13px; }
+  th { background: #1a3a5c; color: #fff; text-align: left; padding: 9px 12px; font-weight: 600; font-size: 11px; text-transform: uppercase; letter-spacing: 0.5px; }
+  td { padding: 9px 12px; border-bottom: 1px solid #f0f0f0; vertical-align: top; }
   tr:last-child td { border-bottom: none; }
-  tr:hover { background: #f8f9ff; }
-  .updated { text-align: right; color: #999; font-size: 12px; margin-top: 32px; }
+  tr:hover { background: #f7f9fc; }
   a { color: #2563eb; text-decoration: none; }
   a:hover { text-decoration: underline; }
-  .alert { background: #fef3c7; border: 1px solid #f59e0b; border-radius: 8px; padding: 12px 16px; margin-bottom: 24px; font-size: 14px; }
-  .alert strong { color: #92400e; }
+
+  /* Status badges */
+  .badge { display: inline-block; padding: 2px 8px; border-radius: 12px; font-size: 11px; font-weight: 700; letter-spacing: 0.3px; }
+  .badge-done { background: #dcfce7; color: #166534; }
+  .badge-overdue { background: #fee2e2; color: #991b1b; }
+  .badge-pending { background: #fef3c7; color: #92400e; }
+  .badge-scheduled { background: #dbeafe; color: #1e40af; }
+  .badge-na { background: #f3f4f6; color: #6b7280; }
+
+  /* Copy blocks */
+  .copy-block { background: #f8f9fb; border: 1px solid #dde3ec; border-radius: 8px; margin-bottom: 20px; overflow: hidden; }
+  .copy-block-header { display: flex; justify-content: space-between; align-items: center; padding: 10px 14px; background: #eef1f6; border-bottom: 1px solid #dde3ec; }
+  .copy-block-label { font-size: 11px; font-weight: 700; color: #4b5563; text-transform: uppercase; letter-spacing: 0.5px; }
+  .copy-btn { background: #1a3a5c; color: #fff; border: none; border-radius: 5px; padding: 4px 10px; font-size: 11px; font-weight: 600; cursor: pointer; transition: background 0.15s; }
+  .copy-btn:hover { background: #274f7a; }
+  .copy-btn.copied { background: #166534; }
+  .copy-body { padding: 14px 16px; font-family: 'SF Mono', 'Fira Mono', 'Consolas', monospace; font-size: 12.5px; line-height: 1.65; color: #1a1a2e; white-space: pre-wrap; word-break: break-word; }
+
+  /* Note callout */
+  .note { background: #eff6ff; border-left: 3px solid #3b82f6; border-radius: 0 6px 6px 0; padding: 10px 14px; font-size: 13px; color: #1e3a5f; margin-bottom: 16px; }
+  .note strong { font-weight: 600; }
+
+  /* Survey questions */
+  .survey-section { background: #fff; border: 1px solid #dde3ec; border-radius: 8px; padding: 16px 18px; margin-bottom: 16px; }
+  .survey-section h3 { font-size: 13px; font-weight: 700; color: #1a3a5c; margin-bottom: 10px; text-transform: uppercase; letter-spacing: 0.4px; }
+  .survey-q { padding: 6px 0; font-size: 13px; border-bottom: 1px solid #f3f4f6; display: flex; gap: 10px; }
+  .survey-q:last-child { border-bottom: none; }
+  .q-num { color: #9ca3af; font-weight: 600; font-size: 12px; min-width: 18px; margin-top: 1px; }
+  .q-text { color: #1a1a2e; }
+  .q-type { font-size: 11px; color: #6b7280; margin-top: 2px; }
+
+  /* Post-session grid */
+  .post-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px; margin-bottom: 20px; }
+  .post-card { background: #fff; border: 1px solid #dde3ec; border-radius: 8px; padding: 14px 16px; }
+  .post-card .pc-label { font-size: 11px; font-weight: 700; color: #6b7280; text-transform: uppercase; letter-spacing: 0.4px; margin-bottom: 6px; }
+  .post-card .pc-who { font-size: 13px; font-weight: 700; color: #1a3a5c; }
+  .post-card .pc-when { font-size: 12px; color: #6b7280; margin-top: 2px; }
+  .post-card .pc-detail { font-size: 12px; color: #4b5563; margin-top: 4px; }
+
+  .updated { text-align: right; color: #9ca3af; font-size: 12px; margin-top: 32px; }
 </style>
 </head>
 <body>
 <div class="container">
-  <h1>Thrive Market — Session Delivery Tracker</h1>
-  <p class="subtitle">Every Consulting engagement delivery status</p>
 
-  <div class="alert">
-    <strong>Action needed:</strong> No Slack channel (#consulting-thrive) exists yet. Create before session. Confirmation prep email needs to go out ASAP — session starts at 11am ET.
+  <!-- PAGE HEADER -->
+  <div class="page-header">
+    <h1>Thrive Market — Session Operations Center</h1>
+    <div class="tagline">Every Consulting · Executive AI Off-Site · April 16, 2026</div>
+    <div class="header-meta">
+      <div class="header-meta-item"><span class="hm-label">Date</span><span class="hm-val">Apr 16, 2026 · 11am–2pm ET / 8am–11am PT</span></div>
+      <div class="header-meta-item"><span class="hm-label">Trainer</span><span class="hm-val">Mike Taylor</span></div>
+      <div class="header-meta-item"><span class="hm-label">Format</span><span class="hm-val">Virtual — Mike remote, Thrive in LA office</span></div>
+      <div class="header-meta-item"><span class="hm-label">Contact</span><span class="hm-val">Nick Gannon · <a href="mailto:gannon.nick@thrivemarket.com">gannon.nick@thrivemarket.com</a></span></div>
+      <div class="header-meta-item"><span class="hm-label">GitHub</span><a href="https://github.com/claudie-everyfolk/thrive-exec-skills">thrive-exec-skills</a></div>
+      <div class="header-meta-item"><span class="hm-label">PDF Summaries</span><a href="https://claudie-everyfolk.github.io/thrive-market-exercises/">claudie-everyfolk.github.io/thrive-market-exercises</a></div>
+      <div class="header-meta-item"><span class="hm-label">NDA</span><span class="hm-val">Executed Apr 15</span></div>
+      <div class="header-meta-item"><span class="hm-label">Dashboard</span><span class="hm-val" style="color:#fbbf24;">Link TBD after creation</span></div>
+    </div>
   </div>
 
-  <div class="meta">
-    <div class="meta-item"><span class="meta-label">Client</span><span class="meta-value">Thrive Market</span></div>
-    <div class="meta-item"><span class="meta-label">Engagement</span><span class="meta-value">Executive AI Off-Site — Half Day (3 hours, virtual)</span></div>
-    <div class="meta-item"><span class="meta-label">Date</span><span class="meta-value">April 16, 2026 — 11am-2pm ET (8am-11am PT)</span></div>
-    <div class="meta-item"><span class="meta-label">Primary Contact</span><span class="meta-value">Nick Gannon (gannon.nick@thrivemarket.com)</span></div>
-    <div class="meta-item"><span class="meta-label">Trainer</span><span class="meta-value">Mike Taylor</span></div>
-    <div class="meta-item"><span class="meta-label">Format</span><span class="meta-value">Virtual — Mike remote, Thrive team in LA office</span></div>
-    <div class="meta-item"><span class="meta-label">Slack Channel</span><span class="meta-value status-overdue">Not created</span></div>
-    <div class="meta-item"><span class="meta-label">Dashboard</span><span class="meta-value status-pending">Not created</span></div>
-    <div class="meta-item"><span class="meta-label">GitHub Exercises</span><span class="meta-value"><a href="https://claudie-everyfolk.github.io/thrive-market-exercises/">thrive-market-exercises</a></span></div>
-    <div class="meta-item"><span class="meta-label">NDA</span><span class="meta-value status-done">Executed (Apr 15)</span></div>
+  <!-- ALERTS -->
+  <div class="alert alert-red">
+    <span class="alert-icon">🚨</span>
+    <div><strong>Slack channel not created.</strong> #consulting-thrive does not exist yet — create before session starts at 11am ET.</div>
+  </div>
+  <div class="alert alert-yellow">
+    <span class="alert-icon">⚠️</span>
+    <div><strong>Confirmation email is OVERDUE.</strong> Needs to go out NOW. Session starts in hours. Copy-paste template is in Section 2 below.</div>
   </div>
 
-  <h2>Engagement-Level Items</h2>
+  <!-- SECTION 1: PRE-SESSION CHECKLIST -->
+  <h2>Section 1 — Pre-Session Checklist</h2>
   <table>
-    <thead><tr><th>Item</th><th>Status</th><th>Owner</th><th>Notes</th></tr></thead>
+    <thead>
+      <tr><th>Item</th><th>Status</th><th>Owner</th><th>Notes</th></tr>
+    </thead>
     <tbody>
-      <tr><td>Client dashboard created</td><td class="status-pending">Pending</td><td>Claudie</td><td>Need to create from template</td></tr>
-      <tr><td>Slack channel created</td><td class="status-overdue">Overdue</td><td>Team</td><td>#consulting-thrive — must create today</td></tr>
-      <tr><td>GitHub repo with exercise materials</td><td class="status-done">Done</td><td>Claudie</td><td><a href="https://github.com/claudie-everyfolk/thrive-market-exercises">thrive-market-exercises</a> + <a href="https://github.com/claudie-everyfolk/thrive-exec-skills">thrive-exec-skills</a></td></tr>
-      <tr><td>Invoice sent</td><td class="status-done">Done</td><td>Consulting Ops</td><td>Sent Apr 9, Coupa vendor setup in progress</td></tr>
-      <tr><td>NDA executed</td><td class="status-done">Done</td><td>Natalia</td><td>Confirmed Apr 15</td></tr>
-      <tr><td>AI strategy docs received</td><td class="status-done">Done</td><td>Nick Gannon</td><td>DocSend link received Apr 15, functional AI strategy by dept</td></tr>
+      <tr>
+        <td>Timing confirmed with client</td>
+        <td><span class="badge badge-done">Done</span></td>
+        <td>Mike</td>
+        <td>Mike emailed Nick Gannon at 8:41am today — confirmed 11am–2pm ET</td>
+      </tr>
+      <tr>
+        <td>Confirmation / prep email sent</td>
+        <td><span class="badge badge-overdue">Overdue</span></td>
+        <td>Mike</td>
+        <td>Use the copy-paste template in Section 2 — send NOW</td>
+      </tr>
+      <tr>
+        <td>Exercise packages</td>
+        <td><span class="badge badge-done">Done</span></td>
+        <td>Nityesh</td>
+        <td>8 execs · 3 personalized exercises each · repo: <a href="https://github.com/claudie-everyfolk/thrive-exec-skills">thrive-exec-skills</a></td>
+      </tr>
+      <tr>
+        <td>Slide deck</td>
+        <td><span class="badge badge-done">Done</span></td>
+        <td>Mike / Nityesh</td>
+        <td>Thrive Exec offsite v2.pptx — all comments resolved this morning</td>
+      </tr>
+      <tr>
+        <td>Session coaching guide (CLAUDE.md)</td>
+        <td><span class="badge badge-done">Done</span></td>
+        <td>Nityesh</td>
+        <td>In thrive-exec-skills repo</td>
+      </tr>
+      <tr>
+        <td>Slack channel #consulting-thrive</td>
+        <td><span class="badge badge-overdue">Overdue</span></td>
+        <td>Team</td>
+        <td>Not created — action needed today</td>
+      </tr>
+      <tr>
+        <td>Client dashboard</td>
+        <td><span class="badge badge-pending">Pending</span></td>
+        <td>Claudie</td>
+        <td>To be created from template; link will be added here</td>
+      </tr>
     </tbody>
   </table>
 
-  <h2>Session — Executive AI Build Day (Apr 16, 11am-2pm ET)</h2>
+  <!-- SECTION 2: CONFIRMATION EMAIL -->
+  <h2>Section 2 — Confirmation Email (Send NOW)</h2>
+  <div class="note">
+    <strong>Status: OVERDUE.</strong> This goes from Mike to the Thrive team before the session kicks off. Copy the block below, paste into email, hit send.
+  </div>
+  <div class="copy-block" id="block-confirm">
+    <div class="copy-block-header">
+      <span class="copy-block-label">Confirmation / Prep Email — Mike → Thrive</span>
+      <button class="copy-btn" onclick="copyBlock('block-confirm')">Copy</button>
+    </div>
+    <div class="copy-body">From: Mike Taylor
+To: gannon.nick@thrivemarket.com
+CC: natalia@every.to, sasha@thrivemarket.com, nick@thrivemarket.com
+Subject: Quick prep checklist for today's session
+
+Hi team,
+
+Looking forward to the session today! A few things to have ready before we kick off at 11am ET (8am PT):
+
+Setup checklist:
+- Make sure the Claude desktop app is downloaded and ready — https://claude.ai/download
+- Enable the connectors you'll want to use: Gmail, Google Drive, Google Calendar, and any other tools relevant to your workflow
+- Sign in and confirm your connectors are active before we start
+
+Resources we'll reference during the session:
+- https://github.com/claudie-everyfolk/thrive-exec-skills
+
+See you at 11!
+
+Mike</div>
+  </div>
+
+  <!-- SECTION 3: POST-SESSION FOLLOW-UP EMAIL -->
+  <h2>Section 3 — Post-Session Follow-Up Email</h2>
+  <div class="note">
+    Mike sends this within 24 hours of session end (by end of day April 17). Attach the presentation PDF before sending.
+  </div>
+  <div class="copy-block" id="block-followup">
+    <div class="copy-block-header">
+      <span class="copy-block-label">Post-Session Follow-Up — Mike → Thrive Attendees</span>
+      <button class="copy-btn" onclick="copyBlock('block-followup')">Copy</button>
+    </div>
+    <div class="copy-body">From: Mike Taylor
+To: [Thrive attendees]
+Subject: AI Training Follow Up
+
+Hi all,
+
+Thanks for joining the session today! Great to meet the team and hope you enjoyed building with Claude.
+
+Following up with:
+- The presentation PDF [attach]
+- Link to the exercise repo with your personalized exercises: https://github.com/claudie-everyfolk/thrive-exec-skills
+
+Please let me know if you have any questions.
+
+Best,
+Mike</div>
+  </div>
+
+  <!-- SECTION 4: POST-SESSION SURVEY -->
+  <h2>Section 4 — Post-Session Survey</h2>
+  <div class="note">
+    <strong>Process note:</strong> For future engagements, the pre-session survey should go out <strong>1 week before</strong> the session so we can personalize exercises from responses. For today, we'll send a post-session feedback survey within 2 hours of session end.
+    <br><br>
+    Post-session survey link: <a href="https://docs.google.com/forms/d/e/1FAIpQLSf4s5_zw19FqiHImOkGYBgHVtE5mjY8E2axEYYMy5yZQc2NJQ/viewform" target="_blank">Google Form →</a> · Claudie sends by 4pm ET today.
+  </div>
+
+  <div class="survey-section">
+    <h3>Pre-Session Questions (reference — these are in the existing form)</h3>
+    <div class="survey-q">
+      <span class="q-num">1</span>
+      <div>
+        <div class="q-text">How often do you use AI tools like ChatGPT or Claude?</div>
+        <div class="q-type">Multiple choice: Rarely / A few times a month / Weekly / Daily / Hourly</div>
+      </div>
+    </div>
+    <div class="survey-q">
+      <span class="q-num">2</span>
+      <div>
+        <div class="q-text">Have you successfully automated a workflow using AI?</div>
+        <div class="q-type">Multiple choice: Yes / No</div>
+      </div>
+    </div>
+    <div class="survey-q">
+      <span class="q-num">3</span>
+      <div>
+        <div class="q-text">Which capability are you most interested in exploring?</div>
+        <div class="q-type">Multiple choice: Claude Chat / Claude Cowork / Claude Code</div>
+      </div>
+    </div>
+    <div class="survey-q">
+      <span class="q-num">4</span>
+      <div>
+        <div class="q-text">What are 2–3 repetitive but valuable tasks you'd want to hand off to AI?</div>
+        <div class="q-type">Open text</div>
+      </div>
+    </div>
+    <div class="survey-q">
+      <span class="q-num">5</span>
+      <div>
+        <div class="q-text">Is there anything you want to make sure this session covers?</div>
+        <div class="q-type">Open text</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="survey-section">
+    <h3>Post-Session Questions (use these for today)</h3>
+    <div class="survey-q">
+      <span class="q-num">1</span>
+      <div>
+        <div class="q-text">How would you rate today's session overall?</div>
+        <div class="q-type">Scale: 1–5</div>
+      </div>
+    </div>
+    <div class="survey-q">
+      <span class="q-num">2</span>
+      <div>
+        <div class="q-text">How likely are you to recommend this training to a colleague?</div>
+        <div class="q-type">Scale: 0–10 (NPS)</div>
+      </div>
+    </div>
+    <div class="survey-q">
+      <span class="q-num">3</span>
+      <div>
+        <div class="q-text">What was the most valuable thing you learned or built today?</div>
+        <div class="q-type">Open text</div>
+      </div>
+    </div>
+    <div class="survey-q">
+      <span class="q-num">4</span>
+      <div>
+        <div class="q-text">What could be improved?</div>
+        <div class="q-type">Open text</div>
+      </div>
+    </div>
+    <div class="survey-q">
+      <span class="q-num">5</span>
+      <div>
+        <div class="q-text">How confident do you feel using the tool on your own?</div>
+        <div class="q-type">Scale: 1–5</div>
+      </div>
+    </div>
+    <div class="survey-q">
+      <span class="q-num">6</span>
+      <div>
+        <div class="q-text">How relevant was the exercise to your actual day-to-day work?</div>
+        <div class="q-type">Scale: 1–5 (exec sessions)</div>
+      </div>
+    </div>
+    <div class="survey-q">
+      <span class="q-num">7</span>
+      <div>
+        <div class="q-text">What's the first thing you plan to try with your team after today?</div>
+        <div class="q-type">Open text</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 5: PARTICIPANTS -->
+  <h2>Section 5 — Participants</h2>
   <table>
-    <thead><tr><th>Item</th><th>Status</th><th>Owner</th><th>Due</th><th>Notes</th></tr></thead>
+    <thead>
+      <tr><th>Name</th><th>Role</th><th>AI Interest Areas (from strategy docs)</th></tr>
+    </thead>
     <tbody>
-      <tr><td>Timing confirmed with client</td><td class="status-done">Done</td><td>Mike</td><td>—</td><td>Mike emailed Nick Gannon 8:41am today confirming 11am-2pm ET</td></tr>
-      <tr><td>Confirmation/prep email sent</td><td class="status-overdue">Overdue</td><td>Mike</td><td>Morning of</td><td>Draft ready — Claude app download + connectors + repo link</td></tr>
-      <tr><td>Exercise packages ready</td><td class="status-done">Done</td><td>Nityesh</td><td>—</td><td>8 execs, 3 exercises each, personalized</td></tr>
-      <tr><td>Session coaching guide</td><td class="status-done">Done</td><td>Nityesh</td><td>—</td><td>CLAUDE.md in thrive-exec-skills repo</td></tr>
-      <tr><td>Slide deck</td><td class="status-done">Done</td><td>Mike / Nityesh</td><td>—</td><td>Thrive Exec offsite v2.pptx — comments resolved this morning</td></tr>
-      <tr><td>Session delivered</td><td class="status-scheduled">Scheduled</td><td>Mike</td><td>11am ET today</td><td>3-hour virtual session</td></tr>
-      <tr><td>Post-session survey sent</td><td class="status-pending">Pending</td><td>Claudie</td><td>By 5pm ET today</td><td>Use executive survey questions</td></tr>
-      <tr><td>Survey responses tracked</td><td class="status-pending">Pending</td><td>Claudie</td><td>Within 48hrs</td><td></td></tr>
-      <tr><td>Follow-up email sent</td><td class="status-pending">Pending</td><td>Mike</td><td>By Apr 17</td><td></td></tr>
-      <tr><td>Dashboard updated</td><td class="status-pending">Pending</td><td>Claudie</td><td>By Apr 17</td><td></td></tr>
+      <tr><td><strong>Hetu Patel</strong> (HP)</td><td>CFO</td><td>Month-end close automation, cause of change analysis, FBP deep dives</td></tr>
+      <tr><td><strong>April Lane</strong> (AL)</td><td>Chief Merchant</td><td>Ingredient vetting, merchandising briefs, vendor scorecards</td></tr>
+      <tr><td><strong>Scott Lescher</strong> (SL)</td><td>COO</td><td>Demand exceptions, carrier scorecards, FC shift handoffs</td></tr>
+      <tr><td><strong>Amina Pasha</strong> (AP)</td><td>CMO</td><td>Creative fatigue detection, campaign narratives, community triage</td></tr>
+      <tr><td><strong>Josh Kreinberg</strong> (JK)</td><td>GC &amp; CAO</td><td>Contract triage, regulatory research, employee comms</td></tr>
+      <tr><td><strong>Doug Willoughby</strong> (DW)</td><td>VP Member Services</td><td>VOM synthesis, scheduling, training scenarios (uses Sierra AI)</td></tr>
+      <tr><td><strong>Sasha Siddhartha</strong> (SA)</td><td>CTO</td><td>Alert triage, app deployment eval, AI investment analysis</td></tr>
+      <tr><td><strong>Nick Green</strong> (NG)</td><td>CEO</td><td>AI ROI synthesis, AI governance, workforce planning</td></tr>
     </tbody>
   </table>
 
-  <h2>Participants</h2>
-  <table>
-    <thead><tr><th>Name</th><th>Role</th><th>AI Interest Areas (from strategy docs)</th></tr></thead>
-    <tbody>
-      <tr><td>Hetu Patel (HP)</td><td>CFO</td><td>Month-end close automation, cause of change analysis, FBP deep dives</td></tr>
-      <tr><td>April Lane (AL)</td><td>Chief Merchant</td><td>Ingredient vetting, merchandising briefs, vendor scorecards</td></tr>
-      <tr><td>Scott Lescher (SL)</td><td>COO</td><td>Demand exceptions, carrier scorecards, FC shift handoffs</td></tr>
-      <tr><td>Amina Pasha (AP)</td><td>CMO</td><td>Creative fatigue detection, campaign narratives, community triage</td></tr>
-      <tr><td>Josh Kreinberg (JK)</td><td>GC &amp; CAO</td><td>Contract triage, regulatory research, employee comms</td></tr>
-      <tr><td>Doug Willoughby (DW)</td><td>VP Member Services</td><td>VOM synthesis, scheduling, training scenarios (uses Sierra AI)</td></tr>
-      <tr><td>Sasha Siddhartha (SA)</td><td>CTO</td><td>Alert triage, app deployment eval, AI investment analysis</td></tr>
-      <tr><td>Nick Green (NG)</td><td>CEO</td><td>AI ROI synthesis, AI governance, workforce planning</td></tr>
-    </tbody>
-  </table>
+  <!-- SECTION 6: POST-SESSION ITEMS -->
+  <h2>Section 6 — Post-Session Action Items</h2>
+  <div class="post-grid">
+    <div class="post-card">
+      <div class="pc-label">Post-Session Survey</div>
+      <div class="pc-who">Claudie</div>
+      <div class="pc-when">By 4pm ET today (within 2hrs of session end)</div>
+      <div class="pc-detail">Send Google Form link to all attendees</div>
+    </div>
+    <div class="post-card">
+      <div class="pc-label">Follow-Up Email</div>
+      <div class="pc-who">Mike Taylor</div>
+      <div class="pc-when">Within 24hrs (by Apr 17 EOD)</div>
+      <div class="pc-detail">Attach PDF deck + link to exercise repo. Template in Section 3 above.</div>
+    </div>
+    <div class="post-card">
+      <div class="pc-label">Dashboard Update</div>
+      <div class="pc-who">Claudie</div>
+      <div class="pc-when">Within 24hrs (by Apr 17)</div>
+      <div class="pc-detail">Mark session delivered, log survey responses, update pipeline</div>
+    </div>
+  </div>
 
-  <p class="updated">Last updated: April 16, 2026 9:30am ET</p>
+  <p class="updated">Last updated: April 16, 2026 · Every Consulting ops</p>
 </div>
+
+<script>
+function copyBlock(blockId) {
+  const block = document.getElementById(blockId);
+  const text = block.querySelector('.copy-body').innerText;
+  navigator.clipboard.writeText(text).then(() => {
+    const btn = block.querySelector('.copy-btn');
+    btn.textContent = 'Copied!';
+    btn.classList.add('copied');
+    setTimeout(() => {
+      btn.textContent = 'Copy';
+      btn.classList.remove('copied');
+    }, 2000);
+  });
+}
+</script>
 </body>
 </html>
