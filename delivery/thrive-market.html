@@ -100,9 +100,9 @@
   </div>
 
   <!-- ALERTS -->
-  <div class="alert alert-red">
-    <span class="alert-icon">🚨</span>
-    <div><strong>Slack channel not created.</strong> #consulting-thrive does not exist yet — create before session starts at 11am ET.</div>
+  <div class="alert alert-yellow">
+    <span class="alert-icon">📌</span>
+    <div><strong>Slack channel is private.</strong> #consulting-thrive exists but Claudie can't access it. Invite the bot if you want me posting there.</div>
   </div>
   <div class="alert alert-yellow">
     <span class="alert-icon">⚠️</span>
@@ -148,15 +148,15 @@
       </tr>
       <tr>
         <td>Slack channel #consulting-thrive</td>
-        <td><span class="badge badge-overdue">Overdue</span></td>
+        <td><span class="badge badge-done">Exists (private)</span></td>
         <td>Team</td>
-        <td>Not created — action needed today</td>
+        <td>Channel is private — Claudie can't see it. Invite the bot if you want me active there.</td>
       </tr>
       <tr>
         <td>Client dashboard</td>
-        <td><span class="badge badge-pending">Pending</span></td>
+        <td><span class="badge badge-done">Done</span></td>
         <td>Claudie</td>
-        <td>To be created from template; link will be added here</td>
+        <td><a href="https://docs.google.com/spreadsheets/d/13Q9SYYpixW9M74ug1ZBVr2kU-czx94QU5RfD008EBac/edit">Thrive Market Dashboard</a></td>
       </tr>
     </tbody>
   </table>
@@ -204,7 +204,8 @@ Mike</div>
       <button class="copy-btn" onclick="copyBlock('block-followup')">Copy</button>
     </div>
     <div class="copy-body">From: Mike Taylor
-To: [Thrive attendees]
+To: gannon.nick@thrivemarket.com, sasha@thrivemarket.com, nick@thrivemarket.com
+CC: natalia@every.to
 Subject: AI Training Follow Up
 
 Hi all,
@@ -359,6 +360,146 @@ Mike</div>
       <div class="pc-who">Claudie</div>
       <div class="pc-when">Within 24hrs (by Apr 17)</div>
       <div class="pc-detail">Mark session delivered, log survey responses, update pipeline</div>
+    </div>
+  </div>
+
+  <!-- SECTION 7: ENGAGEMENT TIMELINE / GANTT CHECKLIST -->
+  <h2>Section 7 — Engagement Timeline</h2>
+  <div style="background:#fff; border:1px solid #dde3ec; border-radius:8px; padding:20px; margin-bottom:20px; overflow-x:auto;">
+    <table style="width:100%; border:none; font-size:12px; border-collapse:collapse;">
+      <thead>
+        <tr style="border-bottom:2px solid #1a3a5c;">
+          <th style="background:none; color:#1a3a5c; text-align:left; padding:6px 8px; width:200px; font-size:11px;">TASK</th>
+          <th style="background:none; color:#1a3a5c; text-align:left; padding:6px 8px; width:80px; font-size:11px;">OWNER</th>
+          <th style="background:none; color:#6b7280; text-align:center; padding:6px 4px; font-size:10px; min-width:50px;">APR 7<br><span style="font-weight:400;color:#9ca3af;">wk -1</span></th>
+          <th style="background:none; color:#6b7280; text-align:center; padding:6px 4px; font-size:10px; min-width:50px;">APR 8-9<br><span style="font-weight:400;color:#9ca3af;">prep</span></th>
+          <th style="background:none; color:#6b7280; text-align:center; padding:6px 4px; font-size:10px; min-width:50px;">APR 14<br><span style="font-weight:400;color:#9ca3af;">wk of</span></th>
+          <th style="background:none; color:#6b7280; text-align:center; padding:6px 4px; font-size:10px; min-width:50px;">APR 15<br><span style="font-weight:400;color:#9ca3af;">day -1</span></th>
+          <th style="background:none; color:#fff; text-align:center; padding:6px 4px; font-size:10px; min-width:70px; background:#1a3a5c; border-radius:4px;">APR 16<br><span style="font-weight:400;">SESSION</span></th>
+          <th style="background:none; color:#6b7280; text-align:center; padding:6px 4px; font-size:10px; min-width:50px;">APR 17<br><span style="font-weight:400;color:#9ca3af;">+1 day</span></th>
+          <th style="background:none; color:#6b7280; text-align:center; padding:6px 4px; font-size:10px; min-width:50px;">APR 18<br><span style="font-weight:400;color:#9ca3af;">+2 day</span></th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- Sales / Contract -->
+        <tr style="background:#f0f4f8;"><td colspan="9" style="padding:6px 8px; font-weight:700; color:#1a3a5c; font-size:11px; border:none;">SALES &amp; CONTRACT</td></tr>
+        <tr style="border-bottom:1px solid #f0f0f0;">
+          <td style="padding:5px 8px; border:none;">Prep call with Nick Gannon</td><td style="border:none; color:#6b7280;">Natalia</td>
+          <td style="text-align:center; border:none;"><span style="background:#dcfce7; color:#166534; padding:1px 6px; border-radius:8px; font-size:10px; font-weight:600;">✓</span></td>
+          <td style="border:none;" colspan="6"></td>
+        </tr>
+        <tr style="border-bottom:1px solid #f0f0f0;">
+          <td style="padding:5px 8px; border:none;">Invoice sent</td><td style="border:none; color:#6b7280;">Ops</td>
+          <td style="border:none;"></td>
+          <td style="text-align:center; border:none;"><span style="background:#dcfce7; color:#166534; padding:1px 6px; border-radius:8px; font-size:10px; font-weight:600;">✓</span></td>
+          <td style="border:none;" colspan="5"></td>
+        </tr>
+        <tr style="border-bottom:1px solid #f0f0f0;">
+          <td style="padding:5px 8px; border:none;">NDA executed</td><td style="border:none; color:#6b7280;">Natalia</td>
+          <td style="border:none;" colspan="3"></td>
+          <td style="text-align:center; border:none;"><span style="background:#dcfce7; color:#166534; padding:1px 6px; border-radius:8px; font-size:10px; font-weight:600;">✓</span></td>
+          <td style="border:none;" colspan="3"></td>
+        </tr>
+        <tr style="border-bottom:1px solid #f0f0f0;">
+          <td style="padding:5px 8px; border:none;">Coupa vendor onboarding</td><td style="border:none; color:#6b7280;">Ops / Thrive</td>
+          <td style="border:none;" colspan="2"></td>
+          <td style="text-align:center; border:none;" colspan="2"><span style="background:#dbeafe; color:#1e40af; padding:1px 6px; border-radius:8px; font-size:10px; font-weight:600;">in progress ───</span></td>
+          <td style="border:none;" colspan="3"></td>
+        </tr>
+
+        <!-- Content Prep -->
+        <tr style="background:#f0f4f8;"><td colspan="9" style="padding:6px 8px; font-weight:700; color:#1a3a5c; font-size:11px; border:none;">CONTENT PREP</td></tr>
+        <tr style="border-bottom:1px solid #f0f0f0;">
+          <td style="padding:5px 8px; border:none;">Thrive sends AI strategy docs</td><td style="border:none; color:#6b7280;">Thrive</td>
+          <td style="border:none;" colspan="3"></td>
+          <td style="text-align:center; border:none;"><span style="background:#dcfce7; color:#166534; padding:1px 6px; border-radius:8px; font-size:10px; font-weight:600;">✓</span></td>
+          <td style="border:none;" colspan="3"></td>
+        </tr>
+        <tr style="border-bottom:1px solid #f0f0f0;">
+          <td style="padding:5px 8px; border:none;">Personalized exercise packages built</td><td style="border:none; color:#6b7280;">Nityesh</td>
+          <td style="border:none;" colspan="2"></td>
+          <td style="text-align:center; border:none;" colspan="2"><span style="background:#dcfce7; color:#166534; padding:1px 6px; border-radius:8px; font-size:10px; font-weight:600;">✓ built ──────</span></td>
+          <td style="border:none;" colspan="3"></td>
+        </tr>
+        <tr style="border-bottom:1px solid #f0f0f0;">
+          <td style="padding:5px 8px; border:none;">Slide deck finalized</td><td style="border:none; color:#6b7280;">Mike / Nityesh</td>
+          <td style="border:none;" colspan="3"></td>
+          <td style="text-align:center; border:none;" colspan="2"><span style="background:#dcfce7; color:#166534; padding:1px 6px; border-radius:8px; font-size:10px; font-weight:600;">✓ finalized ──</span></td>
+          <td style="border:none;" colspan="2"></td>
+        </tr>
+        <tr style="border-bottom:1px solid #f0f0f0;">
+          <td style="padding:5px 8px; border:none;">Coaching guide (CLAUDE.md)</td><td style="border:none; color:#6b7280;">Nityesh</td>
+          <td style="border:none;" colspan="2"></td>
+          <td style="text-align:center; border:none;"><span style="background:#dcfce7; color:#166534; padding:1px 6px; border-radius:8px; font-size:10px; font-weight:600;">✓</span></td>
+          <td style="border:none;" colspan="4"></td>
+        </tr>
+        <tr style="border-bottom:1px solid #f0f0f0;">
+          <td style="padding:5px 8px; border:none;">Pre-session survey</td><td style="border:none; color:#6b7280;">—</td>
+          <td style="text-align:center; border:none;" colspan="2"><span style="background:#f3f4f6; color:#6b7280; padding:1px 6px; border-radius:8px; font-size:10px; font-weight:600;">skipped</span></td>
+          <td style="border:none;" colspan="5"></td>
+        </tr>
+
+        <!-- Day-Of -->
+        <tr style="background:#f0f4f8;"><td colspan="9" style="padding:6px 8px; font-weight:700; color:#1a3a5c; font-size:11px; border:none;">DAY OF SESSION</td></tr>
+        <tr style="border-bottom:1px solid #f0f0f0;">
+          <td style="padding:5px 8px; border:none;">Timing confirmed with client</td><td style="border:none; color:#6b7280;">Mike</td>
+          <td style="border:none;" colspan="4"></td>
+          <td style="text-align:center; border:none;"><span style="background:#dcfce7; color:#166534; padding:1px 6px; border-radius:8px; font-size:10px; font-weight:600;">✓ 8:41am</span></td>
+          <td style="border:none;" colspan="2"></td>
+        </tr>
+        <tr style="border-bottom:1px solid #f0f0f0;">
+          <td style="padding:5px 8px; border:none; font-weight:600;">Confirmation/prep email sent</td><td style="border:none; color:#6b7280; font-weight:600;">Mike</td>
+          <td style="border:none;" colspan="4"></td>
+          <td style="text-align:center; border:none;"><span style="background:#fee2e2; color:#991b1b; padding:1px 6px; border-radius:8px; font-size:10px; font-weight:600;">⚠ SEND NOW</span></td>
+          <td style="border:none;" colspan="2"></td>
+        </tr>
+        <tr style="border-bottom:1px solid #f0f0f0;">
+          <td style="padding:5px 8px; border:none; font-weight:600;">Session delivered (11am-2pm ET)</td><td style="border:none; color:#6b7280; font-weight:600;">Mike</td>
+          <td style="border:none;" colspan="4"></td>
+          <td style="text-align:center; border:none;"><span style="background:#dbeafe; color:#1e40af; padding:1px 6px; border-radius:8px; font-size:10px; font-weight:600;">▶ 11am-2pm</span></td>
+          <td style="border:none;" colspan="2"></td>
+        </tr>
+        <tr style="border-bottom:1px solid #f0f0f0;">
+          <td style="padding:5px 8px; border:none;">Client dashboard created</td><td style="border:none; color:#6b7280;">Claudie</td>
+          <td style="border:none;" colspan="4"></td>
+          <td style="text-align:center; border:none;"><span style="background:#dcfce7; color:#166534; padding:1px 6px; border-radius:8px; font-size:10px; font-weight:600;">✓</span></td>
+          <td style="border:none;" colspan="2"></td>
+        </tr>
+
+        <!-- Post-Session -->
+        <tr style="background:#f0f4f8;"><td colspan="9" style="padding:6px 8px; font-weight:700; color:#1a3a5c; font-size:11px; border:none;">POST-SESSION</td></tr>
+        <tr style="border-bottom:1px solid #f0f0f0;">
+          <td style="padding:5px 8px; border:none;">Post-session survey sent</td><td style="border:none; color:#6b7280;">Claudie</td>
+          <td style="border:none;" colspan="4"></td>
+          <td style="text-align:center; border:none;"><span style="background:#fef3c7; color:#92400e; padding:1px 6px; border-radius:8px; font-size:10px; font-weight:600;">by 4pm</span></td>
+          <td style="border:none;" colspan="2"></td>
+        </tr>
+        <tr style="border-bottom:1px solid #f0f0f0;">
+          <td style="padding:5px 8px; border:none;">Follow-up email with slides + repo</td><td style="border:none; color:#6b7280;">Mike</td>
+          <td style="border:none;" colspan="5"></td>
+          <td style="text-align:center; border:none;"><span style="background:#fef3c7; color:#92400e; padding:1px 6px; border-radius:8px; font-size:10px; font-weight:600;">by EOD</span></td>
+          <td style="border:none;"></td>
+        </tr>
+        <tr style="border-bottom:1px solid #f0f0f0;">
+          <td style="padding:5px 8px; border:none;">Survey responses tracked</td><td style="border:none; color:#6b7280;">Claudie</td>
+          <td style="border:none;" colspan="5"></td>
+          <td style="border:none;"></td>
+          <td style="text-align:center; border:none;"><span style="background:#fef3c7; color:#92400e; padding:1px 6px; border-radius:8px; font-size:10px; font-weight:600;">by EOD</span></td>
+        </tr>
+        <tr style="border-bottom:1px solid #f0f0f0;">
+          <td style="padding:5px 8px; border:none;">Dashboard updated (mark delivered)</td><td style="border:none; color:#6b7280;">Claudie</td>
+          <td style="border:none;" colspan="5"></td>
+          <td style="text-align:center; border:none;"><span style="background:#fef3c7; color:#92400e; padding:1px 6px; border-radius:8px; font-size:10px; font-weight:600;">by EOD</span></td>
+          <td style="border:none;"></td>
+        </tr>
+      </tbody>
+    </table>
+    <div style="margin-top:12px; font-size:11px; color:#9ca3af; display:flex; gap:16px; flex-wrap:wrap;">
+      <span><span style="background:#dcfce7; color:#166534; padding:1px 6px; border-radius:8px; font-size:10px; font-weight:600;">✓</span> Done</span>
+      <span><span style="background:#dbeafe; color:#1e40af; padding:1px 6px; border-radius:8px; font-size:10px; font-weight:600;">▶</span> In Progress</span>
+      <span><span style="background:#fef3c7; color:#92400e; padding:1px 6px; border-radius:8px; font-size:10px; font-weight:600;">⏳</span> Upcoming</span>
+      <span><span style="background:#fee2e2; color:#991b1b; padding:1px 6px; border-radius:8px; font-size:10px; font-weight:600;">⚠</span> Overdue</span>
+      <span><span style="background:#f3f4f6; color:#6b7280; padding:1px 6px; border-radius:8px; font-size:10px; font-weight:600;">—</span> Skipped</span>
     </div>
   </div>
 
