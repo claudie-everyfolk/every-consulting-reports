@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Thrive Market — Session Delivery Tracker</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #f8f9fa; color: #1a1a2e; padding: 32px; line-height: 1.5; }
+  .container { max-width: 1000px; margin: 0 auto; }
+  h1 { font-size: 24px; font-weight: 700; margin-bottom: 4px; }
+  .subtitle { color: #666; font-size: 14px; margin-bottom: 24px; }
+  .meta { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; background: #fff; border: 1px solid #e0e0e0; border-radius: 8px; padding: 20px; margin-bottom: 24px; font-size: 14px; }
+  .meta-item { display: flex; gap: 8px; }
+  .meta-label { font-weight: 600; color: #444; min-width: 120px; }
+  .meta-value { color: #1a1a2e; }
+  .status-done { color: #15803d; font-weight: 600; }
+  .status-pending { color: #b45309; font-weight: 600; }
+  .status-overdue { color: #dc2626; font-weight: 700; }
+  .status-na { color: #9ca3af; }
+  .status-scheduled { color: #2563eb; font-weight: 600; }
+  h2 { font-size: 18px; font-weight: 700; margin: 28px 0 12px; padding-bottom: 6px; border-bottom: 2px solid #1a3a5c; }
+  table { width: 100%; border-collapse: collapse; background: #fff; border: 1px solid #e0e0e0; border-radius: 8px; overflow: hidden; margin-bottom: 24px; font-size: 13px; }
+  th { background: #1a3a5c; color: #fff; text-align: left; padding: 10px 12px; font-weight: 600; font-size: 12px; text-transform: uppercase; letter-spacing: 0.5px; }
+  td { padding: 10px 12px; border-bottom: 1px solid #f0f0f0; }
+  tr:last-child td { border-bottom: none; }
+  tr:hover { background: #f8f9ff; }
+  .section-label { background: #f0f4f8; font-weight: 700; color: #1a3a5c; }
+  .section-label td { padding: 8px 12px; font-size: 13px; }
+  .updated { text-align: right; color: #999; font-size: 12px; margin-top: 32px; }
+  a { color: #2563eb; text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  .alert { background: #fef3c7; border: 1px solid #f59e0b; border-radius: 8px; padding: 12px 16px; margin-bottom: 24px; font-size: 14px; }
+  .alert strong { color: #92400e; }
+</style>
+</head>
+<body>
+<div class="container">
+  <h1>Thrive Market — Session Delivery Tracker</h1>
+  <p class="subtitle">Every Consulting engagement delivery status</p>
+
+  <div class="alert">
+    <strong>Action needed:</strong> No Slack channel exists for Thrive. Create one before the first session. No GitHub repo with exercise materials has been shared yet.
+  </div>
+
+  <div class="meta">
+    <div class="meta-item"><span class="meta-label">Client</span><span class="meta-value">Thrive Market</span></div>
+    <div class="meta-item"><span class="meta-label">Engagement</span><span class="meta-value">Executive AI Off-Site (2 days)</span></div>
+    <div class="meta-item"><span class="meta-label">Dates</span><span class="meta-value">Week of April 21, 2026 (exact TBD)</span></div>
+    <div class="meta-item"><span class="meta-label">Primary Contact</span><span class="meta-value">Nick Green (CEO)</span></div>
+    <div class="meta-item"><span class="meta-label">Day 1 Trainer</span><span class="meta-value">Natalia Quintero</span></div>
+    <div class="meta-item"><span class="meta-label">Day 2 Trainer</span><span class="meta-value">Mike Taylor</span></div>
+    <div class="meta-item"><span class="meta-label">Slack Channel</span><span class="meta-value status-overdue">Not created</span></div>
+    <div class="meta-item"><span class="meta-label">Dashboard</span><span class="meta-value status-pending">Not created</span></div>
+  </div>
+
+  <h2>Engagement-Level Items</h2>
+  <table>
+    <thead><tr><th>Item</th><th>Status</th><th>Owner</th><th>Notes</th></tr></thead>
+    <tbody>
+      <tr><td>Client dashboard created</td><td class="status-pending">Pending</td><td>Claudie</td><td>Need to create from template</td></tr>
+      <tr><td>Slack channel created</td><td class="status-overdue">Overdue</td><td>Team</td><td>Must create before first session</td></tr>
+      <tr><td>GitHub repo with exercise materials</td><td class="status-pending">Pending</td><td>Mike / Nityesh</td><td>Exercises built locally, need to push to repo</td></tr>
+      <tr><td>Contract on file</td><td class="status-pending">Pending</td><td>Natalia</td><td></td></tr>
+      <tr><td>Kickoff email sent</td><td class="status-pending">Pending</td><td>Natalia</td><td></td></tr>
+      <tr><td>Pre-session survey sent</td><td class="status-na">N/A</td><td>—</td><td>Not using for this engagement</td></tr>
+    </tbody>
+  </table>
+
+  <h2>Day 1 — Executive Deep Dives</h2>
+  <table>
+    <thead><tr><th>Item</th><th>Status</th><th>Owner</th><th>Due</th><th>Notes</th></tr></thead>
+    <tbody>
+      <tr><td>Confirmation email sent</td><td class="status-pending">Pending</td><td>Natalia</td><td>Day before</td><td>Draft ready for review</td></tr>
+      <tr><td>Session materials prepared</td><td class="status-pending">Pending</td><td>Natalia</td><td>Day before</td><td></td></tr>
+      <tr><td>Session delivered</td><td class="status-scheduled">Scheduled</td><td>Natalia</td><td>Week of Apr 21</td><td>Per-exec deep dives (~2hrs each)</td></tr>
+      <tr><td>Post-session survey sent</td><td class="status-pending">Pending</td><td>Claudie</td><td>Within 2hrs</td><td></td></tr>
+      <tr><td>Survey responses tracked</td><td class="status-pending">Pending</td><td>Claudie</td><td>Within 48hrs</td><td></td></tr>
+      <tr><td>Follow-up email sent</td><td class="status-pending">Pending</td><td>Natalia</td><td>Within 24hrs</td><td></td></tr>
+      <tr><td>Dashboard updated</td><td class="status-pending">Pending</td><td>Claudie</td><td>Within 24hrs</td><td></td></tr>
+    </tbody>
+  </table>
+
+  <h2>Day 2 — Hands-On Build Session</h2>
+  <table>
+    <thead><tr><th>Item</th><th>Status</th><th>Owner</th><th>Due</th><th>Notes</th></tr></thead>
+    <tbody>
+      <tr><td>Confirmation email sent</td><td class="status-pending">Pending</td><td>Mike</td><td>Day before</td><td>Draft ready — needs GitHub repo link</td></tr>
+      <tr><td>Exercise packages ready</td><td class="status-done">Done</td><td>Mike / Nityesh</td><td>—</td><td>6 execs, 3 exercises each, all built</td></tr>
+      <tr><td>Session CLAUDE.md (coaching guide)</td><td class="status-done">Done</td><td>Nityesh</td><td>—</td><td>~/work/thrive-exec-skills/CLAUDE.md</td></tr>
+      <tr><td>Session delivered</td><td class="status-scheduled">Scheduled</td><td>Mike</td><td>Week of Apr 21</td><td>Claude Code hands-on with all 6 execs</td></tr>
+      <tr><td>Post-session survey sent</td><td class="status-pending">Pending</td><td>Claudie</td><td>Within 2hrs</td><td>Use executive survey questions</td></tr>
+      <tr><td>Survey responses tracked</td><td class="status-pending">Pending</td><td>Claudie</td><td>Within 48hrs</td><td></td></tr>
+      <tr><td>Follow-up email sent</td><td class="status-pending">Pending</td><td>Mike</td><td>Within 24hrs</td><td></td></tr>
+      <tr><td>Dashboard updated</td><td class="status-pending">Pending</td><td>Claudie</td><td>Within 24hrs</td><td></td></tr>
+    </tbody>
+  </table>
+
+  <h2>Participants</h2>
+  <table>
+    <thead><tr><th>Name</th><th>Role</th><th>Exercise Focus</th></tr></thead>
+    <tbody>
+      <tr><td>Hetu Patel (HP)</td><td>CFO</td><td>Variance Commentary, Investor Q&A, FBP Analysis</td></tr>
+      <tr><td>April Lane (AL)</td><td>Chief Merchant</td><td>Ingredient Vetting, Merchandising Brief, Vendor Scorecard</td></tr>
+      <tr><td>Scott Lescher (SL)</td><td>COO</td><td>Demand Exceptions, Carrier Scorecard, FC Shift Handoff</td></tr>
+      <tr><td>Amina Pasha (AP)</td><td>CMO</td><td>Creative Fatigue, Campaign Performance, Community Triage</td></tr>
+      <tr><td>Josh Kreinberg (JK)</td><td>GC & CAO</td><td>Contract Triage, Regulatory Research, Employee Comms</td></tr>
+      <tr><td>Doug Willoughby (DW)</td><td>VP Member Services</td><td>VOM Synthesizer, Scheduling CSV, Training Scenarios</td></tr>
+      <tr><td>Sacha (SA)</td><td>CTO</td><td>Alert Triage, App Deployment Eval, AI Investment Analyzer</td></tr>
+      <tr><td>Nick (NG)</td><td>CEO</td><td>AI ROI Synthesizer, AI Governance, Workforce Planning</td></tr>
+    </tbody>
+  </table>
+
+  <p class="updated">Last updated: April 16, 2026</p>
+</div>
+</body>
+</html>
