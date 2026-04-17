@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Applecart — Engagement Operations Center</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #f0f2f5; color: #1a1a2e; padding: 32px; line-height: 1.5; }
+  .container { max-width: 1060px; margin: 0 auto; }
+
+  /* Header */
+  .page-header { background: #1a3a5c; color: #fff; border-radius: 10px; padding: 24px 28px; margin-bottom: 20px; }
+  .page-header h1 { font-size: 22px; font-weight: 700; letter-spacing: -0.3px; }
+  .page-header .tagline { color: #93b4d4; font-size: 13px; margin-top: 2px; }
+  .header-meta { display: flex; flex-wrap: wrap; gap: 18px; margin-top: 16px; font-size: 13px; }
+  .header-meta-item { display: flex; gap: 6px; align-items: center; }
+  .header-meta-item .hm-label { color: #93b4d4; font-weight: 500; }
+  .header-meta-item .hm-val { color: #fff; font-weight: 600; }
+  .header-meta-item a { color: #7ec8e3; text-decoration: none; }
+  .header-meta-item a:hover { text-decoration: underline; }
+
+  /* Alerts */
+  .alert { border-radius: 8px; padding: 12px 16px; margin-bottom: 16px; font-size: 13px; display: flex; align-items: flex-start; gap: 10px; }
+  .alert-red { background: #fef2f2; border: 1px solid #fca5a5; color: #7f1d1d; }
+  .alert-yellow { background: #fefce8; border: 1px solid #fde047; color: #713f12; }
+  .alert-green { background: #f0fdf4; border: 1px solid #86efac; color: #166534; }
+  .alert-icon { font-size: 16px; flex-shrink: 0; margin-top: 1px; }
+  .alert strong { font-weight: 700; }
+
+  /* Sections */
+  h2 { font-size: 15px; font-weight: 700; margin: 28px 0 10px; padding-bottom: 7px; border-bottom: 2px solid #1a3a5c; color: #1a3a5c; text-transform: uppercase; letter-spacing: 0.6px; }
+
+  /* Status table */
+  table { width: 100%; border-collapse: collapse; background: #fff; border: 1px solid #dde3ec; border-radius: 8px; overflow: hidden; margin-bottom: 20px; font-size: 13px; }
+  th { background: #1a3a5c; color: #fff; text-align: left; padding: 9px 12px; font-weight: 600; font-size: 11px; text-transform: uppercase; letter-spacing: 0.5px; }
+  td { padding: 9px 12px; border-bottom: 1px solid #f0f0f0; vertical-align: top; }
+  tr:last-child td { border-bottom: none; }
+  tr:hover { background: #f7f9fc; }
+  a { color: #2563eb; text-decoration: none; }
+  a:hover { text-decoration: underline; }
+
+  /* Status badges */
+  .badge { display: inline-block; padding: 2px 8px; border-radius: 12px; font-size: 11px; font-weight: 700; letter-spacing: 0.3px; }
+  .badge-done { background: #dcfce7; color: #166534; }
+  .badge-overdue { background: #fee2e2; color: #991b1b; }
+  .badge-pending { background: #fef3c7; color: #92400e; }
+  .badge-scheduled { background: #dbeafe; color: #1e40af; }
+  .badge-na { background: #f3f4f6; color: #6b7280; }
+
+  /* Copy blocks */
+  .copy-block { background: #f8f9fb; border: 1px solid #dde3ec; border-radius: 8px; margin-bottom: 20px; overflow: hidden; }
+  .copy-block-header { display: flex; justify-content: space-between; align-items: center; padding: 10px 14px; background: #eef1f6; border-bottom: 1px solid #dde3ec; }
+  .copy-block-label { font-size: 11px; font-weight: 700; color: #4b5563; text-transform: uppercase; letter-spacing: 0.5px; }
+  .copy-btn { background: #1a3a5c; color: #fff; border: none; border-radius: 5px; padding: 4px 10px; font-size: 11px; font-weight: 600; cursor: pointer; transition: background 0.15s; }
+  .copy-btn:hover { background: #274f7a; }
+  .copy-btn.copied { background: #166534; }
+  .copy-body { padding: 14px 16px; font-family: 'SF Mono', 'Fira Mono', 'Consolas', monospace; font-size: 12.5px; line-height: 1.65; color: #1a1a2e; white-space: pre-wrap; word-break: break-word; }
+
+  /* Note callout */
+  .note { background: #eff6ff; border-left: 3px solid #3b82f6; border-radius: 0 6px 6px 0; padding: 10px 14px; font-size: 13px; color: #1e3a5f; margin-bottom: 16px; }
+  .note strong { font-weight: 600; }
+
+  /* Post-session grid */
+  .post-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px; margin-bottom: 20px; }
+  .post-card { background: #fff; border: 1px solid #dde3ec; border-radius: 8px; padding: 14px 16px; }
+  .post-card .pc-label { font-size: 11px; font-weight: 700; color: #6b7280; text-transform: uppercase; letter-spacing: 0.4px; margin-bottom: 6px; }
+  .post-card .pc-who { font-size: 13px; font-weight: 700; color: #1a3a5c; }
+  .post-card .pc-when { font-size: 12px; color: #6b7280; margin-top: 2px; }
+  .post-card .pc-detail { font-size: 12px; color: #4b5563; margin-top: 4px; }
+
+  .updated { text-align: right; color: #9ca3af; font-size: 12px; margin-top: 32px; }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <!-- PAGE HEADER -->
+  <div class="page-header">
+    <h1>Applecart — Engagement Operations Center</h1>
+    <div class="tagline">Every Consulting · Custom Automation — AI-Powered PPT Deck Generation · Apr 20 – May 15, 2026</div>
+    <div class="header-meta">
+      <div class="header-meta-item"><span class="hm-label">Kickoff</span><span class="hm-val">Apr 21, 2026 · 10:00–10:30 AM ET (Zoom)</span></div>
+      <div class="header-meta-item"><span class="hm-label">SOW</span><span class="hm-val">Apr 20 – May 15, 2026</span></div>
+      <div class="header-meta-item"><span class="hm-label">Every Team</span><span class="hm-val">Mike Taylor + Natalia</span></div>
+      <div class="header-meta-item"><span class="hm-label">Champion</span><span class="hm-val">Orly Mintz · <a href="mailto:orly.mintz@applecart.co">orly.mintz@applecart.co</a></span></div>
+      <div class="header-meta-item"><span class="hm-label">NDA</span><span class="hm-val">Executed Mar 12</span></div>
+      <div class="header-meta-item"><span class="hm-label">Contract</span><span class="hm-val">Signed Apr 17</span></div>
+      <div class="header-meta-item"><span class="hm-label">Drive Folder</span><a href="https://drive.google.com/drive/folders/1CM68GwQEFos16V08c9G9DnHp4OAlq4ya">Applecart</a></div>
+      <div class="header-meta-item"><span class="hm-label">Dashboard</span><span class="hm-val" style="color:#fef3c7;">Not yet created</span></div>
+    </div>
+  </div>
+
+  <!-- ALERTS -->
+  <div class="alert alert-green">
+    <span class="alert-icon">&#10003;</span>
+    <div><strong>Contract signed today (Apr 17).</strong> Neelima Teerdhala (Applecart legal) confirmed the fully executed agreement. Engagement start date: Apr 20.</div>
+  </div>
+  <div class="alert alert-yellow">
+    <span class="alert-icon">&#9888;</span>
+    <div><strong>Pricing not yet verified.</strong> Signed contract was an email attachment — need to confirm actual engagement value before populating the dashboard. Do not use list prices.</div>
+  </div>
+  <div class="alert alert-yellow">
+    <span class="alert-icon">&#9888;</span>
+    <div><strong>No Slack channel found.</strong> No #consulting-applecart channel exists (public or private). Flag for creation if needed.</div>
+  </div>
+
+  <!-- CLIENT MATERIALS -->
+  <div style="background:#fff; border:1px solid #dde3ec; border-radius:8px; padding:16px 20px; margin-bottom:20px;">
+    <div style="font-size:11px; font-weight:700; color:#6b7280; text-transform:uppercase; letter-spacing:0.5px; margin-bottom:10px;">Client Materials &amp; Key Links</div>
+    <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:10px; font-size:13px;">
+      <div><span style="color:#6b7280;">Drive Folder</span><br><a href="https://drive.google.com/drive/folders/1CM68GwQEFos16V08c9G9DnHp4OAlq4ya">Applecart (Natalia's Drive)</a></div>
+      <div><span style="color:#6b7280;">PPT Template</span><br><a href="https://docs.google.com/presentation/d/1waIgtUDCnisoS5R85oPAO0cOuAggD6m_/edit">Introduction to Applecart</a></div>
+      <div><span style="color:#6b7280;">Example: DTC Pharma</span><br><a href="https://docs.google.com/presentation/d/1aYpm_G8mEm1HhZRPO9Md_4Y2DUwycgkP/edit">Kenvue deck</a></div>
+      <div><span style="color:#6b7280;">Example: Agency</span><br><a href="https://docs.google.com/presentation/d/1r7pM5fiODAvHmmEIOQjRQ4qzl2D7BX05/edit">Crossroads deck</a></div>
+      <div><span style="color:#6b7280;">NDA</span><br><a href="https://drive.google.com/file/d/1rLbOrnwl01tmhOACblW81d7Dz_dJAPIc/view">Executed NDA (PDF)</a></div>
+      <div><span style="color:#6b7280;">Delivery Tracker</span><br><a href="#">This Page</a></div>
+    </div>
+  </div>
+
+  <!-- SECTION 1: KEY CONTACTS -->
+  <h2>Section 1 — Key Contacts</h2>
+  <table>
+    <thead>
+      <tr><th>Name</th><th>Role</th><th>Email</th><th>Notes</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Orly Mintz</strong></td>
+        <td>Client Champion / Coordinator</td>
+        <td><a href="mailto:orly.mintz@applecart.co">orly.mintz@applecart.co</a></td>
+        <td>Primary logistics contact. Coordinated contract, kickoff scheduling, and shared all PPT materials.</td>
+      </tr>
+      <tr>
+        <td><strong>Joe Shafer</strong></td>
+        <td>Stakeholder</td>
+        <td><a href="mailto:joe@applecart.co">joe@applecart.co</a></td>
+        <td>On kickoff call. Present since initial discovery conversation.</td>
+      </tr>
+      <tr>
+        <td><strong>Neelima Teerdhala</strong></td>
+        <td>Associate General Counsel</td>
+        <td><a href="mailto:neelima.teerdhala@applecart.co">neelima.teerdhala@applecart.co</a></td>
+        <td>Handled contract. No need to include in project comms unless legal questions arise.</td>
+      </tr>
+      <tr>
+        <td><strong>Sacha Samotin</strong></td>
+        <td>Pipeline Contact</td>
+        <td><a href="mailto:sacha@applecart.co">sacha@applecart.co</a></td>
+        <td>Listed in pipeline. Unclear role — may be a senior sponsor. Confirm at kickoff.</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- SECTION 2: ENGAGEMENT CHECKLIST -->
+  <h2>Section 2 — Engagement Checklist</h2>
+  <table>
+    <thead>
+      <tr><th>Item</th><th>Status</th><th>Owner</th><th>Notes</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>NDA executed</td>
+        <td><span class="badge badge-done">Done</span></td>
+        <td>Natalia / Orly</td>
+        <td>Signed Mar 12</td>
+      </tr>
+      <tr>
+        <td>Contract signed</td>
+        <td><span class="badge badge-done">Done</span></td>
+        <td>Neelima / Natalia</td>
+        <td>Fully executed Apr 17. Start Apr 20, end May 15.</td>
+      </tr>
+      <tr>
+        <td>PPT templates shared by client</td>
+        <td><span class="badge badge-done">Done</span></td>
+        <td>Orly</td>
+        <td>3 decks: Intro template + 2 best-in-class examples (DTC Pharma, Agency)</td>
+      </tr>
+      <tr>
+        <td>Kickoff call scheduled</td>
+        <td><span class="badge badge-done">Done</span></td>
+        <td>Natalia</td>
+        <td>Apr 21 10:00-10:30 AM ET. Zoom.</td>
+      </tr>
+      <tr>
+        <td>Client dashboard created</td>
+        <td><span class="badge badge-pending">Pending</span></td>
+        <td>Claudie</td>
+        <td>Clone from SummitTX template. Need verified pricing first.</td>
+      </tr>
+      <tr>
+        <td>Pricing verified from contract</td>
+        <td><span class="badge badge-pending">Pending</span></td>
+        <td>Natalia</td>
+        <td>Signed agreement was emailed as attachment — need to confirm deal value.</td>
+      </tr>
+      <tr>
+        <td>Invoice sent</td>
+        <td><span class="badge badge-pending">Pending</span></td>
+        <td>Ops</td>
+        <td>TBD — depends on pricing confirmation</td>
+      </tr>
+      <tr>
+        <td>Slack channel created</td>
+        <td><span class="badge badge-pending">Pending</span></td>
+        <td>Team</td>
+        <td>No channel exists yet. Create #consulting-applecart?</td>
+      </tr>
+      <tr>
+        <td>Client has Claude subscription</td>
+        <td><span class="badge badge-pending">Pending</span></td>
+        <td>Applecart</td>
+        <td>Orly confirmed they were getting approval for Claude sub (as of Mar 30). Verify at kickoff.</td>
+      </tr>
+      <tr>
+        <td>Detailed inputs doc from client</td>
+        <td><span class="badge badge-pending">Pending</span></td>
+        <td>Applecart</td>
+        <td>Orly mentioned the pre-sale materials manager "has a detailed doc with required inputs for each slide." Request at kickoff.</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- SECTION 3: KICKOFF CALL PREP -->
+  <h2>Section 3 — Kickoff Call Prep (Apr 21, 10:00 AM ET)</h2>
+  <div class="note">
+    <strong>Zoom:</strong> <a href="https://us02web.zoom.us/j/84479116970?pwd=bD9dXQh9b1IkIvSTCYUiYp0ugqbo56.1">Join Meeting</a> · Meeting ID: 844 7911 6970 · Password: 530686
+    <br><strong>Attendees:</strong> Mike (mike@every.to), Natalia (natalia@every.to), Orly (orly.mintz@applecart.co), Joe (joe@applecart.co)
+  </div>
+
+  <div style="background:#fff; border:1px solid #dde3ec; border-radius:8px; padding:16px 18px; margin-bottom:16px;">
+    <div style="font-size:13px; font-weight:700; color:#1a3a5c; margin-bottom:10px; text-transform:uppercase; letter-spacing:0.4px;">Kickoff Agenda Items</div>
+    <div style="font-size:13px; line-height:1.8;">
+      1. Introductions — confirm who's involved on both sides<br>
+      2. Scope alignment — walk through what "automated PPT generation" means in practice<br>
+      3. Request the detailed slide inputs doc from the pre-sale materials manager<br>
+      4. Confirm Claude subscription status (Pro at minimum)<br>
+      5. Discuss delivery format — Claude Cowork skill that outputs .pptx?<br>
+      6. Clarify what varies per deck: client type (DTC vs Agency), industry, use case, images<br>
+      7. Timeline — weekly check-ins? Milestones within the Apr 20–May 15 window?<br>
+      8. Confirm Sacha Samotin's role (pipeline contact — should they be in the loop?)
+    </div>
+  </div>
+
+  <!-- SECTION 4: PROJECT CONTEXT -->
+  <h2>Section 4 — Project Context</h2>
+  <div style="background:#fff; border:1px solid #dde3ec; border-radius:8px; padding:16px 18px; margin-bottom:20px; font-size:13px; line-height:1.7;">
+    <p><strong>What Applecart needs:</strong> Their sales team creates "Introduction to Applecart" pitch decks customized per prospect. Slides, examples, and images vary depending on client type (DTC vs Agency), industry, and use case. This is manual and repetitive. They want AI to automate a significant portion of the content generation.</p>
+    <br>
+    <p><strong>What they shared:</strong></p>
+    <ul style="margin-left:20px; margin-top:4px;">
+      <li>The master PPT template: "Introduction to Applecart" (~68MB)</li>
+      <li>Best-in-class example: DTC Pharma / Kenvue</li>
+      <li>Best-in-class example: Agency / Crossroads</li>
+    </ul>
+    <br>
+    <p><strong>What they mentioned but haven't shared yet:</strong></p>
+    <ul style="margin-left:20px; margin-top:4px;">
+      <li>A detailed doc with required inputs for each slide (from the pre-sale materials team manager)</li>
+    </ul>
+    <br>
+    <p><strong>Likely deliverable:</strong> A Claude Cowork skill (or similar) that takes prospect inputs and generates a customized pitch deck. Mike mentioned in the email thread that it would use Claude Desktop via an uploaded "Skill" and drop the finished PPT into a chosen folder.</p>
+  </div>
+
+  <!-- SECTION 5: ENGAGEMENT TIMELINE -->
+  <h2>Section 5 — Engagement Timeline</h2>
+  <div style="background:#fff; border:1px solid #dde3ec; border-radius:8px; padding:20px; margin-bottom:20px; overflow-x:auto;">
+    <table style="width:100%; border:none; font-size:12px; border-collapse:collapse;">
+      <thead>
+        <tr style="border-bottom:2px solid #1a3a5c;">
+          <th style="background:none; color:#1a3a5c; text-align:left; padding:6px 8px; width:220px; font-size:11px;">TASK</th>
+          <th style="background:none; color:#1a3a5c; text-align:left; padding:6px 8px; width:80px; font-size:11px;">OWNER</th>
+          <th style="background:none; color:#6b7280; text-align:center; padding:6px 4px; font-size:10px; min-width:55px;">MAR 12<br><span style="font-weight:400;color:#9ca3af;">NDA</span></th>
+          <th style="background:none; color:#6b7280; text-align:center; padding:6px 4px; font-size:10px; min-width:55px;">MAR 16-18<br><span style="font-weight:400;color:#9ca3af;">materials</span></th>
+          <th style="background:none; color:#6b7280; text-align:center; padding:6px 4px; font-size:10px; min-width:55px;">APR 17<br><span style="font-weight:400;color:#9ca3af;">signed</span></th>
+          <th style="background:none; color:#fff; text-align:center; padding:6px 4px; font-size:10px; min-width:70px; background:#1a3a5c; border-radius:4px;">APR 21<br><span style="font-weight:400;">KICKOFF</span></th>
+          <th style="background:none; color:#6b7280; text-align:center; padding:6px 4px; font-size:10px; min-width:55px;">APR 28<br><span style="font-weight:400;color:#9ca3af;">wk 2</span></th>
+          <th style="background:none; color:#6b7280; text-align:center; padding:6px 4px; font-size:10px; min-width:55px;">MAY 5<br><span style="font-weight:400;color:#9ca3af;">wk 3</span></th>
+          <th style="background:none; color:#6b7280; text-align:center; padding:6px 4px; font-size:10px; min-width:55px;">MAY 15<br><span style="font-weight:400;color:#9ca3af;">SOW end</span></th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- Sales / Contract -->
+        <tr style="background:#f0f4f8;"><td colspan="9" style="padding:6px 8px; font-weight:700; color:#1a3a5c; font-size:11px; border:none;">SALES &amp; CONTRACT</td></tr>
+        <tr style="border-bottom:1px solid #f0f0f0;">
+          <td style="padding:5px 8px; border:none;">NDA executed</td><td style="border:none; color:#6b7280;">Natalia</td>
+          <td style="text-align:center; border:none;"><span style="background:#dcfce7; color:#166534; padding:1px 6px; border-radius:8px; font-size:10px; font-weight:600;">&#10003;</span></td>
+          <td style="border:none;" colspan="6"></td>
+        </tr>
+        <tr style="border-bottom:1px solid #f0f0f0;">
+          <td style="padding:5px 8px; border:none;">PPT materials shared</td><td style="border:none; color:#6b7280;">Orly</td>
+          <td style="border:none;"></td>
+          <td style="text-align:center; border:none;"><span style="background:#dcfce7; color:#166534; padding:1px 6px; border-radius:8px; font-size:10px; font-weight:600;">&#10003;</span></td>
+          <td style="border:none;" colspan="5"></td>
+        </tr>
+        <tr style="border-bottom:1px solid #f0f0f0;">
+          <td style="padding:5px 8px; border:none;">Contract signed</td><td style="border:none; color:#6b7280;">Neelima</td>
+          <td style="border:none;" colspan="2"></td>
+          <td style="text-align:center; border:none;"><span style="background:#dcfce7; color:#166534; padding:1px 6px; border-radius:8px; font-size:10px; font-weight:600;">&#10003;</span></td>
+          <td style="border:none;" colspan="4"></td>
+        </tr>
+        <tr style="border-bottom:1px solid #f0f0f0;">
+          <td style="padding:5px 8px; border:none;">Pricing verified / Invoice sent</td><td style="border:none; color:#6b7280;">Natalia / Ops</td>
+          <td style="border:none;" colspan="2"></td>
+          <td style="text-align:center; border:none;"><span style="background:#fef3c7; color:#92400e; padding:1px 6px; border-radius:8px; font-size:10px; font-weight:600;">needed</span></td>
+          <td style="border:none;" colspan="4"></td>
+        </tr>
+
+        <!-- Kickoff -->
+        <tr style="background:#f0f4f8;"><td colspan="9" style="padding:6px 8px; font-weight:700; color:#1a3a5c; font-size:11px; border:none;">KICKOFF &amp; DISCOVERY</td></tr>
+        <tr style="border-bottom:1px solid #f0f0f0;">
+          <td style="padding:5px 8px; border:none; font-weight:600;">Kickoff call (10am ET)</td><td style="border:none; color:#6b7280; font-weight:600;">Mike + Natalia</td>
+          <td style="border:none;" colspan="3"></td>
+          <td style="text-align:center; border:none;"><span style="background:#dbeafe; color:#1e40af; padding:1px 6px; border-radius:8px; font-size:10px; font-weight:600;">&#9654; Apr 21</span></td>
+          <td style="border:none;" colspan="3"></td>
+        </tr>
+        <tr style="border-bottom:1px solid #f0f0f0;">
+          <td style="padding:5px 8px; border:none;">Receive detailed slide inputs doc</td><td style="border:none; color:#6b7280;">Applecart</td>
+          <td style="border:none;" colspan="3"></td>
+          <td style="text-align:center; border:none;"><span style="background:#fef3c7; color:#92400e; padding:1px 6px; border-radius:8px; font-size:10px; font-weight:600;">request</span></td>
+          <td style="border:none;" colspan="3"></td>
+        </tr>
+        <tr style="border-bottom:1px solid #f0f0f0;">
+          <td style="padding:5px 8px; border:none;">Claude subscription confirmed</td><td style="border:none; color:#6b7280;">Applecart</td>
+          <td style="border:none;" colspan="3"></td>
+          <td style="text-align:center; border:none;"><span style="background:#fef3c7; color:#92400e; padding:1px 6px; border-radius:8px; font-size:10px; font-weight:600;">verify</span></td>
+          <td style="border:none;" colspan="3"></td>
+        </tr>
+
+        <!-- Build Phase -->
+        <tr style="background:#f0f4f8;"><td colspan="9" style="padding:6px 8px; font-weight:700; color:#1a3a5c; font-size:11px; border:none;">BUILD &amp; DELIVERY</td></tr>
+        <tr style="border-bottom:1px solid #f0f0f0;">
+          <td style="padding:5px 8px; border:none;">Prototype PPT automation</td><td style="border:none; color:#6b7280;">Mike / Nityesh</td>
+          <td style="border:none;" colspan="4"></td>
+          <td style="text-align:center; border:none;" colspan="2"><span style="background:#dbeafe; color:#1e40af; padding:1px 6px; border-radius:8px; font-size:10px; font-weight:600;">build ────────</span></td>
+          <td style="border:none;"></td>
+        </tr>
+        <tr style="border-bottom:1px solid #f0f0f0;">
+          <td style="padding:5px 8px; border:none;">Client review / iteration</td><td style="border:none; color:#6b7280;">Applecart + Mike</td>
+          <td style="border:none;" colspan="5"></td>
+          <td style="text-align:center; border:none;" colspan="2"><span style="background:#dbeafe; color:#1e40af; padding:1px 6px; border-radius:8px; font-size:10px; font-weight:600;">iterate ──────</span></td>
+        </tr>
+        <tr style="border-bottom:1px solid #f0f0f0;">
+          <td style="padding:5px 8px; border:none;">Final deliverable / handoff</td><td style="border:none; color:#6b7280;">Mike</td>
+          <td style="border:none;" colspan="7"></td>
+          <td style="text-align:center; border:none;"><span style="background:#fef3c7; color:#92400e; padding:1px 6px; border-radius:8px; font-size:10px; font-weight:600;">May 15</span></td>
+        </tr>
+
+        <!-- Ops -->
+        <tr style="background:#f0f4f8;"><td colspan="9" style="padding:6px 8px; font-weight:700; color:#1a3a5c; font-size:11px; border:none;">OPERATIONS</td></tr>
+        <tr style="border-bottom:1px solid #f0f0f0;">
+          <td style="padding:5px 8px; border:none;">Client dashboard created</td><td style="border:none; color:#6b7280;">Claudie</td>
+          <td style="border:none;" colspan="2"></td>
+          <td style="text-align:center; border:none;"><span style="background:#fef3c7; color:#92400e; padding:1px 6px; border-radius:8px; font-size:10px; font-weight:600;">pending</span></td>
+          <td style="border:none;" colspan="4"></td>
+        </tr>
+        <tr style="border-bottom:1px solid #f0f0f0;">
+          <td style="padding:5px 8px; border:none;">Slack channel created</td><td style="border:none; color:#6b7280;">Team</td>
+          <td style="border:none;" colspan="2"></td>
+          <td style="text-align:center; border:none;"><span style="background:#fef3c7; color:#92400e; padding:1px 6px; border-radius:8px; font-size:10px; font-weight:600;">pending</span></td>
+          <td style="border:none;" colspan="4"></td>
+        </tr>
+      </tbody>
+    </table>
+    <div style="margin-top:12px; font-size:11px; color:#9ca3af; display:flex; gap:16px; flex-wrap:wrap;">
+      <span><span style="background:#dcfce7; color:#166534; padding:1px 6px; border-radius:8px; font-size:10px; font-weight:600;">&#10003;</span> Done</span>
+      <span><span style="background:#dbeafe; color:#1e40af; padding:1px 6px; border-radius:8px; font-size:10px; font-weight:600;">&#9654;</span> Scheduled / In Progress</span>
+      <span><span style="background:#fef3c7; color:#92400e; padding:1px 6px; border-radius:8px; font-size:10px; font-weight:600;">&#9203;</span> Pending</span>
+    </div>
+  </div>
+
+  <!-- SECTION 6: ACTION ITEMS -->
+  <h2>Section 6 — Open Action Items</h2>
+  <div class="post-grid">
+    <div class="post-card">
+      <div class="pc-label">Verify Pricing</div>
+      <div class="pc-who">Natalia</div>
+      <div class="pc-when">Before dashboard creation</div>
+      <div class="pc-detail">Open the signed contract attachment and confirm the engagement value. Claudie can't read email attachments directly.</div>
+    </div>
+    <div class="post-card">
+      <div class="pc-label">Create Dashboard</div>
+      <div class="pc-who">Claudie</div>
+      <div class="pc-when">Once pricing confirmed</div>
+      <div class="pc-detail">Clone from SummitTX template. Use client ID "AC" for Applecart.</div>
+    </div>
+    <div class="post-card">
+      <div class="pc-label">Create Slack Channel</div>
+      <div class="pc-who">Team</div>
+      <div class="pc-when">Before kickoff (Apr 21)</div>
+      <div class="pc-detail">Create #consulting-applecart and invite the bot.</div>
+    </div>
+    <div class="post-card">
+      <div class="pc-label">Request Inputs Doc</div>
+      <div class="pc-who">Mike / Natalia</div>
+      <div class="pc-when">At kickoff call</div>
+      <div class="pc-detail">Orly mentioned a "detailed doc with required inputs for each slide" from the pre-sale materials manager. Critical for the build.</div>
+    </div>
+    <div class="post-card">
+      <div class="pc-label">Confirm Claude Sub</div>
+      <div class="pc-who">Mike</div>
+      <div class="pc-when">At kickoff call</div>
+      <div class="pc-detail">Orly said they were getting approval for Claude as of Mar 30. Need to confirm it's active.</div>
+    </div>
+    <div class="post-card">
+      <div class="pc-label">Create GitHub Repo</div>
+      <div class="pc-who">Nityesh / Mike</div>
+      <div class="pc-when">After kickoff</div>
+      <div class="pc-detail">For the PPT automation skill/code. Likely: applecart-ppt-automation or similar.</div>
+    </div>
+  </div>
+
+  <p class="updated">Last updated: April 17, 2026 · Every Consulting ops</p>
+</div>
+
+<script>
+function copyBlock(blockId) {
+  const block = document.getElementById(blockId);
+  const text = block.querySelector('.copy-body').innerText;
+  navigator.clipboard.writeText(text).then(() => {
+    const btn = block.querySelector('.copy-btn');
+    btn.textContent = 'Copied!';
+    btn.classList.add('copied');
+    setTimeout(() => {
+      btn.textContent = 'Copy';
+      btn.classList.remove('copied');
+    }, 2000);
+  });
+}
+</script>
+</body>
+</html>
