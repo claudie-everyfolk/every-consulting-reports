@@ -388,13 +388,98 @@
         <header>
             <h1>Signal Digest</h1>
             <p class="subtitle">What actually matters in AI &mdash; curated by Claudie for the Every Consulting team</p>
-            <p class="meta">Last updated April 18, 2026</p>
+            <p class="meta">Last updated April 21, 2026</p>
         </header>
 
         <nav class="legend">
             Each entry is tagged: <span class="tag-example key-shift">Key Shift</span> signals a genuine change in how we should think or act. <span class="tag-example noise">Noise</span> means useful context but nothing new for the team.
         </nav>
 
+
+        <article class="entry">
+            <span class="signal-tag key-shift">Key Shift</span>
+            <h2><a href="https://x.com/simonw/status/2046732056995205620" target="_blank" rel="noopener">Anthropic quietly drops Claude Code from the $20/month plan</a></h2>
+            <p class="author">Simon Willison (@simonw)</p>
+            <p class="summary">Anthropic updated pricing page without announcement, removing Claude Code from the $20 tier while keeping Cowork (the same capability, repackaged).</p>
+            
+                <details class="section-detail">
+                    <summary>Worth Your Time?</summary>
+                    <div class="section-content">
+                        <p><strong>Read.</strong> One-line verdict: Anthropic is quietly segmenting its product line — power-user tools are moving upmarket, and the $20 tier is being reshaped around a friendlier "Cowork" surface. This is strategically significant for anyone whose workflow depends on Claude Code.</p>
+                    </div>
+                </details>
+
+                <details class="section-detail">
+                    <summary>What's Actually Happening</summary>
+                    <div class="section-content">
+                        <ul>
+<li>Anthropic updated the pricing page to remove Claude Code access from the $20 Pro tier.</li>
+<li>No announcement, no migration notice — just a silent page change.</li>
+<li>The same underlying capability remains available via Cowork (the consumer-friendly framing), but power features like full CLI agent loops are being pushed to higher-priced plans.</li>
+<li>Structural reality: Claude Code usage is extremely token-heavy. Heavy users on a flat $20 plan are almost certainly unprofitable for Anthropic. This is an economic rationalization, executed quietly.</li>
+<li>Shift vs. noise: <strong>shift.</strong> The first concrete signal that Anthropic is repricing around actual unit economics rather than growth-at-all-costs.</li>
+</ul>
+                    </div>
+                </details>
+
+                <details class="section-detail">
+                    <summary>What's Not Being Said</summary>
+                    <div class="section-content">
+                        <ul>
+<li>Silent pricing changes erode trust with developer advocates (like Simon) who were early amplifiers. Anthropic is trading goodwill for margin.</li>
+<li>The "Cowork = Claude Code wearing a hat" observation is sharp: there's no technical reason to separate these products. The separation is <em>pricing strategy</em>, which means future feature gaps will be deliberate, not technical.</li>
+<li>No one is saying: power users on $20 were the cheapest marketing Anthropic had.</li>
+</ul>
+                    </div>
+                </details>
+
+                <details class="section-detail">
+                    <summary>Where This Sits in the Bigger Picture</summary>
+                    <div class="section-content">
+                        <ul>
+<li>Matches a broader 2026 pattern: AI labs transitioning from "land grab" to "margin defense." OpenAI did similar via Plus throttling.</li>
+<li>Reinforces the risk that platform-dependent agent systems (including Claudie) are building on shifting ground. Third-party access tightening, plan repricing, and capability gating are all now happening in parallel.</li>
+</ul>
+                    </div>
+                </details>
+
+                <details class="section-detail">
+                    <summary>What's Likely Coming Next</summary>
+                    <div class="section-content">
+                        <ul>
+<li>A formal announcement in 1-2 weeks with a "new plan tier" between $20 and Max.</li>
+<li>Power-user features (MCP, agents, large context) increasingly gated to higher tiers.</li>
+<li>Third-party tools that re-expose Claude Code capabilities get rate-limited or ToS-restricted (echoing the April platform-access tightening).</li>
+</ul>
+                    </div>
+                </details>
+
+                <details class="section-detail">
+                    <summary>Attention Is All You Need</summary>
+                    <div class="section-content">
+                        <ul>
+<li><strong>Source of truth:</strong> platform.claude.com pricing page (check for diff vs. archive.org)</li>
+<li><strong>People to follow:</strong> Simon Willison (@simonw), Theo (@theo), ClaudeDevs</li>
+<li><strong>Related Anthropic moves:</strong> Cowork launch (Apr 20), Claude Design launch (Apr 21 — entry 62), Console caching dashboard (Apr 21)</li>
+</ul>
+                    </div>
+                </details>
+
+                <details class="section-detail">
+                    <summary>What This Means for Every Consulting</summary>
+                    <div class="section-content">
+                        <ul>
+<li><strong>Client advice:</strong> Anyone building production workflows on Claude Code should plan for tier migration. Don't assume $20/month Pro covers agent workloads going forward. Budget for Max or API.</li>
+<li><strong>Training implications:</strong> Add a module on "platform economics" — teach clients to think about unit economics of their own agent usage before they build against a specific plan tier.</li>
+<li><strong>Internal:</strong> Reinforces the existing <code>Claude Max platform risk</code> memory. Claudie's own infrastructure sits on a Max plan; any repricing there would hit the team directly. Monitor.</li>
+<li><strong>Sales angle:</strong> "We help you build agents that survive platform changes" is an increasingly defensible value prop.</li>
+</ul>
+                    </div>
+                </details>
+            <div class="links">
+                <a href="https://x.com/simonw/status/2046732056995205620" target="_blank" rel="noopener">View on X</a>
+            </div>
+        </article>
 
         <article class="entry">
             <span class="signal-tag key-shift">Key Shift</span>
@@ -4487,7 +4572,7 @@ A circuit breaker halts auto-compaction after three consecutive failures.</p>
                 <li><strong>The platform shift happened in 4 weeks.</strong> Ejaaz&rsquo;s catalog shows Claude Code crossed from developer tool to knowledge-worker platform in a single shipping sprint. Clients who evaluated it even two months ago saw a fundamentally different product.</li>
             </ol>
 
-            <p class="coda">64 of 65 sources tagged as Key Shift. The dominant theme: Claude Code&rsquo;s memory, personalization, and autonomous capabilities represent a genuine platform shift &mdash; not incremental improvement.</p>
+            <p class="coda">65 of 66 sources tagged as Key Shift. The dominant theme: Claude Code&rsquo;s memory, personalization, and autonomous capabilities represent a genuine platform shift &mdash; not incremental improvement.</p>
         </section>
 
         <footer>
