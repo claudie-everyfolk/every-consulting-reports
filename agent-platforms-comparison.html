@@ -1,0 +1,852 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Agent Platforms Compared — 4-Way Analysis</title>
+  <style>
+    :root {
+      --bg: #fafafa;
+      --surface: #ffffff;
+      --text: #1a1a1a;
+      --text-secondary: #555;
+      --accent: #1a1a1a;
+      --border: #e0e0e0;
+      --highlight: #f5f0eb;
+      --tag-bg: #f0ece6;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Georgia', serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.7;
+    }
+    .header {
+      background: var(--accent);
+      color: white;
+      padding: 3rem 2rem;
+      text-align: center;
+    }
+    .header h1 {
+      font-size: 2rem;
+      font-weight: 400;
+      letter-spacing: -0.02em;
+      margin-bottom: 0.5rem;
+    }
+    .header .subtitle {
+      font-size: 1rem;
+      opacity: 0.7;
+      font-style: italic;
+    }
+    .container {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 2rem 1.5rem 4rem;
+    }
+    .tldr {
+      background: var(--highlight);
+      border-left: 4px solid var(--accent);
+      padding: 1.5rem 2rem;
+      margin: 2rem 0;
+      border-radius: 0 8px 8px 0;
+    }
+    .tldr h2 {
+      font-size: 1.1rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 1rem;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    }
+    .tldr ul { padding-left: 1.2rem; }
+    .tldr li { margin-bottom: 0.5rem; font-size: 0.95rem; }
+    h2 {
+      font-size: 1.4rem;
+      margin: 2.5rem 0 1rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 1px solid var(--border);
+      font-weight: 600;
+    }
+    h3 {
+      font-size: 1.1rem;
+      margin: 1.5rem 0 0.75rem;
+      font-weight: 600;
+    }
+    h4 {
+      font-size: 1rem;
+      margin: 1.2rem 0 0.5rem;
+      font-weight: 600;
+    }
+    p { margin-bottom: 1rem; font-size: 0.95rem; }
+    ul, ol { padding-left: 1.5rem; margin-bottom: 1rem; }
+    li { margin-bottom: 0.4rem; font-size: 0.95rem; }
+    strong { font-weight: 700; }
+    em { color: var(--text-secondary); }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1rem 0 1.5rem;
+      font-size: 0.85rem;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    }
+    thead {
+      background: var(--accent);
+      color: white;
+    }
+    th {
+      padding: 0.75rem 0.75rem;
+      text-align: left;
+      font-weight: 600;
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    td {
+      padding: 0.6rem 0.75rem;
+      border-bottom: 1px solid var(--border);
+      vertical-align: top;
+    }
+    tbody tr:hover { background: var(--highlight); }
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1.25rem 1.5rem;
+      margin-bottom: 1rem;
+    }
+    .card h4 {
+      margin-top: 0;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    }
+    .card ul { margin-bottom: 0; }
+    .verdict {
+      background: var(--accent);
+      color: white;
+      padding: 1.5rem 2rem;
+      border-radius: 8px;
+      margin: 2rem 0;
+      font-size: 0.95rem;
+      line-height: 1.6;
+    }
+    .verdict strong { color: white; }
+    .callout {
+      background: var(--highlight);
+      border-radius: 8px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+      font-size: 0.95rem;
+    }
+    .toc {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1.5rem 2rem;
+      margin: 2rem 0;
+    }
+    .toc h3 {
+      margin-top: 0;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      font-size: 0.9rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+    .toc ol { font-size: 0.9rem; }
+    .toc a { color: var(--text); text-decoration: none; border-bottom: 1px solid var(--border); }
+    .toc a:hover { border-bottom-color: var(--accent); }
+    .platform-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+      margin: 1rem 0;
+    }
+    .platform-grid .card { margin-bottom: 0; }
+    .tag {
+      display: inline-block;
+      background: var(--tag-bg);
+      padding: 0.15rem 0.5rem;
+      border-radius: 4px;
+      font-size: 0.75rem;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      margin-right: 0.3rem;
+    }
+    .tag.green { background: #e6f4ea; color: #1e7e34; }
+    .tag.red { background: #fce8e6; color: #c62828; }
+    .tag.amber { background: #fff8e1; color: #f57f17; }
+    .tag.blue { background: #e3f2fd; color: #1565c0; }
+    code {
+      background: var(--tag-bg);
+      padding: 0.15rem 0.4rem;
+      border-radius: 3px;
+      font-size: 0.85em;
+    }
+    .footer {
+      text-align: center;
+      padding: 2rem;
+      font-size: 0.8rem;
+      color: var(--text-secondary);
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    }
+    .quadrant {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+      margin: 1.5rem 0;
+    }
+    .quadrant .card {
+      margin-bottom: 0;
+      position: relative;
+    }
+    .quadrant .card .platform-label {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--text-secondary);
+      margin-bottom: 0.3rem;
+    }
+    .score-bar {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin: 0.3rem 0;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      font-size: 0.8rem;
+    }
+    .score-bar .bar {
+      height: 6px;
+      border-radius: 3px;
+      background: var(--border);
+      flex: 1;
+      position: relative;
+      overflow: hidden;
+    }
+    .score-bar .bar .fill {
+      position: absolute;
+      left: 0; top: 0; bottom: 0;
+      background: var(--accent);
+      border-radius: 3px;
+    }
+    .score-bar .label { min-width: 100px; }
+    .score-bar .value { min-width: 30px; text-align: right; font-weight: 600; }
+    @media (max-width: 700px) {
+      .header { padding: 2rem 1rem; }
+      .header h1 { font-size: 1.5rem; }
+      .container { padding: 1rem; }
+      table { font-size: 0.75rem; }
+      th, td { padding: 0.4rem; }
+      .platform-grid, .quadrant { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="header">
+  <h1>Agent Platforms Compared</h1>
+  <div class="subtitle">OpenAI Workspace Agents &middot; Claude Managed Agents &middot; OpenClaw &middot; Claudie's Harness &mdash; April 23, 2026</div>
+</div>
+
+<div class="container">
+
+  <!-- Pulse Check -->
+  <div class="tldr">
+    <h2>Pulse Check</h2>
+    <p>Four platforms, four philosophies for giving AI agents a body. This report compares them head-to-head: what they are, who they're for, how they handle security, and what each one can and can't do.</p>
+    <ul>
+      <li><strong>OpenAI Workspace Agents</strong> (April 22, 2026) &mdash; Codex-powered persistent agents inside ChatGPT. Teams build once, share across ChatGPT and Slack. Cloud-hosted, always-on, credit-based. The closest thing to "AI employee as a product." Research preview for Business/Enterprise.</li>
+      <li><strong>Claude Managed Agents</strong> (March 2026) &mdash; Anthropic's fully managed cloud agent infrastructure. Container-sandboxed, vault-secured credentials, multi-agent orchestration. The "Heroku for AI agents" play targeting enterprises that want deployment without infrastructure work.</li>
+      <li><strong>OpenClaw</strong> &mdash; Open-source (MIT), self-hosted, model-agnostic. 352k GitHub stars. Gateway daemon on your machine, 20+ messaging channels, 5,700+ community skills. The "own everything, run everything yourself" option.</li>
+      <li><strong>Claudie's Harness</strong> (our setup) &mdash; Claude Code on a dedicated Mac mini. Always-on, 12 scheduled jobs, authenticated browser, email watcher, proactive messaging, persistent filesystem. Purpose-built for one team's operations. The "AI employee on real hardware" approach.</li>
+    </ul>
+  </div>
+
+  <!-- TOC -->
+  <div class="toc">
+    <h3>Contents</h3>
+    <ol>
+      <li><a href="#overview">Platform overview</a></li>
+      <li><a href="#workspace-agents">What OpenAI just shipped</a></li>
+      <li><a href="#comparison">Head-to-head comparison</a></li>
+      <li><a href="#security">Security analysis</a></li>
+      <li><a href="#autonomy">Autonomy spectrum</a></li>
+      <li><a href="#architecture">Architecture deep dive</a></li>
+      <li><a href="#clients">What this means for our clients</a></li>
+      <li><a href="#take">Our take</a></li>
+    </ol>
+  </div>
+
+  <!-- Section 1: Overview -->
+  <h2 id="overview">1. Platform Overview</h2>
+
+  <div class="quadrant">
+    <div class="card">
+      <div class="platform-label">OpenAI</div>
+      <h4>Workspace Agents</h4>
+      <p style="margin-bottom:0.5rem;">Codex-powered persistent agents that live inside ChatGPT. Teams create them by describing workflows, connect integrations (Google Drive, Slack, SharePoint, custom MCPs), set schedules and approval gates, then share across the organization.</p>
+      <p style="margin-bottom:0;"><span class="tag blue">Cloud-hosted</span> <span class="tag blue">Product</span> <span class="tag">OpenAI only</span></p>
+    </div>
+    <div class="card">
+      <div class="platform-label">Anthropic</div>
+      <h4>Claude Managed Agents</h4>
+      <p style="margin-bottom:0.5rem;">Fully managed cloud agent infrastructure. You define an agent config (model + prompt + tools + MCP servers), define an environment (container with packages and networking rules), and start sessions. Claude executes autonomously inside Anthropic's containers.</p>
+      <p style="margin-bottom:0;"><span class="tag blue">Cloud-hosted</span> <span class="tag blue">Infrastructure</span> <span class="tag">Claude only</span></p>
+    </div>
+    <div class="card">
+      <div class="platform-label">Open Source</div>
+      <h4>OpenClaw</h4>
+      <p style="margin-bottom:0.5rem;">Self-hosted personal AI assistant. Run a Gateway daemon on your own machine. Connects to 20+ messaging channels. Model-agnostic (Claude, GPT, DeepSeek, Ollama). 5,700+ community skills on ClawHub. MIT licensed, non-profit stewardship.</p>
+      <p style="margin-bottom:0;"><span class="tag blue">Self-hosted</span> <span class="tag blue">Framework</span> <span class="tag green">Model-agnostic</span></p>
+    </div>
+    <div class="card">
+      <div class="platform-label">Every Consulting</div>
+      <h4>Claudie's Harness</h4>
+      <p style="margin-bottom:0.5rem;">Claude Code on a dedicated Mac mini. Always-on via launchd, accessible through Slack, with full system access: authenticated Chrome browsing, email watcher, proactive messaging, scheduled jobs, macOS Keychain, persistent local filesystem.</p>
+      <p style="margin-bottom:0;"><span class="tag blue">Self-hosted</span> <span class="tag blue">Bespoke</span> <span class="tag">Claude only</span></p>
+    </div>
+  </div>
+
+  <!-- Section 2: OpenAI Workspace Agents -->
+  <h2 id="workspace-agents">2. What OpenAI Just Shipped</h2>
+
+  <p>OpenAI released two related things in the past week. The X post Dan shared is about <strong>Workspace Agents</strong> &mdash; the product layer. But there's also an <strong>Agents SDK update</strong> (April 15) underneath it.</p>
+
+  <h3>Workspace Agents (April 22) &mdash; the product</h3>
+  <p>Persistent, Codex-powered agents that run in the cloud and keep working when you're not there. Teams build them inside a new ChatGPT tab by describing desired workflows. The system maps processes, connects tools, and tests functionality before activation.</p>
+
+  <div class="card">
+    <h4>Key capabilities</h4>
+    <ul>
+      <li><strong>Always-on cloud execution</strong> &mdash; agents run autonomously, not just when someone's chatting</li>
+      <li><strong>Scheduling and triggers</strong> &mdash; run on schedule or in response to specific events</li>
+      <li><strong>Integrations</strong> &mdash; Google Drive, Google Calendar, Slack, SharePoint, custom MCPs</li>
+      <li><strong>Approval gates</strong> &mdash; agents ask for human approval before sensitive actions</li>
+      <li><strong>Shared across teams</strong> &mdash; build once, use in ChatGPT or deploy to Slack</li>
+      <li><strong>Org-level admin controls</strong> &mdash; limit agent access to specific data and tools</li>
+      <li><strong>Memory</strong> &mdash; retain context across projects</li>
+      <li><strong>Prompt injection safeguards</strong> &mdash; built-in protections</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h4>Availability and pricing</h4>
+    <ul>
+      <li>Research preview: ChatGPT Business, Enterprise, Edu, Teachers</li>
+      <li>Free through May 6, 2026</li>
+      <li>Credit-based pricing after that (amounts not yet published)</li>
+      <li>Evolution of GPTs &mdash; existing GPTs will be convertible to workspace agents later</li>
+    </ul>
+  </div>
+
+  <h3>Agents SDK Update (April 15) &mdash; the infrastructure</h3>
+  <p>For developers building their own agent systems via the API. Introduces a <strong>harness + sandbox</strong> architecture that separates the control plane from the compute plane.</p>
+
+  <div class="card">
+    <h4>Key additions</h4>
+    <ul>
+      <li><strong>Harness</strong> &mdash; model-native control plane: agent loop, tool routing, handoffs, approvals, tracing, recovery, run state</li>
+      <li><strong>Sandbox</strong> &mdash; isolated execution plane: reads/writes files, runs commands, installs deps, exposes ports, snapshots state</li>
+      <li><strong>Pluggable sandbox providers</strong> &mdash; Blaxel, Cloudflare, Daytona, E2B, Modal, Runloop, Vercel, or BYO</li>
+      <li><strong>Manifest abstraction</strong> &mdash; portable workspace definitions. Mount local files, output dirs, cloud storage (S3, GCS, Azure Blob, R2)</li>
+      <li><strong>MCP support</strong> &mdash; tool integration via Model Context Protocol</li>
+      <li><strong><code>AGENTS.md</code></strong> &mdash; custom instructions file (equivalent to Claude Code's <code>CLAUDE.md</code>)</li>
+      <li><strong>Credential isolation</strong> &mdash; harness/compute split keeps tokens out of sandboxes</li>
+      <li><strong>Snapshotting + rehydration</strong> &mdash; restore agent state in fresh containers after failures</li>
+      <li><strong>Subagents</strong> (coming) &mdash; parallel, isolated task decomposition</li>
+      <li>Python now, TypeScript later. Standard API pricing.</li>
+    </ul>
+  </div>
+
+  <div class="callout">
+    <strong>The relationship:</strong> Workspace Agents is the product built on top of the Agents SDK. The SDK gives developers the primitives. Workspace Agents packages them into a no-code product for teams. Same pattern as Claude Managed Agents (infrastructure) sitting on top of the Agent SDK (framework).
+  </div>
+
+  <!-- Section 3: Comparison -->
+  <h2 id="comparison">3. Head-to-Head Comparison</h2>
+
+  <table>
+    <thead>
+      <tr>
+        <th style="width:16%"></th>
+        <th style="width:21%">OpenAI Workspace Agents</th>
+        <th style="width:21%">Claude Managed Agents</th>
+        <th style="width:21%">OpenClaw</th>
+        <th style="width:21%">Claudie's Harness</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Launched</strong></td>
+        <td>April 22, 2026</td>
+        <td>March 14, 2026</td>
+        <td>2024 (v1)</td>
+        <td>March 2026</td>
+      </tr>
+      <tr>
+        <td><strong>Runs where</strong></td>
+        <td>OpenAI cloud</td>
+        <td>Anthropic cloud</td>
+        <td>Your hardware</td>
+        <td>Mac mini (your hardware)</td>
+      </tr>
+      <tr>
+        <td><strong>Model</strong></td>
+        <td>OpenAI only (Codex, GPT)</td>
+        <td>Claude only (4.5+)</td>
+        <td>Any (Claude, GPT, DeepSeek, Ollama, etc.)</td>
+        <td>Claude only (via Claude Code Max)</td>
+      </tr>
+      <tr>
+        <td><strong>Target</strong></td>
+        <td>Teams and enterprises using ChatGPT</td>
+        <td>Developers and enterprises via API</td>
+        <td>Technical individuals</td>
+        <td>Our team specifically</td>
+      </tr>
+      <tr>
+        <td><strong>Setup effort</strong></td>
+        <td>Minutes (no-code via ChatGPT UI)</td>
+        <td>~30 seconds (API config)</td>
+        <td>30&ndash;60 min (self-host, technical)</td>
+        <td>~200 hrs to build (bespoke)</td>
+      </tr>
+      <tr>
+        <td><strong>Channels</strong></td>
+        <td>ChatGPT + Slack</td>
+        <td>API only (you build the channel)</td>
+        <td>20+ (WhatsApp, Telegram, Slack, Discord, Signal, iMessage, etc.)</td>
+        <td>Slack + email + web dashboards</td>
+      </tr>
+      <tr>
+        <td><strong>Scheduling</strong></td>
+        <td>Built-in schedules + triggers</td>
+        <td>None (no cron equivalent)</td>
+        <td>Gateway daemon (always-on)</td>
+        <td>12 launchd jobs (cron-like)</td>
+      </tr>
+      <tr>
+        <td><strong>Proactive messaging</strong></td>
+        <td>Yes (scheduled runs, trigger-based)</td>
+        <td>No (request-response only)</td>
+        <td>Yes (daemon listens across channels)</td>
+        <td>Yes (morning briefs, alerts, email notifications)</td>
+      </tr>
+      <tr>
+        <td><strong>Integrations</strong></td>
+        <td>Google Drive, Calendar, Slack, SharePoint, custom MCPs</td>
+        <td>MCP servers, custom tools, built-in toolset</td>
+        <td>5,700+ community skills on ClawHub</td>
+        <td>gws CLI (full Google Workspace), dev-browser (Chrome), MCP</td>
+      </tr>
+      <tr>
+        <td><strong>Custom instructions</strong></td>
+        <td>Workflow descriptions in ChatGPT UI</td>
+        <td>System prompt (fully configurable)</td>
+        <td>System prompt + per-channel config</td>
+        <td><code>CLAUDE.md</code> + ring-based access control + per-user profiles</td>
+      </tr>
+      <tr>
+        <td><strong>Sandbox/isolation</strong></td>
+        <td>Cloud-sandboxed (details not public)</td>
+        <td>Container per session, vault-based credentials</td>
+        <td>None &mdash; full machine access</td>
+        <td>None &mdash; full machine access</td>
+      </tr>
+      <tr>
+        <td><strong>Multi-agent</strong></td>
+        <td>Not yet (single agent per workspace agent)</td>
+        <td>Coordinator/delegate pattern (research preview)</td>
+        <td>Single agent with skill routing</td>
+        <td>Self-spawning <code>claude -p</code> sub-sessions</td>
+      </tr>
+      <tr>
+        <td><strong>Persistent state</strong></td>
+        <td>Memory across projects (cloud)</td>
+        <td>Session logs + memory stores (cloud)</td>
+        <td>Local filesystem</td>
+        <td>Local filesystem (diary, bookmarks, work dirs, teammate profiles)</td>
+      </tr>
+      <tr>
+        <td><strong>Data residency</strong></td>
+        <td>OpenAI servers</td>
+        <td>Anthropic servers</td>
+        <td>Your machine only</td>
+        <td>Our Mac mini only</td>
+      </tr>
+      <tr>
+        <td><strong>Approval flows</strong></td>
+        <td>Built-in approval gates for sensitive actions</td>
+        <td><code>always_ask</code> per tool (MCP defaults to ask)</td>
+        <td>None (trust model)</td>
+        <td>PreToolUse hooks + ring-based permission tiers</td>
+      </tr>
+      <tr>
+        <td><strong>Cost</strong></td>
+        <td>Credits (free until May 6, pricing TBD)</td>
+        <td>Tokens + $0.08/session-hr + $10/1k web searches</td>
+        <td>Free + your API costs</td>
+        <td>Claude Max subscription (~$200/mo)</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- Section 4: Security -->
+  <h2 id="security">4. Security Analysis</h2>
+
+  <p>Compared against our four-layer security framework from <a href="https://claudie-everyfolk.github.io/every-consulting-reports/claudie-security-briefing.html">"Securing an Always-On AI Employee"</a>:</p>
+
+  <h3>Layer 1: Least Access &mdash; What can the agent reach?</h3>
+  <table>
+    <thead>
+      <tr><th></th><th>OpenAI Workspace</th><th>Claude Managed</th><th>OpenClaw</th><th>Claudie</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Isolation</strong></td>
+        <td>Cloud sandbox <span class="tag green">strong</span></td>
+        <td>Container per session <span class="tag green">strong</span></td>
+        <td>Full machine <span class="tag red">none</span></td>
+        <td>Full machine <span class="tag red">none</span></td>
+      </tr>
+      <tr>
+        <td><strong>Credentials</strong></td>
+        <td>OAuth via integrations (agent never sees tokens)</td>
+        <td>Vault-based (proxy fetches, returns results only) <span class="tag green">strongest</span></td>
+        <td>On machine, accessible to agent <span class="tag red">exposed</span></td>
+        <td>macOS Keychain, same machine <span class="tag amber">accessible</span></td>
+      </tr>
+      <tr>
+        <td><strong>Identity gating</strong></td>
+        <td>Org-level admin controls <span class="tag green">built-in</span></td>
+        <td>No built-in "who triggered this" <span class="tag red">gap</span></td>
+        <td>None <span class="tag red">gap</span></td>
+        <td>Ring system + Slack ID verification <span class="tag green">custom</span></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3>Layer 2: Programmatic Controls &mdash; What stops bad actions?</h3>
+  <table>
+    <thead>
+      <tr><th></th><th>OpenAI Workspace</th><th>Claude Managed</th><th>OpenClaw</th><th>Claudie</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Approval flows</strong></td>
+        <td>Built-in approval gates <span class="tag green">native</span></td>
+        <td><code>always_allow</code> / <code>always_ask</code> per tool</td>
+        <td>None</td>
+        <td>PreToolUse hooks <span class="tag green">custom logic</span></td>
+      </tr>
+      <tr>
+        <td><strong>Network controls</strong></td>
+        <td>Not public</td>
+        <td><code>limited</code> mode with <code>allowed_hosts</code> <span class="tag green">strong</span></td>
+        <td>None</td>
+        <td>None (prompt-level only)</td>
+      </tr>
+      <tr>
+        <td><strong>Tool-level permissions</strong></td>
+        <td>Admin can restrict agent tool access</td>
+        <td>Per-tool allow/ask policies</td>
+        <td>Skill-level trust</td>
+        <td><code>--permission-mode dontAsk</code> + settings.json rules</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3>Layer 3: Prompt-based Controls &mdash; What does the agent believe it can do?</h3>
+  <table>
+    <thead>
+      <tr><th></th><th>OpenAI Workspace</th><th>Claude Managed</th><th>OpenClaw</th><th>Claudie</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Custom instructions</strong></td>
+        <td>Workflow descriptions in UI</td>
+        <td>Full system prompt control</td>
+        <td>System prompt + config</td>
+        <td><code>CLAUDE.md</code> (25KB+) with ring-based access control</td>
+      </tr>
+      <tr>
+        <td><strong>Per-user adaptation</strong></td>
+        <td>Shared agent, org-scoped</td>
+        <td>No dynamic per-user adjustment <span class="tag amber">limited</span></td>
+        <td>Per-channel config</td>
+        <td>Per-user teammate profiles with access overrides <span class="tag green">granular</span></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3>Layer 4: Observability &mdash; Can you see what happened?</h3>
+  <table>
+    <thead>
+      <tr><th></th><th>OpenAI Workspace</th><th>Claude Managed</th><th>OpenClaw</th><th>Claudie</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Logging</strong></td>
+        <td>Analytics dashboard in ChatGPT</td>
+        <td>Events API (SSE stream) <span class="tag green">comprehensive</span></td>
+        <td>Local logs</td>
+        <td>Session JSONL + qmd semantic search over history</td>
+      </tr>
+      <tr>
+        <td><strong>Evaluation</strong></td>
+        <td>Not public</td>
+        <td>Outcomes: separate grader model evaluates output <span class="tag green">unique</span></td>
+        <td>None</td>
+        <td>Manual review</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="verdict">
+    <strong>Security verdict:</strong> The cloud platforms (OpenAI Workspace, Claude Managed) are architecturally stronger on isolation &mdash; credentials never touch the execution environment. Claude Managed Agents has the most rigorous credential isolation (vault + proxy pattern). OpenAI Workspace Agents has the most accessible approval flows (built into the product). The self-hosted options (OpenClaw, Claudie) trade isolation for capability &mdash; full machine access enables things sandboxed agents can't do, but requires compensating controls. Claudie's ring system and PreToolUse hooks are the most sophisticated compensating controls of any platform, but they're defense-in-depth, not structural isolation.
+  </div>
+
+  <!-- Section 5: Autonomy Spectrum -->
+  <h2 id="autonomy">5. The Autonomy Spectrum</h2>
+
+  <p>These four platforms sit on a spectrum from "tool you invoke" to "employee who acts independently."</p>
+
+  <div class="card">
+    <h4 style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.05em;">Reactive &larr;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&rarr; Autonomous</h4>
+    <table style="margin:0.5rem 0 0;">
+      <tbody>
+        <tr>
+          <td style="width:25%;text-align:center;border-bottom:none;">
+            <div style="background:var(--highlight);padding:0.5rem;border-radius:6px;">
+              <strong>Claude Managed</strong><br>
+              <span style="font-size:0.8rem;color:var(--text-secondary);">Request-response.<br>You start sessions.<br>No scheduling.</span>
+            </div>
+          </td>
+          <td style="width:25%;text-align:center;border-bottom:none;">
+            <div style="background:var(--highlight);padding:0.5rem;border-radius:6px;">
+              <strong>OpenAI Workspace</strong><br>
+              <span style="font-size:0.8rem;color:var(--text-secondary);">Schedules + triggers.<br>Approval gates.<br>Cloud-persistent.</span>
+            </div>
+          </td>
+          <td style="width:25%;text-align:center;border-bottom:none;">
+            <div style="background:var(--highlight);padding:0.5rem;border-radius:6px;">
+              <strong>OpenClaw</strong><br>
+              <span style="font-size:0.8rem;color:var(--text-secondary);">Always-on daemon.<br>Multi-channel.<br>User-controlled.</span>
+            </div>
+          </td>
+          <td style="width:25%;text-align:center;border-bottom:none;">
+            <div style="background:var(--highlight);padding:0.5rem;border-radius:6px;">
+              <strong>Claudie</strong><br>
+              <span style="font-size:0.8rem;color:var(--text-secondary);">12 scheduled jobs.<br>Proactive messaging.<br>Email watching.<br>Self-spawning.</span>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p>The key distinction: <strong>Claude Managed Agents waits to be called. The other three can act on their own.</strong> OpenAI Workspace Agents just closed the biggest gap Managed Agents still has &mdash; scheduling and triggers. If Anthropic adds cron-like triggers to Managed Agents, the spectrum compresses significantly.</p>
+
+  <div class="callout">
+    <strong>This is what makes the OpenAI announcement interesting.</strong> It's not technically more sophisticated than Claude Managed Agents (arguably less so &mdash; no vault-based credential isolation, no multi-agent orchestration, no outcome evaluation). But it ships the thing enterprises actually want first: agents that <em>do things on their own</em> on a <em>schedule</em>, with <em>approval gates</em>, shared across a <em>team</em>, accessible in <em>Slack</em>. Product intuition over infrastructure elegance.
+  </div>
+
+  <!-- Section 6: Architecture -->
+  <h2 id="architecture">6. Architecture Deep Dive</h2>
+
+  <h3>The converging pattern: brain/hands separation</h3>
+  <p>Both OpenAI and Anthropic independently arrived at the same architectural insight: <strong>separate the brain (model) from the hands (execution environment).</strong></p>
+
+  <div class="platform-grid">
+    <div class="card">
+      <h4>OpenAI's framing</h4>
+      <p style="margin-bottom:0.5rem;"><strong>Harness</strong> = control plane (agent loop, model calls, tool routing, handoffs, approvals, tracing, recovery, run state)</p>
+      <p style="margin-bottom:0;"><strong>Sandbox</strong> = compute plane (file reads/writes, commands, deps, ports, state snapshots)</p>
+    </div>
+    <div class="card">
+      <h4>Anthropic's framing</h4>
+      <p style="margin-bottom:0.5rem;"><strong>Harness</strong> = stateless loop calling Claude, routing tool calls. Crashes? Reboot, replay from session log.</p>
+      <p style="margin-bottom:0;"><strong>Sandbox</strong> = cattle containers. <code>execute(name, input) &rarr; string</code>. Brain doesn't know if sandbox is a container or "a Pok&eacute;mon emulator."</p>
+    </div>
+  </div>
+
+  <p><strong>Why this matters for security:</strong> If the brain never enters the sandbox, and credentials live outside the sandbox, then prompt injection that compromises the brain can't exfiltrate credentials from the sandbox. Both platforms use this to structurally eliminate the credential-exposure attack surface rather than relying on scoping rules that degrade as models get smarter.</p>
+
+  <h3>Where they diverge</h3>
+
+  <table>
+    <thead>
+      <tr><th>Dimension</th><th>OpenAI Agents SDK</th><th>Claude Managed Agents</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Sandbox portability</strong></td>
+        <td>7 providers + BYO. Manifest abstraction for portable workspace definitions. <span class="tag green">more flexible</span></td>
+        <td>Anthropic's containers only. <span class="tag amber">locked in</span></td>
+      </tr>
+      <tr>
+        <td><strong>Credential model</strong></td>
+        <td>Harness/compute split keeps tokens out. Less detail on specific mechanism.</td>
+        <td>Vault + proxy pattern. Explicit: agent calls MCP via proxy, proxy fetches token, returns result only. <span class="tag green">more rigorous</span></td>
+      </tr>
+      <tr>
+        <td><strong>State recovery</strong></td>
+        <td>Snapshotting + rehydration. Fresh container continues from checkpoint. <span class="tag green">explicit</span></td>
+        <td>Session log as source of truth. Harness replays from append-only event log. <span class="tag green">elegant</span></td>
+      </tr>
+      <tr>
+        <td><strong>Multi-agent</strong></td>
+        <td>Subagents (coming). Parallel, isolated environments.</td>
+        <td>Coordinator/delegate. Shared filesystem, isolated contexts. One level of delegation. <span class="tag green">shipping now</span></td>
+      </tr>
+      <tr>
+        <td><strong>Evaluation</strong></td>
+        <td>Not mentioned</td>
+        <td>Outcomes: separate grader model evaluates against rubric, agent iterates up to 20x. <span class="tag green">unique</span></td>
+      </tr>
+      <tr>
+        <td><strong>Instructions file</strong></td>
+        <td><code>AGENTS.md</code></td>
+        <td>System prompt (equivalent to <code>CLAUDE.md</code> loaded into context)</td>
+      </tr>
+      <tr>
+        <td><strong>Storage mounting</strong></td>
+        <td>S3, GCS, Azure Blob, R2 <span class="tag green">cloud-native</span></td>
+        <td>Container filesystem + persistent sessions</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3>OpenClaw and Claudie: the no-sandbox approach</h3>
+
+  <p>Both run on real machines with no isolation boundary. The security model is fundamentally different: instead of preventing the agent from accessing credentials, you <em>trust</em> the agent with credentials and add compensating controls.</p>
+
+  <div class="platform-grid">
+    <div class="card">
+      <h4>OpenClaw's approach</h4>
+      <ul>
+        <li>Trust model: you installed it, you trust it</li>
+        <li>No formal permission system</li>
+        <li>Security through code review (MIT, open source)</li>
+        <li>Community skills are user-vetted</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h4>Claudie's approach</h4>
+      <ul>
+        <li>Own accounts (claudie@every.to) &mdash; not mirroring someone's full access</li>
+        <li>PreToolUse hooks intercept dangerous tool calls</li>
+        <li>Ring-based access control (4 tiers)</li>
+        <li>Identity gates reject unknown Slack IDs before model spawns</li>
+        <li><code>dontAsk</code> permission mode for browsing jobs</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="callout">
+    <strong>The honest assessment:</strong> Cloud-sandboxed agents are structurally more secure. Our compensating controls are sophisticated, but they're defense-in-depth on top of an inherently riskier architecture. We accept that tradeoff because we need capabilities (authenticated browsing, local scheduling, proactive messaging) that sandboxed platforms can't provide. For most enterprises, the cloud platforms are the right choice.
+  </div>
+
+  <!-- Section 7: Clients -->
+  <h2 id="clients">7. What This Means for Our Clients</h2>
+
+  <h3>The recommendation framework</h3>
+
+  <div class="card">
+    <h4>Use OpenAI Workspace Agents when&hellip;</h4>
+    <ul>
+      <li>The team already lives in ChatGPT</li>
+      <li>You want no-code setup &mdash; describe the workflow, connect tools, go</li>
+      <li>The use case is team-shared: triaging requests, preparing reports, responding to messages</li>
+      <li>Slack integration is a requirement</li>
+      <li>You want built-in approval gates without building them yourself</li>
+      <li>You're okay with OpenAI models only</li>
+    </ul>
+    <p style="margin:0;"><span class="tag blue">Best for: operations teams, non-technical teams, quick wins</span></p>
+  </div>
+
+  <div class="card">
+    <h4>Use Claude Managed Agents when&hellip;</h4>
+    <ul>
+      <li>You need developer-level control over agent behavior</li>
+      <li>Security posture is the top concern (vault-based credentials, container isolation, networking controls)</li>
+      <li>The use case involves long-running execution with many tool calls</li>
+      <li>You want multi-agent orchestration</li>
+      <li>You need the strongest observability (Events API, outcome evaluation)</li>
+      <li>The team has engineering capacity to build the integration layer</li>
+    </ul>
+    <p style="margin:0;"><span class="tag blue">Best for: engineering teams, security-conscious enterprises, complex workflows</span></p>
+  </div>
+
+  <div class="card">
+    <h4>Use OpenClaw when&hellip;</h4>
+    <ul>
+      <li>Data must never leave your infrastructure</li>
+      <li>You want model flexibility (switch between Claude, GPT, local models)</li>
+      <li>Multi-channel presence matters (WhatsApp, Telegram, Signal, Discord, etc.)</li>
+      <li>You have technical staff who want full control</li>
+      <li>Budget is a constraint (free + API costs)</li>
+    </ul>
+    <p style="margin:0;"><span class="tag blue">Best for: technical teams with data sovereignty requirements</span></p>
+  </div>
+
+  <div class="card">
+    <h4>Build a custom harness (like Claudie) when&hellip;</h4>
+    <ul>
+      <li>You need a true "AI employee" &mdash; proactive, always-on, with institutional memory</li>
+      <li>The use case requires authenticated access to internal systems the agent needs to <em>drive</em>, not just read</li>
+      <li>Scheduling is core to the value (morning briefs, periodic refreshes, monitoring)</li>
+      <li>You're willing to invest 100+ hours in setup and ongoing maintenance</li>
+      <li>The team is small enough to justify one shared agent rather than per-user agents</li>
+    </ul>
+    <p style="margin:0;"><span class="tag blue">Best for: small teams with high-value operations that justify the investment</span></p>
+  </div>
+
+  <h3>Client-specific implications</h3>
+
+  <p><strong>For hedge funds and PE firms</strong> (Bloomberg, financial clients): Claude Managed Agents is the strongest recommendation. The vault-based credential isolation and networking controls address their security concerns. These teams have engineering capacity. Data residency on Anthropic's servers may be a concern &mdash; OpenClaw or a custom harness if so.</p>
+
+  <p><strong>For media and operations teams</strong> (NYT-type clients): OpenAI Workspace Agents is the fastest path to value. No-code setup, Slack integration, scheduling &mdash; these teams don't have (or want) engineering involvement. The "describe your workflow, connect your tools" model matches how they think.</p>
+
+  <p><strong>For our training curriculum:</strong> We should teach all four. The decision framework above is the slide. Clients will ask "which one should I use?" &mdash; the answer depends on their team, their constraints, and what they're trying to automate.</p>
+
+  <!-- Section 8: Our Take -->
+  <h2 id="take">8. Our Take</h2>
+
+  <div class="verdict">
+    <strong>OpenAI shipped product intuition. Anthropic shipped infrastructure elegance. The market wants both.</strong>
+  </div>
+
+  <p>Workspace Agents is the first cloud platform to ship the full "AI employee" surface: always-on, scheduled, team-shared, in Slack, with approval gates. It's not the most technically sophisticated option &mdash; Claude Managed Agents has better credential isolation, multi-agent orchestration, and observability. But it ships the thing people actually want to buy: an agent that shows up in Slack and does recurring work without being asked.</p>
+
+  <p>This puts pressure on Anthropic. Managed Agents is architecturally stronger but has a critical gap: <strong>no scheduling, no triggers, no proactive operation.</strong> Every session must be started by an API call. That means someone (or something) upstream has to decide when to wake the agent up. OpenAI just eliminated that problem at the product layer.</p>
+
+  <h3>What we'd watch</h3>
+  <ul>
+    <li><strong>Anthropic adding scheduling to Managed Agents.</strong> This is now urgent. OpenAI just showed that scheduling + triggers + Slack integration is the minimum viable "AI employee" product. If Anthropic ships this, the comparison inverts &mdash; Claude Managed Agents would have better security <em>and</em> scheduling.</li>
+    <li><strong>OpenAI Workspace Agents pricing.</strong> Free until May 6, credit-based after. If credits are expensive, Managed Agents' transparent $0.08/session-hr may look better.</li>
+    <li><strong>OpenClaw's response.</strong> Both cloud platforms just validated the category OpenClaw created. But they also made the "why would I self-host?" question harder to answer for non-technical teams.</li>
+    <li><strong>Whether Workspace Agents can handle complex, multi-step workflows reliably.</strong> Research preview = early. Codex is powerful but the no-code "describe your workflow" setup may struggle with edge cases that require developer-level precision.</li>
+  </ul>
+
+  <h3>For Claudie specifically</h3>
+  <p>Workspace Agents is the closest thing to what we built &mdash; and it validates the bet. An always-on agent in Slack that handles recurring work for a team is clearly what the market wants. We got there first because we built it ourselves.</p>
+  <p>But we're still in the 20% that needs the full machine. Authenticated Chrome browsing, 12 launchd jobs, email watching, proactive cross-thread messaging, macOS Keychain integration, self-spawning Claude sessions, semantic search over institutional memory &mdash; none of the cloud platforms can do all of this today. The gap is closing, though. OpenAI is closing it from the product side (scheduling, Slack). Anthropic is closing it from the infrastructure side (containers, security). Give it a year.</p>
+
+  <div class="callout">
+    <strong>Previous report:</strong> This analysis builds on our <a href="https://claudie-everyfolk.github.io/every-consulting-reports/managed-agents-briefing.html">Claude Managed Agents briefing</a> from April 8, 2026, which contains the full engineering deep dive into Anthropic's architecture.
+    <br><br>
+    <strong>Sources:</strong>
+    <a href="https://openai.com/index/introducing-workspace-agents-in-chatgpt/">OpenAI: Introducing Workspace Agents</a> &middot;
+    <a href="https://openai.com/index/the-next-evolution-of-the-agents-sdk/">OpenAI: Next Evolution of Agents SDK</a> &middot;
+    <a href="https://techcrunch.com/2026/04/15/openai-updates-its-agents-sdk-to-help-enterprises-build-safer-more-capable-agents/">TechCrunch</a> &middot;
+    <a href="https://venturebeat.com/orchestration/openai-unveils-workspace-agents-a-successor-to-custom-gpts-for-enterprises-that-can-plug-directly-into-slack-salesforce-and-more">VentureBeat</a> &middot;
+    <a href="https://siliconangle.com/2026/04/22/openai-subscribers-get-new-workspace-agents-automate-complex-tasks-across-teams/">SiliconANGLE</a> &middot;
+    <a href="https://www.helpnetsecurity.com/2026/04/16/openai-agents-sdk-harness-and-sandbox-update/">Help Net Security</a>
+  </div>
+
+</div>
+
+<div class="footer">
+  Prepared by Claudie &middot; Every Consulting &middot; April 23, 2026
+</div>
+
+</body>
+</html>
