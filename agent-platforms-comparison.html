@@ -254,7 +254,7 @@
     <ul>
       <li><strong>OpenAI Workspace Agents</strong> (April 22, 2026) &mdash; Codex-powered persistent agents inside ChatGPT. Teams build once, share across ChatGPT and Slack. Cloud-hosted, always-on, credit-based. The closest thing to "AI employee as a product." Research preview for Business/Enterprise.</li>
       <li><strong>Claude Managed Agents</strong> (March 2026) &mdash; Anthropic's fully managed cloud agent infrastructure. Container-sandboxed, vault-secured credentials, multi-agent orchestration. The "Heroku for AI agents" play targeting enterprises that want deployment without infrastructure work.</li>
-      <li><strong>OpenClaw</strong> &mdash; Open-source (MIT), self-hosted, model-agnostic. 352k GitHub stars. Gateway daemon on your machine, 20+ messaging channels, 5,700+ community skills. The "own everything, run everything yourself" option.</li>
+      <li><strong>OpenClaw</strong> &mdash; Open-source (MIT), self-hosted, model-agnostic. 346k+ GitHub stars. Gateway daemon on your machine, 25+ messaging channels, 44,000+ community skills. The "own everything, run everything yourself" option.</li>
       <li><strong>Claudie's Harness</strong> (our setup) &mdash; Claude Code on a dedicated Mac mini. Always-on, 12 scheduled jobs, authenticated browser, email watcher, proactive messaging, persistent filesystem. Purpose-built for one team's operations. The "AI employee on real hardware" approach.</li>
     </ul>
   </div>
@@ -293,7 +293,7 @@
     <div class="card">
       <div class="platform-label">Open Source</div>
       <h4>OpenClaw</h4>
-      <p style="margin-bottom:0.5rem;">Self-hosted personal AI assistant. Run a Gateway daemon on your own machine. Connects to 20+ messaging channels. Model-agnostic (Claude, GPT, DeepSeek, Ollama). 5,700+ community skills on ClawHub. MIT licensed, non-profit stewardship.</p>
+      <p style="margin-bottom:0.5rem;">Self-hosted personal AI assistant. Run a Gateway daemon on your own machine. Connects to 25+ messaging channels. Model-agnostic (Claude, GPT, DeepSeek, Ollama). 44,000+ community skills on ClawHub. MIT licensed, non-profit stewardship.</p>
       <p style="margin-bottom:0;"><span class="tag blue">Self-hosted</span> <span class="tag blue">Framework</span> <span class="tag green">Model-agnostic</span></p>
     </div>
     <div class="card">
@@ -317,7 +317,7 @@
     <ul>
       <li><strong>Always-on cloud execution</strong> &mdash; agents run autonomously, not just when someone's chatting</li>
       <li><strong>Scheduling and triggers</strong> &mdash; run on schedule or in response to specific events</li>
-      <li><strong>Integrations</strong> &mdash; Google Drive, Google Calendar, Slack, SharePoint, custom MCPs</li>
+      <li><strong>Integrations</strong> &mdash; Google Drive, Google Calendar, Slack, SharePoint, Salesforce, Notion, Atlassian Rovo, Microsoft apps, custom MCPs</li>
       <li><strong>Approval gates</strong> &mdash; agents ask for human approval before sensitive actions</li>
       <li><strong>Shared across teams</strong> &mdash; build once, use in ChatGPT or deploy to Slack</li>
       <li><strong>Org-level admin controls</strong> &mdash; limit agent access to specific data and tools</li>
@@ -350,8 +350,9 @@
       <li><strong><code>AGENTS.md</code></strong> &mdash; custom instructions file (equivalent to Claude Code's <code>CLAUDE.md</code>)</li>
       <li><strong>Credential isolation</strong> &mdash; harness/compute split keeps tokens out of sandboxes</li>
       <li><strong>Snapshotting + rehydration</strong> &mdash; restore agent state in fresh containers after failures</li>
-      <li><strong>Subagents</strong> (coming) &mdash; parallel, isolated task decomposition</li>
-      <li>Python now, TypeScript later. Standard API pricing.</li>
+      <li><strong>Code mode</strong> (coming soon) &mdash; agents write and execute code autonomously. Not yet shipped.</li>
+      <li><strong>Subagents</strong> (coming soon) &mdash; parallel, isolated task decomposition. Not yet shipped.</li>
+      <li>Harness + sandbox available in Python now. TypeScript, code mode, and subagents planned for future releases. Standard API pricing.</li>
     </ul>
   </div>
 
@@ -376,7 +377,7 @@
       <tr>
         <td><strong>Launched</strong></td>
         <td>April 22, 2026</td>
-        <td>March 14, 2026</td>
+        <td>April 8, 2026</td>
         <td>2024 (v1)</td>
         <td>March 2026</td>
       </tr>
@@ -412,7 +413,7 @@
         <td><strong>Channels</strong></td>
         <td>ChatGPT + Slack</td>
         <td>API only (you build the channel)</td>
-        <td>20+ (WhatsApp, Telegram, Slack, Discord, Signal, iMessage, etc.)</td>
+        <td>25+ (WhatsApp, Telegram, Slack, Discord, Signal, iMessage, Teams, LINE, Google Chat, etc.)</td>
         <td>Slack + email + web dashboards</td>
       </tr>
       <tr>
@@ -431,9 +432,9 @@
       </tr>
       <tr>
         <td><strong>Integrations</strong></td>
-        <td>Google Drive, Calendar, Slack, SharePoint, custom MCPs</td>
+        <td>Google Drive, Calendar, Slack, SharePoint, Salesforce, Notion, Atlassian Rovo, Microsoft apps, custom MCPs</td>
         <td>MCP servers, custom tools, built-in toolset</td>
-        <td>5,700+ community skills on ClawHub</td>
+        <td>44,000+ community skills on ClawHub</td>
         <td>gws CLI (full Google Workspace), dev-browser (Chrome), MCP</td>
       </tr>
       <tr>
@@ -453,7 +454,7 @@
       <tr>
         <td><strong>Multi-agent</strong></td>
         <td>Not yet (single agent per workspace agent)</td>
-        <td>Coordinator/delegate pattern (research preview)</td>
+        <td>Coordinator/delegate pattern <span class="tag amber">research preview, requires separate access</span></td>
         <td>Single agent with skill routing</td>
         <td>Self-spawning <code>claude -p</code> sub-sessions</td>
       </tr>
@@ -693,8 +694,8 @@
       </tr>
       <tr>
         <td><strong>Multi-agent</strong></td>
-        <td>Subagents (coming). Parallel, isolated environments.</td>
-        <td>Coordinator/delegate. Shared filesystem, isolated contexts. One level of delegation. <span class="tag green">shipping now</span></td>
+        <td>Subagents (announced, not yet shipped). Parallel, isolated environments.</td>
+        <td>Coordinator/delegate. Shared filesystem, isolated contexts. One level of delegation. <span class="tag amber">research preview</span></td>
       </tr>
       <tr>
         <td><strong>Evaluation</strong></td>
@@ -780,7 +781,7 @@
     <ul>
       <li>Data must never leave your infrastructure</li>
       <li>You want model flexibility (switch between Claude, GPT, local models)</li>
-      <li>Multi-channel presence matters (WhatsApp, Telegram, Signal, Discord, etc.)</li>
+      <li>Multi-channel presence matters (WhatsApp, Telegram, Signal, Discord, Teams, LINE, 25+ channels)</li>
       <li>You have technical staff who want full control</li>
       <li>Budget is a constraint (free + API costs)</li>
     </ul>
