@@ -409,6 +409,95 @@
 
         <article class="entry">
             <span class="signal-tag key-shift">Key Shift</span>
+            <h2><a href="https://x.com/gregpr07/status/2047371442879422566" target="_blank" rel="noopener">The Bitter Lesson of Agent Harnesses</a></h2>
+            <p class="author">Gregor Zunic (@gregpr07)</p>
+            <p class="summary">Browser Use founder argues: don't wrap the LLM, don't wrap its tools — ship a SKILL.md and let the model write its own helpers. Endorsed as 'feels like AGI' by the builder community.</p>
+            
+                <details class="section-detail">
+                    <summary>Worth Your Time?</summary>
+                    <div class="section-content">
+                        <p><strong>Read.</strong> This is a short, clear statement of where agent architecture is settling — from someone who ships a real agent product. It's 90% aligned with what Anthropic is pushing with Skills and what Claudie's stack already looks like.</p>
+                    </div>
+                </details>
+
+                <details class="section-detail">
+                    <summary>What's Actually Happening</summary>
+                    <div class="section-content">
+                        <p>Browser Use (one of the most-used open-source browser agents) spent a year building elaborate harnesses — typed tool wrappers, custom context windows, hand-tuned prompts per task. They are now ripping that out.</p>
+<p>The new shape: a <code>SKILL.md</code> describing what to do, a thin layer of Python helpers the model can call or <em>rewrite</em>, and full LLM autonomy over control flow. Missing capability → the model writes it and commits it to git.</p>
+<p>This is the Sutton "bitter lesson" applied to agent infra: general methods that let the model use compute freely will beat hand-crafted scaffolding. The structural reality is that frontier models are now good enough that wrapping them mostly removes capability rather than adding reliability.</p>
+<p>This is a <em>shift</em>, not noise — it's the second major voice (after Anthropic's Skill launch and Walden Yan's multi-agent retraction) telling builders to stop over-engineering harnesses.</p>
+                    </div>
+                </details>
+
+                <details class="section-detail">
+                    <summary>What's Not Being Said</summary>
+                    <div class="section-content">
+                        <ul>
+<li>This works <em>because</em> Opus 4.7 / Sonnet 4.6 are strong enough. Teams running on weaker/cheaper models still need harnesses. The post assumes frontier-class models.</li>
+<li>"Let the agent write its own helpers and commit them" assumes a trust model (git review, sandbox, tests) most enterprise teams don't have. Browser Use can do this because they own the repo.</li>
+<li>The quiet part: a lot of VC-funded "agent platform" companies are now competing against <code>SKILL.md + 200 lines of Python</code>. The moat thesis is under pressure.</li>
+</ul>
+                    </div>
+                </details>
+
+                <details class="section-detail">
+                    <summary>Where This Sits in the Bigger Picture</summary>
+                    <div class="section-content">
+                        <p>Consolidation toward skills as the canonical extension pattern:
+- Anthropic shipped Skills as a first-class Claude API primitive in 2025.
+- Claude Code adopted SKILL.md/plugin pattern across its ecosystem (Claudie's environment has 70+ skills).
+- Managed Agents (public beta as of today) add persistent memory on top.
+- Google's ADK 2.0 is copying the pattern (Saboo &amp; Osmani's "5 Multi-Agent Orchestration Patterns in ADK 2.0").</p>
+<p>The industry is converging on: <strong>model + skills + memory</strong>, with harnesses shrinking toward minimal. That's a labor-market signal too — "AI infrastructure engineer" as a specialty is compressing.</p>
+                    </div>
+                </details>
+
+                <details class="section-detail">
+                    <summary>What's Likely Coming Next</summary>
+                    <div class="section-content">
+                        <ul>
+<li>Agent-framework companies (LangChain, CrewAI, etc.) will pivot harder toward skills + evals + observability, away from abstraction layers.</li>
+<li>More "my agent rewrote its own tools" posts. Expect Anthropic to publish a canonical version.</li>
+<li>Enterprise will lag 6-12 months — they need the governance story before they let agents commit their own helpers.</li>
+<li>Counter-movement: some teams will push back, arguing harnesses are <em>how you enforce compliance</em>. Watch for that.</li>
+</ul>
+                    </div>
+                </details>
+
+                <details class="section-detail">
+                    <summary>Attention Is All You Need</summary>
+                    <div class="section-content">
+                        <ul>
+<li>Sutton's original Bitter Lesson (2019): http://www.incompleteideas.net/IncIdeas/BitterLesson.html</li>
+<li>Walden Yan's companion piece: "Multi-Agents: What's Actually Working" — https://x.com/walden_yan/status/2047054401341370639</li>
+<li>Anthropic Skills docs (canonical primitive)</li>
+<li>Browser Use GitHub: <code>browser-use/browser-use</code></li>
+</ul>
+                    </div>
+                </details>
+
+                <details class="section-detail">
+                    <summary>What This Means for Every Consulting</summary>
+                    <div class="section-content">
+                        <p><strong>For client advice:</strong>
+- When clients ask "should we build an agent platform?" — the default answer is now "no, use Claude Code or Claude Managed Agents, write skills." Save the platform conversation for teams with ≥5 agents in production.
+- For clients currently mid-build on LangChain/custom harnesses: this is a fork-in-the-road conversation. Not "rip it out" but "stop investing in abstraction, start investing in skills + evals."</p>
+<p><strong>For training implications:</strong>
+- Our Claude Code training decks should lead with: model + SKILL.md + memory. Everything else is implementation detail.
+- The Mercury VP (Ry Wiggins) case study (bookmarked separately) is the positive example — SKILL.md-style second brain, no framework.
+- Good content for Nityesh's next plugin-creator session: "what to package as a skill vs. what to leave as a one-off prompt."</p>
+<p><strong>For our own infra:</strong> validates Claudie's shape. Keep skills as the primary extension mechanism; resist the urge to build meta-frameworks.</p>
+                    </div>
+                </details>
+            <div class="links">
+                <a href="https://x.com/gregpr07/status/2047371442879422566" target="_blank" rel="noopener">View on X</a>
+                <a href="https://browser-use.com/blog/bitter-lesson-agent-harnesses" target="_blank" rel="noopener">Read Article</a>
+            </div>
+        </article>
+
+        <article class="entry">
+            <span class="signal-tag key-shift">Key Shift</span>
             <h2><a href="https://x.com/simonw/status/2046732056995205620" target="_blank" rel="noopener">Anthropic quietly drops Claude Code from the $20/month plan</a></h2>
             <p class="author">Simon Willison (@simonw)</p>
             <p class="summary">Anthropic updated pricing page without announcement, removing Claude Code from the $20 tier while keeping Cowork (the same capability, repackaged).</p>
@@ -4583,7 +4672,7 @@ A circuit breaker halts auto-compaction after three consecutive failures.</p>
                 <li><strong>The platform shift happened in 4 weeks.</strong> Ejaaz&rsquo;s catalog shows Claude Code crossed from developer tool to knowledge-worker platform in a single shipping sprint. Clients who evaluated it even two months ago saw a fundamentally different product.</li>
             </ol>
 
-            <p class="coda">66 of 67 sources tagged as Key Shift. The dominant theme: Claude Code&rsquo;s memory, personalization, and autonomous capabilities represent a genuine platform shift &mdash; not incremental improvement.</p>
+            <p class="coda">67 of 68 sources tagged as Key Shift. The dominant theme: Claude Code&rsquo;s memory, personalization, and autonomous capabilities represent a genuine platform shift &mdash; not incremental improvement.</p>
         </section>
 
         <footer>
