@@ -388,13 +388,91 @@
         <header>
             <h1>Signal Digest</h1>
             <p class="subtitle">What actually matters in AI &mdash; curated by Claudie for the Every Consulting team</p>
-            <p class="meta">Last updated April 23, 2026</p>
+            <p class="meta">Last updated April 24, 2026</p>
         </header>
 
         <nav class="legend">
             Each entry is tagged: <span class="tag-example key-shift">Key Shift</span> signals a genuine change in how we should think or act. <span class="tag-example noise">Noise</span> means useful context but nothing new for the team.
         </nav>
 
+
+        <article class="entry">
+            <span class="signal-tag key-shift">Key Shift</span>
+            <h2><a href="https://x.com/PawelHuryn/status/2047654743317574144" target="_blank" rel="noopener">Claude Cowork now works with any frontier LLM via OpenRouter</a></h2>
+            <p class="author">Paweł Huryn (@PawelHuryn)</p>
+            <p class="summary">Claude Cowork harness runs GPT/Grok/Gemma/MiniMax unchanged via OpenRouter — harness design and model behavior are both converging.</p>
+            
+                <details class="section-detail">
+                    <summary>Worth Your Time?</summary>
+                    <div class="section-content">
+                        <p><strong>Read.</strong> This is a real structural shift for anyone building on top of Claude: the harness (CLAUDE.md, skills, tool protocol) is becoming a portable substrate rather than a model-specific stack.</p>
+                    </div>
+                </details>
+
+                <details class="section-detail">
+                    <summary>What's Actually Happening</summary>
+                    <div class="section-content">
+                        <p>Anthropic shipped OpenRouter support inside Cowork so users can swap the underlying model while keeping the full harness — skills, memory, MCP tools, slash commands. The surprise isn't that it's technically possible (OpenRouter has been around), it's that the harness + skill abstractions are portable enough that foreign models run the same playbook without rewrites.</p>
+<p>The structural reality: Claude's <em>harness</em> may be the more defensible product than the <em>model</em>. Once other labs train their models to behave well inside Claude-shaped harnesses (which Huryn claims they already do, by training on Claude traces), the harness becomes the moat.</p>
+                    </div>
+                </details>
+
+                <details class="section-detail">
+                    <summary>What's Not Being Said</summary>
+                    <div class="section-content">
+                        <ul>
+<li>Anthropic is quietly rewriting its own competitive surface. If the harness is the product, the "Claude Max platform risk" (Anthropic tightening third-party access) looks different — they're opening one door while closing others.</li>
+<li>Nobody is talking about what this does to Anthropic's pricing power on the model itself. If Cowork + GPT-5.5 is "good enough," the Opus premium gets squeezed.</li>
+<li>Contrarian view: model behavior convergence inside harnesses may be overstated. Subtle differences (instruction-following depth, tool-call reliability) still matter a lot for production agents — blog-post demos mask that.</li>
+</ul>
+                    </div>
+                </details>
+
+                <details class="section-detail">
+                    <summary>Where This Sits in the Bigger Picture</summary>
+                    <div class="section-content">
+                        <p>Fits the "harness engineering" thesis that 2026 is the year the scaffolding around models matters more than the model. Parallels: Cursor/Windsurf abstracting over providers; Claude Code itself being a de-facto standard others emulate. The AI stack is stratifying into: model → harness → skills/agents → workflows, with defensibility migrating up the stack.</p>
+                    </div>
+                </details>
+
+                <details class="section-detail">
+                    <summary>What's Likely Coming Next</summary>
+                    <div class="section-content">
+                        <ul>
+<li>Other harnesses (Codex, Cursor, Devin) will match this to avoid lock-in fears.</li>
+<li>Enterprises will start RFPing for "harness portability" alongside model capabilities.</li>
+<li>Skills marketplaces become more valuable than model benchmarks — the asset is the skill library, not the model weights.</li>
+<li>Anthropic probably responds by making Claude-native features (Managed Agents, memory, computer use) the reason you stay.</li>
+</ul>
+                    </div>
+                </details>
+
+                <details class="section-detail">
+                    <summary>Attention Is All You Need</summary>
+                    <div class="section-content">
+                        <ul>
+<li>Paweł Huryn on X — consistent high-signal harness/agent commentary</li>
+<li>OpenRouter: https://openrouter.ai/api</li>
+<li>Related: TRAE "Harness Engineering" guide (Apr 22), Bilgin Ibryam on Subagent vs Advisor patterns</li>
+</ul>
+                    </div>
+                </details>
+
+                <details class="section-detail">
+                    <summary>What This Means for Every Consulting</summary>
+                    <div class="section-content">
+                        <ul>
+<li><strong>Client advice:</strong> Stop letting clients treat "which model" as the key decision. The decision is which harness and which skill library. Our bet on Claude Code as the harness layer is validated.</li>
+<li><strong>Training implications:</strong> Our curriculum should emphasize skill/CLAUDE.md/MCP design as transferable skills — clients get future-proofed even if they later swap models.</li>
+<li><strong>Positioning:</strong> "We teach the durable layer" is a stronger pitch than "we teach Claude."</li>
+<li><strong>Watch:</strong> If Anthropic's third-party tightening (see Claude Max platform risk memory) conflicts with this openness, there's a strategic contradiction — something to monitor.</li>
+</ul>
+                    </div>
+                </details>
+            <div class="links">
+                <a href="https://x.com/PawelHuryn/status/2047654743317574144" target="_blank" rel="noopener">View on X</a>
+            </div>
+        </article>
 
         <article class="entry">
             <span class="signal-tag key-shift">Key Shift</span>
@@ -4672,7 +4750,7 @@ A circuit breaker halts auto-compaction after three consecutive failures.</p>
                 <li><strong>The platform shift happened in 4 weeks.</strong> Ejaaz&rsquo;s catalog shows Claude Code crossed from developer tool to knowledge-worker platform in a single shipping sprint. Clients who evaluated it even two months ago saw a fundamentally different product.</li>
             </ol>
 
-            <p class="coda">67 of 68 sources tagged as Key Shift. The dominant theme: Claude Code&rsquo;s memory, personalization, and autonomous capabilities represent a genuine platform shift &mdash; not incremental improvement.</p>
+            <p class="coda">68 of 69 sources tagged as Key Shift. The dominant theme: Claude Code&rsquo;s memory, personalization, and autonomous capabilities represent a genuine platform shift &mdash; not incremental improvement.</p>
         </section>
 
         <footer>
