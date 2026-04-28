@@ -466,6 +466,86 @@
 
         <article class="entry">
             <span class="signal-tag key-shift">Key Shift</span>
+            <h2><a href="https://x.com/imbue_ai/status/2049174423757103217" target="_blank" rel="noopener">Imbue Blueprint: Planning copilot for coding agents</a></h2>
+            <p class="author">Imbue (@imbue_ai)</p>
+            <p class="summary">Imbue ships an open-source planning skill that reads code, asks grounded questions, and produces an executable plan — distributed as agent skills/extensions for Cursor, Windsurf, VS Code, and Claude Code.</p>
+            
+                <details class="section-detail">
+                    <summary>Worth Your Time?</summary>
+                    <div class="section-content">
+                        <p><strong>Read.</strong> Imbue is shipping the "blueprint before code" workflow as a free open-source skill. This is the pattern Every already teaches; now there's a productized version to compare against and to recommend to clients.</p>
+                    </div>
+                </details>
+
+                <details class="section-detail">
+                    <summary>What's Actually Happening</summary>
+                    <div class="section-content">
+                        <p>Imbue's pivot is structurally interesting. They started as a foundation-model lab, then narrowed to coding agents (Sculptor), and now they're packaging the <em>planning layer</em> — the part that sits between the human prompt and the coding agent — as a free, reusable skill. The bet: the bottleneck in agent coding is no longer code generation quality, it's spec quality. The agent can write the code; what kills the output is that nobody pinned down what to build.</p>
+<p>That's a real shift. For most of 2024–2025, the meta around agent coding was "make the agent better at editing files" — Aider, Cursor's composer, Claude Code's tool loop, Codex's harness. By 2026 those harnesses are commoditized. The differentiated work is upstream: turning a vague request into a grounded plan that survives contact with the codebase.</p>
+<p>Distributing it as a <em>skill</em> (not a product) is also notable. Skills are portable across Claude Code, Cursor, Windsurf, and VS Code — Imbue is positioning Blueprint as plumbing rather than a closed surface. That's the right move if you believe the harness wars are over and the value is in shareable workflows.</p>
+                    </div>
+                </details>
+
+                <details class="section-detail">
+                    <summary>What's Not Being Said</summary>
+                    <div class="section-content">
+                        <p>The unspoken assumption: most coding agent failures are planning failures, not execution failures. That's true in the easy 70% — boilerplate features, refactors, tests. It's not obviously true in the hard 30% — legacy code with implicit invariants, performance-sensitive paths, anything where the actual difficulty is <em>understanding what the code does</em> before changing it. A planning skill that "reads your code and asks grounded questions" is only as good as its ability to read the code well. Worth testing on a hairy codebase, not just a clean one.</p>
+<p>The other gap: this competes with the user's own thinking. A great planning skill that asks the right questions saves time. A mediocre one front-loads ceremony onto every task. The line between the two is thin and depends on calibration that's hard to evaluate from a tweet.</p>
+                    </div>
+                </details>
+
+                <details class="section-detail">
+                    <summary>Where This Sits in the Bigger Picture</summary>
+                    <div class="section-content">
+                        <p>This fits a broader pattern across the AI tooling stack: capabilities are migrating from products into shared, portable formats (skills, MCP servers, claude.md conventions). The thing that used to require a closed platform — "we have a special way of planning" — now ships as a 200-line skill anyone can install. That collapses the moat for plan-and-execute startups and pushes value toward (a) the underlying model, (b) the workflow design, and (c) the harness that runs them.</p>
+<p>For Every's clients, this is part of the trend that makes "AI adoption" less about picking a vendor and more about picking a workflow. The vendors converge; the workflows differentiate.</p>
+                    </div>
+                </details>
+
+                <details class="section-detail">
+                    <summary>What's Likely Coming Next</summary>
+                    <div class="section-content">
+                        <p>Expect a wave of planning/spec skills published over the next 30–60 days — different teams will ship their own version of "ask grounded questions before coding," and the good ones will get forked into client-specific variants. The interesting second-order question is what happens to <em>intermediate</em> tools (Linear-style ticket trackers, PRD docs in Notion) when the planning artifact lives inline in the repo as a blueprint.md the agent generated and the human edited.</p>
+                    </div>
+                </details>
+
+                <details class="section-detail">
+                    <summary>Attention Is All You Need</summary>
+                    <div class="section-content">
+                        <ul>
+<li>Imbue: https://imbue.com</li>
+<li>Blueprint repo: https://github.com/imbue-ai/blueprint</li>
+<li>Sculptor (Imbue's coding agent): https://imbue.com/sculptor</li>
+<li>Imbue founders: Kanjun Qiu, Josh Albrecht</li>
+</ul>
+                    </div>
+                </details>
+
+                <details class="section-detail">
+                    <summary>What This Means for Every Consulting</summary>
+                    <div class="section-content">
+                        <p>Three concrete actions:</p>
+<ol>
+<li>
+<p><strong>Evaluate Blueprint against our existing patterns.</strong> We already use <code>slide-deck-creation/generate-blueprint</code> and the Nityesh-corrected "blueprint first, check existing library, then build" workflow (Apr 21 feedback). Run Blueprint on a real Every client repo and compare the questions it asks against the questions Mike or Nityesh would ask. If it's close, recommend it in trainings as a starter; if it's worse, our internal version is a real differentiator worth packaging.</p>
+</li>
+<li>
+<p><strong>Pull this into the Tech vertical's curriculum.</strong> Mike teaches Cursor and Claude Code; planning-before-coding is one of the highest-leverage habits to install in a client team. Blueprint gives clients a tangible artifact ("install this skill, run it before any non-trivial task") rather than the harder behavioral ask of "always write a plan first."</p>
+</li>
+<li>
+<p><strong>Watch the planning-skill ecosystem.</strong> This is the leading indicator that workflow-as-skill is becoming the default packaging format. Worth doing a quick audit of which Every internal patterns (proposal generation, dashboard updates, daily refresh) could be packaged as portable skills clients can take home — the way we do with Boris Cherny's Claude Code skill in current trainings.</p>
+</li>
+</ol>
+                    </div>
+                </details>
+            <div class="links">
+                <a href="https://x.com/imbue_ai/status/2049174423757103217" target="_blank" rel="noopener">View on X</a>
+                <a href="https://github.com/imbue-ai/blueprint" target="_blank" rel="noopener">Read Article</a>
+            </div>
+        </article>
+
+        <article class="entry">
+            <span class="signal-tag key-shift">Key Shift</span>
             <h2><a href="https://x.com/PawelHuryn/status/2047654743317574144" target="_blank" rel="noopener">Claude Cowork now works with any frontier LLM via OpenRouter</a></h2>
             <p class="author">Paweł Huryn (@PawelHuryn)</p>
             <p class="summary">Claude Cowork harness runs GPT/Grok/Gemma/MiniMax unchanged via OpenRouter — harness design and model behavior are both converging.</p>
@@ -4985,7 +5065,7 @@ A circuit breaker halts auto-compaction after three consecutive failures.</p>
                 <li><strong>The platform shift happened in 4 weeks.</strong> Ejaaz&rsquo;s catalog shows Claude Code crossed from developer tool to knowledge-worker platform in a single shipping sprint. Clients who evaluated it even two months ago saw a fundamentally different product.</li>
             </ol>
 
-            <p class="coda">71 of 72 sources tagged as Key Shift. The dominant theme: Claude Code&rsquo;s memory, personalization, and autonomous capabilities represent a genuine platform shift &mdash; not incremental improvement.</p>
+            <p class="coda">72 of 73 sources tagged as Key Shift. The dominant theme: Claude Code&rsquo;s memory, personalization, and autonomous capabilities represent a genuine platform shift &mdash; not incremental improvement.</p>
         </section>
 
         <footer>
