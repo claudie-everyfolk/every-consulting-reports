@@ -388,7 +388,7 @@
         <header>
             <h1>Signal Digest</h1>
             <p class="subtitle">What actually matters in AI &mdash; curated by Claudie for the Every Consulting team</p>
-            <p class="meta">Last updated April 28, 2026</p>
+            <p class="meta">Last updated April 29, 2026</p>
         </header>
 
         <nav class="legend">
@@ -541,6 +541,100 @@
             <div class="links">
                 <a href="https://x.com/imbue_ai/status/2049174423757103217" target="_blank" rel="noopener">View on X</a>
                 <a href="https://github.com/imbue-ai/blueprint" target="_blank" rel="noopener">Read Article</a>
+            </div>
+        </article>
+
+        <article class="entry">
+            <span class="signal-tag key-shift">Key Shift</span>
+            <h2><a href="https://x.com/rohit4verse/status/2049309009082282019" target="_blank" rel="noopener">Coding agents were 2025. Knowledge worker agents across five SaaS apps are 2026.</a></h2>
+            <p class="author">Rohit (@rohit4verse)</p>
+            <p class="summary">Anthropic engineer signals MCP + Skills as the 2026 stack; solo operators already charging $3K per MCP-connect setup as the knowledge-worker-agent wedge opens.</p>
+            
+                <details class="section-detail">
+                    <summary>Worth Your Time?</summary>
+                    <div class="section-content">
+                        <p><strong>Read.</strong> One-line verdict: This is the cleanest articulation yet of the wedge Every Consulting is selling — a year-defining frame ("2025 = code, 2026 = knowledge-worker-across-SaaS") that's about to become standard market language, plus a price-discovery signal at $3K/setup.</p>
+                    </div>
+                </details>
+
+                <details class="section-detail">
+                    <summary>What's Actually Happening</summary>
+                    <div class="section-content">
+                        <p>The structural reality is that the coding-agent market saturated fast — Cursor, Claude Code, Codex, Copilot all ate it in 2025 — and the next adjacent surface is non-engineering knowledge workers whose work lives across Slack, GDrive, Gmail, Notion, Salesforce, Linear, etc. MCP is the glue. Skills are the durable behavior layer. The two together let a single agent operate competently across ~5 SaaS apps without bespoke integration code per client.</p>
+<p>The incentives align: Anthropic needs MCP to win because it's the moat (every connector strengthens the platform); independent operators need it to win because it lets one person sell a $3K wiring job and stack four clients in a month; clients need it to win because they're under board pressure to "do something with AI" and connector packages are a legible deliverable.</p>
+<p>Shift, not noise: the reframing of MCP from "infrastructure protocol" to "the substrate for the next agent vertical" is genuine. The "MCP is dead" takes from Q1 turned out to be premature — those takes mostly came from people expecting MCP to <em>be</em> the agent rather than to <em>enable</em> the agent.</p>
+                    </div>
+                </details>
+
+                <details class="section-detail">
+                    <summary>What's Not Being Said</summary>
+                    <div class="section-content">
+                        <p>Three gaps:
+- <strong>The unit economics of $3K-per-setup don't scale into enterprise.</strong> A solo charging $3K is doing config work; an enterprise rollout is governance, SSO, audit, change management — orders of magnitude more. The same playbook can't bridge both ends, and the middle market is where margins compress fastest.
+- <strong>MCP servers are still a security liability.</strong> Every connector is a token-holding service that has agentic write access. Nobody in the bullish "MCP is the future" narrative is talking about the supply-chain vector this opens (cf. our prior bookmarks on malicious MCP packages).
+- <strong>Skills + MCP composability assumes Anthropic stays open.</strong> Our memory has the platform-risk note from April: Anthropic is tightening third-party access. If they close the surface area to favor Managed Agents, the $3K-per-setup business becomes vendor-lock middleware on borrowed time.</p>
+                    </div>
+                </details>
+
+                <details class="section-detail">
+                    <summary>Where This Sits in the Bigger Picture</summary>
+                    <div class="section-content">
+                        <p>Maps onto the broader shift from "AI as autocomplete" → "AI as operator." 2024 was prompt-engineering. 2025 was coding-agent dominance. 2026 is the year non-technical knowledge workers get persistent agents that operate across their tool stack. The labor-market implication is that the median ops/admin/marketing role's task surface starts getting absorbed into agent workflows — slowly at first, then in bursts as connectors mature.</p>
+<p>This is also where the consulting layer (Every) has its largest opening, because (a) clients can't self-serve the integration and skill-design work, (b) prompt + skill quality is the bottleneck, and (c) the work is too varied for SaaS productization yet.</p>
+                    </div>
+                </details>
+
+                <details class="section-detail">
+                    <summary>What's Likely Coming Next</summary>
+                    <div class="section-content">
+                        <ul>
+<li>Q3 2026: Anthropic ships first-party connectors for the top 20 SaaS tools, putting pricing pressure on the $3K-setup tier.</li>
+<li>Late 2026: Skills marketplaces emerge (Charlie Hills' LLM Council, Every's tactical skills, Coreyganim's Cowork pack are early signals). One of them gets bought.</li>
+<li>2027: Vertical "knowledge worker agent" SaaS emerges per industry — legal, finance ops, RevOps — bundling MCP servers + skills + governance. Consulting work shifts from "connect your tools" to "design your agent operating model."</li>
+<li>Second-order: Job-description compression. Roles that were "Salesforce admin + GDrive heavy + Slack-coordination" collapse into "agent-supervisor for the RevOps stack."</li>
+</ul>
+                    </div>
+                </details>
+
+                <details class="section-detail">
+                    <summary>Attention Is All You Need</summary>
+                    <div class="section-content">
+                        <ul>
+<li>Foundational: Anthropic's MCP spec at modelcontextprotocol.io</li>
+<li>Anthropic Staff Engineer video on MCP futures (referenced in Rohit's tweet — worth pulling the link from his thread)</li>
+<li>CyrilXBT's $3K-per-setup playbook (quote-tweeted)</li>
+<li>Adjacent signal: Pawel Huryn's "Anthropic is going to win" plus 86% weekly usage drop (also seen this session) — same thesis from a productivity angle</li>
+<li>Key person to watch: any Anthropic eng publicly evangelizing MCP roadmap</li>
+</ul>
+                    </div>
+                </details>
+
+                <details class="section-detail">
+                    <summary>What This Means for Every Consulting</summary>
+                    <div class="section-content">
+                        <p>Concrete implications:</p>
+<ol>
+<li>
+<p><strong>Sales narrative refresh.</strong> Natalia should be using "coding agents 2025 / knowledge worker agents 2026" verbatim in proposals starting this week. It's a clean one-liner that positions Every on the right side of the trend without overclaiming.</p>
+</li>
+<li>
+<p><strong>Pricing floor.</strong> $3K-per-MCP-connect is the new market signal. Use it as a credibility anchor when clients balk: "Solo operators charge $3K to wire one stack; we're delivering [N] integrated stacks plus skills plus training in this engagement."</p>
+</li>
+<li>
+<p><strong>Productize the connector setup.</strong> If solo operators can package this at $3K, Every can package an "Agent-Ready Stack" SKU at a higher price point with governance/quality bundled. Worth a brainstorm.</p>
+</li>
+<li>
+<p><strong>Hedge against platform risk.</strong> Memory note from April flags Anthropic tightening third-party access. If we lean into MCP-heavy delivery, document fallback patterns (direct API calls, Composio, n8n) so client engagements don't break if Anthropic closes the surface.</p>
+</li>
+<li>
+<p><strong>Training curriculum.</strong> Update the "AI for knowledge workers" module to lead with the MCP-connected agent demo across 5 apps rather than starting with prompt engineering. The frame has moved.</p>
+</li>
+</ol>
+                    </div>
+                </details>
+            <div class="links">
+                <a href="https://x.com/rohit4verse/status/2049309009082282019" target="_blank" rel="noopener">View on X</a>
+                <a href="https://x.com/cyrilXBT" target="_blank" rel="noopener">Read Article</a>
             </div>
         </article>
 
@@ -5065,7 +5159,7 @@ A circuit breaker halts auto-compaction after three consecutive failures.</p>
                 <li><strong>The platform shift happened in 4 weeks.</strong> Ejaaz&rsquo;s catalog shows Claude Code crossed from developer tool to knowledge-worker platform in a single shipping sprint. Clients who evaluated it even two months ago saw a fundamentally different product.</li>
             </ol>
 
-            <p class="coda">72 of 73 sources tagged as Key Shift. The dominant theme: Claude Code&rsquo;s memory, personalization, and autonomous capabilities represent a genuine platform shift &mdash; not incremental improvement.</p>
+            <p class="coda">73 of 74 sources tagged as Key Shift. The dominant theme: Claude Code&rsquo;s memory, personalization, and autonomous capabilities represent a genuine platform shift &mdash; not incremental improvement.</p>
         </section>
 
         <footer>
