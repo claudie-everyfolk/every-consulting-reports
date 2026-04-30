@@ -484,6 +484,105 @@
 
         <article class="entry">
             <span class="signal-tag key-shift">Key Shift</span>
+            <h2><a href="https://x.com/DeRonin_/status/2049613859623677978" target="_blank" rel="noopener">Karpathy's 2026 Skip List: Half the Agent Stack Already Has a Sell-By Date</a></h2>
+            <p class="author">Ronin (@DeRonin_), quoting Karpathy via Rohit (@rohit4verse)</p>
+            <p class="summary">Karpathy: '90% of what AI twitter tells you to learn will be dead in 6 months.' A circulating list of 10 frameworks/tools senior engineers stopped using (AutoGen, CrewAI, etc.) hardens the consensus that the agent-framework era is ending and harness/eval/context-engineering skills are what compound.</p>
+            
+                <details class="section-detail">
+                    <summary>Worth Your Time?</summary>
+                    <div class="section-content">
+                        <p><strong>Read.</strong> Skim if you've been tracking the harness-engineering thread already — this is the corollary. If you're still teaching CrewAI or AutoGen in client trainings, stop tonight.</p>
+                    </div>
+                </details>
+
+                <details class="section-detail">
+                    <summary>What's Actually Happening</summary>
+                    <div class="section-content">
+                        <p>The post is a curation, not a new claim. But its virality (133K views on a parallel Avid post quoting the same Karpathy framing, 53K on the Ronin thread itself) signals consensus crystallizing: the multi-agent framework era — Auto­GPT, CrewAI, AutoGen, BabyAGI — is over for production use.</p>
+<p>What replaces them isn't a new framework. It's a small set of <em>durable skills</em>:
+- Harness engineering (covered in entry 75 this week)
+- Context engineering (Avid's "cut context 90%" piece, also today)
+- Eval design (the discipline that filters real progress from demo-ware)
+- Tool design (what the agent reaches for, when, and why)
+- Orchestrator-subagent patterns (when to delegate, how to consolidate)</p>
+<p>The structural shift: 2024–25 the unit of value was the framework. 2026 the unit is the harness around a single capable model.</p>
+                    </div>
+                </details>
+
+                <details class="section-detail">
+                    <summary>What's Not Being Said</summary>
+                    <div class="section-content">
+                        <ul>
+<li>The skip list is partially a status game. Calling AutoGen "dead" is half-true (community-maintained, slow releases) and half-positioning. Some of these tools are still fine for prototyping; the real claim is they don't survive contact with production load.</li>
+<li>The contrarian view: most enterprise teams aren't anywhere close to needing harness engineering. They're still trying to get one Claude Code session reliably running against their codebase. Telling a Bloomberg analyst "skip CrewAI" is irrelevant — they were never going to touch it.</li>
+<li>The list itself is also from January 2026's hype cycle. By Q3 some of <em>this</em> advice will be stale. Karpathy's meta-claim ("90% dead in 6 months") cuts both ways.</li>
+</ul>
+                    </div>
+                </details>
+
+                <details class="section-detail">
+                    <summary>Where This Sits in the Bigger Picture</summary>
+                    <div class="section-content">
+                        <p>This converges with three other signals from the past 30 days:
+- <strong>Harness engineering</strong> named as a discipline (entry 75).
+- <strong>MCP + skills</strong> as the 2026 knowledge-worker stack (entry 74).
+- <strong>Filesystems as new RAG</strong> (Jerry Liu/Mesa today).</p>
+<p>Pattern: the abstractions are moving down. Less "agent framework," more "the model + a tuned execution shell + a real filesystem." This is the Claude Code architecture, generalized. Anthropic, OpenAI, and Cursor are all converging on the same shape — the differentiation will be in the harness tuning, the skill libraries, and the memory layer.</p>
+<p>For the labor market: the AI engineer role of 2025 ("knows LangChain, builds RAG pipelines") is being replaced by the AI engineer role of 2026 ("designs harnesses, writes evals, tunes context"). Salary delta favoring the latter is going to be brutal.</p>
+                    </div>
+                </details>
+
+                <details class="section-detail">
+                    <summary>What's Likely Coming Next</summary>
+                    <div class="section-content">
+                        <ul>
+<li>More framework deprecations through Q2-Q3 2026. Watch for LangChain to either pivot hard into deepagents/profile-tuning (already happening — see Caspar Broekhuizen post today) or get squeezed.</li>
+<li>The "eval engineer" role becomes a real thing. Compensation pulls level with senior backend engineers because the work is the same shape: building the system that catches regressions.</li>
+<li>Bootcamps and consulting practices that still teach agent frameworks lose credibility fast. The ones teaching harness/eval/context discipline win.</li>
+<li>Vendors will start <em>naming</em> their harness publicly. Cursor SDK (today) is the first; Claude Agent SDK is the second. Expect a wave of "look inside our harness" content.</li>
+</ul>
+                    </div>
+                </details>
+
+                <details class="section-detail">
+                    <summary>Attention Is All You Need</summary>
+                    <div class="section-content">
+                        <ul>
+<li>Andrej Karpathy: foundational reference, ex-Tesla/OpenAI, his framing dominates the discourse.</li>
+<li>Tony Gentilcore — "The harness as the context manager" article (entry 75).</li>
+<li>Rohit Aggarwal (@rohit4verse) — the article the Ronin thread quotes: "What to Learn, Build, and Skip in AI Agents (2026)".</li>
+<li>Caspar Broekhuizen + LangChain's deepagents profile work (today's feed).</li>
+</ul>
+                    </div>
+                </details>
+
+                <details class="section-detail">
+                    <summary>What This Means for Every Consulting</summary>
+                    <div class="section-content">
+                        <p><strong>Curriculum implications (Mike, Brooker):</strong>
+- Audit any session decks that reference CrewAI, AutoGen, AutoGPT as "tools to learn." Pull or relabel as "history."
+- Add a 5-min slot in every engineering training: "what to skip, and why." Borrow Karpathy's framing — clients respect that voice.
+- For non-tech vertical (Brooker): the message is simpler — "don't learn frameworks, learn the work." Pair with Eric Glyman's back-office quote from today.</p>
+<p><strong>Pitch implications (Natalia):</strong>
+- "We teach what compounds, not what's trending" is a defensible differentiator vs. boutique competitors who chase the framework du jour.
+- Add a "skip list" slide to standard pitch deck: shows judgment, not just enthusiasm.</p>
+<p><strong>Internal implications (Nityesh, Claudie):</strong>
+- Claudie's setup is harness + skills + filesystem + eval-light. We're on the right side of this shift. The thing we're <em>missing</em> is rigorous evals — which is also Karpathy's #1 durable skill. Worth a Q2 project.
+- Don't waste cycles experimenting with deprecated frameworks for client demos. The skip list is also a focus list.</p>
+<p><strong>Action items:</strong>
+1. Pull Rohit's article into the curriculum reference folder.
+2. Cross-check existing training decks for framework name-drops; replace with harness/skills language.
+3. Open a thread with Mike on whether the engineering vertical's intro session needs a refresh.</p>
+                    </div>
+                </details>
+            <div class="links">
+                <a href="https://x.com/DeRonin_/status/2049613859623677978" target="_blank" rel="noopener">View on X</a>
+                <a href="https://x.com/rohit4verse/status/2049309009082282019" target="_blank" rel="noopener">Read Article</a>
+            </div>
+        </article>
+
+        <article class="entry">
+            <span class="signal-tag key-shift">Key Shift</span>
             <h2><a href="https://x.com/AIHighlight/status/2049063764373242357" target="_blank" rel="noopener">Anthropic publishes study mapping which jobs its AI is replacing</a></h2>
             <p class="author">AI Highlight (@AIHighlight)</p>
             <p class="summary">First-party Anthropic data: workers most displaced by Claude are older, more educated, and earn 47% more than average — flipping the 'AI hits entry-level first' narrative.</p>
@@ -5245,7 +5344,7 @@ A circuit breaker halts auto-compaction after three consecutive failures.</p>
                 <li><strong>The platform shift happened in 4 weeks.</strong> Ejaaz&rsquo;s catalog shows Claude Code crossed from developer tool to knowledge-worker platform in a single shipping sprint. Clients who evaluated it even two months ago saw a fundamentally different product.</li>
             </ol>
 
-            <p class="coda">74 of 75 sources tagged as Key Shift. The dominant theme: Claude Code&rsquo;s memory, personalization, and autonomous capabilities represent a genuine platform shift &mdash; not incremental improvement.</p>
+            <p class="coda">75 of 76 sources tagged as Key Shift. The dominant theme: Claude Code&rsquo;s memory, personalization, and autonomous capabilities represent a genuine platform shift &mdash; not incremental improvement.</p>
         </section>
 
         <footer>
