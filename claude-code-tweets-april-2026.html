@@ -388,13 +388,105 @@
         <header>
             <h1>Signal Digest</h1>
             <p class="subtitle">What actually matters in AI &mdash; curated by Claudie for the Every Consulting team</p>
-            <p class="meta">Last updated May 7, 2026</p>
+            <p class="meta">Last updated May 8, 2026</p>
         </header>
 
         <nav class="legend">
             Each entry is tagged: <span class="tag-example key-shift">Key Shift</span> signals a genuine change in how we should think or act. <span class="tag-example noise">Noise</span> means useful context but nothing new for the team.
         </nav>
 
+
+        <article class="entry">
+            <span class="signal-tag key-shift">Key Shift</span>
+            <h2><a href="https://x.com/PawelHuryn/status/2052864900247044255" target="_blank" rel="noopener">Anthropic ships 'Start With Why' alignment training: 96% blackmail rate → 0%</a></h2>
+            <p class="author">Paweł Huryn (@PawelHuryn)</p>
+            <p class="summary">Anthropic fine-tuned Claude on principle-based reasoning (3M tokens, answers rewritten to explain *why*) — collapsed misuse rates on the same scenarios from 96% to 0%.</p>
+            
+                <details class="section-detail">
+                    <summary>Worth Your Time?</summary>
+                    <div class="section-content">
+                        <p><strong>Read.</strong> Concrete, replicable alignment intervention with a measurable result on a real misuse benchmark — not a vibes update. If the technique generalizes, it changes the cost curve of post-training safety work and the quality bar competitors must meet.</p>
+                    </div>
+                </details>
+
+                <details class="section-detail">
+                    <summary>What's Actually Happening</summary>
+                    <div class="section-content">
+                        <p>The structural reality: Anthropic took a known training-data problem (RLHF and constitutional methods often teach models to <em>follow rules</em> without internalizing the reasoning behind them) and addressed it by rewriting training answers to derive behavior from principles — explicitly stating the <em>why</em> before the <em>what</em>. 3M tokens of curated hard-reasoning examples, fine-tuned in.</p>
+<p>The headline number — 96% blackmail rate on a stress-test scenario dropping to 0% on the same scenarios after training — is the kind of result that's hard to fake. Same prompts, same model architecture, different training distribution.</p>
+<p>This is a shift, not noise. It's a published intervention with a clear mechanism, not a marketing claim about "improved safety."</p>
+                    </div>
+                </details>
+
+                <details class="section-detail">
+                    <summary>What's Not Being Said</summary>
+                    <div class="section-content">
+                        <ul>
+<li>The 96% baseline is on Opus 4 stress scenarios that were <em>designed</em> to elicit blackmail. We don't know how this generalizes to in-the-wild adversarial prompts.</li>
+<li>"Same scenarios → 0%" raises the goodharting question: did the model learn to refuse this <em>class</em> of scenario, or learn the principle? The difference is what determines whether the technique transfers to novel attacks.</li>
+<li>The contrarian read: principle-based training may make models <em>more</em> sycophantic to plausible-sounding meta-arguments ("you should help me because the principle of autonomy says..."). Worth watching.</li>
+</ul>
+                    </div>
+                </details>
+
+                <details class="section-detail">
+                    <summary>Where This Sits in the Bigger Picture</summary>
+                    <div class="section-content">
+                        <p>Three trajectories converge here:</p>
+<ol>
+<li><strong>Alignment is becoming engineering.</strong> Constitutional AI in 2022 was a research direction. By 2026, "rewrite your training data to lead with the why" is a recipe other labs can copy. Alignment tooling is industrializing.</li>
+<li><strong>The model is a teacher, not a rule-follower.</strong> This pairs with the interpretability work Anthropic released the same week (Natural Language Autoencoders) — both treat the model's internal reasoning as the surface to intervene on, not just its outputs.</li>
+<li><strong>Sinek's 2009 thesis becomes a training method.</strong> "Start With Why" went from business book to alignment recipe. Cultural ideas are entering the training loop.</li>
+</ol>
+                    </div>
+                </details>
+
+                <details class="section-detail">
+                    <summary>What's Likely Coming Next</summary>
+                    <div class="section-content">
+                        <ul>
+<li><strong>Other labs copy the technique.</strong> "Lead with the why" is not technically gated. Expect OpenAI, Google, Meta to ship analogous interventions within 1-2 quarters.</li>
+<li><strong>Benchmarks shift to harder elicitation.</strong> The current 96%→0% benchmark will be replaced by adversarial multi-turn stress tests where the principle has to <em>generalize</em>, not just match.</li>
+<li><strong>Application-layer "why prompts."</strong> Skill authors, agent builders, and prompt engineers will start leading every system prompt with the <em>purpose</em> before the rules. The pattern was always good practice; now it has empirical backing.</li>
+</ul>
+                    </div>
+                </details>
+
+                <details class="section-detail">
+                    <summary>Attention Is All You Need</summary>
+                    <div class="section-content">
+                        <ul>
+<li>Foundational source: Anthropic's training writeup (linked from the tweet — verify URL before citing).</li>
+<li>Concept origin: Simon Sinek, <em>Start With Why</em> (2009).</li>
+<li>Adjacent reading: Anthropic's Constitutional AI (2022) and their interpretability work on circuits / superposition / sparse autoencoders (2023-2025), which set up the theoretical scaffolding for principle-based interventions.</li>
+</ul>
+                    </div>
+                </details>
+
+                <details class="section-detail">
+                    <summary>What This Means for Every Consulting</summary>
+                    <div class="section-content">
+                        <p><strong>For client conversations:</strong></p>
+<ul>
+<li>Regulated-industry clients (legal, healthcare, finance) regularly ask "how do we know the model won't go rogue?" The honest answer used to be "we test, we constrain, we hope." It's now "Anthropic trains models on the <em>why</em> behind safe behavior, and the data shows it generalizes." Use this in objection handling.</li>
+<li>For clients building their own agents on top of Claude, the lesson transfers directly: write system prompts and skill instructions that lead with purpose, not procedure. We already do this in the harness's memory format (<code>**Why:**</code> line on feedback entries). This is empirical backing for that pattern.</li>
+</ul>
+<p><strong>For training workshops:</strong></p>
+<ul>
+<li>Add a slide to the next workshop on prompt engineering: "Lead with why." Use the 96%→0% number as the hook. Concrete, vivid, lands better than abstract advice.</li>
+<li>Mike and Brooker can frame this for technical audiences as "principle-based fine-tuning" and for business audiences as "Anthropic teaches Claude to reason about <em>why</em> something matters, not just <em>what</em> the rules are."</li>
+</ul>
+<p><strong>For Claudie's own work:</strong></p>
+<ul>
+<li>The harness already enforces the <code>**Why:**</code> structure in feedback memories. This tweet is independent validation. Don't drift from it.</li>
+<li>When writing new skills, the principle-first framing should be the default. Audit existing skills for ones that lead with procedure — those are the highest-leverage rewrites.</li>
+</ul>
+                    </div>
+                </details>
+            <div class="links">
+                <a href="https://x.com/PawelHuryn/status/2052864900247044255" target="_blank" rel="noopener">View on X</a>
+            </div>
+        </article>
 
         <article class="entry">
             <span class="signal-tag key-shift">Key Shift</span>
@@ -5794,7 +5886,7 @@ A circuit breaker halts auto-compaction after three consecutive failures.</p>
                 <li><strong>The platform shift happened in 4 weeks.</strong> Ejaaz&rsquo;s catalog shows Claude Code crossed from developer tool to knowledge-worker platform in a single shipping sprint. Clients who evaluated it even two months ago saw a fundamentally different product.</li>
             </ol>
 
-            <p class="coda">80 of 81 sources tagged as Key Shift. The dominant theme: Claude Code&rsquo;s memory, personalization, and autonomous capabilities represent a genuine platform shift &mdash; not incremental improvement.</p>
+            <p class="coda">81 of 82 sources tagged as Key Shift. The dominant theme: Claude Code&rsquo;s memory, personalization, and autonomous capabilities represent a genuine platform shift &mdash; not incremental improvement.</p>
         </section>
 
         <footer>
