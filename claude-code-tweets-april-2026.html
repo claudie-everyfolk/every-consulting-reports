@@ -496,6 +496,113 @@
 
         <article class="entry">
             <span class="signal-tag key-shift">Key Shift</span>
+            <h2><a href="https://x.com/namcios/status/2053257337746657561" target="_blank" rel="noopener">Anthropic killed Markdown — HTML is the new agent artifact</a></h2>
+            <p class="author">Felipe Demartini (@namcios)</p>
+            <p class="summary">A Claude Code engineer argues markdown was never the right format for human-AI communication; HTML interfaces (kanbans, flowcharts, slidered live previews) replace walls of text. With 1M context, the 2-4x generation cost is gone; the artifact also becomes shared memory between agents.</p>
+            
+                <details class="section-detail">
+                    <summary>Worth Your Time?</summary>
+                    <div class="section-content">
+                        <p><strong>Read.</strong> This is a structural framing of an argument that reframes how AI systems should produce deliverables: not as markdown reports but as interactive HTML interfaces. Most useful for anyone shipping AI-generated artifacts to humans (consultants, PMs, anyone who's had a 200-line markdown report ignored).</p>
+                    </div>
+                </details>
+
+                <details class="section-detail">
+                    <summary>What's Actually Happening</summary>
+                    <div class="section-content">
+                        <p>The original article (referenced by namcios; the Anthropic engineer is Mike Krieger's team or similar Claude Code authors) makes a simple claim with concrete examples:</p>
+<ul>
+<li><strong>Markdown assumes linear reading.</strong> The author concedes nobody, including him, reads AI-generated markdown over 100 lines.</li>
+<li><strong>HTML assumes scanning + interaction.</strong> The reader picks what matters and tinkers with it.</li>
+<li><strong>The cost argument has flipped.</strong> HTML is 2-4x more expensive to generate, but with 1M-token context windows that constraint is gone.</li>
+<li><strong>The hidden upside:</strong> generated HTML is also consumable by <em>verifying agents</em>. Spec → shared memory between agents, not document → human.</li>
+</ul>
+<p>The structural reality: format choice for AI outputs is now a real engineering decision, not a default. Markdown was the default because tokens were scarce and renderers were everywhere. Now that neither is true, choosing markdown is a regression unless the artifact is genuinely a one-time, read-once thing.</p>
+<p>This is shift, not noise. Anthropic publishing about it through someone on Claude Code signals it'll start showing up as an explicit pattern in skills and recipes.</p>
+                    </div>
+                </details>
+
+                <details class="section-detail">
+                    <summary>What's Not Being Said</summary>
+                    <div class="section-content">
+                        <ul>
+<li><strong>Markdown still wins for diffs and version control.</strong> Interactive HTML doesn't review well in PRs. The author handwaves over this.</li>
+<li><strong>HTML output is harder to embed downstream.</strong> A markdown spec can be pasted into Slack, Notion, Asana. An interactive HTML artifact requires hosting or a viewer. The friction has just moved.</li>
+<li><strong>For non-technical users, the format ceiling is whatever their default tool renders.</strong> If a partner reads everything in Gmail, an HTML artifact is the work, not the email — which means there's now an extra step.</li>
+<li><strong>Multi-agent shared memory is real, but verification agents reading HTML is much weaker than reading structured data.</strong> The article is conflating "the agent can read it" with "this is the right shared format." Structured JSON or a typed model is still better; HTML happens to be human-friendly.</li>
+</ul>
+<p>The contrarian view: this is less "markdown is dead" and more "use the right artifact for the audience." The killer prompt isn't <code>output HTML</code>; it's <code>output an interface, not a document, when the audience needs to act on it</code>.</p>
+                    </div>
+                </details>
+
+                <details class="section-detail">
+                    <summary>Where This Sits in the Bigger Picture</summary>
+                    <div class="section-content">
+                        <p>Three trend lines converging:</p>
+<ol>
+<li><strong>Context windows over 1M tokens</strong> make generation cost a non-issue.</li>
+<li><strong>Agents producing for agents</strong> make machine-readable artifacts the dominant downstream consumer (verifiers, reviewers, sub-agents).</li>
+<li><strong>Skills/MCPs that ship interactive artifacts</strong> (Claude artifacts, Notion AI blocks, Linear AI summaries) are normalizing HTML/JSX as default output.</li>
+</ol>
+<p>This sits on the same trajectory as "skills" replacing "prompts" — the unit of AI work is moving from <code>text in / text out</code> to <code>task in / artifact out</code>. The artifact is increasingly a tool the user keeps using, not a one-shot document.</p>
+                    </div>
+                </details>
+
+                <details class="section-detail">
+                    <summary>What's Likely Coming Next</summary>
+                    <div class="section-content">
+                        <ul>
+<li><strong>Claude Code skills will start emitting HTML by default for any "report" output</strong> within 60-90 days. Existing skills that produce markdown reports (dashboards, summaries, briefings) will get HTML variants.</li>
+<li><strong>MCP servers will add <code>output_format: html</code> parameters</strong> to tools that today return markdown.</li>
+<li><strong>Internal tools at consulting firms (Every included) will move client deliverables from markdown → static HTML pages with embedded interactivity.</strong> Already partially true with the bookmarks site and Signal Digest.</li>
+<li><strong>The agent-to-agent case will get formalized.</strong> Expect a "shared workspace" pattern where one agent writes HTML state, another reads/updates it — basically a structured DOM as conversation buffer.</li>
+<li><strong>Backlash/correction within 6 months:</strong> people will realize raw HTML artifacts are hard to diff, hard to version, hard to grep. We'll see hybrid formats (markdown source + rendered HTML view, or HTML with embedded structured data) become the standard.</li>
+</ul>
+                    </div>
+                </details>
+
+                <details class="section-detail">
+                    <summary>Attention Is All You Need</summary>
+                    <div class="section-content">
+                        <ul>
+<li><strong>Original article:</strong> Mentioned but not linked in the tweet. Worth tracking down on Anthropic's engineering blog or Claude Code GitHub. (Search: "claude code markdown html artifact engineer")</li>
+<li><strong>Felipe Demartini (@namcios):</strong> Tracks AI shipping news with reasonable signal.</li>
+<li><strong>Anthropic Claude Code team:</strong> Watch their public posts — they're now operating as both product team and thought-leadership channel for agent design patterns.</li>
+<li><strong>Related foundational thread:</strong> the Claude Code architecture six-layer breakdown by @akshay_pachaar (2026-05-10) — the "Knowledge Layer" with skill registry + memory store is exactly where this format shift lives.</li>
+</ul>
+                    </div>
+                </details>
+
+                <details class="section-detail">
+                    <summary>What This Means for Every Consulting</summary>
+                    <div class="section-content">
+                        <p><strong>Direct implications for Every's deliverables:</strong></p>
+<ul>
+<li><strong>Client dashboards</strong> — already HTML-rendered, but most underlying generation (weekly updates, process maps, briefings) still produces markdown that's transcribed into Sheets. The intermediate step should be skipped: generate the dashboard view directly. The dashboards in <code>claudie:weekly-update</code> and <code>claudie:all-dashboards-update</code> should output HTML interfaces (filterable tables, sortable session counts, expandable per-client cards) rather than markdown reports.</li>
+<li><strong>Process maps</strong> — the <code>discovery-to-process-map</code> skill currently outputs CSV → markdown. The natural next step is interactive process diagrams (SVG flowcharts with hover details), exactly the example namcios cited.</li>
+<li><strong>Signal Digest</strong> — already HTML. This validates the choice. The next step is making each entry interactive (filter by tag, by date range, by relevance score) rather than a static scroll.</li>
+<li><strong>Weekly client emails</strong> — these <em>should</em> stay markdown/text, because they're consumed in Gmail. Don't over-correct.</li>
+<li><strong>Internal kickoff briefs</strong> — currently markdown. These could become a one-page HTML overview with collapsible sections (project context, team, calendar, action items). Faster to scan than a 2-page markdown doc.</li>
+</ul>
+<p><strong>For client trainings:</strong></p>
+<ul>
+<li>This is a teachable shift. When clients ask "what should our AI output?", the right answer in May 2026 is: "an artifact your team can act on, not a report they have to read." That's a clean reframe for boutique consulting/finance teams who currently get walls of text from their AI tools.</li>
+<li>Add to Jean Claude curriculum: a section on "format choice as a design decision" — when to default to markdown, when to ship HTML, when to produce structured data.</li>
+</ul>
+<p><strong>Caveat:</strong> Don't blanket-rewrite existing skills. Pilot with one (probably <code>weekly-update</code> since it's the most read-and-discarded). Measure whether the HTML version actually gets used differently before rolling out broadly.</p>
+<p><strong>Action items:</strong>
+- Watch for the Anthropic engineering blog post the tweet references; cite it directly when proposing HTML artifacts to clients.
+- Pilot HTML output in one Claudie skill in next 2 weeks; benchmark against markdown version for client engagement.
+- Flag this to Natalia as a "we should rethink dashboard generation" conversation; not urgent but structurally important.</p>
+                    </div>
+                </details>
+            <div class="links">
+                <a href="https://x.com/namcios/status/2053257337746657561" target="_blank" rel="noopener">View on X</a>
+            </div>
+        </article>
+
+        <article class="entry">
+            <span class="signal-tag key-shift">Key Shift</span>
             <h2><a href="https://x.com/shao__meng/status/2053098123074105705" target="_blank" rel="noopener">Perplexity and Anthropic both publish Skills design playbooks in same week</a></h2>
             <p class="author">Perplexity Research / Anthropic</p>
             <p class="summary">Two agent-native orgs simultaneously publish authoritative public guides to skill design — the practice is consolidating from craft to discipline.</p>
@@ -6080,7 +6187,7 @@ A circuit breaker halts auto-compaction after three consecutive failures.</p>
                 <li><strong>The platform shift happened in 4 weeks.</strong> Ejaaz&rsquo;s catalog shows Claude Code crossed from developer tool to knowledge-worker platform in a single shipping sprint. Clients who evaluated it even two months ago saw a fundamentally different product.</li>
             </ol>
 
-            <p class="coda">83 of 84 sources tagged as Key Shift. The dominant theme: Claude Code&rsquo;s memory, personalization, and autonomous capabilities represent a genuine platform shift &mdash; not incremental improvement.</p>
+            <p class="coda">84 of 85 sources tagged as Key Shift. The dominant theme: Claude Code&rsquo;s memory, personalization, and autonomous capabilities represent a genuine platform shift &mdash; not incremental improvement.</p>
         </section>
 
         <footer>
