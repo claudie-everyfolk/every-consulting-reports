@@ -388,13 +388,109 @@
         <header>
             <h1>Signal Digest</h1>
             <p class="subtitle">What actually matters in AI &mdash; curated by Claudie for the Every Consulting team</p>
-            <p class="meta">Last updated May 8, 2026</p>
+            <p class="meta">Last updated May 9, 2026</p>
         </header>
 
         <nav class="legend">
             Each entry is tagged: <span class="tag-example key-shift">Key Shift</span> signals a genuine change in how we should think or act. <span class="tag-example noise">Noise</span> means useful context but nothing new for the team.
         </nav>
 
+
+        <article class="entry">
+            <span class="signal-tag key-shift">Key Shift</span>
+            <h2><a href="https://x.com/shao__meng/status/2053098123074105705" target="_blank" rel="noopener">Perplexity and Anthropic both publish Skills design playbooks in same week</a></h2>
+            <p class="author">Perplexity Research / Anthropic</p>
+            <p class="summary">Two agent-native orgs simultaneously publish authoritative public guides to skill design — the practice is consolidating from craft to discipline.</p>
+            
+                <details class="section-detail">
+                    <summary>Worth Your Time?</summary>
+                    <div class="section-content">
+                        <p><strong>Read.</strong> This is the moment Skills stop being a Claude Code curiosity and become a discipline with public canon. If you build, advise on, or audit agentic systems, this is the new floor for shared vocabulary.</p>
+                    </div>
+                </details>
+
+                <details class="section-detail">
+                    <summary>What's Actually Happening</summary>
+                    <div class="section-content">
+                        <p>Two agent-native organizations — one a model lab (Anthropic), one a search/agent product company (Perplexity) — independently publish authoritative external playbooks for the same craft within ~24 hours. Perplexity's framing is the more interesting one: "Writing a Skill isn't about writing code — it's about building context for the agent." Anthropic's is the canonical one: a 33-page, structured reference.</p>
+<p>This is the textbook signature of a craft consolidating into a practice:
+- Internal patterns become external publications
+- Practitioners across orgs converge on shared vocabulary (triggering, context-shape, maintenance)
+- Documentation moves from "how to use the tool" to "how to think about the work"</p>
+<p>The shift is not that Skills got better — it's that Skills are now the unit of capability that agent teams design around, not prompts. Prompts as a primary craft started losing oxygen the moment skill-style abstractions auto-triggered on context. Now the reference material follows.</p>
+                    </div>
+                </details>
+
+                <details class="section-detail">
+                    <summary>What's Not Being Said</summary>
+                    <div class="section-content">
+                        <p>Neither doc tackles the harder problem yet: <strong>how do you measure skill quality?</strong> Both treat skills as artifacts to write and refine, but evaluation is left as exercise. There's also no canonical answer on:</p>
+<ul>
+<li>When a skill should call a sub-agent vs. inline its work</li>
+<li>How skills should compose (currently: ad-hoc)</li>
+<li>Versioning and deprecation across teams sharing skills</li>
+<li>Anti-patterns: when <em>not</em> to write a skill (we have ~40 in our system; some likely shouldn't exist)</li>
+</ul>
+<p>The contrarian view: a lot of "skills" in the wild are over-promoted prompts. The Perplexity doc hints at this by emphasizing context-building over code, but stops short of saying "most skills you write should be deleted."</p>
+                    </div>
+                </details>
+
+                <details class="section-detail">
+                    <summary>Where This Sits in the Bigger Picture</summary>
+                    <div class="section-content">
+                        <p>Skills-as-discipline is the second leg of the agent stack standardization that started with MCP for tools. MCP standardized how agents reach the world; Skills are standardizing how agents <em>carry knowledge</em> between conversations. Two of the three legs (tools, knowledge) now have public canon. The third — orchestration / sub-agents — is where the next consolidation happens; we already see Hermes, OpenAI Codex, and Cowork all racing to define <code>/goal</code>-style autonomous loops.</p>
+<p>This also confirms Jerry Liu's "context layer is the moat" thesis from this week. Skills are the unit of context that organizations own and accumulate. They are the proprietary asset.</p>
+                    </div>
+                </details>
+
+                <details class="section-detail">
+                    <summary>What's Likely Coming Next</summary>
+                    <div class="section-content">
+                        <ul>
+<li><strong>Skill marketplaces.</strong> Once design is canonical, exchange becomes inevitable. Expect at least one major marketplace announcement within 90 days.</li>
+<li><strong>Skill analytics.</strong> Trigger rates, success rates, drift detection. Today this is invisible; the next round of tooling will surface it.</li>
+<li><strong>Skill linting / static analysis.</strong> "Your description has 4 ambiguous triggers" is a 2026 product.</li>
+<li><strong>Adversarial skill evals.</strong> Once skills auto-trigger on context, prompt injection via skill description becomes an attack surface. Expect a CVE-class incident within 6 months.</li>
+</ul>
+                    </div>
+                </details>
+
+                <details class="section-detail">
+                    <summary>Attention Is All You Need</summary>
+                    <div class="section-content">
+                        <p><strong>Foundational sources:</strong>
+- Perplexity Research: https://research.perplexity.ai/articles/designing-refining-and-maintaining-agent-skills
+- Anthropic Claude Skills guide (linked from @dr_cintas' tweet)
+- Counterpart practitioner thread: @shao__meng's translation/summary at https://x.com/shao__meng/status/2053098123074105705</p>
+<p><strong>Key people to watch:</strong>
+- Boris Cherny (@bcherny) — Claude Code lead, ships skills runtime
+- Perplexity Agents team (publishing under @perplexity_ai)
+- Alvaro Cintas (@dr_cintas) — high-signal aggregator on agent practice</p>
+                    </div>
+                </details>
+
+                <details class="section-detail">
+                    <summary>What This Means for Every Consulting</summary>
+                    <div class="section-content">
+                        <p><strong>Direct, actionable.</strong></p>
+<ol>
+<li><strong>Audit our skill-creator skill.</strong> It predates both of these references. Cross-check against Perplexity's "context not code" thesis and Anthropic's structured guide. Nityesh owns this.</li>
+<li><strong>Audit our existing skills against Perplexity's framing.</strong> We have ~40+ Claudie/Jean-Claude/client-work skills. Some are likely thin wrappers that should collapse into one. The "context, not code" lens helps identify them.</li>
+<li><strong>Position for client conversations.</strong> When clients ask "how should we structure our internal AI workflows," we can now point to two authoritative public references instead of vibes. Adds credibility without us having to be the source.</li>
+<li><strong>Training implication.</strong> Add a Skills design module to the consulting curriculum. Currently we teach Claude Code mechanics; we should teach skill <em>design philosophy</em> — that's where leverage compounds. Especially relevant for clients moving from "Claude as chat" to "Claude as workflow infrastructure."</li>
+<li><strong>Hot take to test in proposals.</strong> "The model is commoditizing. The prompt is dead. The skill is the unit of competitive advantage." Lift Jerry Liu's context-moat framing onto the skill artifact directly.</li>
+</ol>
+<p><strong>Internal action items:</strong>
+- Nityesh: read both docs, propose skill-creator skill update
+- Natalia: optional quote in next proposal about industry consolidating around skills as unit of context
+- Claudie: re-audit signal-digest, weekly-update, delivery-skill descriptions for trigger reliability against Perplexity's framing</p>
+                    </div>
+                </details>
+            <div class="links">
+                <a href="https://x.com/shao__meng/status/2053098123074105705" target="_blank" rel="noopener">View on X</a>
+                <a href="https://research.perplexity.ai/articles/designing-refining-and-maintaining-agent-skills" target="_blank" rel="noopener">Read Article</a>
+            </div>
+        </article>
 
         <article class="entry">
             <span class="signal-tag key-shift">Key Shift</span>
@@ -5886,7 +5982,7 @@ A circuit breaker halts auto-compaction after three consecutive failures.</p>
                 <li><strong>The platform shift happened in 4 weeks.</strong> Ejaaz&rsquo;s catalog shows Claude Code crossed from developer tool to knowledge-worker platform in a single shipping sprint. Clients who evaluated it even two months ago saw a fundamentally different product.</li>
             </ol>
 
-            <p class="coda">81 of 82 sources tagged as Key Shift. The dominant theme: Claude Code&rsquo;s memory, personalization, and autonomous capabilities represent a genuine platform shift &mdash; not incremental improvement.</p>
+            <p class="coda">82 of 83 sources tagged as Key Shift. The dominant theme: Claude Code&rsquo;s memory, personalization, and autonomous capabilities represent a genuine platform shift &mdash; not incremental improvement.</p>
         </section>
 
         <footer>
