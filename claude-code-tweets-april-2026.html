@@ -388,13 +388,107 @@
         <header>
             <h1>Signal Digest</h1>
             <p class="subtitle">What actually matters in AI &mdash; curated by Claudie for the Every Consulting team</p>
-            <p class="meta">Last updated May 21, 2026</p>
+            <p class="meta">Last updated May 23, 2026</p>
         </header>
 
         <nav class="legend">
             Each entry is tagged: <span class="tag-example key-shift">Key Shift</span> signals a genuine change in how we should think or act. <span class="tag-example noise">Noise</span> means useful context but nothing new for the team.
         </nav>
 
+
+        <article class="entry">
+            <span class="signal-tag key-shift">Key Shift</span>
+            <h2><a href="https://x.com/ns123abc/status/2057930703258427664" target="_blank" rel="noopener">Project Glasswing Throughput Update: 10K+ Critical Vulnerabilities in One Month</a></h2>
+            <p class="author">Anthropic (@AnthropicAI) / Andrew Curran (@AndrewCurran_) / NIK (@ns123abc)</p>
+            <p class="summary">One month after launch, Anthropic's Project Glasswing/Claude Mythos has found 10,000+ high- or critical-severity vulnerabilities across partner codebases. Concrete throughput: 2,000 Cloudflare bugs (400 high/critical), 271 vulns in Firefox 150 — a 10x rate vs Firefox 148. Expansion to US and allied governments coming.</p>
+            
+                <details class="section-detail">
+                    <summary>Worth Your Time?</summary>
+                    <div class="section-content">
+                        <p><strong>READ</strong> — but as an <em>update</em>, not a new framing. Entries #28, #34, #51 already established the strategic shift. This is the empirical data point that lets us stop saying "capable of" and start saying "is currently producing." For client conversations, the numbers matter more than the launch did.</p>
+                    </div>
+                </details>
+
+                <details class="section-detail">
+                    <summary>What's Actually Happening</summary>
+                    <div class="section-content">
+                        <p>Anthropic published the first results from Project Glasswing 30 days post-launch. The headline number: <strong>10,000+ high- or critical-severity vulnerabilities</strong> found in production software with partners. The breakdown:</p>
+<ul>
+<li><strong>Cloudflare:</strong> ~2,000 bugs surfaced, 400 of them high/critical severity</li>
+<li><strong>Mozilla Firefox 150:</strong> 271 vulnerabilities — a 10x increase vs Firefox 148 (the prior version Mythos analyzed)</li>
+<li><strong>Expansion path:</strong> Anthropic announced Glasswing will extend to US and allied government partners "in the near future, once we've developed the far stronger safeguards we need"</li>
+</ul>
+<p>The structural reality: a single AI system, in one month, found at-scale the volume of high-severity vulnerabilities that took the Cloudflare and Mozilla security teams quarters or years to find through traditional means. The 10x Firefox jump between 148→150 is not because Firefox got worse — it's because the same Mythos got better at finding what was always there.</p>
+<p>The incentive question is now flipped from "is this useful?" to "is the bottleneck the <em>finding</em> or the <em>fixing</em>?" Cloudflare and Mozilla now have backlogs orders of magnitude larger than their patch capacity.</p>
+                    </div>
+                </details>
+
+                <details class="section-detail">
+                    <summary>What's Not Being Said</summary>
+                    <div class="section-content">
+                        <p>The 10K number is partner-only. Anthropic isn't disclosing what they're finding in software <em>not</em> covered by partner agreements — which is most of the open-source dependency graph. There's a strong implication that the disclosure pipeline (responsible disclosure, coordinated patching) is now the rate limiter, not detection.</p>
+<p>Also unsaid: the dual-use question. The "far stronger safeguards" line is the tell. If Mythos can find 271 vulns in a Firefox release, the same capability in adversarial hands looks like the most consequential offensive-security tool ever built. The government expansion makes this explicit — Anthropic is positioning Glasswing as a national-security asset, not just a defender's tool. Expect classified deployment to precede commercial availability.</p>
+<p>The throughput also exposes a labor question Glasswing doesn't address: who triages 10,000 reports? The traditional SOC analyst pyramid breaks at this volume. Either the AI also does the triage (concentrating capability further in Anthropic) or the buyer eats the headcount cost (defeating the value prop).</p>
+                    </div>
+                </details>
+
+                <details class="section-detail">
+                    <summary>Where This Sits in the Bigger Picture</summary>
+                    <div class="section-content">
+                        <p>This is the empirical proof of the trajectory Signal Digest has been tracking:</p>
+<ul>
+<li><strong>#28</strong> (Apr 7) — Glasswing capability launch</li>
+<li><strong>#34</strong> (Apr 7) — strategic positioning</li>
+<li><strong>#51</strong> (Apr 13) — Mythos as "first AI cyber range complete," 72% Firefox zero-day rate, Goldman/JPM early adoption</li>
+<li><strong>#45</strong> (Apr 12) — Levie's security-Jevons-paradox: more findings → more demand for human security judgment</li>
+<li><strong>#78</strong> — productization angle</li>
+</ul>
+<p>This update converts those forecasts into a citation. It also rhymes with the broader pattern — AI commoditizes the <em>finding</em> step in any field that has a finding step (vulnerabilities, contracts, citations, anomalies), and the bottleneck moves downstream to triage and response.</p>
+                    </div>
+                </details>
+
+                <details class="section-detail">
+                    <summary>What's Likely Coming Next</summary>
+                    <div class="section-content">
+                        <ul>
+<li><strong>Near term:</strong> Cloudflare and Mozilla publish their own postmortems on the Glasswing collaboration — these will be the case studies enterprise CISOs share internally.</li>
+<li><strong>Q3 2026:</strong> Government deployment announced (DoD or NSA partnership), likely under a CISA-coordinated program. Commercial Glasswing follows in Q4 or 2027.</li>
+<li><strong>Second-order:</strong> A counter-market emerges for "AI-assisted patch generation" — finding 10K bugs creates demand for AI-assisted fixing. Watch GitHub/Microsoft, Snyk, and the new wave of AI-native AppSec startups.</li>
+<li><strong>Adversarial:</strong> Within 6–12 months, expect the first publicly attributed offensive-AI vulnerability discovery campaign — almost certainly state-sponsored, almost certainly under-disclosed.</li>
+</ul>
+                    </div>
+                </details>
+
+                <details class="section-detail">
+                    <summary>Attention Is All You Need</summary>
+                    <div class="section-content">
+                        <ul>
+<li><strong>Primary:</strong> @AnthropicAI tweet on Project Glasswing one-month update.</li>
+<li><strong>Coverage:</strong> Andrew Curran (@AndrewCurran_) — strategic framing including the government-expansion line. NIK (@ns123abc) — partner-by-partner numerical breakdown.</li>
+<li><strong>Read alongside:</strong> Signal Digest #28, #34, #45, #51, #78. The Cloudflare blog (when published) will be the load-bearing artifact.</li>
+<li><strong>Mike Taylor (@hammer-mt)</strong> is the Every-internal expert — already running Mythos evals; his perspective is the credentialed take.</li>
+</ul>
+                    </div>
+                </details>
+
+                <details class="section-detail">
+                    <summary>What This Means for Every Consulting</summary>
+                    <div class="section-content">
+                        <p><strong>The throughput numbers convert prior strategic posts into a discovery weapon.</strong> Stop describing the capability — show the chart. "10,000 critical vulnerabilities in 30 days, including 400 high/critical at Cloudflare alone" is the line that gets a CISO to take a discovery call.</p>
+<p><strong>Concrete uses:</strong>
+- <strong>Mike Taylor — Thumbtack follow-up.</strong> Mike's existing relationship + the Repo Hardening Skill bookmark (<code>bookmarks/2026-05-12-kevin-kern-repo-hardening-skill.md</code>) + these numbers = a "Mythos demo + repo hardening" tech-vertical module. This is the most direct revenue path for the update.
+- <strong>Bloomberg + finance clients</strong> (entries #28/#34/#51 already named them as ready-to-receive). The 10x Firefox jump is the data point that lands with security committees.
+- <strong>Brooker — finance-client framing.</strong> "AI can now find security holes 10x better than the previous month, at one of the most-scrutinized codebases on the planet." But hold until Natalia/Brooker sign-off per #51's caveat.
+- <strong>Discovery angle:</strong> flip the conversation from "do you use AI?" to "what's your plan for when your vendors' AI vendors find 10,000 things wrong with your stack?"
+- <strong>Internal — Nityesh.</strong> Per entry #28: a Mythos pass against Claudie's own codebase is worth the cost. Throughput proves the run is bounded.</p>
+<p><strong>Caveat to coach clients on:</strong> finding ≠ fixing. The maintenance tax (per entry #91, Dan Shipper's "After Automation") applies to AppSec triage too. Sell the upside, name the downstream cost.</p>
+<p><strong>Who reads it:</strong> Mike (primary — Thumbtack, Bloomberg, curriculum), Brooker (finance simplification — pending sign-off), Nityesh (internal Mythos run), Natalia (sales narrative, discovery framing).</p>
+                    </div>
+                </details>
+            <div class="links">
+                <a href="https://x.com/ns123abc/status/2057930703258427664" target="_blank" rel="noopener">View on X</a>
+            </div>
+        </article>
 
         <article class="entry">
             <span class="signal-tag key-shift">Key Shift</span>
@@ -6696,7 +6790,7 @@ A circuit breaker halts auto-compaction after three consecutive failures.</p>
                 <li><strong>The platform shift happened in 4 weeks.</strong> Ejaaz&rsquo;s catalog shows Claude Code crossed from developer tool to knowledge-worker platform in a single shipping sprint. Clients who evaluated it even two months ago saw a fundamentally different product.</li>
             </ol>
 
-            <p class="coda">90 of 91 sources tagged as Key Shift. The dominant theme: Claude Code&rsquo;s memory, personalization, and autonomous capabilities represent a genuine platform shift &mdash; not incremental improvement.</p>
+            <p class="coda">91 of 92 sources tagged as Key Shift. The dominant theme: Claude Code&rsquo;s memory, personalization, and autonomous capabilities represent a genuine platform shift &mdash; not incremental improvement.</p>
         </section>
 
         <footer>
