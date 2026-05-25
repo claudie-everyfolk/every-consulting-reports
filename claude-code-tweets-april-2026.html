@@ -497,6 +497,95 @@
 
         <article class="entry">
             <span class="signal-tag key-shift">Key Shift</span>
+            <h2><a href="https://x.com/omarsar0/status/2058936160291004483" target="_blank" rel="noopener">SkillOpt — Microsoft Research treats agent skill docs as trainable external state</a></h2>
+            <p class="author">elvis (@omarsar0)</p>
+            <p class="summary">Microsoft Research releases SkillOpt: instead of treating skill markdown files as human-authored static prompts, treat them as a trainable external state of a frozen agent. A validation-gated optimizer rewrites the doc (add/delete/replace instructions) with a 'textual learning rate.' Beats handwritten skills, TextGrad, GEPA, and EvoSkill across 52 cells. +23.5 pts direct chat, +24.8 with Codex, +19.1 with Claude Code on GPT-5.5. Zero inference-time cost. Transfers across models and harnesses.</p>
+            
+                <details class="section-detail">
+                    <summary>Worth Your Time?</summary>
+                    <div class="section-content">
+                        <p><strong>READ.</strong> One-line verdict: the most direct lever yet on agent skill quality — handwritten skill markdown is now empirically a weak baseline against auto-tuned skills, with the deltas large enough (~20 pts) that the gap will spread fast.</p>
+                    </div>
+                </details>
+
+                <details class="section-detail">
+                    <summary>What's Actually Happening</summary>
+                    <div class="section-content">
+                        <p>For the last 18 months, the dominant pattern for getting agents to behave well on a domain has been: a human writes a skill / system-prompt / agents.md / CLAUDE.md and the agent reads it. The quality ceiling is the author's prompting skill.</p>
+<p>SkillOpt re-frames the file. The agent is frozen. The skill doc is the parameter vector being trained — only with text, not weights. An optimizer model proposes edits (add, delete, replace instructions). A validation set (held-out tasks with scorers) gates which edits survive. A "textual learning rate" controls how aggressively each round rewrites — analogous to gradient step size.</p>
+<p>Three structural results:
+1. <strong>Best or tied on all 52 (model, benchmark, harness) cells tested.</strong> That's the cleanest possible sweep — no model where humans beat the optimizer.
+2. <strong>+23.5 pts (direct chat), +24.8 (Codex), +19.1 (Claude Code)</strong> on GPT-5.5 over no-skill baseline. The Claude Code number is the one that matters most for teams running Claude Code as their harness — that's where Every Consulting and most agent-native teams live.
+3. <strong>Transfer.</strong> Learned skills carry across models and harnesses. So you don't re-train per substrate.</p>
+<p>And critically: <strong>zero extra inference cost.</strong> Unlike GEPA / TextGrad approaches that bake reasoning at runtime, SkillOpt's output is a static markdown file. Everything happens at "training" time.</p>
+                    </div>
+                </details>
+
+                <details class="section-detail">
+                    <summary>What's Not Being Said</summary>
+                    <div class="section-content">
+                        <ul>
+<li><strong>A validation set is the real bottleneck.</strong> SkillOpt assumes you have held-out tasks with scorers. For most enterprise / consulting use cases, that scorer doesn't exist — the value of the agent is hard to grade with code. Building the eval set is now the gate; without it, you can't run SkillOpt. This will favor teams already running evals (Anthropic, Cursor, larger orgs) over the long tail.</li>
+<li><strong>Drift risk.</strong> A textually-rewritten doc is hard to diff-review at human speed. After 10 SkillOpt rounds, you have a prompt whose lineage is opaque. For client-facing agents, this is a compliance/audit problem.</li>
+<li><strong>The frozen-agent assumption is convenient now and wrong in 12 months.</strong> When agent base models update every quarter, "skill that transfers across models" is a strong claim that needs to be re-tested constantly. The skills will quietly stale.</li>
+<li><strong>Beats human authors — but only handwritten skills.</strong> Human-author-then-LLM-edit (the hybrid most teams already do informally) wasn't tested. The real comparison many readers care about is "SkillOpt vs. a senior prompt engineer who iterates with Claude as a co-author."</li>
+</ul>
+                    </div>
+                </details>
+
+                <details class="section-detail">
+                    <summary>Where This Sits in the Bigger Picture</summary>
+                    <div class="section-content">
+                        <p>Three converging trends:
+- <strong>Skill files are now load-bearing.</strong> Karpathy's CLAUDE.md hit 82k stars. Anthropic launched first-class skills. Every Consulting's whole architecture (this Mac mini included) is a stack of markdown skills. The category exists.
+- <strong>Optimizers for textual artifacts (TextGrad, GEPA, DSPy) have been trending for 18 months.</strong> SkillOpt is the version targeted specifically at agent skills rather than general prompts. That specialization is what unlocks the +20 pt gap.
+- <strong>Services-as-software thesis (entries 93/94 this week).</strong> AI-native shops compete on the quality of their agent stack. If a competitor's skills are SkillOpt-tuned and yours are handwritten, that's a measurable advantage in client deliverables.</p>
+                    </div>
+                </details>
+
+                <details class="section-detail">
+                    <summary>What's Likely Coming Next</summary>
+                    <div class="section-content">
+                        <ul>
+<li><strong>A SkillOpt-equivalent tool will ship as an open-source library within 60-90 days.</strong> Probably from Stanford DSPy folks, LangChain, or a solo OSS author. The barrier is the eval harness, not the optimizer logic.</li>
+<li><strong>Anthropic ships first-party "skill tuning" inside Claude Code.</strong> Pattern-match against Cursor's existing "rules" tuning — Anthropic is closer to this than anyone else and has a direct read on Claude Code skill files.</li>
+<li><strong>Second-order effect: skill marketplaces become eval-gated.</strong> Today anyone can publish a skill. In 12 months, the question will be "what's the validation set this skill was tuned on?" — and unsigned/un-tuned skills look like un-tested code.</li>
+</ul>
+                    </div>
+                </details>
+
+                <details class="section-detail">
+                    <summary>Attention Is All You Need</summary>
+                    <div class="section-content">
+                        <ul>
+<li><strong>Paper:</strong> https://arxiv.org/abs/2605.23904</li>
+<li><strong>Author surface:</strong> Microsoft Research; co-authors likely overlap with the TextGrad / DSPy academic cluster.</li>
+<li><strong>Adjacent work to read alongside:</strong> TextGrad (Yuksekgonul et al.), GEPA (genetic prompt optimization), DSPy (Khattab et al.), Anthropic's Skills launch post.</li>
+<li><strong>The one thing to actually do:</strong> read sections 3-4 of the paper for the validation-gating algorithm and the textual-learning-rate definition. That's the implementable core.</li>
+</ul>
+                    </div>
+                </details>
+
+                <details class="section-detail">
+                    <summary>What This Means for Every Consulting</summary>
+                    <div class="section-content">
+                        <p><strong>For Nityesh:</strong> This is the most directly applicable research to Claudie's infrastructure this quarter. Concrete moves:
+1. Pick one Claudie skill that has well-defined success criteria (<code>natalia-email-ghostwriter</code> is the obvious candidate — there's a corpus of 110 emails to validate against). Hand-build a 20-task eval set. Run a manual single-round SkillOpt loop with Claude as the optimizer. Measure delta vs. the current handwritten skill.
+2. If the delta is meaningful, build a small CLI: <code>skillopt &lt;skill-path&gt; --eval &lt;eval-dir&gt;</code>. This becomes Every Consulting's internal moat.
+3. Apply to client deliverables: the custom prompts we ship in $50-100k engagements should be tuned, not handwritten. That's a positioning upgrade — we don't just write prompts, we train them.</p>
+<p><strong>For client training (Mike, Brooker):</strong> The training thesis shifts. "How to write a good prompt" is the 2024 curriculum. "How to build an eval set so you can improve your prompts" is the 2026 curriculum. This is a real change to the bootcamp content.</p>
+<p><strong>For Natalia:</strong> Sales line — "every consulting firm sells prompts. We're the only one that trains them." That differentiation is defensible for ~6 months before the market catches up.</p>
+<p><strong>Risk to flag:</strong> If a client adopts SkillOpt before we offer it, they leapfrog the value of our prompt deliverables. Worth raising in next discovery conversations with clients we already trained — offer a "skill tuning" upgrade engagement.</p>
+                    </div>
+                </details>
+            <div class="links">
+                <a href="https://x.com/omarsar0/status/2058936160291004483" target="_blank" rel="noopener">View on X</a>
+                <a href="https://arxiv.org/abs/2605.23904" target="_blank" rel="noopener">Read Article</a>
+            </div>
+        </article>
+
+        <article class="entry">
+            <span class="signal-tag key-shift">Key Shift</span>
             <h2><a href="https://x.com/RaphaelDabadie/status/2058617909744746697" target="_blank" rel="noopener">Foaster founder: consulting firms lying about AI productivity, MBB clients switching to AI-native</a></h2>
             <p class="author">Raphaël Dabadie (@RaphaelDabadie) — Foaster (YC P26)</p>
             <p class="summary">A YC founder explicitly competing with MBBs publicly accuses traditional consultancies of charging pre-AI rates for work AI does in 1/3 the time, names 'augmenting consultants vs. redesigning the work' as the failure mode, and claims his MBB-defector customers love it. The clearest articulation yet of the AI-native consulting attack pattern.</p>
@@ -6979,7 +7068,7 @@ A circuit breaker halts auto-compaction after three consecutive failures.</p>
                 <li><strong>The platform shift happened in 4 weeks.</strong> Ejaaz&rsquo;s catalog shows Claude Code crossed from developer tool to knowledge-worker platform in a single shipping sprint. Clients who evaluated it even two months ago saw a fundamentally different product.</li>
             </ol>
 
-            <p class="coda">93 of 94 sources tagged as Key Shift. The dominant theme: Claude Code&rsquo;s memory, personalization, and autonomous capabilities represent a genuine platform shift &mdash; not incremental improvement.</p>
+            <p class="coda">94 of 95 sources tagged as Key Shift. The dominant theme: Claude Code&rsquo;s memory, personalization, and autonomous capabilities represent a genuine platform shift &mdash; not incremental improvement.</p>
         </section>
 
         <footer>
