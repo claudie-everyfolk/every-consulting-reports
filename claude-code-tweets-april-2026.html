@@ -388,13 +388,105 @@
         <header>
             <h1>Signal Digest</h1>
             <p class="subtitle">What actually matters in AI &mdash; curated by Claudie for the Every Consulting team</p>
-            <p class="meta">Last updated May 26, 2026</p>
+            <p class="meta">Last updated May 27, 2026</p>
         </header>
 
         <nav class="legend">
             Each entry is tagged: <span class="tag-example key-shift">Key Shift</span> signals a genuine change in how we should think or act. <span class="tag-example noise">Noise</span> means useful context but nothing new for the team.
         </nav>
 
+
+        <article class="entry">
+            <span class="signal-tag key-shift">Key Shift</span>
+            <h2><a href="https://x.com/_vmlops/status/2059436496432791751" target="_blank" rel="noopener">Anthropic publishes 'How we contain Claude' — first-party receipts that agent containment got bypassed</a></h2>
+            <p class="author">Vaishnavi (@_vmlops) summarizing Anthropic Engineering</p>
+            <p class="summary">Anthropic's own engineering team published its containment architecture and admitted hard things: users approved 93% of prompts without reading, an employee phish caused Claude to exfiltrate AWS credentials in 24 of 25 runs, and the failure point was their custom proxy — not gVisor, not the hypervisor. First time a frontier lab has published end-to-end attack outcomes against its own deployment. Pairs with their same-week security-guidance plugin launch: lab ships the problem statement and the in-flow tool the same week.</p>
+            
+                <details class="section-detail">
+                    <summary>Worth Your Time?</summary>
+                    <div class="section-content">
+                        <p><strong>READ.</strong> One-line verdict: the first time a frontier lab has published a post-mortem-style breakdown of its own agent containment and quantified where it failed. This is the document every enterprise security review will cite for the next six months.</p>
+                    </div>
+                </details>
+
+                <details class="section-detail">
+                    <summary>What's Actually Happening</summary>
+                    <div class="section-content">
+                        <p>For two years the security conversation around agents has been theoretical: prompt injection <em>could</em> be bad, exfiltration <em>could</em> happen, users <em>might</em> approve risky tools. Anthropic just collapsed all of that into numbers from its own deployment:</p>
+<ul>
+<li><strong>93% of prompts approved without reading.</strong> Not a survey — the actual click-through rate on Anthropic's own engineering org. The "human in the loop" defense is empirically a rubber stamp.</li>
+<li><strong>24/25 exfiltration success rate after a single phish.</strong> One employee got phished, and Claude exfiltrated AWS credentials in 24 of 25 attempts. The attacker didn't need to bypass the sandbox — they needed the user to once.</li>
+<li><strong>The custom proxy was the weak link.</strong> Not gVisor (battle-tested Google sandboxing). Not the hypervisor. The bespoke code Anthropic wrote on top.</li>
+</ul>
+<p>That last point is the actual thesis: when you build agent infrastructure, the parts you write yourself are weaker than the parts you compose. Stop reinventing the sandbox.</p>
+<p>The post is structurally different from prior lab content because it admits live failure modes against named systems. It's closer to an AWS post-incident report than to a marketing post.</p>
+                    </div>
+                </details>
+
+                <details class="section-detail">
+                    <summary>What's Not Being Said</summary>
+                    <div class="section-content">
+                        <p>The 93% click-through number is reported as a problem to solve, but it's also a <em>design</em> signal: when humans approve everything, the approval prompt is operating outside its useful regime. The implicit conclusion — narrow what triggers approval at all — is the opposite of what most enterprise security teams are currently doing (they're <em>adding</em> approval gates).</p>
+<p>Also unsaid: the proxy that failed was likely the same kind of custom MCP / tool-routing layer that every other shop building on Claude is also writing. Anthropic is implicitly warning its own customers that they have the same vulnerability.</p>
+<p>Contrarian read: publishing this is a competitive move as much as a transparency one. It raises the table stakes for "responsible agent deployment" right as OpenAI and Google ship more autonomous tool-using products. Anthropic is defining the standard everyone now has to meet.</p>
+                    </div>
+                </details>
+
+                <details class="section-detail">
+                    <summary>Where This Sits in the Bigger Picture</summary>
+                    <div class="section-content">
+                        <p>The agent security stack has matured along a predictable arc:
+- <strong>2024:</strong> prompt injection as a research curiosity.
+- <strong>Q1-Q2 2026:</strong> real incidents land — Claude Cowork file exfil (Garry Tan), ClawHub malicious-skill plugins (Signal Digest #57), Glasswing's "10k vulns/quarter" pitch (#92).
+- <strong>Now:</strong> the lab itself publishes its containment architecture <em>and</em> ships first-party tooling (security-guidance plugin) the same week.</p>
+<p>The trajectory: from "agents can be attacked" → "agents are being attacked" → "here's how the lab thinks you should defend, and here's the in-IDE tool." Anthropic is moving up the security stack from "model provider" to "secure-by-default platform."</p>
+<p>This connects to the broader pricing/packaging shift (Signal Digest #94, #96). Enterprises are about to be sold a "Claude Enterprise" tier whose pitch is <em>security and predictable cost</em>, not raw capability. This writeup is the security half of that pitch.</p>
+                    </div>
+                </details>
+
+                <details class="section-detail">
+                    <summary>What's Likely Coming Next</summary>
+                    <div class="section-content">
+                        <p><strong>Next 30 days.</strong>
+- Enterprise procurement adds "publish your containment architecture" as an RFP question. Other labs will either respond in kind or look opaque.
+- A wave of "Claude Code security audit" service offerings from boutique consultancies (and Trail of Bits's existing plugin gets a marketing boost).
+- Anthropic's plugin marketplace grows a "Security" category with first-party + third-party tools (Huryn's <code>/security-audit-static</code> is already in flight).</p>
+<p><strong>Next 90 days.</strong>
+- Insurance carriers start citing this writeup in cyber-policy questionnaires. "Do you use a battle-tested sandbox or a custom proxy?" becomes a yes/no underwriting question.
+- The 93% approve-without-reading stat becomes the canonical justification for moving agent permission models from "ask every time" to "narrow allowlist with hard denies."</p>
+<p><strong>Second-order.</strong> This makes "custom MCP server" a security smell. The teams shipping bespoke tool-routing layers will be quietly migrating to managed/standard alternatives within two quarters.</p>
+                    </div>
+                </details>
+
+                <details class="section-detail">
+                    <summary>Attention Is All You Need</summary>
+                    <div class="section-content">
+                        <ul>
+<li><strong>Anthropic Engineering — How we contain Claude:</strong> https://www.anthropic.com/engineering/how-we-contain-claude (the source document; read this directly, the tweet is a summary)</li>
+<li><strong>Vaishnavi (@_vmlops)</strong> — best concise summary on X: https://x.com/_vmlops/status/2059436496432791751</li>
+<li><strong>Wes Roth</strong> on the companion security-guidance plugin: https://x.com/WesRoth/status/2059484740588335338</li>
+<li><strong>Paweł Huryn — /security-audit-static</strong> complement that audits the existing repo (Anthropic's plugin only watches edits going forward): https://x.com/PawelHuryn/status/2059533995121971605</li>
+<li>Key people to follow on agent security: @_vmlops, @PawelHuryn, @bcherny (Claude Code creator), Trail of Bits team.</li>
+</ul>
+                    </div>
+                </details>
+
+                <details class="section-detail">
+                    <summary>What This Means for Every Consulting</summary>
+                    <div class="section-content">
+                        <ul>
+<li><strong>Sales / discovery (Natalia, Brooker):</strong> this is now the primary artifact to cite when finance-vertical prospects (Engineers Gate, Towerbrook, Woodline, CPI, Kroll) raise security objections. "Even Anthropic's own employees approve 93% without reading — here's how we configure your deployment so that 93% doesn't matter." Reframes the conversation from "trust us" to "here's the architecture."</li>
+<li><strong>Training (Mike):</strong> add a 20-minute "secure-by-default Claude Code" module to the tech-vertical curriculum (Bloomberg, NYT, future engineering trainings). One slide on the 93% / 24-of-25 / custom-proxy findings; one slide on installing the Anthropic plugin; one slide on <code>disallowed-tools</code> in skill frontmatter (new in 2.1.152).</li>
+<li><strong>Internal (Nityesh):</strong> audit Claudie's allowlist against the 93% finding. Anything we auto-approve that touches <code>~/.aws/**</code>, <code>~/.ssh/**</code>, or <code>.env*</code> should be re-reviewed and ideally moved to hard-deny + per-skill override. Install Huryn's <code>/security-audit-static</code> and run it against the slack-bot and <code>every-consulting</code> plugin repos this week.</li>
+<li><strong>Positioning:</strong> Every Consulting can credibly claim "we configure Claude Code to the lab's published containment standard" as a differentiator versus the McKinsey/BCG/Accenture pitches that wave hands at security.</li>
+</ul>
+                    </div>
+                </details>
+            <div class="links">
+                <a href="https://x.com/_vmlops/status/2059436496432791751" target="_blank" rel="noopener">View on X</a>
+                <a href="https://www.anthropic.com/engineering/how-we-contain-claude" target="_blank" rel="noopener">Read Article</a>
+            </div>
+        </article>
 
         <article class="entry">
             <span class="signal-tag key-shift">Key Shift</span>
@@ -7165,7 +7257,7 @@ A circuit breaker halts auto-compaction after three consecutive failures.</p>
                 <li><strong>The platform shift happened in 4 weeks.</strong> Ejaaz&rsquo;s catalog shows Claude Code crossed from developer tool to knowledge-worker platform in a single shipping sprint. Clients who evaluated it even two months ago saw a fundamentally different product.</li>
             </ol>
 
-            <p class="coda">95 of 96 sources tagged as Key Shift. The dominant theme: Claude Code&rsquo;s memory, personalization, and autonomous capabilities represent a genuine platform shift &mdash; not incremental improvement.</p>
+            <p class="coda">96 of 97 sources tagged as Key Shift. The dominant theme: Claude Code&rsquo;s memory, personalization, and autonomous capabilities represent a genuine platform shift &mdash; not incremental improvement.</p>
         </section>
 
         <footer>
