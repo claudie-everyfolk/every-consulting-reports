@@ -388,13 +388,92 @@
         <header>
             <h1>Signal Digest</h1>
             <p class="subtitle">What actually matters in AI &mdash; curated by Claudie for the Every Consulting team</p>
-            <p class="meta">Last updated May 27, 2026</p>
+            <p class="meta">Last updated May 28, 2026</p>
         </header>
 
         <nav class="legend">
             Each entry is tagged: <span class="tag-example key-shift">Key Shift</span> signals a genuine change in how we should think or act. <span class="tag-example noise">Noise</span> means useful context but nothing new for the team.
         </nav>
 
+
+        <article class="entry">
+            <span class="signal-tag key-shift">Key Shift</span>
+            <h2><a href="https://x.com/Mnilax/status/2059737441880457369" target="_blank" rel="noopener">The 20K-token floor: sub-agent economics catch up to practitioners</a></h2>
+            <p class="author">Mnimiy (@Mnilax)</p>
+            <p class="summary">Practitioner data (4 of 14 sub-agents survived) plus an Anthropic engineers' workshop converge on a new orthodoxy: sub-agents are expensive, self-evaluation is a trap, adversarial evaluators win.</p>
+            
+                <details class="section-detail">
+                    <summary>Worth Your Time?</summary>
+                    <div class="section-content">
+                        <p><strong>Read</strong> — but only if you build or operate agent systems. <strong>Skip</strong> if you're a generalist or end-user; this is craft, not narrative.</p>
+<p>One-line verdict: This is the moment "spawn another agent" stops being free advice and starts being capital allocation.</p>
+                    </div>
+                </details>
+
+                <details class="section-detail">
+                    <summary>What's Actually Happening</summary>
+                    <div class="section-content">
+                        <p>Two things landed in the same week, and they reinforce each other.</p>
+<p>The practitioner side: Mnimiy ran 14 Claude Code sub-agents over 60 days and reports only 4 survived. The headline number — 20K tokens of overhead per spawned sub-agent — isn't new, but it was lore. Now it's stated plainly: every fan-out has a fixed cost, paid before any work happens.</p>
+<p>The vendor side: Anthropic engineers Ash Prabaker and Andrew Wilson gave a workshop on long-running agents with two claims worth quoting verbatim. <em>"Self-evaluation is a trap. Adversarial evaluator agents work better."</em> And: <em>"Context compaction doesn't [scale]"</em> — the rest of the line was cut off in the screenshot but the direction is clear.</p>
+<p>The structural reality: sub-agents have moved from "obvious win, more is better" to "audit your callers." The incentive shift inside Anthropic — engineers publicly recommending adversarial multi-agent QA over self-eval — is the more durable signal here. It tells you what the platform is being optimized for next.</p>
+                    </div>
+                </details>
+
+                <details class="section-detail">
+                    <summary>What's Not Being Said</summary>
+                    <div class="section-content">
+                        <p>Nobody's saying it out loud, but the cost of "let the agent decide" has become real. Self-evaluation loops are how every solo builder demos their agent — "look, it reviewed itself!" — and they almost never work in production. The adversarial-judge pattern requires deliberate design: separate context, separate prompts, separate biases. That's expensive to build and harder to demo.</p>
+<p>The contrarian read: the 20K number is being treated as a ceiling, but it's a floor. Spawning is cheap relative to the <em>cumulative</em> cost of an agent that runs for hours and compacts its own context badly. The framing should be "how do you justify long-running state," not "how do you minimize spawn count."</p>
+                    </div>
+                </details>
+
+                <details class="section-detail">
+                    <summary>Where This Sits in the Bigger Picture</summary>
+                    <div class="section-content">
+                        <p>We're at the end of the "more agents = better" phase. The next phase is portfolio thinking: which agents survive a quarterly review, which get retired, what's the unit economics per task. That maps directly onto how engineering orgs already think about microservices and headcount.</p>
+<p>It also pre-stages the next debate: stateful vs. stateless agents. Anthropic's hint that compaction doesn't scale is them quietly conceding that the path forward is structured memory and explicit handoffs, not bigger context windows.</p>
+                    </div>
+                </details>
+
+                <details class="section-detail">
+                    <summary>What's Likely Coming Next</summary>
+                    <div class="section-content">
+                        <ul>
+<li>Sub-agent ROI metrics become standard in agent tooling (similar to how span timing became standard in distributed tracing).</li>
+<li>"Adversarial-by-default" QA patterns ship as named recipes in Claude Code and competitors.</li>
+<li>Public retirements: high-profile sub-agent products get killed and their authors write postmortems. This is healthy.</li>
+<li>Pricing pressure on long-running agent products as buyers learn to ask "what's the spawn count per task?"</li>
+</ul>
+                    </div>
+                </details>
+
+                <details class="section-detail">
+                    <summary>Attention Is All You Need</summary>
+                    <div class="section-content">
+                        <ul>
+<li><strong>Anthropic workshop (Prabaker + Wilson, long-running agents)</strong> — find the recording; this is the primary source. Not yet linked in Mnimiy's thread but should surface on Anthropic's channels within the week.</li>
+<li><strong>Mnimiy / @Mnilax</strong> — keeps publishing field reports on sub-agent failure modes; worth following for ground truth.</li>
+<li><strong>Anthropic engineering posts on multi-agent systems</strong> — earlier work on "orchestrator-worker" patterns frames this.</li>
+</ul>
+                    </div>
+                </details>
+
+                <details class="section-detail">
+                    <summary>What This Means for Every Consulting</summary>
+                    <div class="section-content">
+                        <ul>
+<li><strong>Internal (Claudie):</strong> Nityesh should audit <code>experimental:parallelize</code> callers against a 20K-per-subagent threshold. <code>slide-deck-creation:review-slides</code> already implements the adversarial-judge pattern correctly — use it as the template when refactoring <code>quality-check</code> and any self-reviewing skill.</li>
+<li><strong>Mike's tech vertical curriculum:</strong> Add a "sub-agent economics" module. Clients are about to build multi-agent setups by default; they need the 20K floor and the adversarial-eval principle baked in from day one. Otherwise they'll come back in six months with the same 10-of-14-burnt-tokens problem.</li>
+<li><strong>Discovery framing:</strong> When a client says "we want our agents to QA themselves," the new answer is no. Stand up a separate agent with no shared context. This is now a defensible best-practice recommendation, not a preference.</li>
+<li><strong>Watch for:</strong> the workshop recording when it posts — worth a 30-min team viewing before our next curriculum revision.</li>
+</ul>
+                    </div>
+                </details>
+            <div class="links">
+                <a href="https://x.com/Mnilax/status/2059737441880457369" target="_blank" rel="noopener">View on X</a>
+            </div>
+        </article>
 
         <article class="entry">
             <span class="signal-tag key-shift">Key Shift</span>
@@ -7257,7 +7336,7 @@ A circuit breaker halts auto-compaction after three consecutive failures.</p>
                 <li><strong>The platform shift happened in 4 weeks.</strong> Ejaaz&rsquo;s catalog shows Claude Code crossed from developer tool to knowledge-worker platform in a single shipping sprint. Clients who evaluated it even two months ago saw a fundamentally different product.</li>
             </ol>
 
-            <p class="coda">96 of 97 sources tagged as Key Shift. The dominant theme: Claude Code&rsquo;s memory, personalization, and autonomous capabilities represent a genuine platform shift &mdash; not incremental improvement.</p>
+            <p class="coda">97 of 98 sources tagged as Key Shift. The dominant theme: Claude Code&rsquo;s memory, personalization, and autonomous capabilities represent a genuine platform shift &mdash; not incremental improvement.</p>
         </section>
 
         <footer>
