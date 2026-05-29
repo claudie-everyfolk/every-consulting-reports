@@ -477,6 +477,74 @@
 
         <article class="entry">
             <span class="signal-tag key-shift">Key Shift</span>
+            <h2><a href="https://x.com/bcherny/status/2060390852619272526" target="_blank" rel="noopener">Salesforce Goes Agentic with Claude Code: 231 Days → 13</a></h2>
+            <p class="author">Boris Cherny (@bcherny)</p>
+            <p class="summary">Salesforce's public engineering writeup: a 231-day migration shipped in 13, quality rose as output rose, and the biggest wins came from redesigning workflows — not accelerating old ones.</p>
+            
+                <details class="section-detail">
+                    <summary>Worth Your Time?</summary>
+                    <div class="section-content">
+                        <p><strong>Read.</strong> A named Fortune-500 engineering org publicly putting hard numbers (231→13 days, incidents −5%) behind the agentic-first transition. This is the external proof point Every's tech vertical has been arguing toward without a marquee citation.</p>
+                    </div>
+                </details>
+
+                <details class="section-detail">
+                    <summary>What's Actually Happening</summary>
+                    <div class="section-content">
+                        <p>A major enterprise — not a startup, not an Anthropic demo — published a detailed account of restructuring engineering around Claude Code. Two structural claims matter more than the headline speedup: (1) quality and throughput rose <em>together</em>, breaking the productivity-vs-quality framing, because guardrails and standards were built into the agentic workflow itself rather than bolted on after; (2) the leverage came from deleting steps and handoffs and letting agents own work end-to-end — process redesign, not task acceleration. Incentive to note: Salesforce and Anthropic both benefit from this story landing, so the framing is favorable. But the specificity (a scoped-then-shipped migration, per-PR coverage) is harder to manufacture than vibes.</p>
+                    </div>
+                </details>
+
+                <details class="section-detail">
+                    <summary>What's Not Being Said</summary>
+                    <div class="section-content">
+                        <p>The 231-day estimate is self-reported and unauditable — "scoped at 231 days" may have been padded. We don't see the denominator: how many agentic attempts failed or were abandoned to surface the wins shown. "Incidents dropped 5%" over what window, and is 5% even outside noise? And the hardest gap: the org transformation (deleting handoffs, reorganizing ownership) is the actual unlock, and that's the part you <em>can't</em> buy with a Claude Code license — it's culture and management change. The tooling is necessary but the writeup quietly understates how much human reorganization preceded the numbers.</p>
+                    </div>
+                </details>
+
+                <details class="section-detail">
+                    <summary>Where This Sits in the Bigger Picture</summary>
+                    <div class="section-content">
+                        <p>This is the enterprise-validation beat of the agentic-coding S-curve. 2024–25 was capability demos; 2026 is named enterprises publishing operational results. It rhymes with Mollick's same-day point (orgs must spend tokens both building <em>and</em> experimenting to find practices) and with the broader "change how you work, not what you do" thesis. For the labor-market read: the bottleneck moves from writing code to designing the workflow and reviewing agent output — taste and judgment over throughput.</p>
+                    </div>
+                </details>
+
+                <details class="section-detail">
+                    <summary>What's Likely Coming Next</summary>
+                    <div class="section-content">
+                        <p>Expect a wave of copycat enterprise writeups (the social proof cascade — once Salesforce does it, VP Engs have cover). Second-order: "agentic migration" becomes a budgeted line item, and a market forms for help making the <em>organizational</em> change — which is precisely the consulting wedge. Expect pushback too: a counter-narrative of failed agentic rollouts where teams bought tools but skipped the workflow redesign and got nothing.</p>
+                    </div>
+                </details>
+
+                <details class="section-detail">
+                    <summary>Attention Is All You Need</summary>
+                    <div class="section-content">
+                        <ul>
+<li>Primary source: Salesforce Engineering blog, "Pioneering the Agentic Shift Within Salesforce Engineering" (salesforce.com).</li>
+<li>Key voices: Boris Cherny (@bcherny, Anthropic) amplifying; Srini (Salesforce eng) credited.</li>
+<li>Companion read: Ethan Mollick (@emollick) on spending tokens for building + experiments.</li>
+</ul>
+                    </div>
+                </details>
+
+                <details class="section-detail">
+                    <summary>What This Means for Every Consulting</summary>
+                    <div class="section-content">
+                        <ul>
+<li><strong>Mike (Tech Vertical):</strong> This is the anchor case study for the Stage 3→4 (agentic-first) pitch in the <code>compound-engineering</code> module and the Thumbtack workshop. Add a proof slide: "231 days scoped → 13 shipped; 1 PR = 21 endpoints @ 100% coverage; incidents −5% as PRs rose."</li>
+<li><strong>Natalia (Sales):</strong> "Salesforce publicly validated the agentic shift — we run the workshop that gets your team there" is now a credible, name-droppable opener.</li>
+<li><strong>The honest sell:</strong> lead with the part the writeup buries — the wins come from redesigning workflows, not installing a tool. That reframes Every's value from "teach Claude Code" to "redesign how your engineers work," which is exactly the high-ticket discovery-to-delivery offering. The risk to flag to clients: buy the tool, skip the org change, get nothing.</li>
+</ul>
+                    </div>
+                </details>
+            <div class="links">
+                <a href="https://x.com/bcherny/status/2060390852619272526" target="_blank" rel="noopener">View on X</a>
+                <a href="https://www.salesforce.com/blog/pioneering-the-agentic-shift-within-salesforce-engineering/" target="_blank" rel="noopener">Read Article</a>
+            </div>
+        </article>
+
+        <article class="entry">
+            <span class="signal-tag key-shift">Key Shift</span>
             <h2><a href="https://x.com/claudeai/status/2060042702150930686" target="_blank" rel="noopener">Claude Opus 4.8 launches: SWE-bench Pro 69.2, honest about its own work, /fast 3x cheaper</a></h2>
             <p class="author">Anthropic / Boris Cherny (@bcherny) / Claude (@claudeai)</p>
             <p class="summary">Anthropic ships Opus 4.8 at same price as 4.7, with measurable jumps in coding (SWE-bench Pro 64.3 → 69.2), self-honesty about progress, and /fast mode now 3x cheaper. Same day: dynamic workflows (tens-to-hundreds of coordinated subagents) and configurable /effort levels.</p>
@@ -7502,7 +7570,7 @@ A circuit breaker halts auto-compaction after three consecutive failures.</p>
                 <li><strong>The platform shift happened in 4 weeks.</strong> Ejaaz&rsquo;s catalog shows Claude Code crossed from developer tool to knowledge-worker platform in a single shipping sprint. Clients who evaluated it even two months ago saw a fundamentally different product.</li>
             </ol>
 
-            <p class="coda">100 of 101 sources tagged as Key Shift. The dominant theme: Claude Code&rsquo;s memory, personalization, and autonomous capabilities represent a genuine platform shift &mdash; not incremental improvement.</p>
+            <p class="coda">101 of 102 sources tagged as Key Shift. The dominant theme: Claude Code&rsquo;s memory, personalization, and autonomous capabilities represent a genuine platform shift &mdash; not incremental improvement.</p>
         </section>
 
         <footer>
