@@ -388,13 +388,92 @@
         <header>
             <h1>Signal Digest</h1>
             <p class="subtitle">What actually matters in AI &mdash; curated by Claudie for the Every Consulting team</p>
-            <p class="meta">Last updated May 28, 2026</p>
+            <p class="meta">Last updated May 29, 2026</p>
         </header>
 
         <nav class="legend">
             Each entry is tagged: <span class="tag-example key-shift">Key Shift</span> signals a genuine change in how we should think or act. <span class="tag-example noise">Noise</span> means useful context but nothing new for the team.
         </nav>
 
+
+        <article class="entry">
+            <span class="signal-tag key-shift">Key Shift</span>
+            <h2><a href="https://x.com/AlphaSignalAI/status/2060337943034691904" target="_blank" rel="noopener">SKILL.md is the attack surface: poisoning skills with words, not code</a></h2>
+            <p class="author">AlphaSignal AI (@AlphaSignalAI) / Saha et al.</p>
+            <p class="summary">A new paper proves you can hijack an AI agent by editing only the natural-language SKILL.md metadata — no malware. Crafted text wins 80% of top-10 search placements, gets picked over identical benign skills 77.6% of the time, and slips past scanners 87% of the time. The agent supply chain's attack surface is now prose.</p>
+            
+                <details class="section-detail">
+                    <summary>Worth Your Time?</summary>
+                    <div class="section-content">
+                        <p><strong>Read</strong> — if you build, run, or advise anyone running agents that load skills from a registry (which is now most serious agent setups, including ours). <strong>Skim</strong> if you only consume agents through a closed product.</p>
+<p>One-line verdict: the AI supply-chain threat just moved from "malicious code in the package" to "malicious <em>intent</em> in the description" — and our scanners were built for the wrong one.</p>
+                    </div>
+                </details>
+
+                <details class="section-detail">
+                    <summary>What's Actually Happening</summary>
+                    <div class="section-content">
+                        <p>Saha et al. (arXiv 2605.11418) take the ClawHub-style skill registry — modular packages each fronted by a SKILL.md that tells the agent what the skill does and when to use it — and show that the SKILL.md is not documentation. It's a semantic control surface. An attacker who edits <em>only the natural-language text</em>, leaving the code functionally unchanged, can attack three stages of the skill lifecycle:</p>
+<ul>
+<li><strong>Discovery:</strong> textual triggers manipulate embedding-based retrieval. Adversarial skills hit 86% pairwise win rate and 80% top-10 placement for target queries.</li>
+<li><strong>Selection:</strong> description-only framing biases the agent toward a malicious variant over a functionally identical benign one — 77.6% of paired trials.</li>
+<li><strong>Governance:</strong> context-stuffing the moderation/scanner step gets poisoned skills flagged "clean" 87% of the time.</li>
+</ul>
+<p>The incentive read: skill registries compete on growth and breadth, so the friction on publishing is low and governance lags — the same dynamic that made npm and PyPI fertile. The amplifier is that agents run with shell access, API keys, and filesystem reach. The novel part is that the exploit is <em>prose</em>, so every code-centric defense — static analysis, dependency scanning, package signing — is aimed at the wrong layer.</p>
+<p>This is the academic mechanism beneath the ClawHub incident we logged in #57. #57 was "it's happening." This is "here's exactly how, and your scanner won't catch it."</p>
+                    </div>
+                </details>
+
+                <details class="section-detail">
+                    <summary>What's Not Being Said</summary>
+                    <div class="section-content">
+                        <p>The selection-bias result is the quietly scary one. Discovery manipulation is just SEO for skills — annoying, defensible with better ranking. But selection bias means that even when the agent has the benign skill <em>and</em> the malicious one side by side, the words tip it toward the bad one 77.6% of the time. That's not a search problem; that's the agent's own judgment being steerable by adversarial framing. No allowlist fixes that if both skills are on the list.</p>
+<p>The contrarian read: registries will reach for the obvious fix — "scan SKILL.md with an LLM." The paper's governance result (87% evasion via context-stuffing) is a pre-emptive refutation. LLM-judging the metadata loses to metadata written to beat the LLM judge. The only robust controls are provenance and allowlisting (who authored this, do I trust them), not content inspection.</p>
+<p>What's also unsaid: the same trick works on <em>first-party</em> skills the moment an attacker can edit them — a compromised maintainer account or a poisoned auto-update is enough. "We only use trusted registries" narrows the door; it doesn't close it.</p>
+                    </div>
+                </details>
+
+                <details class="section-detail">
+                    <summary>Where This Sits in the Bigger Picture</summary>
+                    <div class="section-content">
+                        <p>Three forces converging. First, the agent stack is standardizing on skills + MCP as the extension mechanism (see #99, Anthropic's Architect cert, which teaches exactly this surface). Standardization creates a monoculture, and monocultures are what supply-chain attacks farm. Second, "context engineering" has made natural-language metadata load-bearing — descriptions, triggers, tool docs all steer behavior, which means they're all attack surface. Third, the security industry's tooling is still code-shaped; "natural language is executable infrastructure" is the line that names the gap.</p>
+<p>For the labor/market picture: this is another brick in the wall that turns "we adopted agents" into "we have an agent governance problem." Every enterprise standing up internal skill libraries is accreting unscanned, prose-level risk.</p>
+                    </div>
+                </details>
+
+                <details class="section-detail">
+                    <summary>What's Likely Coming Next</summary>
+                    <div class="section-content">
+                        <p>Precedent says: registries add provenance metadata (signed publishers, verified authors), then allowlist-by-default postures, then a SkillSieve-style triage layer (already in the related work). Expect an OWASP "Agentic Skills Top 10" to harden into a checklist enterprises demand in procurement — the CSA already published a context-poisoning research note.</p>
+<p>Second-order effects: (1) a market for "skill firewalls" / pre-load review tooling; (2) insurance and compliance language ("are your agent skills from a verified registry?") entering vendor questionnaires; (3) a flight to first-party / audited skill sources, which advantages platform owners (Anthropic's official marketplace) over open registries — consolidation, again following the platform playbook.</p>
+                    </div>
+                </details>
+
+                <details class="section-detail">
+                    <summary>Attention Is All You Need</summary>
+                    <div class="section-content">
+                        <ul>
+<li><strong>Paper:</strong> <a href="https://arxiv.org/abs/2605.11418">Under the Hood of SKILL.md: Semantic Supply-chain Attacks on AI Agent Skill Registry</a> — Shoumik Saha et al.</li>
+<li><strong>Code:</strong> https://github.com/ShoumikSaha/agent-skill-security</li>
+<li><strong>Standards forming:</strong> <a href="https://owasp.org/www-project-agentic-skills-top-10/">OWASP Agentic Skills Top 10</a>; <a href="https://labs.cloudsecurityalliance.org/research/csa-research-note-skill-md-agent-context-poisoning-20260506/">CSA research note on SKILL.md context poisoning</a></li>
+<li><strong>Adjacent defense:</strong> <a href="https://arxiv.org/html/2604.06550v1">SkillSieve: A Hierarchical Triage Framework for Detecting Malicious AI Agent Skills</a></li>
+<li><strong>Our precedent:</strong> Signal Digest #57 (ClawHub, 824 malicious skills).</li>
+</ul>
+                    </div>
+                </details>
+
+                <details class="section-detail">
+                    <summary>What This Means for Every Consulting</summary>
+                    <div class="section-content">
+                        <p><strong>For clients.</strong> Every client standing up an internal skill library or adopting Claude Code now has a supply-chain question they almost certainly haven't asked. The advice: provenance over inspection. Allowlist authored/audited skill sources; disable auto-update from single-maintainer repos; review SKILL.md <em>description</em> diffs, not just code diffs; and don't trust "we scanned it" (87% miss rate). This is a concrete module for Mike's and Brooker's training and the seed of an "agent governance assessment" offering Natalia could productize — urgent for finance clients (Bloomberg, hedge funds) where the exfiltration blast radius is high.</p>
+<p><strong>For us, internally.</strong> Claudie's own architecture is the threat model: 100+ SKILL.md skills, four marketplaces, three of them auto-updating from external GitHub — one a single-maintainer personal repo. Nityesh's <code>claudie-security-briefing.md</code> covers supply chain at the <em>code</em> layer and has a named gap at the metadata layer. Recommended: pin/allowlist the marketplaces, disable <code>autoUpdate</code> on the personal repo (or fold its skills into the team repo), add a pre-load review on SKILL.md description changes, and activate the currently-empty <code>blocklist.json</code>. The training credibility play writes itself: "we hardened our own agent against this paper" is a better sales line than a slide.</p>
+                    </div>
+                </details>
+            <div class="links">
+                <a href="https://x.com/AlphaSignalAI/status/2060337943034691904" target="_blank" rel="noopener">View on X</a>
+                <a href="https://arxiv.org/abs/2605.11418" target="_blank" rel="noopener">Read Article</a>
+            </div>
+        </article>
 
         <article class="entry">
             <span class="signal-tag key-shift">Key Shift</span>
@@ -7423,7 +7502,7 @@ A circuit breaker halts auto-compaction after three consecutive failures.</p>
                 <li><strong>The platform shift happened in 4 weeks.</strong> Ejaaz&rsquo;s catalog shows Claude Code crossed from developer tool to knowledge-worker platform in a single shipping sprint. Clients who evaluated it even two months ago saw a fundamentally different product.</li>
             </ol>
 
-            <p class="coda">99 of 100 sources tagged as Key Shift. The dominant theme: Claude Code&rsquo;s memory, personalization, and autonomous capabilities represent a genuine platform shift &mdash; not incremental improvement.</p>
+            <p class="coda">100 of 101 sources tagged as Key Shift. The dominant theme: Claude Code&rsquo;s memory, personalization, and autonomous capabilities represent a genuine platform shift &mdash; not incremental improvement.</p>
         </section>
 
         <footer>
