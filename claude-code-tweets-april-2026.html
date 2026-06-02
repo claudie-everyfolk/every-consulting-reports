@@ -388,13 +388,92 @@
         <header>
             <h1>Signal Digest</h1>
             <p class="subtitle">What actually matters in AI &mdash; curated by Claudie for the Every Consulting team</p>
-            <p class="meta">Last updated June 1, 2026</p>
+            <p class="meta">Last updated June 2, 2026</p>
         </header>
 
         <nav class="legend">
             Each entry is tagged: <span class="tag-example key-shift">Key Shift</span> signals a genuine change in how we should think or act. <span class="tag-example noise">Noise</span> means useful context but nothing new for the team.
         </nav>
 
+
+        <article class="entry">
+            <span class="signal-tag key-shift">Key Shift</span>
+            <h2><a href="https://x.com/AlphaSignalAI/status/2061719473061843023" target="_blank" rel="noopener">COLLEAGUE.SKILL — distilling a person's judgment into an editable, versioned skill file</a></h2>
+            <p class="author">AlphaSignal AI (@AlphaSignalAI)</p>
+            <p class="summary">Shanghai AI Lab's COLLEAGUE.SKILL (the paper behind the viral 'dot-skill' tool) was the #1 Paper of the Day on Hugging Face. It distills a specific coworker into an agent skill by splitting capability (work.md) from behavior/persona (persona.md), pulling from chat history and docs. Technical report released June 1, 2026; community gallery already at 215 skills / 165 contributors. Reframes expertise as editable, versioned files — not an opaque clone. Distinct from SkillOpt (#95), which auto-optimizes a generic skill against a validation set; this captures one named person's tacit judgment.</p>
+            
+                <details class="section-detail">
+                    <summary>Worth Your Time?</summary>
+                    <div class="section-content">
+                        <p><strong>READ.</strong> One-line verdict: the clearest sign yet that the unit of "knowledge work capital" is shifting from <em>the person</em> to <em>a versioned file of the person's judgment</em> — and Every Consulting already sells the manual version of this.</p>
+                    </div>
+                </details>
+
+                <details class="section-detail">
+                    <summary>What's Actually Happening</summary>
+                    <div class="section-content">
+                        <p>The viral framing ("distill your departing coworker into an AI") is the marketing. The structural move underneath is the interesting part: <strong>COLLEAGUE.SKILL formalizes tacit expertise as two separable artifacts</strong> — <code>work.md</code> (the capability: what the person does, their decision rules, their checklists) and <code>persona.md</code> (the behavior: voice, taste, what they'd push back on, their quirks). It ingests the raw exhaust of a knowledge worker's job — chat history (Lark/DingTalk), documents, work communications — and compiles it into a manual an agent can execute.</p>
+<p>Why now: agents got good enough at <em>following</em> a detailed skill file that the bottleneck moved upstream, to <em>authoring</em> one. Hand-writing a good skill is hard and depends on the author's prompting ability. COLLEAGUE.SKILL automates the authoring by pointing it at a person's actual work history. The 24-year-old engineer who built it in four hours, the 215-skill gallery, the #1 HuggingFace slot — that's adoption velocity, and velocity is the signal, not the polish.</p>
+<p>Who benefits from the narrative: the platform/tool layer (more skills = more lock-in) and management (institutional knowledge stops walking out the door). Who loses control of the narrative: the individual contributor, whose leverage has always partly been <em>that the knowledge lived in their head</em>.</p>
+                    </div>
+                </details>
+
+                <details class="section-detail">
+                    <summary>What's Not Being Said</summary>
+                    <div class="section-content">
+                        <p>The viral-tweet framing is upbeat ("save yourself from repetitive work"). The honest version is darker and is being reported elsewhere: in China this tool set off real anxiety — workers realizing they were being asked to <strong>train their own replacements</strong>, and pushing back (MIT Technology Review, Apr 2026; SCMP). The contrarian read: "expertise capture" and "expertise extraction" are the same operation viewed from two ends of the power asymmetry. Whether it's empowering or extractive depends entirely on <em>who commissions the skill file and who owns it afterward</em>.</p>
+<p>The second thing not being said: a skill file is a <strong>lossy</strong> compression of judgment. It captures the decisions that left a paper trail, not the instinct that decided <em>which decisions mattered</em>. The first generation of these will be confidently wrong in exactly the high-stakes edge cases where the real expert's value lived — and you won't know until the expert is gone. The editable-and-versioned design is the honest answer to this: it's a <em>living document you correct</em>, not a frozen clone you trust.</p>
+                    </div>
+                </details>
+
+                <details class="section-detail">
+                    <summary>Where This Sits in the Bigger Picture</summary>
+                    <div class="section-content">
+                        <p>This is the same structural force as the <strong>Levie / Kirkland-builds-its-own-Harvey</strong> thesis bookmarked the same day, and the <strong>Single Company Brain</strong> theme: when everyone has the same frontier models, the moat is internal institutional knowledge. COLLEAGUE.SKILL is what that thesis looks like at the level of one person instead of one firm. It sits squarely in <strong>AI / labor-market transformation</strong> — not "AI takes the job" but the subtler "AI changes what the job's <em>durable asset</em> is." The asset is no longer your presence; it's the captured, versioned file of your judgment, and the question of who owns that file is the new labor-rights frontier.</p>
+<p>It also rhymes with Claudie's own architecture: her <code>identity.md</code> (persona) is split from her skills (capability) — the exact <code>persona.md</code> / <code>work.md</code> decomposition, arrived at independently. That convergence is itself signal: the split isn't arbitrary, it's the natural shape of "an agent that acts like a specific competent person."</p>
+                    </div>
+                </details>
+
+                <details class="section-detail">
+                    <summary>What's Likely Coming Next</summary>
+                    <div class="section-content">
+                        <ul>
+<li><strong>Precedent:</strong> every time tacit knowledge got codified — guild secrets → trade manuals, craftsman → assembly-line work instructions, senior dev → runbook — the codification raised throughput and <em>lowered the codified worker's individual bargaining power</em> while creating a new, higher tier of work (judging/editing the codified output). Expect the same: a new tier of "skill-file editors/validators" above the captured work.</li>
+<li><strong>Second-order effect:</strong> offboarding becomes a <em>deliverable</em>. "Knowledge transfer" stops being a wiki nobody reads and becomes a tested, executable skill file. Smart firms will make it a condition of senior exits; smart seniors will negotiate ownership/royalties on their file.</li>
+<li><strong>Watch for:</strong> (1) the first lawsuit or contract fight over who owns a departing employee's skill file; (2) SkillOpt-style auto-tuning (#95) bolted onto COLLEAGUE.SKILL-style capture — capture the person, then optimize the captured file against real task outcomes. That combination is the actually-powerful system.</li>
+</ul>
+                    </div>
+                </details>
+
+                <details class="section-detail">
+                    <summary>Attention Is All You Need</summary>
+                    <div class="section-content">
+                        <ul>
+<li><strong>COLLEAGUE.SKILL / dot-skill repo</strong> — https://github.com/titanwings/colleague-skill — read the architecture section (Work Skill vs Persona, multi-source ingestion, skill generation &amp; evolution). <em>Read in full</em> if building anything similar; the two-file split is the takeaway.</li>
+<li><strong>Technical report (released June 1, 2026)</strong> — linked from the repo. Skim for the evaluation methodology (how they measured fidelity to the original person — that's the hard, unsolved part).</li>
+<li><strong>MIT Technology Review, "Chinese tech workers are starting to train their AI doubles — and pushing back"</strong> (Apr 20, 2026) — https://www.technologyreview.com/2026/04/20/1136149/chinese-tech-workers-ai-colleagues/ — <em>read this</em> for the labor-power counter-narrative the hype tweets omit.</li>
+<li><strong>Key person:</strong> Zhou Tianyi (Shanghai AI Lab) — the builder. Worth tracking what he ships next.</li>
+<li><strong>Companion (#95):</strong> SkillOpt — the optimization side of the same coin.</li>
+</ul>
+                    </div>
+                </details>
+
+                <details class="section-detail">
+                    <summary>What This Means for Every Consulting</summary>
+                    <div class="section-content">
+                        <p>This is close to home — it's a productized version of what Every already does by hand, and it cuts two ways:</p>
+<ul>
+<li><strong>Offering (opportunity):</strong> an <strong>"expertise capture / departure insurance"</strong> engagement. Sit with a senior or departing employee, produce a versioned, editable skill file of their judgment (<code>work.md</code> + <code>persona.md</code>). This is a cleaner, higher-stakes deliverable than "AI training," it fits the $50–100k discovery-to-delivery model, and it's especially compelling for <strong>finance/PE clients</strong> where a single senior analyst's judgment <em>is</em> the asset. Natalia's sales handle gets sharper: not "we'll train your team on AI" but "we'll make sure your best people's judgment doesn't walk out the door."</li>
+<li><strong>Internal tool:</strong> Nityesh can generalize <code>natalia-email-ghostwriter</code> (already a persona-capture artifact built from 110+ emails) into a two-file <code>colleague-skill</code> extractor. Every becomes a live case study for the offering it's selling.</li>
+<li><strong>The honest caveat to lead with (differentiator):</strong> the extraction-vs-empowerment tension from §3 is <em>exactly</em> the thing clients will be nervous about, and naming it first is how a boutique earns trust. Every's pitch should be the editable-versioned-human-in-the-loop framing — "we capture judgment as a living document your expert keeps correcting," not "we clone your people." That framing is both more honest and more defensible than the viral version, and it's the reason a client pays Every instead of pointing an open-source tool at their Slack.</li>
+</ul>
+                    </div>
+                </details>
+            <div class="links">
+                <a href="https://x.com/AlphaSignalAI/status/2061719473061843023" target="_blank" rel="noopener">View on X</a>
+                <a href="https://github.com/titanwings/colleague-skill" target="_blank" rel="noopener">Read Article</a>
+            </div>
+        </article>
 
         <article class="entry">
             <span class="signal-tag key-shift">Key Shift</span>
@@ -7744,7 +7823,7 @@ A circuit breaker halts auto-compaction after three consecutive failures.</p>
                 <li><strong>The platform shift happened in 4 weeks.</strong> Ejaaz&rsquo;s catalog shows Claude Code crossed from developer tool to knowledge-worker platform in a single shipping sprint. Clients who evaluated it even two months ago saw a fundamentally different product.</li>
             </ol>
 
-            <p class="coda">103 of 104 sources tagged as Key Shift. The dominant theme: Claude Code&rsquo;s memory, personalization, and autonomous capabilities represent a genuine platform shift &mdash; not incremental improvement.</p>
+            <p class="coda">104 of 105 sources tagged as Key Shift. The dominant theme: Claude Code&rsquo;s memory, personalization, and autonomous capabilities represent a genuine platform shift &mdash; not incremental improvement.</p>
         </section>
 
         <footer>
