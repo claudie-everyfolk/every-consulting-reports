@@ -398,6 +398,90 @@
 
         <article class="entry">
             <span class="signal-tag key-shift">Key Shift</span>
+            <h2><a href="https://x.com/ClaudeDevs/status/2061877343078244459" target="_blank" rel="noopener">Anthropic ships the `ant` CLI — every Claude Platform endpoint runnable from the terminal</a></h2>
+            <p class="author">ClaudeDevs (@ClaudeDevs)</p>
+            <p class="summary">Anthropic released `ant`, a first-party CLI that makes every Claude Platform endpoint runnable from the terminal — the Messages API and Claude Managed Agents included, with results pipeable straight into the shell. It's explicitly designed to be driven by coding agents (Claude Code) via the claude-api skill. The platform stops being a thing you call through an SDK and becomes a thing your agent operates as a shell tool.</p>
+            
+                <details class="section-detail">
+                    <summary>Worth Your Time?</summary>
+                    <div class="section-content">
+                        <p><strong>READ</strong> (5 min) — small announcement, large surface. A first-party CLI that an agent can drive turns "call the API" into "operate the platform," and that's a different primitive than an SDK. Directly load-bearing for anyone running Claude Code as infrastructure — which is exactly what Claudie is.</p>
+                    </div>
+                </details>
+
+                <details class="section-detail">
+                    <summary>What's Actually Happening</summary>
+                    <div class="section-content">
+                        <p>Three things shipped in one CLI, and the third is the one that matters:
+1. <strong>Every endpoint is now a terminal command.</strong> Messages API, batches, files, and — notably — <strong>Claude Managed Agents</strong> can be stood up and driven from the shell, with stdout pipeable into the rest of a Unix pipeline.
+2. <strong>It's first-party.</strong> Not a community wrapper. Anthropic is signaling that the terminal, not just the SDK, is a supported way to consume the platform.
+3. <strong>It's built to be driven by an agent.</strong> The tweet's tell: "well understood by coding agents (Claude Code) using the <code>claude-api</code> skill." This isn't a CLI for humans who'd rather type than write Python. It's a CLI so that <strong>Claude Code can operate the Claude Platform as a tool</strong> — spin up a Managed Agent, pipe a Messages call, compose them — without you writing SDK glue.</p>
+<p>The incentive is clear: Anthropic wants the agent to be the integration layer. If your coding agent can drive the platform from the shell, the friction of "build an app that uses the API" collapses into "ask the agent to do it."</p>
+                    </div>
+                </details>
+
+                <details class="section-detail">
+                    <summary>What's Not Being Said</summary>
+                    <div class="section-content">
+                        <ul>
+<li><strong>This is a moat move dressed as a convenience.</strong> A CLI that only Claude Code understands well deepens the Claude-Code-as-control-plane lock-in. Great if you've standardized on it (Every has). A dependency to be aware of if you haven't.</li>
+<li><strong>Managed Agents from the terminal lowers the bar to a fleet.</strong> "Stand up a Managed Agent" being one shell command means the cost of spawning long-running agents drops — which is a spend and governance question, not just a convenience.</li>
+<li><strong>No mention of auth/scoping ergonomics.</strong> A CLI that an agent drives needs tight credential scoping; piping platform calls through an autonomous agent is exactly where a prompt-injection or runaway-loop turns into real API spend. The announcement is silent on guardrails.</li>
+<li><strong>It blurs the line Every cares about.</strong> When the agent can both reason <em>and</em> provision platform resources from one shell, "the harness" and "the platform" stop being cleanly separable — which complicates the thin-harness thesis (see entry on mem0 / harness-as-product).</li>
+</ul>
+                    </div>
+                </details>
+
+                <details class="section-detail">
+                    <summary>Where This Sits in the Bigger Picture</summary>
+                    <div class="section-content">
+                        <ul>
+<li><strong>The harness is the product (mem0, rohit life-harness #103, Karpathy CLAUDE.md).</strong> <code>ant</code> is Anthropic pushing its harness one layer down into platform operations. The agent doesn't just write code that calls the API; it operates the API surface directly.</li>
+<li><strong>CLI-as-agent-interface is a pattern, not a one-off.</strong> GitHub <code>gh</code>, <code>wrangler</code>, <code>gcloud</code> — agents are far better at driving well-documented CLIs than at writing SDK boilerplate. <code>ant</code> is Anthropic conceding that and shipping for it.</li>
+<li><strong>Managed Agents go from "a thing you architect" to "a thing you invoke."</strong> That's the same trajectory serverless took: provisioning collapses into a command.</li>
+</ul>
+                    </div>
+                </details>
+
+                <details class="section-detail">
+                    <summary>What's Likely Coming Next</summary>
+                    <div class="section-content">
+                        <ul>
+<li><strong>Skills that wrap <code>ant</code> proliferate within weeks.</strong> The <code>claude-api</code> skill is the seed; expect community skills that compose <code>ant</code> into higher-level workflows (eval runners, agent fleets, batch pipelines).</li>
+<li><strong><code>ant</code> becomes the recommended path for "deploy this agent"</strong> inside Claude Code — pattern-match the SDK→CLI shift other platforms made.</li>
+<li><strong>Second-order: cost-governance tooling follows.</strong> Once spawning Managed Agents is one command an autonomous agent can issue, someone ships budget caps / dry-run / approval gates around it. (Every should want this before it leans in.)</li>
+</ul>
+                    </div>
+                </details>
+
+                <details class="section-detail">
+                    <summary>Attention Is All You Need</summary>
+                    <div class="section-content">
+                        <ul>
+<li><strong>Source:</strong> https://x.com/ClaudeDevs/status/2061877343078244459</li>
+<li><strong>Key dependency:</strong> the <code>claude-api</code> skill (already installed in Claudie's environment) — the documented bridge between Claude Code and <code>ant</code>.</li>
+<li><strong>Adjacent to read:</strong> Anthropic's Claude Managed Agents docs; Every's own <code>~/work/managed-agents-research.md</code> (April benchmark of Managed Agents vs. Claudie's own harness, session <code>7e0e7a77</code>); prior digest entries on harness-as-product.</li>
+<li><strong>The one thing to do:</strong> take one existing Claudie launchd job's call path and re-implement it through <code>ant</code> + the claude-api skill, to scope the long-standing "price out an API fallback for <code>claude -p</code>" idea (flagged 2026-04-05).</li>
+</ul>
+                    </div>
+                </details>
+
+                <details class="section-detail">
+                    <summary>What This Means for Every Consulting</summary>
+                    <div class="section-content">
+                        <p><strong>For Nityesh (primary):</strong> This is the terminal interface to the Managed Agents stack you benchmarked in April. Two concrete moves: (1) Prototype the <code>claude -p</code> → <code>ant</code>/Messages-API fallback on a single launchd job — if the subprocess-per-message Slack architecture ever needs a cheaper or more controllable path, this is it. (2) Before adopting Managed-Agents-via-<code>ant</code> anywhere autonomous, decide the credential scoping and a spend cap — a CLI an agent can drive to provision agents is exactly where runaway cost lives.</p>
+<p><strong>For Mike (tech vertical):</strong> New curriculum unit. Clients already ask about CLI agent tooling (sessions <code>4753930a</code>, <code>071e824b</code>). "Your coding agent can operate the model platform as a shell tool" is a clean, demoable lesson and pairs with the existing Claude Code module.</p>
+<p><strong>For Natalia (positioning):</strong> Reinforces the "the harness is the moat" sales narrative — Anthropic is now shipping platform operations <em>into</em> the harness layer Every has bet on. We're standardized on the thing the vendor is doubling down on.</p>
+<p><strong>Risk to flag:</strong> deeper Claude-Code lock-in. Fine given Every's standardization, but name it explicitly in any client architecture advice — recommend the pattern <em>and</em> the portability caveat (cf. Garry Tan, "host your own memory").</p>
+                    </div>
+                </details>
+            <div class="links">
+                <a href="https://x.com/ClaudeDevs/status/2061877343078244459" target="_blank" rel="noopener">View on X</a>
+            </div>
+        </article>
+
+        <article class="entry">
+            <span class="signal-tag key-shift">Key Shift</span>
             <h2><a href="https://x.com/AlphaSignalAI/status/2061719473061843023" target="_blank" rel="noopener">COLLEAGUE.SKILL — distilling a person's judgment into an editable, versioned skill file</a></h2>
             <p class="author">AlphaSignal AI (@AlphaSignalAI)</p>
             <p class="summary">Shanghai AI Lab's COLLEAGUE.SKILL (the paper behind the viral 'dot-skill' tool) was the #1 Paper of the Day on Hugging Face. It distills a specific coworker into an agent skill by splitting capability (work.md) from behavior/persona (persona.md), pulling from chat history and docs. Technical report released June 1, 2026; community gallery already at 215 skills / 165 contributors. Reframes expertise as editable, versioned files — not an opaque clone. Distinct from SkillOpt (#95), which auto-optimizes a generic skill against a validation set; this captures one named person's tacit judgment.</p>
@@ -7900,7 +7984,7 @@ A circuit breaker halts auto-compaction after three consecutive failures.</p>
                 <li><strong>The platform shift happened in 4 weeks.</strong> Ejaaz&rsquo;s catalog shows Claude Code crossed from developer tool to knowledge-worker platform in a single shipping sprint. Clients who evaluated it even two months ago saw a fundamentally different product.</li>
             </ol>
 
-            <p class="coda">105 of 106 sources tagged as Key Shift. The dominant theme: Claude Code&rsquo;s memory, personalization, and autonomous capabilities represent a genuine platform shift &mdash; not incremental improvement.</p>
+            <p class="coda">106 of 107 sources tagged as Key Shift. The dominant theme: Claude Code&rsquo;s memory, personalization, and autonomous capabilities represent a genuine platform shift &mdash; not incremental improvement.</p>
         </section>
 
         <footer>
