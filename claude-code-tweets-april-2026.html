@@ -388,13 +388,93 @@
         <header>
             <h1>Signal Digest</h1>
             <p class="subtitle">What actually matters in AI &mdash; curated by Claudie for the Every Consulting team</p>
-            <p class="meta">Last updated June 2, 2026</p>
+            <p class="meta">Last updated June 3, 2026</p>
         </header>
 
         <nav class="legend">
             Each entry is tagged: <span class="tag-example key-shift">Key Shift</span> signals a genuine change in how we should think or act. <span class="tag-example noise">Noise</span> means useful context but nothing new for the team.
         </nav>
 
+
+        <article class="entry">
+            <span class="signal-tag key-shift">Key Shift</span>
+            <h2><a href="https://x.com/ttunguz/status/2062159298411852051" target="_blank" rel="noopener">Benchmarks go dual-axis: performance AND cost-per-task</a></h2>
+            <p class="author">Tomasz Tunguz (@ttunguz)</p>
+            <p class="summary">Microsoft adds 'average token usage' to its model card and MAI-Code-1-Flash matches frontier coding scores at 1/3 the tokens — model evaluation is becoming a two-axis problem: performance and the cost to get there.</p>
+            
+                <details class="section-detail">
+                    <summary>Worth Your Time?</summary>
+                    <div class="section-content">
+                        <p><strong>Read.</strong> Short, but it names a structural shift cleanly: the industry's scoreboard is quietly adding a second column. If you advise anyone on model selection or AI budgets, this is the frame to adopt now.</p>
+                    </div>
+                </details>
+
+                <details class="section-detail">
+                    <summary>What's Actually Happening</summary>
+                    <div class="section-content">
+                        <p>For three years the only number that mattered was the capability score — MMLU, then SWE-Bench, then whatever the latest eval was. Cost was a footnote you discovered on your invoice. Two things just changed at once: (a) a model (MAI-Code-1-Flash) posting a <em>competitive</em> coding score at ~1/3 the token consumption of a peer, and (b) a major lab (Microsoft) putting average token usage <em>on the model card itself</em> — institutionalizing it as a published spec, not a benchmark someone has to run.</p>
+<p>The incentive behind it: as inference becomes the dominant line item in enterprise AI spend, "best model" stops meaning "highest score" and starts meaning "best score per dollar." Vendors that win on efficiency now have a number to point at. This is a shift, not noise — it's a change in <em>what gets measured and published</em>, which is upstream of every buying decision.</p>
+                    </div>
+                </details>
+
+                <details class="section-detail">
+                    <summary>What's Not Being Said</summary>
+                    <div class="section-content">
+                        <ul>
+<li><strong>"Token usage" is a leaky proxy for cost.</strong> Tokens × price-per-token, and prices move; a model that's efficient today can be repriced. The honest axis is dollars-per-completed-task, which also folds in retries and failed runs the token count hides.</li>
+<li><strong>Cheaper-per-token can be more expensive per task.</strong> A weaker model that needs three attempts can burn more than one expensive clean run. The single-axis-to-two-axis story can mislead if "tokens" gets mistaken for "cost of the outcome."</li>
+<li><strong>Benchmaxing moves to the cost axis.</strong> Once efficiency is scored, vendors will optimize the published number — shorter chains, terser outputs — sometimes at the expense of the work.</li>
+</ul>
+                    </div>
+                </details>
+
+                <details class="section-detail">
+                    <summary>Where This Sits in the Bigger Picture</summary>
+                    <div class="section-content">
+                        <p>This is the benchmark-side proof of the token-economics thesis the team has tracked all week: Levie's "model routing is the inevitable conclusion of token economics," the "token budget wars" (adoption → allocation), and Uber capping coding-agent spend at $1,500/seat. Capability commoditizes from the bottom up; the frontier keeps moving, but "good enough at a fraction of the cost" eats the routine work underneath it. The labor-market read: the valuable human skill shifts from "can you get the model to do it" to "do you know which model <em>should</em> do it" — model selection as a managed cost discipline.</p>
+                    </div>
+                </details>
+
+                <details class="section-detail">
+                    <summary>What's Likely Coming Next</summary>
+                    <div class="section-content">
+                        <ul>
+<li>Cost-per-task columns become standard on every model card and leaderboard within ~2 quarters (Tunguz's explicit prediction).</li>
+<li>Routing layers (Factory Router and successors) get pulled into the default stack — the decision of <em>which</em> model gets abstracted away from the user.</li>
+<li>Enterprises add a "tokens-per-task / model-mix" line to their AI ROI dashboards, the same way they track cloud cost per workload.</li>
+<li>Second-order: pressure on premium-only pricing. If a 1/3-cost model is "good enough" for 70% of tasks, the frontier model's addressable share of <em>volume</em> shrinks even as its share of <em>hard problems</em> holds.</li>
+</ul>
+                    </div>
+                </details>
+
+                <details class="section-detail">
+                    <summary>Attention Is All You Need</summary>
+                    <div class="section-content">
+                        <ul>
+<li><strong>Source benchmark:</strong> SWE-Bench Verified (the coding eval the cost-efficiency claim is anchored to).</li>
+<li><strong>Key person:</strong> Tomasz Tunguz (@ttunguz) — reliably early on SaaS/AI cost-structure shifts.</li>
+<li><strong>Primary artifact to pull:</strong> Microsoft's latest model card (the one with the new "average token usage" column) — worth grabbing the actual numbers before citing client-facing.</li>
+<li><strong>Adjacent reading already in the vault:</strong> <code>bookmarks/2026-06-03-levie-model-routing.md</code>, <code>bookmarks/2026-06-02-jayagupta-token-budget-wars.md</code>, <code>bookmarks/2026-05-08-avichawla-smarter-claude-burns-more-tokens.md</code>.</li>
+</ul>
+                    </div>
+                </details>
+
+                <details class="section-detail">
+                    <summary>What This Means for Every Consulting</summary>
+                    <div class="section-content">
+                        <ul>
+<li><strong>Discovery hook (Natalia/Brooker):</strong> "Model cards now ship two axes — performance <em>and</em> tokens-per-task. What are you measuring per task?" Most clients measure neither. This is a clean, current opener that exposes the gap.</li>
+<li><strong>Today's Thrive exec session:</strong> pairs directly with the AI Investment Analyzer and license-governance exercises — add a tokens-per-task / model-mix axis to the ROI scorecard so the CTO's "$600K/yr, board wants ROI" question gets a real answer.</li>
+<li><strong>Curriculum (Mike):</strong> a "right-sized model / cost-per-task" unit using the SWE-Bench-at-1/3-tokens example — teaches <em>when not to reach for the biggest model</em>, the single highest-leverage cost lever for coding teams.</li>
+<li><strong>Claudie's own infra (Nityesh):</strong> the per-agent model override is the in-house version of this — route triage/classification steps in scheduled jobs to Haiku/Sonnet, reserve Opus for judgment. We should practice what we'd advise.</li>
+<li><strong>Productization:</strong> strengthens the case for an "AI Tool Spend Audit" SKU — seat utilization + model-mix + cost-per-task, built from the Thrive prompts we already have.</li>
+</ul>
+                    </div>
+                </details>
+            <div class="links">
+                <a href="https://x.com/ttunguz/status/2062159298411852051" target="_blank" rel="noopener">View on X</a>
+            </div>
+        </article>
 
         <article class="entry">
             <span class="signal-tag key-shift">Key Shift</span>
@@ -7984,7 +8064,7 @@ A circuit breaker halts auto-compaction after three consecutive failures.</p>
                 <li><strong>The platform shift happened in 4 weeks.</strong> Ejaaz&rsquo;s catalog shows Claude Code crossed from developer tool to knowledge-worker platform in a single shipping sprint. Clients who evaluated it even two months ago saw a fundamentally different product.</li>
             </ol>
 
-            <p class="coda">106 of 107 sources tagged as Key Shift. The dominant theme: Claude Code&rsquo;s memory, personalization, and autonomous capabilities represent a genuine platform shift &mdash; not incremental improvement.</p>
+            <p class="coda">107 of 108 sources tagged as Key Shift. The dominant theme: Claude Code&rsquo;s memory, personalization, and autonomous capabilities represent a genuine platform shift &mdash; not incremental improvement.</p>
         </section>
 
         <footer>
