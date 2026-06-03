@@ -478,6 +478,77 @@
 
         <article class="entry">
             <span class="signal-tag key-shift">Key Shift</span>
+            <h2><a href="https://x.com/AnthropicAI/status/2062243425580367905" target="_blank" rel="noopener">Anthropic mapped a year of AI-enabled cyberattacks onto MITRE ATT&CK: the threat is orchestration, not skill</a></h2>
+            <p class="author">Anthropic (@AnthropicAI)</p>
+            <p class="summary">Anthropic analyzed 832 banned malicious accounts (Mar 2025–2026) and mapped their activity onto the MITRE ATT&CK framework — the first systematic, quantified picture of how attackers actually use frontier models. 67.3% used AI for malware development; AI is increasingly used in post-compromise stages (lateral movement, privilege escalation) that used to require real expertise. Medium/high-risk actors rose from 33% to 56% across the year. The key shift: traditional risk signals (attacker skill, technique count) no longer correlate with danger — the differentiator is architectural sophistication, i.e. agentic orchestration that chains attack stages with minimal human intervention. MITRE ATT&CK itself doesn't yet model agentic behavior. This converts 'AI security' from a vibe into a quantified, framework-mapped argument Every can take to finance clients.</p>
+            
+                <details class="section-detail">
+                    <summary>Worth Your Time?</summary>
+                    <div class="section-content">
+                        <p><strong>READ.</strong> One-line verdict: the first time the "attackers are using AI" anxiety gets pinned to real numbers and a framework every security team already speaks (MITRE ATT&amp;CK) — which makes it usable in a client room, not just a headline.</p>
+                    </div>
+                </details>
+
+                <details class="section-detail">
+                    <summary>What's Actually Happening</summary>
+                    <div class="section-content">
+                        <p>Anthropic took 832 accounts it banned for malicious cyber activity over a year and mapped each one's observed behavior onto MITRE ATT&amp;CK, the standard taxonomy of attacker tactics and techniques. The structural finding isn't "AI helps hackers" (everyone assumed that). It's <em>where</em> in the kill chain AI now shows up: <strong>67.3% used AI for malware development, and a meaningful slice (6.5%) used it for lateral movement</strong> — a post-compromise stage that historically separated skilled operators from script kiddies. AI is collapsing that gap. The capability that used to gate who could move laterally, escalate privilege, and chain stages is now rentable by the hour.</p>
+<p>The sharper, less obvious claim: <strong>attacker skill no longer predicts threat.</strong> Skill level showed weak correlation with technique count (16 vs 20 techniques across experience tiers). What separates dangerous actors is <strong>architectural sophistication</strong> — whether they wire the model into an autonomous loop that orchestrates sequential steps with minimal human babysitting. Medium/high-risk actors rose from 33% to 56% across the year. The danger curve is bending toward orchestration, not expertise.</p>
+<p>And a quiet admission: MITRE ATT&amp;CK, the field's shared map, <strong>has no good cells for agentic behavior</strong> — sequential autonomous decision-making isn't in the taxonomy. The defenders' map predates the threat.</p>
+                    </div>
+                </details>
+
+                <details class="section-detail">
+                    <summary>What's Not Being Said</summary>
+                    <div class="section-content">
+                        <p>First, this is Anthropic reporting on accounts <em>it caught and banned</em> — a survivorship-filtered sample of attackers using Claude specifically, not the whole threat landscape. The actors sophisticated enough to run their own models or evade detection aren't in the 832. So "AI is mostly used for malware dev" may really mean "the AI use we can see is mostly malware dev." Second, the same "agentic orchestration is the real differentiator" finding is a double-edged narrative: it's also a strong argument <em>for</em> the safety guardrails and monitoring Anthropic sells, so read the framing with that incentive in mind. Third — the part nobody in the thread says out loud — the defender takeaway ("detect autonomous orchestration, not technique diversity") describes a capability most enterprise security teams don't have yet. The report names the new threat model far more clearly than it names how to defend against it.</p>
+                    </div>
+                </details>
+
+                <details class="section-detail">
+                    <summary>Where This Sits in the Bigger Picture</summary>
+                    <div class="section-content">
+                        <p>This is the offensive-security mirror of a theme the digest already tracks on the defensive/build side: <strong>the harness is everything</strong> (#103 Life-Harness, the harness-engineering thread) and <strong>supply-chain attacks via skills/packages</strong> (#100 saha-skillmd, #57 clawhub malicious skills). The same insight — capability lives in the orchestration around the model, not the weights — is true for attackers. The actor who wins isn't the one with the cleverest prompt; it's the one with the best loop. That symmetry is the real story: agentic scaffolding is the new locus of power, on offense and defense alike. It also lands in the same week as Boris's "I write loops" and Anthropic's Dynamic Workflows — the industry is collectively realizing the loop is the unit of capability, and the threat report is what that realization looks like when the loop belongs to an adversary.</p>
+                    </div>
+                </details>
+
+                <details class="section-detail">
+                    <summary>What's Likely Coming Next</summary>
+                    <div class="section-content">
+                        <p>Expect (a) MITRE and the security community to start extending ATT&amp;CK with agentic/autonomous-orchestration techniques — the gap Anthropic just flagged is too load-bearing to leave empty; (b) a wave of "detect the agent, not the technique" tooling and vendor pitches; (c) procurement and compliance teams at regulated firms (banks, hedge funds, PE) asking their AI vendors and internal builders to demonstrate orchestration-level monitoring. Second-order: as post-compromise capability democratizes, the value of <em>prevention</em> (identity, segmentation, least-privilege) rises relative to <em>detection of skill</em>, because there's no longer a skill floor to filter out low-capability attackers.</p>
+                    </div>
+                </details>
+
+                <details class="section-detail">
+                    <summary>Attention Is All You Need</summary>
+                    <div class="section-content">
+                        <p>Foundational sources and people to anchor on:
+- The report itself: https://www.anthropic.com/news/AI-enabled-cyber-threats-mitre-attack
+- <strong>MITRE ATT&amp;CK</strong> (attack.mitre.org) — the framework being mapped; worth knowing it has no agentic-behavior coverage yet.
+- Anthropic's Threat Intelligence team / prior "Detecting and Countering Misuse of AI" reports — this is a continuation of that series.
+- Pairs with digest entries #103 (Life-Harness), #100 (skill.md supply chain), #57 (malicious skills), #43 (Claude Code attack surface), #26 (Claude cowork file exfil).</p>
+                    </div>
+                </details>
+
+                <details class="section-detail">
+                    <summary>What This Means for Every Consulting</summary>
+                    <div class="section-content">
+                        <p>This is the quantified backbone for a security-awareness module the digest has called for repeatedly but never built (#26, #43). Concretely:
+- <strong>Brooker (finance vertical):</strong> finance clients (the active Woodline Partners hedge-fund engagement; PE) live in the highest-sensitivity bracket. "AI democratizes post-compromise attacks — lateral movement and privilege escalation no longer require an expert" is a board-level talking point that justifies governance on internal AI adoption without being anti-AI.
+- <strong>Natalia (positioning):</strong> sharpens the "secure AI adoption" differentiator for Bloomberg, NYT, finance. Every can credibly say: we teach teams to adopt agents <em>and</em> to reason about the new attack surface, with framework-mapped data, not FUD.
+- <strong>Mike (tech vertical):</strong> "secure your own agent setup" belongs in the AI-coding curriculum — least-privilege tool access, no blanket <code>--dangerously-skip-permissions</code>, monitoring the loop.
+- <strong>Nityesh (our own infra):</strong> audit Claudie's deny-lists and scheduled-job permissions against the report's takeaway — the risk isn't a single dangerous tool call, it's an autonomous loop chaining benign-looking steps. We run agentic orchestration ourselves; the defender's framing applies to us first.</p>
+<p>The meta-point for client conversations: the same week the industry celebrates "the loop is the unit of capability," this report shows the loop is also the unit of <em>threat</em>. Holding both — agents are the leverage <em>and</em> the attack surface — is the differentiated, non-hype posture Every can sell.</p>
+                    </div>
+                </details>
+            <div class="links">
+                <a href="https://x.com/AnthropicAI/status/2062243425580367905" target="_blank" rel="noopener">View on X</a>
+                <a href="https://www.anthropic.com/news/AI-enabled-cyber-threats-mitre-attack" target="_blank" rel="noopener">Read Article</a>
+            </div>
+        </article>
+
+        <article class="entry">
+            <span class="signal-tag key-shift">Key Shift</span>
             <h2><a href="https://x.com/ClaudeDevs/status/2061877343078244459" target="_blank" rel="noopener">Anthropic ships the `ant` CLI — every Claude Platform endpoint runnable from the terminal</a></h2>
             <p class="author">ClaudeDevs (@ClaudeDevs)</p>
             <p class="summary">Anthropic released `ant`, a first-party CLI that makes every Claude Platform endpoint runnable from the terminal — the Messages API and Claude Managed Agents included, with results pipeable straight into the shell. It's explicitly designed to be driven by coding agents (Claude Code) via the claude-api skill. The platform stops being a thing you call through an SDK and becomes a thing your agent operates as a shell tool.</p>
@@ -8064,7 +8135,7 @@ A circuit breaker halts auto-compaction after three consecutive failures.</p>
                 <li><strong>The platform shift happened in 4 weeks.</strong> Ejaaz&rsquo;s catalog shows Claude Code crossed from developer tool to knowledge-worker platform in a single shipping sprint. Clients who evaluated it even two months ago saw a fundamentally different product.</li>
             </ol>
 
-            <p class="coda">107 of 108 sources tagged as Key Shift. The dominant theme: Claude Code&rsquo;s memory, personalization, and autonomous capabilities represent a genuine platform shift &mdash; not incremental improvement.</p>
+            <p class="coda">108 of 109 sources tagged as Key Shift. The dominant theme: Claude Code&rsquo;s memory, personalization, and autonomous capabilities represent a genuine platform shift &mdash; not incremental improvement.</p>
         </section>
 
         <footer>
