@@ -388,13 +388,78 @@
         <header>
             <h1>Signal Digest</h1>
             <p class="subtitle">What actually matters in AI &mdash; curated by Claudie for the Every Consulting team</p>
-            <p class="meta">Last updated June 3, 2026</p>
+            <p class="meta">Last updated June 4, 2026</p>
         </header>
 
         <nav class="legend">
             Each entry is tagged: <span class="tag-example key-shift">Key Shift</span> signals a genuine change in how we should think or act. <span class="tag-example noise">Noise</span> means useful context but nothing new for the team.
         </nav>
 
+
+        <article class="entry">
+            <span class="signal-tag key-shift">Key Shift</span>
+            <h2><a href="https://x.com/_catwu/status/2062408623565984209" target="_blank" rel="noopener">Anthropic's Data Team Automated 95% of Business Analytics Queries with Claude</a></h2>
+            <p class="author">cat (@_catwu)</p>
+            <p class="summary">Anthropic's own data team automated 95% of ad-hoc business analytics queries with Claude, using evals, ablations, and online validation to make the output trustworthy.</p>
+            
+                <details class="section-detail">
+                    <summary>Worth Your Time?</summary>
+                    <div class="section-content">
+                        <p><strong>READ.</strong> A frontier lab publishing that its <em>internal</em> data team automated 95% of business analytics queries — and the methodology that made it trustworthy — is a rare, concrete dispatch from inside the automation curve Every sells against. One-line verdict: the proof point and the playbook in a single post.</p>
+                    </div>
+                </details>
+
+                <details class="section-detail">
+                    <summary>What's Actually Happening</summary>
+                    <div class="section-content">
+                        <p>The structural reality: ad-hoc business analytics — "pull me the numbers on X, sliced by Y" — is one of the most universal knowledge-work bottlenecks. Every company with a data team has a queue of these requests, and the data team is the constraint. Anthropic is reporting that 95% of that queue now resolves without a human writing the query.</p>
+<p>The important part is <em>not</em> the 95% — it's the second clause: <strong>evals, ablations, online validation.</strong> That's the difference between a demo and production. The reason analytics automation has historically failed isn't that models can't write SQL — it's that nobody trusts an answer they can't verify. Anthropic's claim is that they built the trust scaffolding (eval sets, ablation studies on what actually moves accuracy, live validation against ground truth) that turns "the model probably got it right" into "we measured that it gets it right 95% of the time." This is a shift, not noise: it's a lab saying the trust problem is now an engineering problem with a known solution shape.</p>
+                    </div>
+                </details>
+
+                <details class="section-detail">
+                    <summary>What's Not Being Said</summary>
+                    <div class="section-content">
+                        <p>The 95% is doing a lot of work. Which 95%? Almost certainly the high-frequency, well-structured, repeat-pattern queries — not the novel, ambiguous, politically-loaded analyses where the hard judgment lives. The remaining 5% is probably where most of the <em>value</em> and all of the <em>risk</em> sits. Also unsaid: the cost of building the eval/validation harness. "Automate 95%" reads as a cost saving; the harness itself is a non-trivial standing investment most companies won't staff for. The honest contrarian read: the model was never the bottleneck — the eval infrastructure was, and that's the part nobody wants to pay for.</p>
+                    </div>
+                </details>
+
+                <details class="section-detail">
+                    <summary>Where This Sits in the Bigger Picture</summary>
+                    <div class="section-content">
+                        <p>This is the analytics-team version of the coding-agent story that's played out over the last year: the work doesn't disappear, it moves up a level. The data analyst stops writing queries and starts owning the eval set, the validation logic, and the 5% of judgment calls. It's consistent with the broader 2026 trajectory — automation lands first on the structured, high-volume, verifiable slice of a knowledge job, and the human role compresses toward specification, verification, and the genuinely ambiguous. Finance and BI functions are squarely next.</p>
+                    </div>
+                </details>
+
+                <details class="section-detail">
+                    <summary>What's Likely Coming Next</summary>
+                    <div class="section-content">
+                        <p>Second-order effects: (1) "Analytics copilot with built-in evals" becomes a product category, not a custom build. (2) The job title shifts from "analyst who pulls numbers" to "analyst who owns the eval harness." (3) Finance/PE/hedge-fund clients — who have both the volume and the trust requirement — start asking vendors "how do you validate the output," and the answer becomes the differentiator. Precedent: this is exactly how coding agents went from "cool demo" to "we measure pass rate on our eval suite" in ~18 months.</p>
+                    </div>
+                </details>
+
+                <details class="section-detail">
+                    <summary>Attention Is All You Need</summary>
+                    <div class="section-content">
+                        <p>Foundational source: the Anthropic blog post the tweet references (covering their evals/ablations/online-validation approach to analytics) — pull it directly and read the methodology, not the headline. Key person: cat (@_catwu), Anthropic data team. The reusable artifact is the <em>method</em> — eval sets + ablations + online validation — which generalizes far beyond analytics to any agentic task where trust is the blocker.</p>
+                    </div>
+                </details>
+
+                <details class="section-detail">
+                    <summary>What This Means for Every Consulting</summary>
+                    <div class="section-content">
+                        <ul>
+<li><strong>Sales talking point (sourced, not fabricated):</strong> "Anthropic's own data team automated 95% of analytics queries." Credible third-party proof for the finance/data pitch — Brooker's vertical especially.</li>
+<li><strong>It validates work we're already shipping:</strong> Thrive Market's "FBP Analysis Accelerator" runs on the identical thesis (question-to-answer in minutes, not days). This is evidence it scales.</li>
+<li><strong>The training upgrade:</strong> the real client lesson isn't "AI can do analytics" — it's "evals are how you make analytics automation trustworthy." Fold the evals/ablations/online-validation framing into Mike's existing eval module and a finance-vertical "trustworthy analytics" block.</li>
+<li><strong>For our own house:</strong> Claudie's <code>quality-check</code> skill is already a primitive "online validation" step for dashboards. The opportunity is to formalize an eval set for dashboard updates — measure correctness instead of relying on human-in-the-loop ambiguity surfacing.</li>
+</ul>
+                    </div>
+                </details>
+            <div class="links">
+                <a href="https://x.com/_catwu/status/2062408623565984209" target="_blank" rel="noopener">View on X</a>
+            </div>
+        </article>
 
         <article class="entry">
             <span class="signal-tag key-shift">Key Shift</span>
@@ -8226,7 +8291,7 @@ A circuit breaker halts auto-compaction after three consecutive failures.</p>
                 <li><strong>The platform shift happened in 4 weeks.</strong> Ejaaz&rsquo;s catalog shows Claude Code crossed from developer tool to knowledge-worker platform in a single shipping sprint. Clients who evaluated it even two months ago saw a fundamentally different product.</li>
             </ol>
 
-            <p class="coda">109 of 110 sources tagged as Key Shift. The dominant theme: Claude Code&rsquo;s memory, personalization, and autonomous capabilities represent a genuine platform shift &mdash; not incremental improvement.</p>
+            <p class="coda">110 of 111 sources tagged as Key Shift. The dominant theme: Claude Code&rsquo;s memory, personalization, and autonomous capabilities represent a genuine platform shift &mdash; not incremental improvement.</p>
         </section>
 
         <footer>
