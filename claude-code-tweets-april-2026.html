@@ -398,6 +398,81 @@
 
         <article class="entry">
             <span class="signal-tag key-shift">Key Shift</span>
+            <h2><a href="https://x.com/Mnilax/status/2062524132621791514" target="_blank" rel="noopener">Dynamic Workflows: Claude writes its own orchestration script</a></h2>
+            <p class="author">Mnimiy (@Mnilax), Miles Deutscher (@milesdeutscher), CJ Hess (@seejayhess)</p>
+            <p class="summary">Anthropic shipped dynamic workflows — Claude writes its own JS orchestration script and fans out 10s–100s of subagents (pipeline, parallel, adversarial-verify, loop-until-dry) to crack one hard task. The ecosystem spent this week reverse-engineering the patterns.</p>
+            
+                <details class="section-detail">
+                    <summary>Worth Your Time?</summary>
+                    <div class="section-content">
+                        <p><strong>Read</strong> — if you build with Claude Code or sell agent design. <strong>Skim</strong> otherwise.</p>
+<p>Anthropic shipped a primitive that moves the unit of work from "a prompt" to "a program that spawns agents." It's directly in Claudie's own toolset already, and it's the concrete artifact two prior digest entries (10, 98) predicted. The practitioner threads (Mnimiy's "6 patterns, 14 steps" teardown; Hess's 7-PR adversarial review) are where the real signal is — not the hype-merchant "99% of people missed this" framing.</p>
+                    </div>
+                </details>
+
+                <details class="section-detail">
+                    <summary>What's Actually Happening</summary>
+                    <div class="section-content">
+                        <p>The structural shift: orchestration logic used to live in the model's head (you prompt, it decides what to do next, statefully, inside one rotting context). Dynamic workflows externalize that into a <strong>deterministic JS script</strong> Claude authors and runs — <code>agent()</code>, <code>pipeline()</code>, <code>parallel()</code> barriers, schema-validated returns, loop-until-dry, budget gates. The control flow is code; the intelligence is in the spawned subagents, each with a clean context.</p>
+<p>Why now: two forces converged. (1) Attention degrades at 100–200k tokens regardless of window size (see today's Aurimas finding) — single-context agents hit a ceiling. (2) Frontier models got expensive, so you want to spend tokens deliberately, not let one long context burn them. A script with explicit fan-out and budget gates solves both. This is shift, not noise — it changes what a "task" is.</p>
+                    </div>
+                </details>
+
+                <details class="section-detail">
+                    <summary>What's Not Being Said</summary>
+                    <div class="section-content">
+                        <p>The hype threads ("most powerful feature," "went under 99% of people's noses") bury the cost. Spawning is not free: our own entry 98 documented a <strong>~20K-token floor per subagent</strong> and field data that only 4 of 14 subagents survived 60 days of real use. "10s–100s of subagents" is a capital-allocation decision paid <em>before</em> any work happens. The honest version: dynamic workflows make fan-out <em>structurally viable</em> (no context-rot, clean isolation, deterministic control), but they don't make it <em>cheap</em>. Most tasks still don't want 100 agents. The skill is knowing when scale is justified — and gating on <code>budget.remaining()</code> so a workflow can't run away.</p>
+                    </div>
+                </details>
+
+                <details class="section-detail">
+                    <summary>Where This Sits in the Bigger Picture</summary>
+                    <div class="section-content">
+                        <p>This is the "harness &gt; model" thesis (entry on scaling-laws-agent-harnesses, 2026-06-04) reaching its logical endpoint: the harness is now a program the model writes for itself. It also closes the loop on the orchestration-era prediction from entry 10 (Cursor 3) and entry 22 — the question stopped being "which model/tool" and became "how do you decompose, fan out, and verify." Adversarial verification (Hess) is the maturation of entry 98's core finding: agents shouldn't QA themselves; stand up a separate skeptic.</p>
+                    </div>
+                </details>
+
+                <details class="section-detail">
+                    <summary>What's Likely Coming Next</summary>
+                    <div class="section-content">
+                        <ul>
+<li><strong>Pattern libraries become the moat.</strong> The model can write the script, but knowing <em>which</em> of the 6 patterns fits (pipeline vs. barrier, single-vote vs. adversarial panel) is judgment. Expect reusable, named workflows to be the next thing teams hoard.</li>
+<li><strong>Cost dashboards.</strong> As fan-out normalizes, "tokens per resolved task" becomes the metric that matters, and someone ships the observability for it.</li>
+<li><strong>Second-order:</strong> self-reviewing skills get refactored to adversarial across the ecosystem. The "let it check its own work" default dies.</li>
+</ul>
+                    </div>
+                </details>
+
+                <details class="section-detail">
+                    <summary>Attention Is All You Need</summary>
+                    <div class="section-content">
+                        <p>Foundational sources / people to follow:
+- <strong>Mnimiy (@Mnilax)</strong> — the teardown: https://x.com/Mnilax/status/2062524132621791514 (and his upstream sub-agent-economics thread, our entry 98)
+- <strong>CJ Hess (@seejayhess)</strong> — adversarial use in practice: https://x.com/seejayhess/status/2062295566378267034
+- <strong>Sydney Runkle (@sydneyrunkle, Pydantic)</strong> — provider-agnostic harness + hill-climbing guides, posting heavily this week
+- Skip the amplifier threads (Deutscher et al.) once you've read the primaries — they're distribution, not source.</p>
+                    </div>
+                </details>
+
+                <details class="section-detail">
+                    <summary>What This Means for Every Consulting</summary>
+                    <div class="section-content">
+                        <ul>
+<li><strong>Claudie (infra):</strong> Close the open thread from 5/29 — Nityesh asked to migrate <code>all-dashboards-update</code> from a shaky temp-file-shared-state skill to a Workflow. Dynamic workflows are the right fix; confirm whether it shipped, and if not, make it the first production Workflow. Migration candidates: <code>experimental:parallelize</code>, <code>all-asana-sync</code>, and <code>quality-check</code> (→ adversarial, template = <code>slide-deck-creation:review-slides</code>).</li>
+<li><strong>Mike (training):</strong> One combined module — "sub-agent economics + dynamic workflows": the 6 patterns, the adversarial principle, and the 20K cost floor. Layer onto the existing subagents slide in <code>claude-code-refresher.md</code>.</li>
+<li><strong>Natalia (sales):</strong> Hess's 7-PR adversarial review is a concrete, demoable answer to "should our agents check their own work?" — <em>no, you stand up a separate verifier.</em> Defensible, specific, and exactly the kind of judgment clients pay $50–100k for.</li>
+<li><strong>The discipline to teach:</strong> fan-out is capital allocation. The differentiator isn't spawning more agents — it's knowing when not to.</li>
+</ul>
+                    </div>
+                </details>
+            <div class="links">
+                <a href="https://x.com/Mnilax/status/2062524132621791514" target="_blank" rel="noopener">View on X</a>
+                <a href="https://x.com/milesdeutscher/status/2062216995383488744" target="_blank" rel="noopener">Read Article</a>
+            </div>
+        </article>
+
+        <article class="entry">
+            <span class="signal-tag key-shift">Key Shift</span>
             <h2><a href="https://x.com/_catwu/status/2062408623565984209" target="_blank" rel="noopener">Anthropic's Data Team Automated 95% of Business Analytics Queries with Claude</a></h2>
             <p class="author">cat (@_catwu)</p>
             <p class="summary">Anthropic's own data team automated 95% of ad-hoc business analytics queries with Claude, using evals, ablations, and online validation to make the output trustworthy.</p>
@@ -8291,7 +8366,7 @@ A circuit breaker halts auto-compaction after three consecutive failures.</p>
                 <li><strong>The platform shift happened in 4 weeks.</strong> Ejaaz&rsquo;s catalog shows Claude Code crossed from developer tool to knowledge-worker platform in a single shipping sprint. Clients who evaluated it even two months ago saw a fundamentally different product.</li>
             </ol>
 
-            <p class="coda">110 of 111 sources tagged as Key Shift. The dominant theme: Claude Code&rsquo;s memory, personalization, and autonomous capabilities represent a genuine platform shift &mdash; not incremental improvement.</p>
+            <p class="coda">111 of 112 sources tagged as Key Shift. The dominant theme: Claude Code&rsquo;s memory, personalization, and autonomous capabilities represent a genuine platform shift &mdash; not incremental improvement.</p>
         </section>
 
         <footer>
