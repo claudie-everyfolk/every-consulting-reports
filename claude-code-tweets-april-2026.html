@@ -388,13 +388,117 @@
         <header>
             <h1>Signal Digest</h1>
             <p class="subtitle">What actually matters in AI &mdash; curated by Claudie for the Every Consulting team</p>
-            <p class="meta">Last updated June 4, 2026</p>
+            <p class="meta">Last updated June 5, 2026</p>
         </header>
 
         <nav class="legend">
             Each entry is tagged: <span class="tag-example key-shift">Key Shift</span> signals a genuine change in how we should think or act. <span class="tag-example noise">Noise</span> means useful context but nothing new for the team.
         </nav>
 
+
+        <article class="entry">
+            <span class="signal-tag key-shift">Key Shift</span>
+            <h2><a href="https://x.com/_vmlops/status/2062571864866824247" target="_blank" rel="noopener">OpenAI Ships Role-Specific Codex Plugins — SME-Built Workflows for Sales, Analytics, Design, and Finance</a></h2>
+            <p class="author">Vaishnavi (@_vmlops) / OpenAI</p>
+            <p class="summary">OpenAI launches six role-specific Codex plugins (62 app connectors, 110 skills) built by its own subject-matter experts — productizing the 'custom AI workflows for business roles' layer, with Strategy Consulting and Legal plugins on the roadmap.</p>
+            
+                <details class="section-detail">
+                    <summary>Worth Your Time?</summary>
+                    <div class="section-content">
+                        <p><strong>Read.</strong> Not because the plugins are exotic — because the GitHub repo is a free, public reference implementation of exactly what Every Consulting sells, built by OpenAI's own subject-matter experts.</p>
+<p><strong>One-line verdict:</strong> OpenAI just productized the "custom AI workflows for business roles" layer — the same layer Every Consulting charges $50k–$100k to build — and put the templates on GitHub under MIT license.</p>
+                    </div>
+                </details>
+
+                <details class="section-detail">
+                    <summary>What's Actually Happening</summary>
+                    <div class="section-content">
+                        <p>The structural reality: OpenAI shipped six role-specific Codex plugins (Sales, Data Analytics, Product Design, Creative Production, Public Equity Investing, Investment Banking) — <strong>62 app connectors, 110 skills out of the box</strong>. Each plugin bundles domain skills, connector bindings (<code>.app.json</code>), MCP server config (<code>.mcp.json</code>), and starter assets. Teams swap placeholder connector IDs and ship. Salesforce, Snowflake, HubSpot, BigQuery, FactSet, LSEG, Moody's, S&amp;P, PitchBook — the connectors target exactly the stack Every's finance clients run.</p>
+<p>Why now: OpenAI reports knowledge workers are ~20% of Codex's 5M+ weekly users and growing <strong>3x faster than developers</strong>. The land-grab has moved from "developers using AI to code" to "every business role using agents on their real systems." Whoever owns the role-level workflow templates owns enterprise distribution.</p>
+<p>The framing tell: "built by OpenAI's own subject-matter experts" is doing heavy lifting. It's an authority claim designed to make in-house and consultant-built alternatives feel redundant. And the roadmap is explicit about where this goes: <strong>Corporate Finance, Private Equity, Marketing Strategy, Strategy Consulting, and Legal plugins are announced next</strong>.</p>
+<p>This is a structural shift, not cyclical noise — it's the same move as Anthropic's skills ecosystem, now executed at the role level with first-party connector bindings by the largest distribution player.</p>
+                    </div>
+                </details>
+
+                <details class="section-detail">
+                    <summary>What's Not Being Said</summary>
+                    <div class="section-content">
+                        <ul>
+<li><strong>Templates aren't deployments.</strong> "Swap connector ids, ship" elides the hard 80%: data permissions, workflow mapping, exception handling, change management, and the org redesign that makes any of it stick. The README literally ships <code>REPLACE_WITH_SALESFORCE_APP_OR_CONNECTOR_ID</code> placeholders — the gap between that and a working deployment is the consulting business.</li>
+<li><strong>Generic role ≠ this firm's role.</strong> A "Public Equity Investing" plugin encodes the median workflow. A hedge fund's edge is precisely the non-median parts of its process — which is what discovery engagements surface.</li>
+<li><strong>Lock-in by template.</strong> Adopting OpenAI's plugin layer binds your workflow definitions to Codex. The smartest contrarian (echoing Sydney Runkle's model-agnostic harness argument the same day) would say enterprises should own their skill libraries in portable form, not rent them from one lab.</li>
+<li><strong>Auth is workspace-only at launch</strong> — no SAML, no external partner access. Unusable for client-facing deliverables in current form.</li>
+<li><strong>All adoption numbers are OpenAI-reported.</strong> No independent audit.</li>
+<li>A historian would note: this is the SAP/Oracle "industry solutions" playbook, or AWS re:Invent absorbing its ecosystem — the platform ships first-party versions of what integrators built, integrators move up the stack, and the integration market <em>grows</em> because more enterprises now believe the category is real.</li>
+</ul>
+                    </div>
+                </details>
+
+                <details class="section-detail">
+                    <summary>Where This Sits in the Bigger Picture</summary>
+                    <div class="section-content">
+                        <p>This is the role-level chapter of the story we've been tracking all spring:</p>
+<ul>
+<li><strong>Entry 60 (openai-codex-claude-code-plugin):</strong> Codex as a plugin platform — this is that platform getting first-party content.</li>
+<li><strong>Entry 86 (openai-deployment-company):</strong> OpenAI becoming a deployment company, not just a model company — plugins are deployment artifacts.</li>
+<li><strong>Entry 53 (harrison-chase-harness-your-moat) + Sydney Runkle's model-agnostic harness thread (June 4):</strong> the counter-thesis — own your harness and skill library, don't rent the lab's.</li>
+<li><strong>Entry 84 (ericosiu-services-as-software-agency-dead):</strong> the "services as software" repricing pressure, now with a concrete artifact.</li>
+<li><strong>Skill-library-first AI strategy (bookmark 2026-06-04):</strong> validated — the unit of enterprise AI adoption is now officially the skill/plugin bundle, per both major labs.</li>
+<li><strong>Anthropic's parallel motion:</strong> skills, plugins, and Claude Code's plugin marketplace — both labs converging on "packaged domain expertise" as the distribution unit. Every Consulting was early to this (it literally started as skills in a plugin marketplace).</li>
+</ul>
+<p>Labor-market angle: plugins for Investment Banking and Public Equity Investing target the analyst layer directly — consistent with the Garicano Fed-data entry (46) showing role compression at the junior end.</p>
+                    </div>
+                </details>
+
+                <details class="section-detail">
+                    <summary>What's Likely Coming Next</summary>
+                    <div class="section-content">
+                        <p>Most probable developments, based on the SAP/AWS precedent:</p>
+<ol>
+<li><strong>The announced wave lands</strong> — Strategy Consulting, Legal, PE, Corporate Finance, Marketing Strategy plugins ship within a quarter. The "Strategy Consulting" one will produce a fresh round of "consulting is dead" discourse.</li>
+<li><strong>Anthropic responds in kind</strong> — expect first-party role plugins/skills bundles for Claude, likely positioned around Claude Code + Cowork. Watch the EveryInc compound-engineering-plugin ecosystem for the community version.</li>
+<li><strong>Vendor SME plugins become table stakes; differentiation moves to firm-specific encoding.</strong> The pitch "we'll set up AI for your sales team" dies; the pitch "we'll encode <em>your</em> process, portably, across models" strengthens.</li>
+<li><strong>Second-order effect:</strong> enterprises that drop in generic plugins will plateau (the "AI adoption plateau" pattern, entry 63) — generating remediation demand: "we installed the plugins, usage flatlined, now what?" That's a discovery-session lead-gen channel.</li>
+<li><strong>Watch for:</strong> independent adoption data on plugin usage; whether OpenAI opens external/SAML auth (that's the signal they're serious about client-deliverable use cases); whether plugin marketplaces emerge with revenue share.</li>
+</ol>
+<p>Confirm/disprove: if in 90 days finance clients are asking "should we use the Investment Banking plugin?" in discovery calls, the thesis holds. If nobody mentions it, this was lab-PR noise.</p>
+                    </div>
+                </details>
+
+                <details class="section-detail">
+                    <summary>Attention Is All You Need</summary>
+                    <div class="section-content">
+                        <ul>
+<li><strong>The repo itself (read in full):</strong> <a href="https://github.com/openai/role-specific-plugins">github.com/openai/role-specific-plugins</a> — MIT-licensed. Study the structure: <code>.codex-plugin/plugin.json</code>, <code>.app.json</code> connector bindings, <code>.mcp.json</code>, <code>skills/</code> directories. This is a free competitive teardown of how OpenAI's SMEs encode role workflows.</li>
+<li><strong>VentureBeat coverage:</strong> <a href="https://venturebeat.com/orchestration/openais-codex-update-lets-agents-build-interactive-enterprise-workspaces-via-sites-and-role-specific-plugins">Codex Sites + role-specific plugins</a> — key insight: the "technical liaison" role is what's being removed.</li>
+<li><strong>Digital Applied breakdown:</strong> <a href="https://www.digitalapplied.com/blog/openai-codex-chatgpt-business-plugins-june-2026-agentic-work">Codex in ChatGPT, 6 plugins</a> — key insight: "the judgment layer becomes the service line."</li>
+<li><strong>Counter-thesis (read the thread):</strong> Sydney Runkle (<a href="https://x.com/sydneyrunkle">@sydneyrunkle</a>) on model-agnostic harnesses — <a href="https://x.com/sydneyrunkle/status/2062635642090074390">x.com/sydneyrunkle/status/2062635642090074390</a>.</li>
+<li><strong>Key people:</strong> <a href="https://x.com/_vmlops">@_vmlops</a> (surfaced it); OpenAI's CRO org driving the enterprise push; Harrison Chase (<a href="https://x.com/hwchase17">@hwchase17</a>) for the harness-as-moat frame.</li>
+</ul>
+                    </div>
+                </details>
+
+                <details class="section-detail">
+                    <summary>What This Means for Every Consulting</summary>
+                    <div class="section-content">
+                        <p><strong>Verticals affected:</strong> Finance first (Investment Banking + Public Equity plugins aim at hedge fund / PE analyst workflows — Brooker's vertical), then all of them when Strategy Consulting and Legal land.</p>
+<p><strong>Level:</strong> Paradigm-level for positioning, plus immediate discovery-session context.</p>
+<p><strong>Competitive read — honest version:</strong> this validates the model and attacks the low end simultaneously. Validation: both labs now agree the unit of enterprise AI value is packaged role-specific workflows — what Every has built since it was "a few skills in a plugin marketplace." Threat: "we'll build your team custom AI workflows" is no longer a $50k pitch when OpenAI gives away SME-built templates. The defensible layer moves up: discovery (finding the non-median workflow), firm-specific encoding, portability across models, and the judgment/validation layer.</p>
+<p><strong>Concrete moves:</strong></p>
+<ol>
+<li><strong>Natalia — sales narrative:</strong> Reposition against the templates, not around them. "OpenAI's plugins encode the median sales team. Your edge is everything about your process that isn't median — that's what we encode." Expect finance prospects to ask about the Investment Banking plugin by name; have the answer ready.</li>
+<li><strong>Brooker — finance vertical:</strong> Read the Financial Markets/Public Equity plugin skills directory before the next hedge fund or PE discovery call. Know what FactSet/Moody's/PitchBook workflows it covers out of the box so we never pitch something the client can get free.</li>
+<li><strong>Mike + Nityesh — teardown:</strong> Clone the repo, study how OpenAI's SMEs structure skills, manifests, and connector bindings. Adopt what's good into Every's skill-building practice; it's MIT-licensed. Also a ready-made workshop artifact: "anatomy of a role plugin."</li>
+<li><strong>Curriculum:</strong> Add a "build vs. buy vs. adapt" module — when to drop in a vendor plugin, when to fork it, when to build firm-specific. The honest version of this module is itself a trust-builder.</li>
+<li><strong>Watch:</strong> the Strategy Consulting plugin release. When it ships, run it through this digest same-day — it will be the sharpest version of this story for us.</li>
+</ol>
+                    </div>
+                </details>
+            <div class="links">
+                <a href="https://x.com/_vmlops/status/2062571864866824247" target="_blank" rel="noopener">View on X</a>
+                <a href="https://github.com/openai/role-specific-plugins" target="_blank" rel="noopener">Read Article</a>
+            </div>
+        </article>
 
         <article class="entry">
             <span class="signal-tag key-shift">Key Shift</span>
@@ -8566,7 +8670,7 @@ A circuit breaker halts auto-compaction after three consecutive failures.</p>
                 <li><strong>The platform shift happened in 4 weeks.</strong> Ejaaz&rsquo;s catalog shows Claude Code crossed from developer tool to knowledge-worker platform in a single shipping sprint. Clients who evaluated it even two months ago saw a fundamentally different product.</li>
             </ol>
 
-            <p class="coda">113 of 114 sources tagged as Key Shift. The dominant theme: Claude Code&rsquo;s memory, personalization, and autonomous capabilities represent a genuine platform shift &mdash; not incremental improvement.</p>
+            <p class="coda">114 of 115 sources tagged as Key Shift. The dominant theme: Claude Code&rsquo;s memory, personalization, and autonomous capabilities represent a genuine platform shift &mdash; not incremental improvement.</p>
         </section>
 
         <footer>
