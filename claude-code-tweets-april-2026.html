@@ -502,6 +502,101 @@
 
         <article class="entry">
             <span class="signal-tag key-shift">Key Shift</span>
+            <h2><a href="https://x.com/eglyman/status/2062921352613425446" target="_blank" rel="noopener">The problem isn't AI spend — it's blind spend</a></h2>
+            <p class="author">Eric Glyman (@eglyman)</p>
+            <p class="summary">Ramp's CEO reframes the AI cost panic: spending works, blind spending doesn't. No attribution means no allocation — and the future of finance is allocating AI spend with the rigor applied to headcount.</p>
+            
+                <details class="section-detail">
+                    <summary>Worth Your Time?</summary>
+                    <div class="section-content">
+                        <p><strong>Read.</strong> This is the cleanest articulation yet of the next phase of corporate AI: from "should we spend on AI?" to "can we attribute and allocate AI spend?"</p>
+<p><strong>One-line verdict:</strong> The token-budget panic headlines are a category error — the problem was never the size of the bill, it's that no one can tie a token to an outcome, so finance and engineering argue past each other with no shared language of value.</p>
+                    </div>
+                </details>
+
+                <details class="section-detail">
+                    <summary>What's Actually Happening</summary>
+                    <div class="section-content">
+                        <p>The structural reality: AI spend has crossed the threshold where it's a material line item (Glyman cites Uber "blowing its yearly AI budget in a quarter" and a Meta employee burning 281B tokens in a month), but the <em>accounting</em> hasn't caught up. There is no unit economics for AI work. A sales team measures qualified leads, support measures resolved conversations — a token measures only that "the meter ran."</p>
+<p>Glyman's chain: <strong>no attribution → no allocation.</strong> Without knowing which spend produced value, you can't decide where to add or cut. So organizations default everything to frontier models regardless of task complexity — and that default is where the waste lives, not in the total.</p>
+<p>Who benefits from this framing? Ramp, transparently — they sell spend management and this is the AI-era expansion of their core pitch (apply headcount-grade rigor to a new category). But the incentive doesn't make it wrong; it makes Ramp an early, credible voice because they see the actual spend data across thousands of companies. This is a vendor naming a real gap they're positioned to fill.</p>
+<p><strong>Structural shift, not cyclical noise.</strong> "AI FinOps" is becoming a discipline the way cloud FinOps did after the 2015–2018 cloud-bill shock. Same pattern: new infinitely-scalable resource → unconstrained adoption → bill shock → measurement/governance discipline emerges.</p>
+                    </div>
+                </details>
+
+                <details class="section-detail">
+                    <summary>What's Not Being Said</summary>
+                    <div class="section-content">
+                        <ul>
+<li><strong>Attribution for AI is genuinely harder than Glyman implies.</strong> Cloud FinOps could tag spend to a service or team. Attributing a token to "value" requires defining the unit of value per workflow — and most knowledge work has no clean output metric. The "$1M from re-routing 10%" math (model right-sizing) is the <em>easy</em> half; true outcome-attribution is the hard, possibly-unsolved half. The post quietly conflates the two.</li>
+<li><strong>The contrarian view:</strong> premature attribution machinery can suppress exactly the exploratory, "wasteful" usage that produced the top-quartile revenue doubling. If you'd demanded ROI attribution on every experiment in 2023, you'd have killed the experiments that worked. There's a real tension between measurement discipline and exploration that the tidy "rigor like headcount" framing erases.</li>
+<li><strong>A historian would note:</strong> every general-purpose technology goes through this — electricity, then computers (Solow's "productivity paradox"), then cloud. Measurement always lags capability by years, and the firms that win aren't the ones who measured first, they're the ones who deployed widely <em>and then</em> measured. Glyman's own data says this: the top quartile spent and won; they didn't wait for attribution.</li>
+<li><strong>Model right-sizing is also a moving target.</strong> Routing 10% to "GPT-4 level" today assumes the cheap tier is good enough — but frontier capability keeps redefining what tasks need frontier models. The arbitrage is real but it's a treadmill, not a one-time savings.</li>
+</ul>
+                    </div>
+                </details>
+
+                <details class="section-detail">
+                    <summary>Where This Sits in the Bigger Picture</summary>
+                    <div class="section-content">
+                        <p>This is the financialization of AI adoption — the moment the conversation moves from CTO/CIO ("can we?") to CFO ("is it allocated well?"). It connects to three forces:</p>
+<ol>
+<li><strong>The agentic shift</strong> multiplies token consumption by orders of magnitude (agents loop, retry, verify, spawn sub-agents), making the bill grow non-linearly with adoption — which is exactly what triggers the FinOps reflex.</li>
+<li><strong>Model commoditization at the low end:</strong> the gap between cheap and frontier on routine tasks (summaries, classification, extraction) has collapsed, making right-sizing a real and large lever for the first time.</li>
+<li><strong>The labor-market frame:</strong> "allocate AI with the rigor applied to headcount" is doing quiet work — it positions AI spend as substitutable for and comparable to payroll, which is how CFOs will eventually decide AI-vs-hiring tradeoffs.</li>
+</ol>
+                    </div>
+                </details>
+
+                <details class="section-detail">
+                    <summary>What's Likely Coming Next</summary>
+                    <div class="section-content">
+                        <ul>
+<li><strong>An "AI FinOps" tooling category</strong> emerges fast — spend attribution, per-task cost tracking, automatic model routing/right-sizing. Expect Ramp, the model providers (usage dashboards with attribution tags), and startups to converge here within 6–12 months.</li>
+<li><strong>Automatic model routers become standard infrastructure</strong> — middleware that classifies each request and routes to the cheapest sufficient model. (OpenRouter, semantic routers, and provider-native routing are early versions.)</li>
+<li><strong>Second-order effect:</strong> procurement and finance teams gain veto power over AI architecture decisions that were previously pure engineering calls. The "shared language of value" Glyman wants will be imposed top-down, and some of it will be crude (usage mandates, PR-count metrics) — see the Gergely Orosz "AI usage as KPI gets gamed" thread the same day for how this goes wrong.</li>
+<li><strong>Watch for:</strong> the first public case study of a company cutting its AI bill significantly <em>without</em> losing output via right-sizing. That confirms the thesis. The disconfirming signal would be firms finding that aggressive cost-optimization measurably degraded results — i.e., the cheap tier wasn't actually good enough.</li>
+</ul>
+                    </div>
+                </details>
+
+                <details class="section-detail">
+                    <summary>Attention Is All You Need</summary>
+                    <div class="section-content">
+                        <ul>
+<li><strong>Eric Glyman</strong> — Ramp CEO, the source. <a href="https://x.com/eglyman">@eglyman</a>. Worth following for the spend-data vantage point on AI adoption across thousands of companies.</li>
+<li><strong>Cloud FinOps as the precedent</strong> — the <a href="https://www.finops.org/">FinOps Foundation</a> playbook is the direct analog; "AI FinOps" will borrow its structure (inform → optimize → operate). <em>Key insight you need:</em> the discipline is attribution-first; optimization is meaningless until spend is tagged to teams/outcomes.</li>
+<li><strong>Andreessen Horowitz / Sequoia AI-spend reports</strong> — the recurring "$X of AI revenue vs $Y of compute" analyses that frame the macro bill-shock. <em>Skim for the numbers, not the narrative.</em></li>
+<li><strong>The contrast piece to read alongside:</strong> <a href="https://x.com/GergelyOrosz">Gergely Orosz</a> on AI-usage-as-productivity-metric getting gamed (2026-06-05) — the cautionary inverse of Glyman's optimism. Usage counts are vanity; outcome attribution is the real signal.</li>
+<li><strong>Tomasz Tunguz</strong> (<a href="https://x.com/ttunguz">@ttunguz</a>) on cost-per-task as a benchmark axis (Signal Digest entry ~104) — the adjacent, complementary take.</li>
+</ul>
+                    </div>
+                </details>
+
+                <details class="section-detail">
+                    <summary>What This Means for Every Consulting</summary>
+                    <div class="section-content">
+                        <p>This is <strong>discovery-and-deliverable gold</strong>, not just bootcamp color. Our clients are already living this:</p>
+<ul>
+<li><strong>Headway</strong> (12/8 check-in): Director of IT and team said leadership is forcing an AI KR for the quarter — <em>"everyone is yearning for some way to understand, is this investment worth it? How the hell do you measure that?"</em> Mike answered live with a triangulation framework.</li>
+<li><strong>Thrive Market</strong> CTO: <em>"$600K/year on AI tooling... my CFO wants to know if we're getting value from 200 Claude seats when maybe 60 people are active."</em></li>
+</ul>
+<p>We've already built the raw material: the Thrive exec deliverables (AI ROI Synthesizer, AI Investment Analyzer, License Governance &amp; ROI Dashboard) and Signal Digest entry 104's proposed "AI Tool Spend Audit" SKU. Glyman gives us the <strong>CFO-ready language</strong> to package it.</p>
+<p><strong>Concrete next moves:</strong>
+1. <strong>Productize a repeatable "AI Spend Attribution &amp; Right-Sizing Audit"</strong> — spend → attribution → model-mix reallocation, with Glyman's "$1M on a $10M bill" worked example as the hook. This is a sellable SKU for finance/PE/enterprise clients, not just a Thrive one-off.
+2. <strong>Add a discovery question to the standard script:</strong> <em>"You track cost-per-head. What's your cost-per-AI-task — and can you attribute any AI line item to an outcome?"</em> Most clients can answer neither; the gap is the sale.
+3. <strong>Pair it with the cautionary case</strong> (Orosz) so we teach outcomes-not-usage — a defensible, contrarian position that differentiates us from vendors pushing usage mandates.</p>
+<p><strong>Vertical fit:</strong> <strong>Brooker leads</strong> (this is finance discipline — speaks to CFOs and the finance/PE book). <strong>Mike supports</strong> on the model right-sizing half (the "when not to reach for the biggest model" engineering unit). <strong>Natalia</strong> should see the SKU framing for the sales motion.</p>
+<p><strong>For our own practice:</strong> we run on tokens and have per-agent model overrides documented but haven't audited whether our scheduled jobs are right-sized (triage/classification could run on Haiku/Sonnet, reserving Opus for judgment). We should run our own audit first — practicing what we'd bill clients to do makes the pitch credible.</p>
+                    </div>
+                </details>
+            <div class="links">
+                <a href="https://x.com/eglyman/status/2062921352613425446" target="_blank" rel="noopener">View on X</a>
+            </div>
+        </article>
+
+        <article class="entry">
+            <span class="signal-tag key-shift">Key Shift</span>
             <h2><a href="https://x.com/Mnilax/status/2062524132621791514" target="_blank" rel="noopener">Dynamic Workflows: Claude writes its own orchestration script</a></h2>
             <p class="author">Mnimiy (@Mnilax), Miles Deutscher (@milesdeutscher), CJ Hess (@seejayhess)</p>
             <p class="summary">Anthropic shipped dynamic workflows — Claude writes its own JS orchestration script and fans out 10s–100s of subagents (pipeline, parallel, adversarial-verify, loop-until-dry) to crack one hard task. The ecosystem spent this week reverse-engineering the patterns.</p>
@@ -8670,7 +8765,7 @@ A circuit breaker halts auto-compaction after three consecutive failures.</p>
                 <li><strong>The platform shift happened in 4 weeks.</strong> Ejaaz&rsquo;s catalog shows Claude Code crossed from developer tool to knowledge-worker platform in a single shipping sprint. Clients who evaluated it even two months ago saw a fundamentally different product.</li>
             </ol>
 
-            <p class="coda">114 of 115 sources tagged as Key Shift. The dominant theme: Claude Code&rsquo;s memory, personalization, and autonomous capabilities represent a genuine platform shift &mdash; not incremental improvement.</p>
+            <p class="coda">115 of 116 sources tagged as Key Shift. The dominant theme: Claude Code&rsquo;s memory, personalization, and autonomous capabilities represent a genuine platform shift &mdash; not incremental improvement.</p>
         </section>
 
         <footer>
