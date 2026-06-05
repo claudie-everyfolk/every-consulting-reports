@@ -473,6 +473,112 @@
 
         <article class="entry">
             <span class="signal-tag key-shift">Key Shift</span>
+            <h2><a href="https://x.com/alexalbert__/status/2062580571214389510" target="_blank" rel="noopener">When AI Builds Itself: Anthropic's Recursive Self-Improvement Data</a></h2>
+            <p class="author">Alex Albert (@alexalbert__) / Anthropic</p>
+            <p class="summary">Anthropic publishes internal data — 80% of merged code now written by Claude, engineers shipping 8x more — and frames it as an early signal on the path to recursive self-improvement.</p>
+            
+                <details class="section-detail">
+                    <summary>Worth Your Time?</summary>
+                    <div class="section-content">
+                        <p><strong>Read</strong> — but read it as two documents stapled together: a genuinely novel internal dataset, and a policy argument wrapped around it.</p>
+<p><strong>One-line verdict:</strong> Anthropic is the first frontier lab to publish hard internal numbers on how much of its <em>own</em> development is now done by its model — and to openly name "recursive self-improvement" as the thing those numbers point toward. The data is the signal; the RSI framing is the lab telling you how it wants the data read.</p>
+<p>The headline metrics:
+- <strong>80%+</strong> of all code merged into Anthropic's codebase is now Claude-written (up from single digits before Feb 2025).
+- Engineers ship <strong>8x</strong> more code per quarter than in 2024.
+- Open-ended coding task success: <strong>~26% → 76%</strong> in six months.
+- When research sessions went off-track, Claude proposed a better next step than the human <strong>64%</strong> of the time (April 2026).</p>
+<hr />
+                    </div>
+                </details>
+
+                <details class="section-detail">
+                    <summary>What's Actually Happening</summary>
+                    <div class="section-content">
+                        <p>The structural reality: the bottleneck in AI development is moving off of <em>code execution</em> and onto <em>research taste</em> — deciding which problems are worth solving. Anthropic's own framing splits capability into three tiers: (1) executing specified tasks — Claude excels; (2) tactical judgment on next steps — improving fast, 64% vs humans; (3) strategic direction-setting — still human-dominated. The whole essay is an argument that tier 3 is the last load-bearing wall.</p>
+<p>Who benefits from this narrative? Anthropic, directly and on two fronts. As a <em>product</em> story, "our model writes 80% of our own frontier code" is the most credible possible endorsement of Claude Code for engineering buyers. As a <em>policy</em> story, "RSI may be closer than you think and could mean loss of human control" is the argument that justifies Anthropic's regulatory posture (international coordination, verifiable slowdowns). The same dataset serves a sales pitch and a safety pitch simultaneously — that's not a contradiction to resolve, it's the point.</p>
+<p><strong>Structural shift, not cyclical noise</strong> — but specifically a shift in <em>who writes code</em>, with the <em>who decides what to build</em> question explicitly unresolved by Anthropic's own data.</p>
+<hr />
+                    </div>
+                </details>
+
+                <details class="section-detail">
+                    <summary>What's Not Being Said</summary>
+                    <div class="section-content">
+                        <p>The loudest omission, flagged in the replies: <strong>Anthropic published the productivity gain but not the quality cost.</strong> No revert/rollback rate on Claude-authored PRs vs a human baseline. At 80% authorship and 8x volume, even a small relative defect rate compounds into a large absolute number of bugs. The "would have caught ~1/3 of past incident bugs" stat is about <em>review</em>, not about defects <em>introduced</em> by Claude-authored code — different denominator.</p>
+<p>Anthropic actually concedes more than the tweet does: the 8x lines-of-code figure is "almost certainly an overstatement of the true productivity gain," the 4x employee-survey estimate may be inflated by cognitive bias, and their April 2026 autonomous-research demo "didn't transfer cleanly to production-scale models." The skeptic's question — <em>is "more code" even a good metric?</em> — is conceded inside the piece but buried under the headline number that travels on Twitter.</p>
+<p>The contrarian read: this is a company measuring itself with the metric most flattering to its product, on a task (its own codebase, with its own engineers as expert supervisors) that is the <em>easiest possible</em> environment for the model to look superhuman. Anthropic's engineers are world-class at prompting and reviewing Claude; that 80% does not transfer to a median enterprise team. A historian would note every general-purpose technology produced exactly this "we automated ourselves first" moment — compilers, spreadsheets, CAD — and that the productivity curve usually flattens where judgment, not execution, is the bottleneck. Which is precisely the wall Anthropic admits it hasn't crossed.</p>
+<hr />
+                    </div>
+                </details>
+
+                <details class="section-detail">
+                    <summary>Where This Sits in the Bigger Picture</summary>
+                    <div class="section-content">
+                        <p>This is the clearest public data point yet on the "AI accelerating AI" thesis that underpins every short-timeline AGI forecast. It connects directly to the labor-market story we already advise clients on: the value isn't in <em>typing code</em>, it's in <em>deciding what to build and verifying it's right</em>. Anthropic's own three-tier model is, accidentally, the best org-design framework we've seen for where human roles survive — execution collapses, tactical judgment is contested, strategic taste holds.</p>
+<p>It also sits next to the other Anthropic releases we've digested recently (entries 97 "how we contain Claude," 98 sub-agent economics, 99 architect certification). Read together, they're one coordinated message: the model is now capable enough to build frontier systems, so the differentiated human skill is <em>direction and oversight</em>, not production. That is the exact thesis Every Consulting sells.</p>
+<hr />
+                    </div>
+                </details>
+
+                <details class="section-detail">
+                    <summary>What's Likely Coming Next</summary>
+                    <div class="section-content">
+                        <ul>
+<li><strong>Other labs respond.</strong> Expect OpenAI / Google to publish comparable "% of our code is AI-written" figures within months — the metric is now competitive table stakes. Watch for whether anyone publishes a <em>quality</em> number; the first lab to release revert-rate data wins the credibility argument.</li>
+<li><strong>Task-horizon expansion.</strong> Anthropic projects day-long autonomous tasks this year, week-long by 2027. The thing to watch is whether tier-2 (tactical judgment) keeps climbing toward tier-3 (strategic taste) — that crossover is the actual RSI trigger, and the 64% stat is the number to track over time.</li>
+<li><strong>Second-order effect for buyers:</strong> "80% of our code is AI-written" becomes a board-level expectation. Our enterprise clients' leadership will start asking <em>their</em> eng orgs "why aren't we at 80%?" — creating demand (and a measurement trap, since the number doesn't transfer). That conversation is a consulting opportunity and a place to inject reality.</li>
+<li><strong>Disconfirming signal to watch:</strong> if the open-ended success rate plateaus below ~85% or the lines-of-code-to-shipped-value ratio degrades, the RSI-soon thesis weakens.</li>
+</ul>
+<hr />
+                    </div>
+                </details>
+
+                <details class="section-detail">
+                    <summary>Attention Is All You Need</summary>
+                    <div class="section-content">
+                        <p><strong>Read in full:</strong>
+- The Anthropic piece itself — https://anthropic.com/institute/recursive-self-improvement — specifically the three-tier capability section and the caveats (they're more honest than the discourse around them).</p>
+<p><strong>Key insight, no need to read in full:</strong>
+- Alex Albert's thread — https://x.com/alexalbert__/status/2062580571214389510 — the four metrics, which is what will actually circulate.
+- Ethan Mollick's framing — https://x.com/emollick/status/2062582362194460698 — useful precisely because he names the "navel-gazing + marketing + sincere belief" blend; good model for how to present this to skeptical clients without either dismissing or swallowing it.</p>
+<p><strong>Key people:</strong>
+- <strong>Alex Albert</strong> (@alexalbert__) — Anthropic, Claude Relations. The conduit for Claude Code capability data.
+- <strong>Ethan Mollick</strong> (@emollick, Wharton) — the most-cited translator of AI capability into managerial/organizational language. Worth tracking as the bridge between lab claims and enterprise reality.</p>
+<p><strong>The concept to anchor on:</strong> the execution → tactical judgment → strategic taste ladder. It's the cleanest available framework for advising clients on which roles AI displaces and which it amplifies.</p>
+<hr />
+                    </div>
+                </details>
+
+                <details class="section-detail">
+                    <summary>What This Means for Every Consulting</summary>
+                    <div class="section-content">
+                        <p><strong>Vertical:</strong> Cross-cutting, but lands hardest in (a) <strong>tech/dev</strong> (Mike) and (b) <strong>strategy/leadership</strong> conversations (Natalia). Less directly relevant to Brooker's non-tech finance work, except as paradigm context.</p>
+<p><strong>How it changes what we say:</strong></p>
+<ol>
+<li>
+<p><strong>Sales / strategy framing (Natalia).</strong> This is the single most credible third-party proof for our core pitch: the durable human skill is <em>direction + verification, not production</em>. Anthropic's own three-tier model is a ready-made slide. Use the 80% figure as a hook — then immediately supply the reality clients won't get from the tweet: <em>that number reflects expert supervisors on their own codebase; your org's number depends on how good your people get at directing and reviewing the model.</em> That honesty is the differentiator.</p>
+</li>
+<li>
+<p><strong>Tech-vertical curriculum (Mike).</strong> The headline buyers will bring to trainings is "80% AI-written code." Build a module-or-segment around the <strong>quality/verification gap</strong> the announcement omits: review discipline, regression testing, revert-rate as the metric that actually matters. Kieran's <code>/ce-dogfood-beta</code> (hands-off QA loop) is a perfect live demo of "the agent owns verification too" — pair them.</p>
+</li>
+<li>
+<p><strong>Discovery-session context.</strong> When a client's leadership cites this piece (they will), our job is to convert "why aren't we at 80%?" into the right question: <em>which tier of work are we trying to automate, and do we have the review/taste layer to do it safely?</em> That reframing is itself a deliverable.</p>
+</li>
+<li>
+<p><strong>Concrete next move:</strong> add a one-pager / talking-points note for the team — "How to talk about Anthropic's RSI announcement with clients" — that gives everyone the four stats, the three-tier framework, AND the missing-quality-cost caveat, so we present as the people who read past the headline. Natalia and Mike should both have it before their next client calls.</p>
+</li>
+</ol>
+<p><strong>Who should know:</strong> Natalia (positioning), Mike (curriculum + the quality-gap angle). Worth a heads-up that this will come up unprompted in nearly every leadership conversation for the next quarter.</p>
+                    </div>
+                </details>
+            <div class="links">
+                <a href="https://x.com/alexalbert__/status/2062580571214389510" target="_blank" rel="noopener">View on X</a>
+                <a href="https://anthropic.com/institute/recursive-self-improvement" target="_blank" rel="noopener">Read Article</a>
+            </div>
+        </article>
+
+        <article class="entry">
+            <span class="signal-tag key-shift">Key Shift</span>
             <h2><a href="https://x.com/AnthropicAI/status/2062568862479208923" target="_blank" rel="noopener">When AI Builds Itself</a></h2>
             <p class="author">Anthropic (@AnthropicAI)</p>
             <p class="summary">Anthropic publishes internal data showing AI is now meaningfully accelerating its own development — 80% of merged code authored by Claude, engineers shipping 8x more code/quarter — and names recursive self-improvement as a path it considers plausible and near.</p>
@@ -8460,7 +8566,7 @@ A circuit breaker halts auto-compaction after three consecutive failures.</p>
                 <li><strong>The platform shift happened in 4 weeks.</strong> Ejaaz&rsquo;s catalog shows Claude Code crossed from developer tool to knowledge-worker platform in a single shipping sprint. Clients who evaluated it even two months ago saw a fundamentally different product.</li>
             </ol>
 
-            <p class="coda">112 of 113 sources tagged as Key Shift. The dominant theme: Claude Code&rsquo;s memory, personalization, and autonomous capabilities represent a genuine platform shift &mdash; not incremental improvement.</p>
+            <p class="coda">113 of 114 sources tagged as Key Shift. The dominant theme: Claude Code&rsquo;s memory, personalization, and autonomous capabilities represent a genuine platform shift &mdash; not incremental improvement.</p>
         </section>
 
         <footer>
