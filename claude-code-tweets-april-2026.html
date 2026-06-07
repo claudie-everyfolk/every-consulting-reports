@@ -388,13 +388,82 @@
         <header>
             <h1>Signal Digest</h1>
             <p class="subtitle">What actually matters in AI &mdash; curated by Claudie for the Every Consulting team</p>
-            <p class="meta">Last updated June 6, 2026</p>
+            <p class="meta">Last updated June 7, 2026</p>
         </header>
 
         <nav class="legend">
             Each entry is tagged: <span class="tag-example key-shift">Key Shift</span> signals a genuine change in how we should think or act. <span class="tag-example noise">Noise</span> means useful context but nothing new for the team.
         </nav>
 
+
+        <article class="entry">
+            <span class="signal-tag key-shift">Key Shift</span>
+            <h2><a href="https://x.com/aakashgupta/status/2063448157258981762" target="_blank" rel="noopener">Build for the 80%: adoption is a modality problem, not an intelligence problem</a></h2>
+            <p class="author">Aakash Gupta (@aakashgupta)</p>
+            <p class="summary">ChatGPT's WAU curve step-changed on multimodal unlocks (image gen), not reasoning upgrades. The next 800M users aren't knowledge workers — they're people whose interface is talking, viewing, messaging. Build for interface, not intelligence.</p>
+            
+                <details class="section-detail">
+                    <summary>Worth Your Time?</summary>
+                    <div class="section-content">
+                        <p><strong>Read</strong> — if you advise anyone on AI adoption, sell AI training, or design rollout for non-technical teams. <strong>Skim</strong> if you're a builder who already lives in the tooling.</p>
+<p>One-line verdict: The clearest articulation yet that the adoption gap is an interface gap, not a capability gap — and it reframes who "the user" even is.</p>
+                    </div>
+                </details>
+
+                <details class="section-detail">
+                    <summary>What's Actually Happening</summary>
+                    <div class="section-content">
+                        <p>Aakash Gupta, citing OpenAI PM Abhi's walkthrough of ChatGPT's growth trajectory, makes a falsifiable structural claim: every step-change in ChatGPT's weekly-active-user curve corresponds to a <em>multimodal unlock</em>, not a reasoning upgrade. GPT-4, o1, o3 made the product smarter but kept serving the same 10-20% — knowledge workers who sit at computers and read text. The 1B-WAU jump came from image generation (ImageGen 2 reportedly had the biggest ELO jump of any OpenAI model), because "describe something, see something" is a UI that works for people who don't read three paragraphs of chat.</p>
+<p>The incentive read: OpenAI's growth team has internalized that intelligence is no longer the binding constraint on reach. Distribution is now a modality problem. Search and images reached the next cohort; voice and computer use are the next unlocks being prioritized.</p>
+                    </div>
+                </details>
+
+                <details class="section-detail">
+                    <summary>What's Not Being Said</summary>
+                    <div class="section-content">
+                        <p>The unstated tension: this is a <em>consumer</em> growth story, and most of the people quoting it sell to <em>enterprises</em> of knowledge workers — the exact 10-20% Gupta says are already served. Taken literally, the tweet says "Every's clients are the saturated segment." That's the trap.</p>
+<p>The contrarian, more useful read: the 80/20 split isn't just global — it's <em>inside every org</em>. A hedge fund's analysts are the 20%; its operations, compliance, and admin staff are the 80%, and they bounce off a text-chat box exactly the way Gupta's "next 800M" do. The adoption plateau Every's clients hit isn't because the model is too dumb. It's because the interface assumes a reading-and-prompting habit most of the staff don't have.</p>
+                    </div>
+                </details>
+
+                <details class="section-detail">
+                    <summary>Where This Sits in the Bigger Picture</summary>
+                    <div class="section-content">
+                        <p>This pairs directly with the AI-adoption-plateau thesis (Signal entry 63) and the SaaS-to-agents shift (entry 17): the people who don't adopt aren't resistant, they're un-onboarded by the interface. It also closes a loop with Every's own product line — Monologue (voice), and screenshot/image input — which are precisely the low-reading-overhead modalities Gupta says drive the next adoption wave. Every is, accidentally, building for the 80%.</p>
+                    </div>
+                </details>
+
+                <details class="section-detail">
+                    <summary>What's Likely Coming Next</summary>
+                    <div class="section-content">
+                        <p>If the pattern holds, the next enterprise-adoption wins won't come from a smarter model — they'll come from meeting non-technical staff in the modality they already use: voice dictation, screenshot/image input, and agents embedded inside the tools they already open (Excel, email, Slack). Expect "computer use" and ambient/voice agents to be the 2026 adoption story for the back-office majority, the same way image gen was the consumer story.</p>
+                    </div>
+                </details>
+
+                <details class="section-detail">
+                    <summary>Attention Is All You Need</summary>
+                    <div class="section-content">
+                        <ul>
+<li>Primary source: Aakash Gupta's tweet — https://x.com/aakashgupta/status/2063448157258981762</li>
+<li>Underlying data: OpenAI PM Abhi's walkthrough of ChatGPT's WAU trajectory (referenced in the tweet; worth finding the full talk).</li>
+<li>Key people: Aakash Gupta (Product Growth writer), Abhi (OpenAI PM).</li>
+<li>Companion frames in our store: Signal entries 63 (adoption plateau), 17 (SaaS → agents), 71 (Gupta — experience is a tax).</li>
+</ul>
+                    </div>
+                </details>
+
+                <details class="section-detail">
+                    <summary>What This Means for Every Consulting</summary>
+                    <div class="section-content">
+                        <p><strong>For the pitch (Natalia):</strong> A sharp line — "Reasoning upgrades serve the 20% who already use AI; adoption across the other 80% of your team comes from interface, not intelligence." It reframes the retainer/training value prop away from "we'll teach you better prompts" toward "we'll get the rest of your org actually using this."</p>
+<p><strong>For delivery (Brooker — non-tech/finance vertical):</strong> Lead non-technical sessions with low-reading-overhead modalities first — voice (Monologue), screenshot/image input, Claude-in-Excel — before text-prompting drills. The Engineers Gate finance training is a live test case for this.</p>
+<p><strong>For discovery:</strong> Add a diagnostic question — "which interface will your team <em>actually</em> open every day?" — instead of assuming chat. The answer reshapes the training plan.</p>
+                    </div>
+                </details>
+            <div class="links">
+                <a href="https://x.com/aakashgupta/status/2063448157258981762" target="_blank" rel="noopener">View on X</a>
+            </div>
+        </article>
 
         <article class="entry">
             <span class="signal-tag key-shift">Key Shift</span>
@@ -8940,7 +9009,7 @@ A circuit breaker halts auto-compaction after three consecutive failures.</p>
                 <li><strong>The platform shift happened in 4 weeks.</strong> Ejaaz&rsquo;s catalog shows Claude Code crossed from developer tool to knowledge-worker platform in a single shipping sprint. Clients who evaluated it even two months ago saw a fundamentally different product.</li>
             </ol>
 
-            <p class="coda">117 of 118 sources tagged as Key Shift. The dominant theme: Claude Code&rsquo;s memory, personalization, and autonomous capabilities represent a genuine platform shift &mdash; not incremental improvement.</p>
+            <p class="coda">118 of 119 sources tagged as Key Shift. The dominant theme: Claude Code&rsquo;s memory, personalization, and autonomous capabilities represent a genuine platform shift &mdash; not incremental improvement.</p>
         </section>
 
         <footer>
