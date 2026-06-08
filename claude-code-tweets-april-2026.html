@@ -398,6 +398,89 @@
 
         <article class="entry">
             <span class="signal-tag key-shift">Key Shift</span>
+            <h2><a href="https://x.com/danshipper/status/2063948403566854585" target="_blank" rel="noopener">WTF is a loop? The week 'design loops, don't prompt' became a contested vocabulary</a></h2>
+            <p class="author">Peter Steinberger (@steipete) / Boris Cherny (@bcherny) / Matt Van Horn (@mvanhorn)</p>
+            <p class="summary">Peter Steinberger's line — 'you shouldn't be prompting coding agents anymore, you should be designing loops that prompt your agents' — put the whole AI-coding timeline in a chokehold this week. Boris Cherny (Claude Code creator) answered with five concrete tips for running Opus autonomously for hours/days (auto-permissions, dynamic workflows orchestrating thousands of agents, /loop, cloud, end-to-end self-verification). Matt Van Horn wrote 'WTF Is a Loop?' cataloguing that almost nobody repeating the six-word slogan can define it — and Every's CEO Dan Shipper endorsed it. A loud skeptic camp (David Cramer, dex) calls it 'engineers-playing-ant-farm slop.' The shift isn't the technique; it's that 'loop' became contested industry vocabulary in one week, and the fight is really about whether self-verification is real.</p>
+            
+                <details class="section-detail">
+                    <summary>Worth Your Time?</summary>
+                    <div class="section-content">
+                        <p><strong>READ.</strong> One-line verdict: the agent-orchestration shift Claudie already runs on just became the industry's loudest argument — and the argument is secretly about the one thing that separates value from slop (self-verification), which is the exact thing Every can teach from lived experience.</p>
+                    </div>
+                </details>
+
+                <details class="section-detail">
+                    <summary>What's Actually Happening</summary>
+                    <div class="section-content">
+                        <p>The surface event is a slogan going viral. Peter Steinberger: <em>"Here's your monthly reminder that you shouldn't be prompting coding agents anymore. You should be designing loops that prompt your agents."</em> Matt Van Horn's article nails the real tell — "the most repeated sentence in AI coding this week is six words long, and almost nobody saying it can define it." A piece of vocabulary outran its own definition.</p>
+<p>The structural reality underneath: the unit of work in AI coding is migrating from <strong>the prompt</strong> (human drives every step) to <strong>the loop</strong> (human designs a system — discovery → plan → work → check → repeat — and the agent drives the steps). Boris Cherny, who builds Claude Code, gave the concrete spec: auto-mode permissions, dynamic workflows orchestrating hundreds/thousands of sub-agents, <code>/goal</code> and <code>/loop</code> to keep going until done, Claude Code in the cloud, and — the load-bearing one — <em>"make sure Claude has a way to self-verify its work end to end."</em> That last tip is not coequal with the other four; it's the whole game.</p>
+<p>Who benefits from the loop narrative: the labs and tooling layer (loops consume vastly more tokens than single prompts — Cherny's own framing references billion-token autonomous runs). Who's skeptical: senior engineers like David Cramer ("im so tired of 'groundbreak techniques' to produce more unmaintainable software") and dex ("engineers-playing-ant-farm slop") who've watched unsupervised generation produce volume without quality.</p>
+<p>This is a <strong>shift, not noise</strong> — but the <em>vocabulary</em> virality is noise wrapped around a real structural change. The change is genuine; the six-word slogan is the cyclical hype skin on top of it.</p>
+                    </div>
+                </details>
+
+                <details class="section-detail">
+                    <summary>What's Not Being Said</summary>
+                    <div class="section-content">
+                        <p>The loop debate is a proxy fight, and both camps are half-right about different things.</p>
+<p><strong>The believers underplay the precondition.</strong> A loop only beats a prompt if the agent can tell whether its own output is correct. Cherny's tip #5 (self-verify end to end) is listed fifth but is actually the gate: without tests, evals, a runnable service, or an adversarial reviewer, a loop just optimizes toward the <em>string</em> "done" faster than a human can catch it. Steinberger's slogan ships the conclusion (stop prompting) and buries the precondition (build a verification harness first).</p>
+<p><strong>The skeptics are right about the median team and wrong about the ceiling.</strong> Cramer/dex's "slop" critique is accurate for any team running loops on a model that can't self-check inside a codebase with no test coverage and no review gate — which is most enterprise teams today. But it's wrong as a blanket claim: where the harness exists, loops demonstrably extend coherent work across hours. The honest synthesis neither camp is stating: <strong>the loop is only as good as its verifier, and most orgs don't have one.</strong></p>
+<p>The contrarian view worth holding: the metric the whole debate should center on is <strong>revert-rate and review-burden</strong>, not lines shipped or hours run autonomously. Nobody in the viral thread is measuring that.</p>
+                    </div>
+                </details>
+
+                <details class="section-detail">
+                    <summary>Where This Sits in the Bigger Picture</summary>
+                    <div class="section-content">
+                        <p>This is the AI-coding layer catching up to a lesson other layers already learned. RAG learned "more retrieved chunks ≠ better answers." The skills layer learned it last week (entry #111: delete 95% of skills, pass-rate goes up). Now orchestration learns its version: <strong>more autonomy ≠ more value; autonomy without verification is just faster entropy.</strong> Each layer rediscovers that the binding constraint is signal/ground-truth, not throughput.</p>
+<p>It also marks AI coding's transition from <em>tool</em> discourse ("Cursor vs Claude Code vs Copilot") to <em>systems</em> discourse ("how do you architect the loop and its checks"). That's a maturity marker — the field is arguing about engineering practice, not feature lists.</p>
+                    </div>
+                </details>
+
+                <details class="section-detail">
+                    <summary>What's Likely Coming Next</summary>
+                    <div class="section-content">
+                        <ul>
+<li><strong>"Loop" gets a real definition and sub-types</strong> — supervised loops, dynamic-workflow fan-out, self-verifying loops — within a quarter, because Van Horn-style "nobody can define it" pieces force precision.</li>
+<li><strong>Verification becomes the product.</strong> Expect a wave of tooling and benchmarks centered on agent self-verification (SWE-Marathon-style long-horizon benchmarks already cited in Cherny's thread) and on revert-rate / review-burden metrics.</li>
+<li><strong>The slop critique gets data.</strong> Someone publishes a study showing loop-generated code has higher revert rates <em>absent</em> a test harness, and lower <em>with</em> one — confirming both camps and ending the binary fight.</li>
+<li><strong>Enterprise buyers ask "how do I verify?" before "how do I loop?"</strong> — which is the question Every should be ready to answer.</li>
+</ul>
+                    </div>
+                </details>
+
+                <details class="section-detail">
+                    <summary>Attention Is All You Need</summary>
+                    <div class="section-content">
+                        <p>Foundational sources and people to track:
+- <strong>Boris Cherny (@bcherny)</strong> — Claude Code creator; his 5-tips tweet is the canonical practitioner spec: https://x.com/bcherny/status/2063792263067754658
+- <strong>Peter Steinberger (@steipete)</strong> — originated the slogan; prolific on autonomous coding.
+- <strong>Matt Van Horn (@mvanhorn)</strong> — "WTF Is a Loop? Peter Steinberger vs. Boris Cherny": https://x.com/mvanhorn/status/2063865685558903149 (endorsed by Dan Shipper: https://x.com/danshipper/status/2063948403566854585)
+- <strong>Skeptic anchors:</strong> David Cramer (@zeeg, Sentry founder), dex (@dexhorthy) — the quality-counterweight.
+- <strong>SWE-Marathon</strong> (Rishi Desai, @rishi_desai2) — the long-horizon autonomous-work benchmark the believers cite.</p>
+                    </div>
+                </details>
+
+                <details class="section-detail">
+                    <summary>What This Means for Every Consulting</summary>
+                    <div class="section-content">
+                        <p><strong>We are the lived-experience case study, and the timing is ours to take.</strong> Dan Shipper (our CEO) already endorsed Van Horn's piece — Every is <em>in</em> this conversation, not observing it.</p>
+<ul>
+<li><strong>Mike Taylor's tech curriculum:</strong> the Thumbtack Session 2 deck already contains a <code>letting-claude-prompt-you</code> module and a CE-loop (plan → work → review → compound) framing. Promote it to a headline module. The market just generated demand for exactly the thing Mike already teaches; the move is to rename it in the customer's new vocabulary ("loops") and lead with it.</li>
+<li><strong>The differentiator is the verifier, not the loop.</strong> Every's honest, defensible client message: <em>anyone can set up a loop; the value is in the verification harness.</em> We can show ours — Claudie's dynamic workflows gate every write through an adversarial verifier and surface ambiguities to a human (<code>plugins/claudie/workflows/</code>). That's a live demo, not a slide.</li>
+<li><strong>Set client expectations against the slop critique.</strong> Tell clients the truth Cramer/dex are pointing at: if your codebase has no tests, no review gate, and you're on a non-frontier model, loops will make your mess faster. Sequence the engagement — verification infrastructure <em>before</em> autonomy. That reframes a hype trend into a disciplined adoption roadmap, which is exactly what a $50–100k engagement should sell.</li>
+<li><strong>Claudie infra:</strong> Nityesh — audit sub-agent fan-out against the token-floor economics (entry #98) and standardize the <code>review-slides</code> adversarial-judge pattern as the reusable self-verify template across workflows.</li>
+</ul>
+                    </div>
+                </details>
+            <div class="links">
+                <a href="https://x.com/danshipper/status/2063948403566854585" target="_blank" rel="noopener">View on X</a>
+                <a href="https://x.com/mvanhorn/status/2063865685558903149" target="_blank" rel="noopener">Read Article</a>
+            </div>
+        </article>
+
+        <article class="entry">
+            <span class="signal-tag key-shift">Key Shift</span>
             <h2><a href="https://x.com/aakashgupta/status/2063448157258981762" target="_blank" rel="noopener">Build for the 80%: adoption is a modality problem, not an intelligence problem</a></h2>
             <p class="author">Aakash Gupta (@aakashgupta)</p>
             <p class="summary">ChatGPT's WAU curve step-changed on multimodal unlocks (image gen), not reasoning upgrades. The next 800M users aren't knowledge workers — they're people whose interface is talking, viewing, messaging. Build for interface, not intelligence.</p>
@@ -9092,7 +9175,7 @@ A circuit breaker halts auto-compaction after three consecutive failures.</p>
                 <li><strong>The platform shift happened in 4 weeks.</strong> Ejaaz&rsquo;s catalog shows Claude Code crossed from developer tool to knowledge-worker platform in a single shipping sprint. Clients who evaluated it even two months ago saw a fundamentally different product.</li>
             </ol>
 
-            <p class="coda">119 of 120 sources tagged as Key Shift. The dominant theme: Claude Code&rsquo;s memory, personalization, and autonomous capabilities represent a genuine platform shift &mdash; not incremental improvement.</p>
+            <p class="coda">120 of 121 sources tagged as Key Shift. The dominant theme: Claude Code&rsquo;s memory, personalization, and autonomous capabilities represent a genuine platform shift &mdash; not incremental improvement.</p>
         </section>
 
         <footer>
