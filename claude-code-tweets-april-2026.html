@@ -388,7 +388,7 @@
         <header>
             <h1>Signal Digest</h1>
             <p class="subtitle">What actually matters in AI &mdash; curated by Claudie for the Every Consulting team</p>
-            <p class="meta">Last updated June 7, 2026</p>
+            <p class="meta">Last updated June 8, 2026</p>
         </header>
 
         <nav class="legend">
@@ -462,6 +462,89 @@
                 </details>
             <div class="links">
                 <a href="https://x.com/aakashgupta/status/2063448157258981762" target="_blank" rel="noopener">View on X</a>
+            </div>
+        </article>
+
+        <article class="entry">
+            <span class="signal-tag key-shift">Key Shift</span>
+            <h2><a href="https://x.com/rohit4verse/status/2063619984266596414" target="_blank" rel="noopener">Build the skill library, then delete it until only the judgment is left</a></h2>
+            <p class="author">@rohit4verse</p>
+            <p class="summary">rohit4verse distills a WorkOS result (Nick Nisi, DX engineer) into a thesis that inverts the prevailing 'build a big skill library' advice: 10,000 lines of doc-derived skills were dragging the model down — one skill alone moved a task from 97% to 77% accuracy. WorkOS deleted 95%, kept 553 lines of pure gotchas, and pass rate went UP. The shift: a skill's value isn't the docs it wraps (the model already knows those) — it's the handful of product-specific landmines, and bloat buries them. You don't get to a good skill library by adding; you get there by deleting. Verified against WorkOS's public skills repo and Nisi's talk.</p>
+            
+                <details class="section-detail">
+                    <summary>Worth Your Time?</summary>
+                    <div class="section-content">
+                        <p><strong>READ.</strong> One-line verdict: the clearest empirical kill-shot yet against the "ship a giant skill library" reflex — more context is not more capability, and for an agent fleet like Claudie's the implication is an <em>audit</em>, not an <em>expansion</em>.</p>
+                    </div>
+                </details>
+
+                <details class="section-detail">
+                    <summary>What's Actually Happening</summary>
+                    <div class="section-content">
+                        <p>The viral framing is "I deleted 95% of my skills." The structural reality is more precise and verifiable. WorkOS (via DX engineer <strong>Nick Nisi</strong>) auto-generated ~10,000 lines of agent skills from their product docs — the canonical "wrap your documentation in SKILL.md files" move that every team is being told is their first AI step. Then they ran <em>evals</em>. The library was actively hurting: one skill alone dropped a task from <strong>97% to 77%</strong> accuracy. They cut it to <strong>553 lines of pure gotchas</strong> and the pass rate climbed back to 97%. (Confirmed in the public <code>workos/skills</code> repo and Nisi's talk, not just the tweet.)</p>
+<p>The mechanism — and this is the part that matters — is <strong>signal dilution, not token cost</strong>. A frontier model already knows how to use Stripe, write SQL, or call a REST API. Feeding it your docs restates what it already knows and, in doing so, <em>buries</em> the 10 lines that are genuinely non-obvious: the landmine specific to your product, the field that means something different than its name suggests, the call that looks idempotent but isn't. The skill's entire value is that residue of hard-won, product-specific judgment. Pad it with retrievable knowledge and you lower the concentration of the only thing the model couldn't have guessed.</p>
+<p>Who benefits from the "build a huge library" narrative: the platform/tool layer (more skills = more surface = more lock-in) and content marketers selling "100 skills" packs. Who pays: the team whose pass rate quietly drops and who can't tell why, because the failure is diffuse.</p>
+<p>This is a <strong>structural shift in how to think about agent context</strong>, not cyclical noise. It's the same lesson the RAG world learned (more retrieved chunks ≠ better answers) arriving at the skills layer.</p>
+                    </div>
+                </details>
+
+                <details class="section-detail">
+                    <summary>What's Not Being Said</summary>
+                    <div class="section-content">
+                        <p>Three things.</p>
+<p><strong>First — this only works if you have evals.</strong> "Delete 95%" is terrifying advice without a measurement loop, because you're cutting blind. WorkOS could do it <em>because they had a validation set that told them the cut helped</em>. The tweet sells the conclusion (delete) and underplays the precondition (measure). Anyone who deletes on vibes will eventually cut a load-bearing gotcha and have no idea.</p>
+<p><strong>Second — the bloat usually isn't in the always-loaded layer.</strong> Modern skill design uses progressive disclosure: a short SKILL.md body that's always in context, plus reference files loaded on demand. A 1,000-line skill whose bulk sits in lazily-loaded references costs almost nothing until invoked. So the honest version of the advice is narrower: <em>cut the always-loaded bodies and dedupe overlapping skills</em>, not "delete 95% of every line." The viral number (95%) is real for WorkOS's specific doc-dump situation but doesn't transfer linearly to a well-architected library.</p>
+<p><strong>Third — "the model already knows how to code" has an expiry-date risk.</strong> It's true for public, well-documented tech. It's false for your internal systems, anything post-training-cutoff, or anything proprietary. The "delete the docs" rule quietly assumes the model's prior is correct; for genuinely novel or private surfaces, the docs <em>are</em> the gotchas.</p>
+                    </div>
+                </details>
+
+                <details class="section-detail">
+                    <summary>Where This Sits in the Bigger Picture</summary>
+                    <div class="section-content">
+                        <p>This sits on the <strong>AI / agent-architecture trajectory</strong> and rhymes hard with several things already in this digest:
+- <strong>SkillOpt (#95)</strong> — auto-tuning a skill against a validation set. WorkOS's manual delete-and-measure is the human version of the same loop; bolt SkillOpt onto it and you get automated skill compression.
+- <strong>COLLEAGUE.SKILL (#102)</strong> — capturing a person's <em>judgment</em> as a file. This is the complement: judgment is the thing worth keeping; docs are the thing worth cutting. Both point at the same redefinition — the unit of value in a skill is distilled judgment, not transcribed knowledge.
+- <strong>The broader "context engineering" turn</strong> — as base models get cheaper and smarter (Levie's stratification thesis, same week), the moat moves from <em>what you put in front of the model</em> to <em>the discipline of what you leave out</em>. Curation becomes the craft.</p>
+                    </div>
+                </details>
+
+                <details class="section-detail">
+                    <summary>What's Likely Coming Next</summary>
+                    <div class="section-content">
+                        <ul>
+<li><strong>Precedent:</strong> every knowledge medium went through the same arc — early abundance ("write everything down"), then a painful discovery that volume hurts retrieval, then a curation discipline (the editor, the style guide, the runbook that's deliberately short). Skills are at the "volume hurts" inflection now. Expect "skill linting / skill eval" tooling to become standard within a year.</li>
+<li><strong>Second-order effect:</strong> skill <em>count</em> dies as a vanity metric. The brag shifts from "we have 200 skills" to "our 12 skills hold a 96% pass rate." Marketplaces optimized for quantity get awkward.</li>
+<li><strong>Watch for:</strong> Anthropic and others shipping built-in eval+compression tooling for skills (the retrospective-agent pattern Nisi describes — the agent reads its own failure logs and <em>adds a gotcha</em>, growing the library only where it provably fails). That closed loop is the actually-powerful system.</li>
+</ul>
+                    </div>
+                </details>
+
+                <details class="section-detail">
+                    <summary>Attention Is All You Need</summary>
+                    <div class="section-content">
+                        <ul>
+<li><strong><code>workos/skills</code> repo</strong> — https://github.com/workos/skills — and its <a href="https://github.com/workos/skills/blob/main/CLAUDE.md"><code>CLAUDE.md</code></a>. <em>Read in full</em> — it's the primary artifact, the actual pared-down library, not a writeup about one.</li>
+<li><strong>Nick Nisi, "How I deleted 95% of my agent skills and got better results"</strong> — https://www.youtube.com/watch?v=vy7o1g2iHY8 — <em>watch</em> for the eval methodology and the retrospective-agent pattern (the part the tweet omits). Nisi is DX at WorkOS; worth tracking.</li>
+<li><strong>Anthropic, "Lessons from building Claude Code: How we use skills"</strong> — https://claude.com/blog/lessons-from-building-claude-code-how-we-use-skills — the foundational source on progressive disclosure and gotchas-as-high-signal. <em>Read the key insight</em>, skim the rest.</li>
+<li><strong>Companion entries:</strong> SkillOpt (#95), COLLEAGUE.SKILL (#102).</li>
+</ul>
+                    </div>
+                </details>
+
+                <details class="section-detail">
+                    <summary>What This Means for Every Consulting</summary>
+                    <div class="section-content">
+                        <p>This is close to home twice over — as an internal action and as a client offering.</p>
+<ul>
+<li><strong>Internal (do this):</strong> Claudie's own skill corpus is the textbook target — 22 plugin skills + locals, with fat always-loaded bodies (<code>delivery-ops</code> ~253-line SKILL.md, <code>delivery-skill</code> ~401-line) and several overlapping delivery skills that have already caused mis-triggering. The honest move isn't a blind 95% purge (we use progressive disclosure, so most reference bulk is already cheap) — it's a <em>scoped</em> audit: trim the always-loaded bodies to gotchas, dedupe the overlapping delivery skills, and — critically — <strong>build a small eval set first</strong> so we cut with measurement, not vibes. Nityesh owns the architecture; this is his call to make.</li>
+<li><strong>Client offering (sell this):</strong> most clients are being told to "build a skill library" and are about to walk into exactly WorkOS's 97%→77% trap. Every's differentiated take — "skills are a <em>subtractive</em> craft; the value is the gotchas, and you need evals to find them" — is a sharper, more credible pitch than "we'll help you write skills." It pairs naturally with <strong>Mike's "Skills Mastery — Zero to Hero" curriculum</strong>: the WorkOS result is a ready-made teaching case, and "delete to improve" is the counterintuitive lesson that makes a workshop memorable.</li>
+<li><strong>The boutique edge:</strong> anyone can generate 10,000 lines of skills from docs in an afternoon — that's the commodity. Knowing which 553 lines to keep, and having the eval discipline to prove it, is the judgment clients pay $50–100k for.</li>
+</ul>
+                    </div>
+                </details>
+            <div class="links">
+                <a href="https://x.com/rohit4verse/status/2063619984266596414" target="_blank" rel="noopener">View on X</a>
+                <a href="https://github.com/workos/skills" target="_blank" rel="noopener">Read Article</a>
             </div>
         </article>
 
@@ -9009,7 +9092,7 @@ A circuit breaker halts auto-compaction after three consecutive failures.</p>
                 <li><strong>The platform shift happened in 4 weeks.</strong> Ejaaz&rsquo;s catalog shows Claude Code crossed from developer tool to knowledge-worker platform in a single shipping sprint. Clients who evaluated it even two months ago saw a fundamentally different product.</li>
             </ol>
 
-            <p class="coda">118 of 119 sources tagged as Key Shift. The dominant theme: Claude Code&rsquo;s memory, personalization, and autonomous capabilities represent a genuine platform shift &mdash; not incremental improvement.</p>
+            <p class="coda">119 of 120 sources tagged as Key Shift. The dominant theme: Claude Code&rsquo;s memory, personalization, and autonomous capabilities represent a genuine platform shift &mdash; not incremental improvement.</p>
         </section>
 
         <footer>
