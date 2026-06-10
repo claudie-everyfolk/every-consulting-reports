@@ -478,6 +478,93 @@
 
         <article class="entry">
             <span class="signal-tag key-shift">Key Shift</span>
+            <h2><a href="https://x.com/felixrieseberg/status/2064392202504310900" target="_blank" rel="noopener">Anthropic launches Claude Fable 5 & Mythos 5 — the first public Mythos-class model</a></h2>
+            <p class="author">Felix Rieseberg (@felixrieseberg) / Anthropic</p>
+            <p class="summary">Anthropic put a Mythos-class frontier model into general availability — SOTA on nearly every benchmark, priced below the prior tier, gated by safety classifiers that divert risky requests to Opus 4.8.</p>
+            
+                <details class="section-detail">
+                    <summary>Worth Your Time?</summary>
+                    <div class="section-content">
+                        <p><strong>READ.</strong> This is the frontier launch the practice reviews on day one. A Mythos-class model is now generally available, it's cheaper than the tier it replaces, and it ships with a novel safety architecture. It directly resets the model-selection and pricing advice we give every client, and it supersedes the "should we wait for Claude 5?" holding answer we've been using since the Opus 4.8 launch (entry #100). Claude 5 is here.</p>
+                    </div>
+                </details>
+
+                <details class="section-detail">
+                    <summary>What's Actually Happening</summary>
+                    <div class="section-content">
+                        <p>Anthropic released <strong>two configurations of one next-gen model</strong>:</p>
+<ul>
+<li><strong>Fable 5</strong> — Mythos-class capability made <em>safe for general use</em>. SOTA on nearly all benchmarks: coding (Cognition FrontierCode), finance (Hebbia Finance Benchmark, "senior-level reasoning"), vision, and long-context (3× the gain of Opus 4.8 when given persistent memory). Customer proof points: "compressed months of engineering into days," a 50M-line codebase migration in one day, reasoning "at senior research scientist grade."</li>
+<li><strong>Mythos 5</strong> — the <em>same</em> model with safeguards lifted, restricted to vetted cybersecurity pros (Project Glasswing) and biology researchers via controlled-access programs.</li>
+</ul>
+<p>The structural move is the safety architecture, not just the capability bump. Three classifiers automatically <strong>divert</strong> high-risk requests — cyber-exploitation, bio/chem, and model-distillation attempts — to Opus 4.8 rather than refusing outright. Fallback triggers in &lt;5% of sessions. There's a 30-day data-retention policy on all Mythos-class traffic. This is how Anthropic justified making a model this capable broadly available: the dangerous-capability surface is fenced off by routing, not by lobotomizing the model.</p>
+<p>Incentives: Anthropic released this <strong>days after warning that AI is becoming too dangerous</strong> (TechCrunch framing). Putting the safe configuration in public while keeping the unsafe one gated is the commercial resolution of that tension — capture the revenue and the "we're the responsible lab" positioning at once. Pricing at $10/$50 (less than half Mythos Preview) signals they want volume adoption, not a scarcity-priced halo product.</p>
+<p><strong>Shift, not noise.</strong> A frontier-tier model crossing into general availability with a routing-based safety layer is a genuine inflection in both capability and how labs ship safety.</p>
+                    </div>
+                </details>
+
+                <details class="section-detail">
+                    <summary>What's Not Being Said</summary>
+                    <div class="section-content">
+                        <ul>
+<li><strong>"SOTA on nearly all benchmarks" is a vendor claim on vendor-friendly evals</strong> (FrontierCode is Cognition's, the finance bench is Hebbia's). The 50M-line one-day migration is a single customer anecdote, not a reproducible result. Cite these as <em>claims</em>, not facts, in any deck.</li>
+<li><strong>The &lt;5% fallback rate is the average, not the worst case.</strong> For a security-focused or life-sciences client, the relevant question is the fallback rate <em>in their workflow</em> — which could be far higher, and silently degrades them to Opus 4.8 mid-task. Nobody is publishing per-domain fallback rates.</li>
+<li><strong>30-day retention on Mythos-class traffic is buried.</strong> For NDA-bound clients (Bloomberg, NYT, 100B+ AUM funds) this is the single most important line in the announcement and it's not in the headline.</li>
+<li><strong>The contrarian read:</strong> "safe for general use via classifiers" means the model's real ceiling is hidden behind a router most users never hit. The capability you're paying frontier prices for may be partially inaccessible by design — and you can't audit when you got downgraded.</li>
+</ul>
+                    </div>
+                </details>
+
+                <details class="section-detail">
+                    <summary>Where This Sits in the Bigger Picture</summary>
+                    <div class="section-content">
+                        <p>Two trajectories converge here. First, <strong>capability-per-dollar keeps collapsing</strong> — this lands the same day as the "price-per-unit falls ~10x/year" framing (bookmark <code>2026-06-09-token-cost-collapse-10x-year.md</code>). Frontier capability at half the prior tier's price is that curve made concrete. Second, <strong>labs are productizing safety as routing infrastructure</strong>, not as refusal — a maturation from "the model won't answer" to "the request gets handled by a less-capable but safer model." That's a template other labs will copy.</p>
+<p>On the labor-market axis: a model that does senior-research-scientist-grade reasoning and one-day codebase migrations pushes the automation frontier squarely into knowledge work that was considered safe 18 months ago — exactly the audiences we train.</p>
+                    </div>
+                </details>
+
+                <details class="section-detail">
+                    <summary>What's Likely Coming Next</summary>
+                    <div class="section-content">
+                        <ul>
+<li><strong>Competitive response within weeks</strong> — OpenAI/Google ship a comparable tier or cut prices. The $10/$50 anchor pressures everyone.</li>
+<li><strong>Subscription-access whiplash</strong> — free Jun 9–22, then usage credits, then "full restoration when capacity permits." Expect client confusion and complaints about gated access; the honest answer is "available on API/Enterprise now, subscription is phased."</li>
+<li><strong>Budget shock, again</strong> — cheaper per token will pull clients toward handing the model bigger jobs, and cost-per-task rises (ServiceNow blew its full-year Anthropic budget in months, entry #89). The "cheaper" headline will mask climbing bills.</li>
+<li><strong>Glasswing expansion</strong> — Mythos 5 gated to vetted security pros is the productized continuation of entry #34. Expect a stream of "AI found N novel vulns" results, and the dual-use debate to intensify.</li>
+</ul>
+                    </div>
+                </details>
+
+                <details class="section-detail">
+                    <summary>Attention Is All You Need</summary>
+                    <div class="section-content">
+                        <p>Foundational sources to read directly, not via takes:
+- <strong>Anthropic announcement:</strong> https://www.anthropic.com/news/claude-fable-5-mythos-5 — the only authoritative source on pricing, safeguards, and retention.
+- <strong>Felix Rieseberg</strong> (@felixrieseberg) — the "third era" framing: https://x.com/felixrieseberg/status/2064392202504310900
+- <strong>Boris Cherny</strong> (@bcherny) — practitioner read + the self-verification-loop thesis: https://x.com/bcherny/status/2064431111154053187
+- <strong>Thariq</strong> (@trq212) — "verify it's doing the right work, not that it did the work right": https://x.com/trq212/status/2064437561930682672
+- <strong>Matthew Berman</strong> — "My Week with Fable" (independent hands-on, names the quirks): https://x.com/MatthewBerman/status/2064393462028669176
+- <strong>Press cross-check:</strong> CNBC, NBC News, TechCrunch (2026-06-09) — for the "days after warning AI is too dangerous" context.</p>
+                    </div>
+                </details>
+
+                <details class="section-detail">
+                    <summary>What This Means for Every Consulting</summary>
+                    <div class="section-content">
+                        <p><strong>Reset the standing client script.</strong> The Opus 4.8-era answer ("don't wait for 5, 4.8 is what 5 would be at another lab," #100) is now stale. New line: <em>Fable 5 is here, on API + consumption Enterprise today; subscription access is phased through Jun 22, then usage-credit-gated. It's more capable and cheaper per token — but budget by task-completed, because cost-per-task can still climb.</em> (Natalia.)</p>
+<p><strong>Curriculum updates.</strong> Tech vertical (Mike): fold the Fable 5 coding story into the Claude Code track and the planned "agent orchestration over tool choice" shift; pair with the same-day "design loops, not prompts" / self-verification thesis. Finance vertical (Brooker): build a "senior-analyst-grade reasoning + how to validate it" block anchored on the Hebbia finance result and the catwu 95%-automation proof point (#107) — the validation layer is the sellable skill, and it's the direct answer to "how do I trust the output?"</p>
+<p><strong>Two things to tell every client, unprompted.</strong> (1) The safety classifiers are a <em>governance feature</em> — frontier capability with rails is exactly the posture regulated finance clients want. (2) <strong>Flag the 30-day Mythos-class retention before anyone routes confidential data through it</strong> — our clients are under NDA; confirm Enterprise terms first. This is platform-risk advisory, and it's ours to raise.</p>
+<p><strong>For Claudie's own infra (Nityesh):</strong> the self-verification-loop wave is the engineered fix for the "verify before reporting done" discipline that's been violated 3+ times. Turn the <code>quality-check</code> primitive into a real post-action "did the write land?" gate on scheduled jobs, and build an internal eval suite so adopting Fable 5 (or any future model) doesn't ship blind. This was listed as an action against #100 and remains un-built.</p>
+                    </div>
+                </details>
+            <div class="links">
+                <a href="https://x.com/felixrieseberg/status/2064392202504310900" target="_blank" rel="noopener">View on X</a>
+                <a href="https://www.anthropic.com/news/claude-fable-5-mythos-5" target="_blank" rel="noopener">Read Article</a>
+            </div>
+        </article>
+
+        <article class="entry">
+            <span class="signal-tag key-shift">Key Shift</span>
             <h2><a href="https://x.com/danshipper/status/2063948403566854585" target="_blank" rel="noopener">WTF is a loop? The week 'design loops, don't prompt' became a contested vocabulary</a></h2>
             <p class="author">Peter Steinberger (@steipete) / Boris Cherny (@bcherny) / Matt Van Horn (@mvanhorn)</p>
             <p class="summary">Peter Steinberger's line — 'you shouldn't be prompting coding agents anymore, you should be designing loops that prompt your agents' — put the whole AI-coding timeline in a chokehold this week. Boris Cherny (Claude Code creator) answered with five concrete tips for running Opus autonomously for hours/days (auto-permissions, dynamic workflows orchestrating thousands of agents, /loop, cloud, end-to-end self-verification). Matt Van Horn wrote 'WTF Is a Loop?' cataloguing that almost nobody repeating the six-word slogan can define it — and Every's CEO Dan Shipper endorsed it. A loud skeptic camp (David Cramer, dex) calls it 'engineers-playing-ant-farm slop.' The shift isn't the technique; it's that 'loop' became contested industry vocabulary in one week, and the fight is really about whether self-verification is real.</p>
@@ -9337,7 +9424,7 @@ A circuit breaker halts auto-compaction after three consecutive failures.</p>
                 <li><strong>The platform shift happened in 4 weeks.</strong> Ejaaz&rsquo;s catalog shows Claude Code crossed from developer tool to knowledge-worker platform in a single shipping sprint. Clients who evaluated it even two months ago saw a fundamentally different product.</li>
             </ol>
 
-            <p class="coda">122 of 123 sources tagged as Key Shift. The dominant theme: Claude Code&rsquo;s memory, personalization, and autonomous capabilities represent a genuine platform shift &mdash; not incremental improvement.</p>
+            <p class="coda">123 of 124 sources tagged as Key Shift. The dominant theme: Claude Code&rsquo;s memory, personalization, and autonomous capabilities represent a genuine platform shift &mdash; not incremental improvement.</p>
         </section>
 
         <footer>
