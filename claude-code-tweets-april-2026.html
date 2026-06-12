@@ -388,13 +388,90 @@
         <header>
             <h1>Signal Digest</h1>
             <p class="subtitle">What actually matters in AI &mdash; curated by Claudie for the Every Consulting team</p>
-            <p class="meta">Last updated June 10, 2026</p>
+            <p class="meta">Last updated June 11, 2026</p>
         </header>
 
         <nav class="legend">
             Each entry is tagged: <span class="tag-example key-shift">Key Shift</span> signals a genuine change in how we should think or act. <span class="tag-example noise">Noise</span> means useful context but nothing new for the team.
         </nav>
 
+
+        <article class="entry">
+            <span class="signal-tag key-shift">Key Shift</span>
+            <h2><a href="https://x.com/0xDepressionn/status/2065076207373169096" target="_blank" rel="noopener">Cost is now the #2 enterprise AI complaint — the shift from adoption to governance</a></h2>
+            <p class="author">Dep (@0xDepressionn)</p>
+            <p class="summary">Enterprise AI's bottleneck is rotating from 'can we get people to use it' to 'can we afford how they use it' — and model-routing is the emerging fix.</p>
+            
+                <details class="section-detail">
+                    <summary>Worth Your Time?</summary>
+                    <div class="section-content">
+                        <p><strong>Skim</strong> — the specific numbers are unverifiable secondhand claims, but the underlying shift is real and matters to us.</p>
+<p><strong>One-line verdict:</strong> The enterprise AI bottleneck is rotating from <em>adoption</em> ("get people to use it") to <em>cost governance</em> ("afford how they're using it") — and the proposed fix, routing each task to the right-sized model, is exactly the kind of concrete, teachable optimization Every can own.</p>
+                    </div>
+                </details>
+
+                <details class="section-detail">
+                    <summary>What's Actually Happening</summary>
+                    <div class="section-content">
+                        <p>The structural reality underneath the Sam Altman anecdote: usage-based pricing met genuine enterprise adoption, and the bill arrived. For two years the industry optimized for one metric — get more seats active, more tokens flowing — because adoption was the hard part and nobody had a budget conversation worth having on tiny pilots. Now adoption succeeded at scale, and the cost curve that was a rounding error in 2024 is a line item with a VP's name on it.</p>
+<p>The "30-50% of sessions are routine tasks on the most expensive model" claim is the load-bearing insight regardless of whether the exact figure holds: people default to the best model for everything because choosing is friction, and the marginal token felt free until it wasn't. Who benefits from this framing? The post author (selling a routing system/article) and, more broadly, every "AI cost optimization" vendor about to appear. That doesn't make it wrong — it makes it a market forming in real time.</p>
+<p>This is a <strong>structural shift</strong>, not cyclical noise. Cost discipline doesn't un-happen once finance notices.</p>
+                    </div>
+                </details>
+
+                <details class="section-detail">
+                    <summary>What's Not Being Said</summary>
+                    <div class="section-content">
+                        <p>The headline numbers are single-sourced and should be treated as claims, not facts: the "$1.3M in a month," the "Jensen Huang expects tokens worth half your salary," the "43% lower bill" are all unverified and unattributed to a primary document. A historian of IT spend would yawn — this is the exact arc of cloud compute (2010s "lift everything to AWS" → mid-decade FinOps backlash → Kubernetes cost-allocation tooling). We've seen this movie; "FinOps for AI" is the sequel.</p>
+<p>The smartest contrarian point: routing is not free. Splitting tasks across model tiers adds orchestration complexity, eval overhead (how do you <em>know</em> the cheap model's output is "the same"?), and a new failure surface. "Same output, 43% cheaper" hides the engineering cost of building and maintaining the router — and the risk that a mis-routed task quietly degrades quality in a way nobody catches until a client does. The honest version is "lower bill, <em>if</em> you invest in the routing layer and the evals to trust it."</p>
+                    </div>
+                </details>
+
+                <details class="section-detail">
+                    <summary>Where This Sits in the Bigger Picture</summary>
+                    <div class="section-content">
+                        <p>This is the second-order consequence of the adoption wave Every has been riding. Our whole pitch is "change how teams actually work with AI" — and we're good at the adoption half. The cost half is the natural sequel for any client 6-12 months past a successful rollout. It connects to a theme already rippling across the feed the same day: token-saving prompt patterns, <code>--effort</code> tuning, planning-on-the-expensive-model / implementing-on-the-cheap-one splits. All the same instinct — match task difficulty to model tier.</p>
+<p>It also sits inside the labor-market story: Huang's "tokens worth half your salary" framing reframes compute as a complement to headcount, not a substitute. The budget question isn't "AI vs. people," it's "how much compute per person is rational" — a question every CFO is about to ask and few have a framework for.</p>
+                    </div>
+                </details>
+
+                <details class="section-detail">
+                    <summary>What's Likely Coming Next</summary>
+                    <div class="section-content">
+                        <p>Precedent (cloud FinOps) says: tooling, roles, and norms appear in that order. Expect (a) routing/observability products to flood in — model gateways, per-task cost dashboards, "cheapest model that passes eval" auto-selectors; (b) a new quasi-role inside enterprises ("AI cost owner" / AI FinOps) the way "cloud cost owner" emerged; (c) procurement pushing providers toward committed-use discounts and caching credits.</p>
+<p>Non-obvious second-order effect: cost pressure will <em>accelerate</em> the move to agentic, eval-gated workflows — because you can't safely route to a cheaper model without an eval that tells you the output still passes. Cost discipline forces the rigor that quality discipline alone hasn't. Watch for: the first public "we cut our AI bill X% by routing" enterprise case studies (confirms thesis) vs. providers simply cutting prices enough that routing stops mattering (disproves it).</p>
+                    </div>
+                </details>
+
+                <details class="section-detail">
+                    <summary>Attention Is All You Need</summary>
+                    <div class="section-content">
+                        <ul>
+<li><strong>The cloud-FinOps playbook is the foundational analogy.</strong> The FinOps Foundation framework (finops.org) maps almost 1:1: inform → optimize → operate. Read it as the template for what "AI FinOps" will become — <em>key insight, not full read</em>: cost allocation + showback + right-sizing, applied to tokens instead of instances.</li>
+<li><strong>Model-routing / cascades, the technical core.</strong> The "FrugalGPT" line of work (Chen, Zaharia, Zou, 2023 — arxiv.org/abs/2305.05176) is the original academic framing of LLM cascades: try a cheap model first, escalate only on low confidence. Anyone selling "task routing" in 2026 is repackaging this. <em>Read the abstract + method.</em></li>
+<li><strong>Anthropic's own cost levers</strong> — prompt caching and batch processing (docs.anthropic.com) — are the cheapest wins before you build any router. <em>Key insight: a lot of the "43%" is achievable with caching + batching alone, no routing complexity.</em></li>
+<li><strong>People to watch:</strong> Sam Altman (@sama) and Jensen Huang (@nvidia) as the demand-side framers; the FinOps Foundation as the discipline's home.</li>
+</ul>
+                    </div>
+                </details>
+
+                <details class="section-detail">
+                    <summary>What This Means for Every Consulting</summary>
+                    <div class="section-content">
+                        <p>This is a <strong>new expansion offering hiding in plain sight</strong>, and it's most relevant to <strong>clients who are past the adoption curve</strong> — exactly our maturing engagements.</p>
+<ul>
+<li><strong>Vertical:</strong> Cuts across all three, but lands hardest with <strong>finance/ops (Brooker)</strong> — CFOs and ops leaders are the ones who feel the bill — and <strong>tech (Mike)</strong>, since model-routing and eval-gated cascades are an engineering build. Natalia owns the framing: we don't just drive adoption, we make it <em>sustainable</em>.</li>
+<li><strong>Format:</strong> Paradigm-level, not a single bootcamp slide. The concrete move is an <strong>"AI Cost Audit / right-sizing" add-on</strong>: inventory where the org defaults to the most expensive model for routine work, quantify it, and propose a routing + caching plan with evals to protect quality. It's measurable (before/after bill), which makes it an easy expansion sell on top of an existing engagement.</li>
+<li><strong>Internal credibility:</strong> We should practice this ourselves first — Claudie's own scheduled jobs already think about model tiers and peak-hour throttling. A short "here's how we route our own agent's work" is a credible demo artifact.</li>
+<li><strong>Caution to carry into client rooms:</strong> lead with caching + batching (free wins, no new failure surface) before routing (real engineering + eval cost). Don't sell "43% cheaper" as turnkey — sell it as an investment with a payback period.</li>
+<li><strong>Who should know:</strong> Brooker (the finance-audience hook), Mike (the routing/eval build), Natalia (the sustainability narrative for renewals).</li>
+</ul>
+                    </div>
+                </details>
+            <div class="links">
+                <a href="https://x.com/0xDepressionn/status/2065076207373169096" target="_blank" rel="noopener">View on X</a>
+            </div>
+        </article>
 
         <article class="entry">
             <span class="signal-tag key-shift">Key Shift</span>
@@ -9582,7 +9659,7 @@ A circuit breaker halts auto-compaction after three consecutive failures.</p>
                 <li><strong>The platform shift happened in 4 weeks.</strong> Ejaaz&rsquo;s catalog shows Claude Code crossed from developer tool to knowledge-worker platform in a single shipping sprint. Clients who evaluated it even two months ago saw a fundamentally different product.</li>
             </ol>
 
-            <p class="coda">125 of 126 sources tagged as Key Shift. The dominant theme: Claude Code&rsquo;s memory, personalization, and autonomous capabilities represent a genuine platform shift &mdash; not incremental improvement.</p>
+            <p class="coda">126 of 127 sources tagged as Key Shift. The dominant theme: Claude Code&rsquo;s memory, personalization, and autonomous capabilities represent a genuine platform shift &mdash; not incremental improvement.</p>
         </section>
 
         <footer>
