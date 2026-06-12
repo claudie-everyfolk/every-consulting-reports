@@ -488,6 +488,104 @@
 
         <article class="entry">
             <span class="signal-tag key-shift">Key Shift</span>
+            <h2><a href="https://x.com/AlphaSignalAI/status/2065222550041596309" target="_blank" rel="noopener">How to Actually Prompt Claude Fable 5</a></h2>
+            <p class="author">AlphaSignal AI (@AlphaSignalAI)</p>
+            <p class="summary">Anthropic's official Fable 5 prompting guide says prior-model prompts now degrade output — the work shifts from steering each step to setting direction and verifying results.</p>
+            
+                <details class="section-detail">
+                    <summary>Worth Your Time?</summary>
+                    <div class="section-content">
+                        <p><strong>Read — in full, then act on it.</strong> This is not "another prompting tips thread." It is the official migration guidance for Anthropic's new flagship, and it explicitly says the prompting style baked into our curriculum, our delivered client prompt libraries, and Claudie's own skills now <em>reduces</em> output quality.</p>
+<p><strong>One-line verdict:</strong> The prompt's job just changed from <em>steering every step</em> to <em>setting direction and checking results</em> — and the old, careful, over-specified prompts are now a tax, not a safety net.</p>
+                    </div>
+                </details>
+
+                <details class="section-detail">
+                    <summary>What's Actually Happening</summary>
+                    <div class="section-content">
+                        <p>The structural reality: model capability finally outran the scaffolding we built to compensate for its limits. For three years, good prompting meant <em>adding</em> — step lists, "show your reasoning," enumerated edge cases, token-budget reminders. Those were crutches for models that drifted, skipped steps, or quit early. Fable 5 doesn't need them, and worse, they actively interfere:</p>
+<ul>
+<li><strong>Prescriptive step lists</strong> fight the model's mid-task self-correction.</li>
+<li><strong>"Show your reasoning"</strong> now trips a <code>reasoning_extraction</code> refusal category and silently routes you to Opus 4.8.</li>
+<li><strong>Token-countdown reminders</strong> cause premature wrap-up.</li>
+<li><strong>Enumerated edge cases</strong> (15 named behaviors) underperform one principle ("lead with the outcome").</li>
+</ul>
+<p>What to add instead: an <strong>effort parameter</strong> (high default, xhigh for hard work, medium/low for routine — low Fable 5 often beats xhigh on prior models), <strong>fresh-context verifier subagents</strong> (outperform self-critique), a <strong>boundary block</strong> (report findings, hold fixes until asked), a <strong>memory file</strong> (one lesson per file — Anthropic claims 3× compound-learning improvement), and a <strong>request-intent statement</strong> (why you're asking).</p>
+<p>Who benefits from the framing? Anthropic — it reframes "you have to rewrite all your prompts" as a capability upgrade. That's true, but it's also a real migration cost being narrated as a feature.</p>
+<p><strong>Structural shift, not cyclical noise.</strong> Alex Albert's own summary — "rewrite old CLAUDE.md instructions, let the model use more judgment" — is a paradigm change in how you instruct a model, not a tuning tweak.</p>
+                    </div>
+                </details>
+
+                <details class="section-detail">
+                    <summary>What's Not Being Said</summary>
+                    <div class="section-content">
+                        <p>The guide sells deletion as pure upside. The contrarian read: <strong>deletion transfers risk from the prompt to the model's judgment</strong>, and the model's judgment is now partly governed by undisclosed routing and steering.</p>
+<ul>
+<li><strong>The fallback tax.</strong> Anthropic says classifiers fire on &lt;5% of sessions; Artificial Analysis measured ~8% of benchmark tasks silently routing to Opus 4.8, with false positives on biology and GPU-programming prompts. Dan Shipper hit exactly this — set up a big Fable project, came back an hour later, it had tripped a safeguard and fell back to 4.8 ten minutes in. For a client paying for Fable-class output, a silent downgrade mid-task is a delivery risk nobody's pricing in.</li>
+<li><strong>Silent interventions.</strong> The system card discloses ~0.03% of traffic gets unannounced prompt modification — a real problem for ML-research clients who need reproducibility.</li>
+<li><strong>Data retention.</strong> Fable 5 requires 30-day retention with no zero-retention option. That's omitted from the prompting guide but lives in the system disclosures — and it's a hard blocker for finance/legal clients with data-handling rules.</li>
+</ul>
+<p>A historian would note: every major model release has had a "your old prompts are wrong now" moment (GPT-3.5→4, Opus 3→3.5). What's new is that the <em>correction is subtraction</em>, and that the model now overrides you through routing you can't see.</p>
+                    </div>
+                </details>
+
+                <details class="section-detail">
+                    <summary>Where This Sits in the Bigger Picture</summary>
+                    <div class="section-content">
+                        <p>This is the prompting-layer reflection of a deeper trajectory: <strong>as models get more capable, the human's job moves up the abstraction ladder</strong> — from operator (do these steps) to manager (here's the goal, here's how I'll check it). The "boundary block" and "verifier subagent" pattern is literally management: delegate with intent, set guardrails, inspect the work. That maps onto our entire consulting thesis — we teach people to work <em>with</em> AI as a teammate, not operate it as a tool. Fable 5 just made the teammate framing literally correct at the prompt level.</p>
+<p>It also connects to the safety story the team should be tracking: Fable 5 shipped days after Anthropic warned AI is getting "too dangerous," with covert capability limits it then partially walked back after "secret sabotage" accusations (Fortune, TechCrunch, Nathan Lambert). The prompting guide and the safety drama are the same story — a model powerful enough that Anthropic is steering it behind the scenes, which is exactly why your prompt should set direction and <em>verify</em> rather than micromanage.</p>
+                    </div>
+                </details>
+
+                <details class="section-detail">
+                    <summary>What's Likely Coming Next</summary>
+                    <div class="section-content">
+                        <ul>
+<li><strong>Skill/prompt-library churn becomes a recurring cost.</strong> Expect a wave of "I rewrote my CLAUDE.md for Fable 5" content within weeks (Christopher Allen's "scaffolding obsolete" piece is already out). Teams with large prompt libraries — including us — will feel this most.</li>
+<li><strong>Verifier-subagent patterns get productized.</strong> The "fresh context checks the work" pattern will show up as a default in harnesses and frameworks. Worth getting ahead of in Mike's Claude Code training.</li>
+<li><strong>The fallback problem gets tooling.</strong> Watch for routing-transparency features or third-party detectors that tell you when you've been downgraded to 4.8. Until then, "verify your model didn't change under you" is a real ops concern.</li>
+<li><strong>Confirm/disprove:</strong> if Anthropic publishes routing transparency and the fallback rate drops below the measured ~8%, the thesis (silent downgrade is a delivery risk) weakens. If client work starts producing inconsistent output mid-task, it strengthens.</li>
+</ul>
+                    </div>
+                </details>
+
+                <details class="section-detail">
+                    <summary>Attention Is All You Need</summary>
+                    <div class="section-content">
+                        <ul>
+<li><strong>Anthropic's official Claude Fable 5 prompting guide</strong> — the 14-section source document. <em>Read in full before touching the prompt library.</em> (Linked from the AlphaSignal piece.)</li>
+<li><strong>AlphaSignal AI</strong> — the clean 8-minute summary: https://alphasignalai.substack.com/p/how-to-actually-prompt-claude-fable · X: https://x.com/AlphaSignalAI</li>
+<li><strong>Alex Albert</strong> (Anthropic, developer relations) — the migration framing ("rewrite old CLAUDE.md, let the model use more judgment"): https://x.com/alexalbert__</li>
+<li><strong>Artificial Analysis</strong> — independent measurement of the ~8% fallback-to-4.8 rate: https://x.com/ArtificialAnlys</li>
+<li><strong>Nathan Lambert / Interconnects</strong> — "Claude Fable 5 and new AI safety fables," the safety/steering context: https://www.interconnects.ai/p/claude-fable-5-and-new-ai-safety</li>
+<li><strong>Christopher Allen</strong> — practitioner companion, "Fable 5 Made Most of My Agent Scaffolding Obsolete": https://x.com/ChristopherA/status/2065234780497883259</li>
+<li><strong>Key insight to extract, not read cover-to-cover:</strong> the through-line is <em>deletion</em> — "skills developed for prior models are often too prescriptive for Claude Fable 5 and can degrade output quality."</li>
+</ul>
+                    </div>
+                </details>
+
+                <details class="section-detail">
+                    <summary>What This Means for Every Consulting</summary>
+                    <div class="section-content">
+                        <p>This is <strong>paradigm-level</strong>, and it touches our actual deliverables — not just talking points.</p>
+<p><strong>Audit our own IP (highest priority, net-new — no Fable 5 analysis exists in our knowledge base yet):</strong>
+- The <code>prompt-engineer</code> skill is <em>half-aligned</em>: its "genius intern / explain the why" core matches Fable 5, but it still teaches edge-case enumeration and <code>&lt;reasoning&gt;</code> blocks, and has zero concept of effort settings, verifier subagents, boundary blocks, or memory files. <strong>Nityesh</strong> owns a revision pass.
+- The <strong>delivered client prompt libraries</strong> (Kroll TAS, CPI, New Politics — ~2,975 rows with explicit "step by step" and "edge cases to handle" phrasing) were shipped for prior models and may now degrade on Fable 5. These are client deliverables — there's a credibility and a re-engagement angle in proactively offering a "Fable 5 refresh."</p>
+<p><strong>By vertical:</strong>
+- <strong>Mike (tech / Claude Code):</strong> the "Claude Code Subagents" session is the natural home for verifier subagents + effort-per-task. Also fold in the silent-fallback risk — engineers need to know their model can change under them mid-task.
+- <strong>Brooker (non-tech / finance):</strong> biggest behavioral risk. He teaches transferable "step-by-step / show-your-reasoning" habits to non-engineers — habits that now <em>hurt</em> on Fable 5. He needs a one-page "what changed" delta before the next <strong>TowerBrook</strong> session (live, prompt-engineering-heavy). Also flag the 30-day-retention-no-opt-out point for finance clients.
+- <strong>Natalia (strategy):</strong> decide whether this becomes a client-facing "model update" touchpoint — a short, branded "what Fable 5 changes for your prompts" note is a low-cost, high-trust re-engagement hook for Bloomberg and the finance accounts.</p>
+<p><strong>Concrete next moves:</strong> (1) Nityesh revises <code>prompt-engineer</code> for Fable 5; (2) Brooker gets the one-page delta before TowerBrook; (3) Natalia decides on a client-facing refresh offer; (4) Claudie audits her own skills for the deprecated patterns — the <strong>boundary block</strong> ("report findings, hold fixes until asked") is the exact scope-discipline gate Claudie already maintains, now validated as official Anthropic guidance.</p>
+                    </div>
+                </details>
+            <div class="links">
+                <a href="https://x.com/AlphaSignalAI/status/2065222550041596309" target="_blank" rel="noopener">View on X</a>
+                <a href="https://alphasignalai.substack.com/p/how-to-actually-prompt-claude-fable" target="_blank" rel="noopener">Read Article</a>
+            </div>
+        </article>
+
+        <article class="entry">
+            <span class="signal-tag key-shift">Key Shift</span>
             <h2><a href="https://x.com/0xDepressionn/status/2065076207373169096" target="_blank" rel="noopener">Cost is now the #2 enterprise AI complaint — the shift from adoption to governance</a></h2>
             <p class="author">Dep (@0xDepressionn)</p>
             <p class="summary">Enterprise AI's bottleneck is rotating from 'can we get people to use it' to 'can we afford how they use it' — and model-routing is the emerging fix.</p>
@@ -9749,7 +9847,7 @@ A circuit breaker halts auto-compaction after three consecutive failures.</p>
                 <li><strong>The platform shift happened in 4 weeks.</strong> Ejaaz&rsquo;s catalog shows Claude Code crossed from developer tool to knowledge-worker platform in a single shipping sprint. Clients who evaluated it even two months ago saw a fundamentally different product.</li>
             </ol>
 
-            <p class="coda">127 of 128 sources tagged as Key Shift. The dominant theme: Claude Code&rsquo;s memory, personalization, and autonomous capabilities represent a genuine platform shift &mdash; not incremental improvement.</p>
+            <p class="coda">128 of 129 sources tagged as Key Shift. The dominant theme: Claude Code&rsquo;s memory, personalization, and autonomous capabilities represent a genuine platform shift &mdash; not incremental improvement.</p>
         </section>
 
         <footer>
