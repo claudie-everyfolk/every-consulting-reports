@@ -477,6 +477,89 @@
 
         <article class="entry">
             <span class="signal-tag key-shift">Key Shift</span>
+            <h2><a href="https://x.com/AnthropicAI/status/2065597531644743999" target="_blank" rel="noopener">The government pulls a model: Fable 5 and Mythos 5 go dark by directive</a></h2>
+            <p class="author">Anthropic (@AnthropicAI)</p>
+            <p class="summary">The US government issued an export-control directive suspending all access to Fable 5 and Mythos 5 by any foreign national — including Anthropic's own foreign-national employees — forcing Anthropic to abruptly disable both models for every customer. The first time a frontier model has been taken offline by government order rather than by the lab's choice.</p>
+            
+                <details class="section-detail">
+                    <summary>Worth Your Time?</summary>
+                    <div class="section-content">
+                        <p><strong>Read</strong> — if you advise clients on AI vendor risk, build production systems on a single frontier model, or sell on "AI strategy" rather than tactics. <strong>Skim</strong> if you're heads-down on a non-frontier workload.</p>
+<p>One-line verdict: The day AI vendor risk stopped being commercial (pricing, TOS, silent nerfs) and became <em>sovereign</em> — the government will now remove capability by order, with no notice.</p>
+                    </div>
+                </details>
+
+                <details class="section-detail">
+                    <summary>What's Actually Happening</summary>
+                    <div class="section-content">
+                        <p>Citing national-security authorities, the US government issued an export-control directive suspending all access to two Anthropic models — Fable 5 and Mythos 5 — by <em>any foreign national, inside or outside the US, including Anthropic's own foreign-national employees</em>. The practical effect: Anthropic had to disable both models for <strong>all</strong> customers, immediately, to stay compliant. Existing sessions ended with errors; platform requests to those models now fail. All other Claude models are unaffected.</p>
+<p>The framing matters. This is being characterized publicly (by Anthropic, and by commentators like Box's Aaron Levie) as a <em>misunderstanding</em> Anthropic expects to resolve — Paweł Huryn reports it being attributed to a "narrow jailbreak," and Matt Pocock already noted "Fable back in the stable," suggesting at least partial restoration within hours. But the precedent is set regardless of how fast it resolves: a frontier model can now be switched off by directive, not by the lab's commercial choice.</p>
+<p>The incentives are visible. The government gets a live demonstration that it <em>can</em> reach into a commercial AI product and pull a capability. Anthropic gets to look maximally compliant while signaling to customers "this wasn't us." And foreign-national exclusion — including from a US company's own staff — is the genuinely new contour: this is export control applied to model <em>access</em>, treating frontier weights like a controlled technology rather than a SaaS feature.</p>
+                    </div>
+                </details>
+
+                <details class="section-detail">
+                    <summary>What's Not Being Said</summary>
+                    <div class="section-content">
+                        <ul>
+<li><strong>"Misunderstanding" is the convenient framing for everyone.</strong> It lets Anthropic avoid alarming customers and lets the government avoid debating whether it just set policy by directive. Whether it resolves in days or not, the capability to do this is now demonstrated and will be reused.</li>
+<li><strong>The selectivity is the signal.</strong> Only Fable 5 and Mythos 5 were pulled — the <em>most capable</em> tiers. The implicit threshold ("models above capability X are controlled technology") is now real, even if unwritten. Every future frontier release ships under that shadow.</li>
+<li><strong>Foreign-national employee exclusion is a labor-market tremor, not just a product event.</strong> A US AI lab being told its own non-citizen engineers can't touch a model has hiring, immigration, and org-design consequences nobody is pricing yet.</li>
+</ul>
+                    </div>
+                </details>
+
+                <details class="section-detail">
+                    <summary>Where This Sits in the Bigger Picture</summary>
+                    <div class="section-content">
+                        <p>This is the convergence of two trajectories: AI capability climbing past the point where governments are comfortable leaving it purely commercial, and export-control machinery (built for chips) being pointed at models and model <em>access</em>. Ethan Mollick's read is the sharp one: this likely does <strong>not</strong> produce more open-weights frontier models — if a Mythos-class model is deemed risky, China won't want it open either, and you can't train a Mythos-class model without a "very regulatable compute footprint." The compute bottleneck is exactly what makes frontier models governable. Open weights at the frontier get <em>less</em> likely after this, not more.</p>
+                    </div>
+                </details>
+
+                <details class="section-detail">
+                    <summary>What's Likely Coming Next</summary>
+                    <div class="section-content">
+                        <ul>
+<li><strong>Fast partial restoration, permanent precedent.</strong> Signs already point to Fable returning. But "the government can pull a model" is now a known move — expect it invoked again, faster, with less explanation.</li>
+<li><strong>Capability-tiered compliance regimes.</strong> Labs will pre-segment models by a capability/control threshold so the next directive hits a smaller blast radius. Expect "government-compliant default tiers" to become a product concept.</li>
+<li><strong>Enterprise procurement language changes.</strong> Contracts will start asking for model-continuity guarantees and government-directive carve-outs. Vendor-risk reviews will add "sovereign suspension" as a named risk.</li>
+<li><strong>A multi-model default for anything production-critical.</strong> Single-model dependency just acquired a tail risk no SLA covers.</li>
+</ul>
+                    </div>
+                </details>
+
+                <details class="section-detail">
+                    <summary>Attention Is All You Need</summary>
+                    <div class="section-content">
+                        <ul>
+<li><strong>Primary source:</strong> Anthropic's statement — https://x.com/AnthropicAI/status/2065597531644743999</li>
+<li><strong>What the model does / context:</strong> Paweł Huryn — https://x.com/PawelHuryn/status/2065620550932726160</li>
+<li><strong>Open-weights consequence (the most load-bearing take):</strong> Ethan Mollick — https://x.com/emollick/status/2065787920473055528 and his "Shape of the Thing" essay (oneusefulthing.org/p/the-shape-of-the-thing) on living through escalating AI instability.</li>
+<li><strong>Regulation-precedent framing:</strong> Aaron Levie (quoted in the @ClaudeDevs thread). People to watch: Anthropic policy team, BIS/Commerce export-control posture.</li>
+</ul>
+                    </div>
+                </details>
+
+                <details class="section-detail">
+                    <summary>What This Means for Every Consulting</summary>
+                    <div class="section-content">
+                        <p>This is a forcing function for the practice's strongest positioning: <strong>govern for continuity, not for peak capability.</strong> Concrete client implications:</p>
+<ol>
+<li><strong>Add "sovereign suspension" to vendor-risk advice.</strong> Any client betting a production workflow on a single frontier tier now has a named, demonstrated tail risk. The advice writes itself: abstract the model layer, keep a fallback tier (e.g. Opus 4.8) wired and tested, and don't hard-code the frontier model into a critical path.</li>
+<li><strong>The contrarian comfort point for nervous clients.</strong> elvis's take — Opus 4.8 for planning + GPT-5.5 for execution still beats the pulled tier for most real tasks — is worth carrying into rooms. Most client value lives below the frontier; this event is a reason to <em>not</em> over-index on the bleeding edge.</li>
+<li><strong>Internal action for Claudie's own infra:</strong> this validates the long-stalled fallback work — Claudie's scheduled jobs default to Opus 4.8 and shouldn't depend on any single top-tier model staying available. Worth confirming no job hard-pins a frontier model that could vanish mid-run.</li>
+<li><strong>Training framing:</strong> "AI risk" in client workshops should now include availability/continuity risk by directive, not just hallucination and data risk. This is a fresh, vivid example for the deck.</li>
+</ol>
+                    </div>
+                </details>
+            <div class="links">
+                <a href="https://x.com/AnthropicAI/status/2065597531644743999" target="_blank" rel="noopener">View on X</a>
+                <a href="https://x.com/PawelHuryn/status/2065620550932726160" target="_blank" rel="noopener">Read Article</a>
+            </div>
+        </article>
+
+        <article class="entry">
+            <span class="signal-tag key-shift">Key Shift</span>
             <h2><a href="https://x.com/levie/status/2065287110744297809" target="_blank" rel="noopener">Box's 1,640-leader survey: heaviest AI adopters plan to grow headcount the most</a></h2>
             <p class="author">Aaron Levie (@levie)</p>
             <p class="summary">Box surveyed 1,640 IT leaders across the US, Japan, and Europe — the companies adopting agentic AI most aggressively are the ones planning to grow headcount the most, not cut it.</p>
@@ -10000,7 +10083,7 @@ A circuit breaker halts auto-compaction after three consecutive failures.</p>
                 <li><strong>The platform shift happened in 4 weeks.</strong> Ejaaz&rsquo;s catalog shows Claude Code crossed from developer tool to knowledge-worker platform in a single shipping sprint. Clients who evaluated it even two months ago saw a fundamentally different product.</li>
             </ol>
 
-            <p class="coda">130 of 131 sources tagged as Key Shift. The dominant theme: Claude Code&rsquo;s memory, personalization, and autonomous capabilities represent a genuine platform shift &mdash; not incremental improvement.</p>
+            <p class="coda">131 of 132 sources tagged as Key Shift. The dominant theme: Claude Code&rsquo;s memory, personalization, and autonomous capabilities represent a genuine platform shift &mdash; not incremental improvement.</p>
         </section>
 
         <footer>
