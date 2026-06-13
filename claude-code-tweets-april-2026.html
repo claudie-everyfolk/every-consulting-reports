@@ -488,6 +488,80 @@
 
         <article class="entry">
             <span class="signal-tag key-shift">Key Shift</span>
+            <h2><a href="https://x.com/AlphaSignalAI/status/2065403984408457274" target="_blank" rel="noopener">SusVibes: AI agents pass 61% of tests, but only 10.5% of their code is secure</a></h2>
+            <p class="author">AlphaSignal AI (@AlphaSignalAI)</p>
+            <p class="summary">Carnegie Mellon's SusVibes benchmark shows agent-written code that works is usually still insecure — and prompt-level fixes don't close the gap.</p>
+            
+                <details class="section-detail">
+                    <summary>Worth Your Time?</summary>
+                    <div class="section-content">
+                        <p><strong>Read.</strong> A rare quantified answer to the single most-asked question in engineering-team AI training: "is the code my agent writes safe to ship?" Short, citable, and it kills a popular bad fix.</p>
+                    </div>
+                </details>
+
+                <details class="section-detail">
+                    <summary>What's Actually Happening</summary>
+                    <div class="section-content">
+                        <p>Agents are reward-shaped by their harness: the visible success signal is "tests pass," so that's what they optimize. Security is invisible to that loop — no failing test fires for an injection sink or a missing authz check, so the agent has no gradient toward fixing it. The 61%-vs-10.5% gap isn't a model-capability story; it's a <strong>specification gap</strong>. The structural reality: the more we let agents close functional tickets unsupervised, the more we mass-produce code that looks done and isn't safe. This is a shift from "can agents code?" (settled: yes) to "can we trust what they ship?" (no, not without a layer the benchmark says prompts can't provide).</p>
+                    </div>
+                </details>
+
+                <details class="section-detail">
+                    <summary>What's Not Being Said</summary>
+                    <div class="section-content">
+                        <ul>
+<li>One harness (SWE-Agent) + one model (Claude 4 Sonnet). Newer harnesses with built-in security-review passes (Cursor's review agent, Claude's security beta) aren't in the number — the 10.5% is the <em>naive-pipeline</em> floor, not the ceiling.</li>
+<li>"Vulnerability" is benchmark-defined against tasks pre-selected for human-shipped bugs — adversarially hard by construction. Real-world greenfield code may fare differently.</li>
+<li>Contrarian read: humans also ship ~these bugs (that's where the tasks came from). The story isn't "AI is uniquely unsafe," it's "AI removes the human review step that used to catch some of them — speed without the brake."</li>
+</ul>
+                    </div>
+                </details>
+
+                <details class="section-detail">
+                    <summary>Where This Sits in the Bigger Picture</summary>
+                    <div class="section-content">
+                        <p>2025–26's dominant motion is agentic-first development: teams pushing toward "agent writes the feature, human reviews." This benchmark is the first hard data point on the cost of skipping the second half. It lands alongside the OpenAI cyber-leadership hires and Cursor/Claude shipping always-on review agents — the whole frontier is converging on "the review layer is the product now, not the generation layer."</p>
+                    </div>
+                </details>
+
+                <details class="section-detail">
+                    <summary>What's Likely Coming Next</summary>
+                    <div class="section-content">
+                        <ul>
+<li>Security-review agents become a default pipeline stage, not an add-on — and a benchmark like SusVibes becomes the marketing number they cite.</li>
+<li>Second-order: org policy catches up — "no agent PR merges without an automated security gate" as a written rule, the way linters and CI became mandatory.</li>
+<li>Expect vendor counter-benchmarks showing their review layer lifts 10.5% → much higher. Watch whether the lift is real or harness-gamed.</li>
+</ul>
+                    </div>
+                </details>
+
+                <details class="section-detail">
+                    <summary>Attention Is All You Need</summary>
+                    <div class="section-content">
+                        <ul>
+<li>Primary source: the Carnegie Mellon SusVibes paper (search "SusVibes benchmark Carnegie Mellon" — get the arXiv/PDF and the actual numbers before quoting in client material).</li>
+<li>Adjacent: SWE-bench / SWE-Agent for the harness baseline; Cursor's security-review agent and Claude's security-review beta as the mitigation side.</li>
+</ul>
+                    </div>
+                </details>
+
+                <details class="section-detail">
+                    <summary>What This Means for Every Consulting</summary>
+                    <div class="section-content">
+                        <p>This is a teaching asset for engineering-team engagements, where the live tension is exactly a <strong>trust gap</strong> — teams that can detect bad AI output rate their <em>trust</em> in it lower, and they're right to.
+- <strong>The slide:</strong> "61% pass / 10.5% secure" makes "passing tests ≠ safe to ship" concrete in one number.
+- <strong>The nuance that earns the room:</strong> prompt tweaks don't fix it and hurt accuracy — so the answer isn't "write better prompts," it's "add a review layer" (automated security-review agent + human gate on sensitive diffs). This reframes the whole conversation from prompt-craft to pipeline design.
+- <strong>The demo:</strong> pair with an always-on PR security-review agent so the fix is shown, not just the problem.
+- Folds into the "secure-by-default Claude Code" module idea already in our notes — now with a benchmark behind it.</p>
+                    </div>
+                </details>
+            <div class="links">
+                <a href="https://x.com/AlphaSignalAI/status/2065403984408457274" target="_blank" rel="noopener">View on X</a>
+            </div>
+        </article>
+
+        <article class="entry">
+            <span class="signal-tag key-shift">Key Shift</span>
             <h2><a href="https://x.com/AlphaSignalAI/status/2065222550041596309" target="_blank" rel="noopener">How to Actually Prompt Claude Fable 5</a></h2>
             <p class="author">AlphaSignal AI (@AlphaSignalAI)</p>
             <p class="summary">Anthropic's official Fable 5 prompting guide says prior-model prompts now degrade output — the work shifts from steering each step to setting direction and verifying results.</p>
@@ -9847,7 +9921,7 @@ A circuit breaker halts auto-compaction after three consecutive failures.</p>
                 <li><strong>The platform shift happened in 4 weeks.</strong> Ejaaz&rsquo;s catalog shows Claude Code crossed from developer tool to knowledge-worker platform in a single shipping sprint. Clients who evaluated it even two months ago saw a fundamentally different product.</li>
             </ol>
 
-            <p class="coda">128 of 129 sources tagged as Key Shift. The dominant theme: Claude Code&rsquo;s memory, personalization, and autonomous capabilities represent a genuine platform shift &mdash; not incremental improvement.</p>
+            <p class="coda">129 of 130 sources tagged as Key Shift. The dominant theme: Claude Code&rsquo;s memory, personalization, and autonomous capabilities represent a genuine platform shift &mdash; not incremental improvement.</p>
         </section>
 
         <footer>
