@@ -388,13 +388,97 @@
         <header>
             <h1>Signal Digest</h1>
             <p class="subtitle">What actually matters in AI &mdash; curated by Claudie for the Every Consulting team</p>
-            <p class="meta">Last updated June 15, 2026</p>
+            <p class="meta">Last updated June 16, 2026</p>
         </header>
 
         <nav class="legend">
             Each entry is tagged: <span class="tag-example key-shift">Key Shift</span> signals a genuine change in how we should think or act. <span class="tag-example noise">Noise</span> means useful context but nothing new for the team.
         </nav>
 
+
+        <article class="entry">
+            <span class="signal-tag key-shift">Key Shift</span>
+            <h2><a href="https://x.com/AnthropicAI/status/2066969532380721386" target="_blank" rel="noopener">Agentic coding and persistent returns to expertise</a></h2>
+            <p class="author">Anthropic (@AnthropicAI)</p>
+            <p class="summary">Anthropic's economic study of 400K Claude Code sessions finds domain expertise — not an engineering background — predicts who succeeds, and that every occupational field lands within 7 points of software engineering on verifiable success.</p>
+            
+                <details class="section-detail">
+                    <summary>Worth Your Time?</summary>
+                    <div class="section-content">
+                        <p><strong>Read.</strong> This is the first large-n, methodologically serious dataset that backs the entire premise Every Consulting sells on. If you only remember one thing: on hard, verifiable success, non-engineers nearly match engineers — and domain expertise, not coding background, is the differentiator.</p>
+                    </div>
+                </details>
+
+                <details class="section-detail">
+                    <summary>What's Actually Happening</summary>
+                    <div class="section-content">
+                        <p>Anthropic ran a privacy-preserving analysis of <strong>400,000 Claude Code sessions</strong> between October 2025 and April 2026 and published the economics. Three structural findings:</p>
+<ul>
+<li><strong>Task value is climbing.</strong> Benchmarked against what each task would cost on a freelance marketplace, the monetary value of the average session grew <strong>27% in six months.</strong> The tool is being pointed at more valuable work over time, not the same work cheaper.</li>
+<li><strong>Success is occupation-agnostic.</strong> On their strictest measure — verifiable evidence of completion, like committed code — <strong>every field was within 7 percentage points of software engineering.</strong> That is a remarkably flat distribution for a tool everyone assumed was for engineers.</li>
+<li><strong>Expertise compounds, but the bar is "proficient," not "expert."</strong> Domain experts (inferred from the questions they ask and the vocabulary they use) succeed more often — but the gap between <em>intermediate</em> and <em>expert</em> users is modest. Translation: you need to know your domain well, not perfectly, to build successfully within it.</li>
+</ul>
+<p>The incentive behind the publication is obvious — Anthropic wants enterprises to believe non-engineers can deploy Claude Code, because that's the TAM expansion story. But the methodology (verifiable completion, freelance-cost benchmarking, n=400K) is harder to wave away than a marketing claim.</p>
+                    </div>
+                </details>
+
+                <details class="section-detail">
+                    <summary>What's Not Being Said</summary>
+                    <div class="section-content">
+                        <ul>
+<li><strong>Selection bias.</strong> People who reach for Claude Code are already self-selected for some technical confidence. The "non-engineers succeed" finding is conditioned on people who chose to open an agentic coding tool — not a random office worker.</li>
+<li><strong>"Within 7pp" hides the floor.</strong> We're told the spread between fields is tight; we're not told the absolute success rate. If software engineering sits at 55% and everyone is within 7 points, that's a very different story than 90%.</li>
+<li><strong>"Domain expert judged by vocabulary" is circular-ish.</strong> The proxy for expertise is the ability to articulate the domain — which is also the proxy for writing a good prompt. The paper may be partly measuring "people who communicate precisely succeed," which we already knew.</li>
+<li><strong>Survivorship in the value stat.</strong> 27% growth in average session value could reflect that low-value casual users churned out, lifting the average — not that the same users do more valuable work.</li>
+</ul>
+                    </div>
+                </details>
+
+                <details class="section-detail">
+                    <summary>Where This Sits in the Bigger Picture</summary>
+                    <div class="section-content">
+                        <p>This is the empirical positive complement to the displacement research (e.g., Garicano's "weak bundle / tight bundle"). That work showed generic coders being commoditized; this shows domain experts <em>capturing</em> the upside. Same underlying force — value migrating from "can write code" to "knows what's worth building" — viewed from the winning side. It also lands on top of the recurring 2026 thesis that the bottleneck is skill diffusion, not model quality: the friction was never the model, it was that almost nobody had been taught to work this way.</p>
+                    </div>
+                </details>
+
+                <details class="section-detail">
+                    <summary>What's Likely Coming Next</summary>
+                    <div class="section-content">
+                        <ul>
+<li><strong>Vertical-specific agent harnesses.</strong> If domain proficiency is the unlock, expect tooling pre-loaded with domain context (legal, finance, ops) rather than general coding agents — lowering the articulation bar further.</li>
+<li><strong>The "intermediate is enough" finding gets weaponized in procurement.</strong> Enterprises will use it to justify rolling AI build tools to whole departments, not just eng — which is precisely where training demand spikes.</li>
+<li><strong>Counter-research on the absolute floor.</strong> Someone will publish the success rates Anthropic omitted, and the "within 7pp" framing will get pressure-tested.</li>
+</ul>
+                    </div>
+                </details>
+
+                <details class="section-detail">
+                    <summary>Attention Is All You Need</summary>
+                    <div class="section-content">
+                        <ul>
+<li><strong>Primary source:</strong> Anthropic, "Agentic coding and persistent returns to expertise," anthropic.com (June 16, 2026). Read the methodology section for the success-measure definition and the freelance-cost benchmark before citing numbers in client material.</li>
+<li><strong>Anthropic Economic Index</strong> — the broader program this sits in; track for the follow-on datasets.</li>
+<li><strong>Pair with:</strong> Garicano's returns-to-expertise work (Signal Digest #46) for the displacement side of the same coin.</li>
+</ul>
+                    </div>
+                </details>
+
+                <details class="section-detail">
+                    <summary>What This Means for Every Consulting</summary>
+                    <div class="section-content">
+                        <p>This is <strong>objection-handling ammunition</strong>, citable and dated. The single most common pushback from non-technical and finance clients is "but my team aren't engineers." The answer is now empirical: Anthropic studied 400K real sessions and found non-engineering fields land within 7 points of software engineers on verifiable success, and that <em>domain proficiency</em> — which your people already have — is what predicts who wins.</p>
+<p>Concrete moves:
+- Add the <strong>27% value-growth</strong> and <strong>7pp</strong> stats to the sales-proposal reference data, sitting next to the existing returns-to-expertise framing.
+- Hand the "intermediate-is-enough" finding to the non-tech/finance vertical lead for live deals where the buyer doubts their team's technical readiness.
+- Use it to settle the recurring curriculum question — "how hard do we push the technical stretch?" The modest intermediate-to-expert gap argues for pushing trainees further up the ladder than "meet them where they are."</p>
+<p><strong>One-liner for the room:</strong> "You don't need to hire engineers. You need to teach the experts you already have to build in the domain they already master — and now there's data on 400,000 sessions proving it works."</p>
+                    </div>
+                </details>
+            <div class="links">
+                <a href="https://x.com/AnthropicAI/status/2066969532380721386" target="_blank" rel="noopener">View on X</a>
+                <a href="https://www.anthropic.com/research/agentic-coding-returns-to-expertise" target="_blank" rel="noopener">Read Article</a>
+            </div>
+        </article>
 
         <article class="entry">
             <span class="signal-tag key-shift">Key Shift</span>
@@ -10240,7 +10324,7 @@ A circuit breaker halts auto-compaction after three consecutive failures.</p>
                 <li><strong>The platform shift happened in 4 weeks.</strong> Ejaaz&rsquo;s catalog shows Claude Code crossed from developer tool to knowledge-worker platform in a single shipping sprint. Clients who evaluated it even two months ago saw a fundamentally different product.</li>
             </ol>
 
-            <p class="coda">133 of 134 sources tagged as Key Shift. The dominant theme: Claude Code&rsquo;s memory, personalization, and autonomous capabilities represent a genuine platform shift &mdash; not incremental improvement.</p>
+            <p class="coda">134 of 135 sources tagged as Key Shift. The dominant theme: Claude Code&rsquo;s memory, personalization, and autonomous capabilities represent a genuine platform shift &mdash; not incremental improvement.</p>
         </section>
 
         <footer>
