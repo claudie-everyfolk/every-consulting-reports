@@ -388,13 +388,100 @@
         <header>
             <h1>Signal Digest</h1>
             <p class="subtitle">What actually matters in AI &mdash; curated by Claudie for the Every Consulting team</p>
-            <p class="meta">Last updated June 17, 2026</p>
+            <p class="meta">Last updated June 18, 2026</p>
         </header>
 
         <nav class="legend">
             Each entry is tagged: <span class="tag-example key-shift">Key Shift</span> signals a genuine change in how we should think or act. <span class="tag-example noise">Noise</span> means useful context but nothing new for the team.
         </nav>
 
+
+        <article class="entry">
+            <span class="signal-tag key-shift">Key Shift</span>
+            <h2><a href="https://x.com/claudeai/status/2067671912038240487" target="_blank" rel="noopener">Artifacts in Claude Code</a></h2>
+            <p class="author">Anthropic (@claudeai), Boris Cherny (@bcherny), Thariq (@trq212)</p>
+            <p class="summary">Claude Code can now generate interactive pages from a session — PR walkthroughs, living dashboards, diagrams — shared with your team at a private link. Coding-agent output moves from text/files to shareable artifacts.</p>
+            
+                <details class="section-detail">
+                    <summary>Worth Your Time?</summary>
+                    <div class="section-content">
+                        <p><strong>Read</strong> — this is a product-level capability change, not a feature tweak.</p>
+<p><strong>One-line verdict:</strong> Claude Code's output is no longer just text in a terminal and files in a repo — it's now a shareable, interactive web artifact (PR walkthrough, living dashboard, diagram, data analysis) hosted behind a private team link. The agent's deliverable surface just changed.</p>
+<p>The announcement: <em>"New in Claude Code: Artifacts. Interactive pages built from your session, like a PR walkthrough or a living project dashboard, shared with your team at a private link. Available in beta on Team and Enterprise plans."</em> Boris Cherny (creator of Claude Code): <em>"I've been using Artifacts in Claude Code for everything... a game changer for how I work with Claude."</em> Thariq confirms HTML artifact upload/edit shared internally, with Pro/Max access "coming soon."</p>
+                    </div>
+                </details>
+
+                <details class="section-detail">
+                    <summary>What's Actually Happening</summary>
+                    <div class="section-content">
+                        <p>The structural reality: the bottleneck in agentic coding has quietly moved from <em>generation</em> to <em>communication</em>. Agents can already produce more correct work than a human can review by reading raw diffs and logs. Artifacts attacks the review-and-share bottleneck — it turns the agent's reasoning into something a teammate (often non-technical) can actually look at: a rendered walkthrough, a live dashboard, a diagram.</p>
+<p>Who benefits from the framing? Anthropic, obviously — it deepens the moat around Claude Code as a <em>team</em> product, not a solo-dev tool. The "private link, shared with your team" language and the Team/Enterprise-only gating make the play explicit: this is a wedge into being the collaboration layer, not just the codegen layer. The Pro/Max rollout is deliberately later — seats first, individuals second.</p>
+<p>Structural shift, not cyclical noise. It's the same move ChatGPT made with Canvas and Claude made with web Artifacts, now pushed into the coding-agent context where the output has real operational weight (a dashboard your team runs against, a PR walkthrough that replaces a Loom).</p>
+                    </div>
+                </details>
+
+                <details class="section-detail">
+                    <summary>What's Not Being Said</summary>
+                    <div class="section-content">
+                        <ul>
+<li><strong>Hosting and data residency.</strong> "Shared at a private link" means Anthropic is now hosting rendered artifacts that may embed code, data, and internal context. For enterprise security teams this is a new surface to vet — exactly the question a Bloomberg or a hedge-fund client will ask first. The tweets are silent on where artifacts live, retention, and access control granularity.</li>
+<li><strong>The link-sharing failure mode.</strong> "Private link" is famously the weakest form of access control (anyone with the URL). If artifacts default to link-based sharing rather than identity-based (SSO-gated) access, that's a leak vector for client work.</li>
+<li><strong>It overlaps with tools teams already glued together.</strong> Plenty of shops already wire Claude Code output to internal dashboards, Cloudflare/Vercel previews, or Notion. The contrarian take: this is convenient, not novel — and it locks a previously portable output (an HTML file you host anywhere) into Anthropic's surface.</li>
+<li>A historian would note: every successful dev tool eventually grows a sharing/collaboration layer (GitHub Gists, CodeSandbox, Observable). This is Claude Code reaching that maturity stage — predictable, but it marks the transition from "tool" to "platform."</li>
+</ul>
+                    </div>
+                </details>
+
+                <details class="section-detail">
+                    <summary>Where This Sits in the Bigger Picture</summary>
+                    <div class="section-content">
+                        <p>This is one move in a broader 2026 pattern: <strong>agent output is becoming a first-class, shareable object.</strong> It connects to the "Company Brain / living document" thread (dashboards that regenerate instead of going stale), to the markdown-vs-HTML interface debate, and to the shift where the unit of knowledge work is no longer a document a human wrote but an artifact an agent produced and a human curated.</p>
+<p>For the labor-market lens: when an agent can produce a PR walkthrough or an analysis dashboard that a non-engineer can read, the translation layer between "what the AI did" and "what the business needs to decide" thins out. That's the layer a lot of mid-level knowledge work currently occupies.</p>
+                    </div>
+                </details>
+
+                <details class="section-detail">
+                    <summary>What's Likely Coming Next</summary>
+                    <div class="section-content">
+                        <ul>
+<li><strong>Pro/Max rollout within weeks</strong> (Thariq already signaled it), which is when this becomes usable for solo operators and small teams — including our own internal setup.</li>
+<li><strong>Identity-gated sharing</strong> to follow link-based sharing once enterprise security pushes back — expect SSO/SAML-scoped artifacts.</li>
+<li><strong>Second-order:</strong> artifacts become the default deliverable format for agentic work — "send me the artifact link" replaces "send me the file." Expect competitors (Cursor, Codex, Copilot Workspace) to ship equivalents quickly; this becomes table stakes within a quarter.</li>
+<li><strong>Watch for:</strong> whether artifacts become <em>editable by the team</em> (Thariq hints at upload/edit), which would push them from "rendered output" toward "collaborative canvas" — a much bigger deal.</li>
+</ul>
+                    </div>
+                </details>
+
+                <details class="section-detail">
+                    <summary>Attention Is All You Need</summary>
+                    <div class="section-content">
+                        <ul>
+<li><strong>The announcement</strong> — Anthropic (@claudeai): https://x.com/claudeai/status/2067671912038240487 <em>(read in full — it's short and defines the feature)</em></li>
+<li><strong>Boris Cherny</strong> (@bcherny), creator of Claude Code: https://x.com/bcherny/status/2067700226669060207 — <em>key insight:</em> the use cases he lists (visual explanations, system diagrams, animation previews, data analyses, dashboards) are the actual adoption surface, not codegen.</li>
+<li><strong>Thariq</strong> (@trq212), Anthropic, Claude Code team: https://x.com/trq212/status/2067682475611242546 — <em>key insight:</em> HTML upload/edit + "coming to Pro/MAX soon" — the access roadmap.</li>
+<li><strong>Prior context to read:</strong> Claude's web Artifacts launch and ChatGPT Canvas — Artifacts in Claude Code is the same primitive in a coding-agent context. The "markdown killed HTML interfaces" debate (in this digest) is the contrarian counterweight worth holding alongside it.</li>
+</ul>
+                    </div>
+                </details>
+
+                <details class="section-detail">
+                    <summary>What This Means for Every Consulting</summary>
+                    <div class="section-content">
+                        <p><strong>Vertical:</strong> primarily <strong>Tech (Mike)</strong>, secondarily <strong>Strategy/Non-tech (Natalia, Brooker)</strong>.</p>
+<ul>
+<li><strong>Bootcamp / training material (Mike):</strong> This is a live demo candidate for any Claude Code workshop. The strongest teaching frame is "stop pasting diffs into Slack — generate a PR walkthrough artifact." For clients already on Claude Enterprise (their engineers can use it <em>today</em> inside their own tenant), this is immediately usable; demo it in their environment, not ours.</li>
+<li><strong>Discovery context:</strong> When mapping a client's workflow, "where does AI output go and who has to read it?" is now a question with a native answer. Artifacts collapse the agent-output → human-review handoff that shows up in almost every engagement.</li>
+<li><strong>Sales angle (Natalia):</strong> Reinforces our standing thesis — the value isn't the model, it's the harness and how output reaches the team. Artifacts are Anthropic validating "agent output as shareable intelligence layer," which is exactly what we build for clients.</li>
+<li><strong>Security caveat to carry into finance/enterprise rooms:</strong> raise the hosting / private-link / data-residency questions (Section 3) <em>before</em> a client puts client data into an artifact. For client-sensitive work, our existing pattern (Cloudflare Pages behind @every.to Access) still has cleaner identity-based gating than a private link — note that distinction.</li>
+<li><strong>Internal:</strong> Claudie runs on Max, so this is not usable for our own automation yet — wait for the Pro/Max rollout, then evaluate whether Artifacts can replace parts of the manual Cloudflare/file-browser sharing flow.</li>
+<li><strong>Concrete next move:</strong> Mike flags Artifacts as a demo module for the next Enterprise-tenant client session; Natalia files it as a sales talking point ("Anthropic is now shipping the shareable-output layer we've been building for you").</li>
+</ul>
+                    </div>
+                </details>
+            <div class="links">
+                <a href="https://x.com/claudeai/status/2067671912038240487" target="_blank" rel="noopener">View on X</a>
+            </div>
+        </article>
 
         <article class="entry">
             <span class="signal-tag key-shift">Key Shift</span>
@@ -10496,7 +10583,7 @@ A circuit breaker halts auto-compaction after three consecutive failures.</p>
                 <li><strong>The platform shift happened in 4 weeks.</strong> Ejaaz&rsquo;s catalog shows Claude Code crossed from developer tool to knowledge-worker platform in a single shipping sprint. Clients who evaluated it even two months ago saw a fundamentally different product.</li>
             </ol>
 
-            <p class="coda">136 of 137 sources tagged as Key Shift. The dominant theme: Claude Code&rsquo;s memory, personalization, and autonomous capabilities represent a genuine platform shift &mdash; not incremental improvement.</p>
+            <p class="coda">137 of 138 sources tagged as Key Shift. The dominant theme: Claude Code&rsquo;s memory, personalization, and autonomous capabilities represent a genuine platform shift &mdash; not incremental improvement.</p>
         </section>
 
         <footer>
