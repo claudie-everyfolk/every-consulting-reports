@@ -388,13 +388,100 @@
         <header>
             <h1>Signal Digest</h1>
             <p class="subtitle">What actually matters in AI &mdash; curated by Claudie for the Every Consulting team</p>
-            <p class="meta">Last updated June 19, 2026</p>
+            <p class="meta">Last updated June 20, 2026</p>
         </header>
 
         <nav class="legend">
             Each entry is tagged: <span class="tag-example key-shift">Key Shift</span> signals a genuine change in how we should think or act. <span class="tag-example noise">Noise</span> means useful context but nothing new for the team.
         </nav>
 
+
+        <article class="entry">
+            <span class="signal-tag key-shift">Key Shift</span>
+            <h2><a href="https://x.com/gregpr07/status/2068012597694329325" target="_blank" rel="noopener">The open-weights comeback — frontier-adjacent quality at ~10x lower cost</a></h2>
+            <p class="author">Alexander Yue (@Alezander907), Gregor Zunic (@gregpr07), Matt Pocock (@mattpocockuk), rahul (@rahulgs)</p>
+            <p class="summary">On the same day, multiple credible practitioners independently called an open-weights resurgence — GLM 5.2 near-Opus for browser agents, Minimax M3 at sonnet-level for $0.30 input — at roughly a tenth of frontier cost.</p>
+            
+                <details class="section-detail">
+                    <summary>Worth Your Time?</summary>
+                    <div class="section-content">
+                        <p>
+<strong>Read.</strong> Verdict: the open-weights tier just crossed from "good enough for hobbyists" to "near-frontier for real agentic work" — and several people who build agents for a living noticed on the same day. When the browser-use founder, a top TS educator, and a Ramp engineer independently say it within hours, that's not coincidence — it's a threshold being crossed.
+</p>
+                    </div>
+                </details>
+
+                <details class="section-detail">
+                    <summary>What's Actually Happening</summary>
+                    <div class="section-content">
+                        <p>
+The structural reality: the <em>capability gap</em> between closed frontier models and open weights has compressed to the point where, for many production tasks (browser agents, coding, classification), the open model is "good enough" — while the <em>price gap</em> is still ~10x. That's the dangerous combination. Quality differences shrink with each release; cost differences don't. Once a cheaper option clears the "good enough" bar for a use case, switching becomes an economic inevitability, not a preference.
+</p>
+<p>
+Who benefits: practitioners and orgs running high-volume agentic workloads (where token cost dominates), and the labs shipping open weights (GLM/Zhipu, Minimax, Moonshot/Kimi). Who's pressured: the closed frontier labs' <em>margin on commodity tasks</em> — not their lead on the hardest problems, but their pricing power on the easy 80%.
+</p>
+<p>
+This is a <strong>structural shift</strong>, with a cyclical wrapper. Open-weights "comebacks" have been declared before (Llama 2, Mixtral, DeepSeek V3). What's new is the <em>agentic</em> framing — these are being judged on browser/tool-use scores, the workloads that actually consume tokens at scale, not chatbot vibes.
+</p>
+                    </div>
+                </details>
+
+                <details class="section-detail">
+                    <summary>What's Not Being Said</summary>
+                    <div class="section-content">
+                        <ul>
+<li><strong>"Good enough" is task-specific, not global.</strong> GLM 5.2 near-Opus <em>for browser agents</em> does not mean near-Opus for hard reasoning, long-context synthesis, or client-facing writing. The headline flattens a jagged capability frontier.</li>
+<li><strong>Running open weights isn't free.</strong> Matt Pocock's "how are you doing it?" is the tell — there's real ops cost (hosting, throughput, reliability, eval) hidden behind the $0.30 sticker price. Self-hosting frontier-scale models is non-trivial; using a provider reintroduces a vendor.</li>
+<li><strong>The contrarian view:</strong> the frontier labs <em>want</em> the commodity tier to commoditize — it pushes their revenue toward the high-value frontier where they still dominate, and they capture the agentic-harness layer (Claude Code, Codex) regardless of which model runs underneath.</li>
+</ul>
+                    </div>
+                </details>
+
+                <details class="section-detail">
+                    <summary>Where This Sits in the Bigger Picture</summary>
+                    <div class="section-content">
+                        <p>
+This connects directly to the <strong>AI/AGI trajectory</strong> force and to two things already in the digest: the cost-of-frontier-compute theme and the "spend a lot but underuse AI" gap. The picture cohering across June 2026: model capability is necessary but no longer the differentiator — the harness, the workflow integration, and the cost/capability <em>routing decision</em> are where value is captured. "Use Claude for code, GPT for writing, a cheap open model for volume" (@trikcode, same day) is becoming the default sophisticated posture.
+</p>
+                    </div>
+                </details>
+
+                <details class="section-detail">
+                    <summary>What's Likely Coming Next</summary>
+                    <div class="section-content">
+                        <ul>
+<li><strong>Model routing becomes a first-class skill.</strong> Expect tooling and consulting demand around "which model for which task, at what cost" — not single-vendor standardization.</li>
+<li><strong>Second-order effect:</strong> procurement and security teams will be pulled into model choice (open-weights raises data-residency and ZDR questions — see the Anthropic ZDR/"who owns context" thread same week). The decision moves from eng to a cross-functional one.</li>
+<li><strong>Watch for:</strong> a major enterprise publicly standardizing a portfolio (frontier + open) rather than a single vendor. That confirms the thesis. Disconfirming signal: open-weights scores plateauing while frontier pulls ahead on the next release.</li>
+</ul>
+                    </div>
+                </details>
+
+                <details class="section-detail">
+                    <summary>Attention Is All You Need</summary>
+                    <div class="section-content">
+                        <ul>
+<li><strong>People to track:</strong> Gregor Zunic (@gregpr07, browser-use) — closest to the agentic-eval reality; Alexander Yue (@Alezander907) for ongoing model-vs-cost scoring; the labs themselves (Zhipu/GLM, Minimax, Moonshot/Kimi).</li>
+<li><strong>Worth the full read:</strong> browser-use's eval methodology when published — that's the substance behind these scores. Everything else here you just need the headline from.</li>
+</ul>
+                    </div>
+                </details>
+
+                <details class="section-detail">
+                    <summary>What This Means for Every Consulting</summary>
+                    <div class="section-content">
+                        <ul>
+<li><strong>Reframe the client conversation from "which model" to "which model for which task, at what cost."</strong> The sophisticated answer is a portfolio with routing, not a single vendor. This is a concrete, sellable discovery output: a per-workflow model/cost map.</li>
+<li><strong>Cost framing is now a live lever.</strong> For high-volume client workloads (classification, extraction, browser automation), a ~10x cost delta for "good enough" output is material — and quantifiable in a discovery engagement. Pair this with the "spend a lot but underuse AI" insight: the win isn't always more spend, sometimes it's <em>smarter routing</em> of existing spend.</li>
+<li><strong>Caution to carry into client work:</strong> "good enough for X" ≠ "good enough for everything." For client-facing deliverables (decks, written analysis) keep frontier models — the micro-hallucination risk is exactly where the cheap-model savings would cost the most. The routing logic <em>is</em> the expertise.</li>
+</ul>
+                    </div>
+                </details>
+            <div class="links">
+                <a href="https://x.com/gregpr07/status/2068012597694329325" target="_blank" rel="noopener">View on X</a>
+                <a href="https://x.com/mattpocockuk/status/2067899664209187273" target="_blank" rel="noopener">Read Article</a>
+            </div>
+        </article>
 
         <article class="entry">
             <span class="signal-tag key-shift">Key Shift</span>
@@ -13590,7 +13677,7 @@ The printing press analogy Boris uses is instructive: scribes didn't disappear, 
                 <li><strong>The platform shift happened in 4 weeks.</strong> Ejaaz&rsquo;s catalog shows Claude Code crossed from developer tool to knowledge-worker platform in a single shipping sprint. Clients who evaluated it even two months ago saw a fundamentally different product.</li>
             </ol>
 
-            <p class="coda">139 of 140 sources tagged as Key Shift. The dominant theme: Claude Code&rsquo;s memory, personalization, and autonomous capabilities represent a genuine platform shift &mdash; not incremental improvement.</p>
+            <p class="coda">140 of 141 sources tagged as Key Shift. The dominant theme: Claude Code&rsquo;s memory, personalization, and autonomous capabilities represent a genuine platform shift &mdash; not incremental improvement.</p>
         </section>
 
         <footer>
