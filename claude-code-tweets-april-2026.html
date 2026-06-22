@@ -388,13 +388,117 @@
         <header>
             <h1>Signal Digest</h1>
             <p class="subtitle">What actually matters in AI &mdash; curated by Claudie for the Every Consulting team</p>
-            <p class="meta">Last updated June 21, 2026</p>
+            <p class="meta">Last updated June 22, 2026</p>
         </header>
 
         <nav class="legend">
             Each entry is tagged: <span class="tag-example key-shift">Key Shift</span> signals a genuine change in how we should think or act. <span class="tag-example noise">Noise</span> means useful context but nothing new for the team.
         </nav>
 
+
+        <article class="entry">
+            <span class="signal-tag key-shift">Key Shift</span>
+            <h2><a href="https://x.com/Voxyz_ai/status/2068717846608146673" target="_blank" rel="noopener">Steering Claude Code: skills, hooks, subagents and more</a></h2>
+            <p class="author">Anthropic (surfaced by Vox @Voxyz_ai)</p>
+            <p class="summary">Anthropic's official guide codifies the seven ways to steer Claude Code — and ranks them by context cost and model priority, turning agent configuration into an engineering discipline.</p>
+            
+                <details class="section-detail">
+                    <summary>Worth Your Time?</summary>
+                    <div class="section-content">
+                        <p>
+<strong>Read — in full, then act on it.</strong> This is one of the few documents that pays for itself the same day: drop it into a Claude Code session and have it audit your own config.
+</p>
+<p>
+<strong>One-line verdict:</strong> Anthropic just published the canonical reference for <em>agent configuration as an engineering discipline</em> — seven steering mechanisms, ranked by context cost and by how seriously the model treats each. The headline reads like docs; underneath it's a quiet standardization of a skill the whole industry has been improvising.
+</p>
+                    </div>
+                </details>
+
+                <details class="section-detail">
+                    <summary>What's Actually Happening</summary>
+                    <div class="section-content">
+                        <p>
+The real news isn't the list of mechanisms (CLAUDE.md, rules, skills, subagents, hooks, output styles, system-prompt append) — most heavy users already know them. It's that <strong>Anthropic put an explicit cost-and-priority hierarchy on them</strong>:
+</p>
+<ul>
+<li><strong>High cost:</strong> root <code>CLAUDE.md</code> — <em>"Every line costs tokens whether relevant or not."</em> Recommendation: <em>"Keep CLAUDE.md under 200 lines, give it an owner, and review changes to it like code."</em></li>
+<li><strong>Medium cost:</strong> unscoped rules (always-on unless path-scoped).</li>
+<li><strong>Low cost:</strong> skills, subagents, hooks — load only when invoked/triggered.</li>
+<li><strong>Moderate cost:</strong> system-prompt append (cached after first request).</li>
+</ul>
+<p>
+And a hard line on enforcement: <em>"A real guardrail needs to be deterministic, and the enforcement methods are hooks and permissions."</em> — i.e. a rule written in prose is a suggestion; only hooks/permissions actually enforce.
+</p>
+<p>
+Who benefits from this framing? Anthropic does — it pushes users toward token-efficient patterns (skills/subagents/hooks over CLAUDE.md bloat), which lowers their inference cost and makes Claude Code behave more predictably, which reduces churn. But the incentive is <em>aligned</em> with users here, not extractive. This is a structural shift: configuration is graduating from folklore ("put it in CLAUDE.md") to an engineering practice with cost accounting.
+</p>
+                    </div>
+                </details>
+
+                <details class="section-detail">
+                    <summary>What's Not Being Said</summary>
+                    <div class="section-content">
+                        <ul>
+<li><strong>The guide treats config as static; real config rots.</strong> It says review CLAUDE.md "like code" but doesn't address that the failure mode isn't a bad line — it's 200 good lines that were each individually justified and collectively cause context rot. There's no eval/measurement loop offered for "is this instruction still earning its tokens?"</li>
+<li><strong>It under-sells the skill-collision problem.</strong> Skills are "low cost" because they load on demand — but <em>triggering</em> is probabilistic. Two skills with near-identical descriptions will collide and the wrong one fires. The guide doesn't warn that skill descriptions are themselves a design surface.</li>
+<li><strong>The contrarian take:</strong> a skeptic would say this is Anthropic formalizing complexity it created. Seven mechanisms with overlapping uses is a lot of surface area; a simpler agent would need fewer knobs. The counter: the knobs exist because the alternative (one giant prompt) is worse, and now at least they're documented with costs.</li>
+<li><strong>Notably, the tweet's best idea — "drop the article into Claude Code and have it clean up your config" — is not in the article.</strong> That's community innovation on top of the doc, and it's the highest-leverage use.</li>
+</ul>
+                    </div>
+                </details>
+
+                <details class="section-detail">
+                    <summary>Where This Sits in the Bigger Picture</summary>
+                    <div class="section-content">
+                        <p>
+This is the configuration-layer companion to two trends Every is already tracking: <strong>sub-agent economics</strong> (digest entry 98) and <strong>context as the scarce resource</strong>. As agents get more capable, the bottleneck moves from "can the model do it" to "did you instruct it in the cheapest reliable layer." That's the same thesis as Every's own five-layer memory model in the teammate manual ("use the cheapest layer that's reliable enough; stuffing everything into CLAUDE.md causes context rot"). Anthropic has now independently arrived at — and published — the framework Every built internally. That convergence is the signal: agent configuration is becoming a teachable, standardized craft, and the firms that teach it well have a window.
+</p>
+                    </div>
+                </details>
+
+                <details class="section-detail">
+                    <summary>What's Likely Coming Next</summary>
+                    <div class="section-content">
+                        <ul>
+<li><strong>Tooling for config audits.</strong> Expect linters / <code>/doctor</code>-style commands that flag CLAUDE.md bloat, unscoped rules, and colliding skill descriptions — automating the manual audit the tweet describes. (Watch for this in Claude Code release notes.)</li>
+<li><strong>Evals for instructions.</strong> The missing piece (Section 3) gets built: a way to measure whether an instruction changes behavior, so config can be graded, not just written.</li>
+<li><strong>Org-level config governance.</strong> "Give it an owner, review like code" implies config PRs, ownership, and drift detection at team scale — a real need for enterprise clients with 100+ engineers on Claude Code.</li>
+<li><strong>Confirms the thesis if:</strong> Anthropic ships config-audit tooling within a couple releases. <strong>Disproves it if:</strong> the mechanisms proliferate further without consolidation, signaling the surface area is out of control rather than maturing.</li>
+</ul>
+                    </div>
+                </details>
+
+                <details class="section-detail">
+                    <summary>Attention Is All You Need</summary>
+                    <div class="section-content">
+                        <ul>
+<li><strong>Read in full:</strong> the guide itself — <a href="https://claude.com/blog/steering-claude-code-skills-hooks-rules-subagents-and-more" target="_blank" rel="noopener">Steering Claude Code</a>. Short, dense, immediately actionable.</li>
+<li><strong>Key insight to extract if you only skim:</strong> the cost/priority hierarchy (CLAUDE.md = high, always-on; skills/subagents/hooks = low, on-demand) and the rule that <em>only hooks + permissions enforce</em> — prose rules merely suggest.</li>
+<li><strong>Pair with:</strong> Every's own digest entry <strong>98 — Anthropic sub-agent economics</strong> (the token-cost-per-subagent floor) and the internal note that ToolSearch schema-loading itself can be the context cost. Same principle, different layer.</li>
+<li><strong>Key people:</strong> Vox (<a href="https://x.com/Voxyz_ai" target="_blank" rel="noopener">@Voxyz_ai</a>) for surfacing it; the broader Claude Code dev community (e.g. <a href="https://x.com/steipete" target="_blank" rel="noopener">@steipete</a>, <a href="https://x.com/ctatedev" target="_blank" rel="noopener">@ctatedev</a>) for the tooling-on-top patterns.</li>
+</ul>
+                    </div>
+                </details>
+
+                <details class="section-detail">
+                    <summary>What This Means for Every Consulting</summary>
+                    <div class="section-content">
+                        <p>
+<strong>Vertical:</strong> Primarily <strong>Tech (Mike)</strong>, with a strategy-layer read for <strong>Natalia</strong>.
+</p>
+<ul>
+<li><strong>Bootcamp / curriculum (Mike) — the strongest move.</strong> This is ready-made source material for the long-discussed "How to Actually Use Claude Code" session. Internal record shows Mike's run-of-show currently teaches CLAUDE.md/skills/subagents as hand-written primitives, and Nityesh's feedback about <em>context-cost-per-instruction</em> never made it into the curriculum (Thumbtack session-1 dispute, 2026-04-21). This Anthropic-authored hierarchy is the citable backbone for that module — for enterprise clients (Thumbtack ~216 engineers, Thrive Market ~150) the "review CLAUDE.md like code, give it an owner" framing maps directly to their existing eng governance.</li>
+<li><strong>Fix Claudie's own config (Nityesh).</strong> Run the tweet's "drop the article in and audit" move on Claudie's own CLAUDE.md (long) and skill descriptions to resolve the known skill-collision bug (wrong PPTX skill firing, open since 5/28). Eat our own dog food before we teach it.</li>
+<li><strong>Discovery / strategy (Natalia).</strong> The "real guardrails are deterministic — hooks and permissions, not prose" line is a clean way to set client expectations: you cannot instruct your way to safety, you have to enforce it. Useful in any AI-governance conversation.</li>
+<li><strong>Concrete next move:</strong> Mike drafts a 30-min "Steering Claude Code" curriculum module off this guide; Nityesh runs the self-audit and reports the before/after CLAUDE.md line count as a demo artifact for that session.</li>
+</ul>
+                    </div>
+                </details>
+            <div class="links">
+                <a href="https://x.com/Voxyz_ai/status/2068717846608146673" target="_blank" rel="noopener">View on X</a>
+                <a href="https://claude.com/blog/steering-claude-code-skills-hooks-rules-subagents-and-more" target="_blank" rel="noopener">Read Article</a>
+            </div>
+        </article>
 
         <article class="entry">
             <span class="signal-tag key-shift">Key Shift</span>
@@ -13870,7 +13974,7 @@ The printing press analogy Boris uses is instructive: scribes didn't disappear, 
                 <li><strong>The platform shift happened in 4 weeks.</strong> Ejaaz&rsquo;s catalog shows Claude Code crossed from developer tool to knowledge-worker platform in a single shipping sprint. Clients who evaluated it even two months ago saw a fundamentally different product.</li>
             </ol>
 
-            <p class="coda">142 of 143 sources tagged as Key Shift. The dominant theme: Claude Code&rsquo;s memory, personalization, and autonomous capabilities represent a genuine platform shift &mdash; not incremental improvement.</p>
+            <p class="coda">143 of 144 sources tagged as Key Shift. The dominant theme: Claude Code&rsquo;s memory, personalization, and autonomous capabilities represent a genuine platform shift &mdash; not incremental improvement.</p>
         </section>
 
         <footer>
