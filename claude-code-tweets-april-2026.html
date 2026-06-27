@@ -388,13 +388,102 @@
         <header>
             <h1>Signal Digest</h1>
             <p class="subtitle">What actually matters in AI &mdash; curated by Claudie for the Every Consulting team</p>
-            <p class="meta">Last updated June 26, 2026</p>
+            <p class="meta">Last updated June 27, 2026</p>
         </header>
 
         <nav class="legend">
             Each entry is tagged: <span class="tag-example key-shift">Key Shift</span> signals a genuine change in how we should think or act. <span class="tag-example noise">Noise</span> means useful context but nothing new for the team.
         </nav>
 
+
+        <article class="entry">
+            <span class="signal-tag key-shift">Key Shift</span>
+            <h2><a href="https://x.com/GergelyOrosz/status/2070735111226847242" target="_blank" rel="noopener">From 'token harder' to 'token smarter' — Coinbase halves AI spend with routing + caching</a></h2>
+            <p class="author">Brian Armstrong (@brian_armstrong), Gergely Orosz (@GergelyOrosz), dex (@dexhorthy)</p>
+            <p class="summary">Coinbase reports cutting AI token spend ~50% with the same token volume by routing to cheap-but-capable open models (GLM 5.2, Kimi 2.7) plus smart routing and caching — the operationalization of the open-weights parity shift, and the start of cost engineering as a discipline.</p>
+            
+                <details class="section-detail">
+                    <summary>Worth Your Time?</summary>
+                    <div class="section-content">
+                        <p>
+<strong>Read.</strong> This is the second-derivative of the open-weights story we logged on 2026-06-20 (entry 122). That entry called the parity; this one shows a flagship company <em>operationalizing</em> it at scale and publishing the playbook. For a consulting practice whose clients are now asking "how do we control AI spend," this is the most directly billable signal of the week.
+</p>
+                    </div>
+                </details>
+
+                <details class="section-detail">
+                    <summary>What's Actually Happening</summary>
+                    <div class="section-content">
+                        <p>
+The structural reality: through 2025, the cost lever everyone reached for was usage caps and spend alerts — friction. Armstrong is explicitly rejecting that. Coinbase's move is to treat model selection as an <em>infrastructure</em> problem, not a behavior problem: set cheap-but-capable defaults (GLM 5.2, Kimi 2.7), route each request to the cheapest model that clears the quality bar, and cache aggressively (especially the static context that gets re-sent every call). Result: token <em>volume</em> keeps climbing, token <em>spend</em> drops ~50%. The incentive is obvious — at enterprise scale, inference is now a real line item, and a 2x efficiency gain is a serious number.
+</p>
+<p>
+This is a shift, not noise, because it's a CEO of a public company publishing the mechanism, corroborated by a credible third party (Orosz) and echoed by practitioners (dexhorthy). The "token harder → token smarter" framing is the tell: the frontier of competence is moving from "can you get the model to do it" to "can you get the model to do it cheaply and reliably."
+</p>
+                    </div>
+                </details>
+
+                <details class="section-detail">
+                    <summary>What's Not Being Said</summary>
+                    <div class="section-content">
+                        <p>
+Two gaps. First, the quality-bar problem is hand-waved. "Still pretty performant" is doing heavy lifting — routing only works if you have evals that tell you which requests can safely drop to the cheap model. The hard part isn't the router; it's the measurement that feeds it. Most companies don't have that, which is exactly where outside help is valuable. Second, the contrarian read: this is bearish for the frontier labs' margins (Orosz's IPO point), but it's <em>bullish</em> for anyone who sells the integration layer — routers, eval harnesses, caching infra, and the consulting to set it up. Commoditized models push value up the stack to orchestration.
+</p>
+                    </div>
+                </details>
+
+                <details class="section-detail">
+                    <summary>Where This Sits in the Bigger Picture</summary>
+                    <div class="section-content">
+                        <p>
+Three threads converge here: (a) open-weights parity (entry 122), (b) US export controls pushing usage toward open models (entry 119, Fable 5 suspension), and (c) the services-over-software thesis (entry 8, and today's Peter Yang bookmark). Together they describe a 2026 where the model is a swappable commodity, the moat is the harness and the context, and the money is in outcomes. Cost engineering is the newest sub-discipline of that harness layer.
+</p>
+                    </div>
+                </details>
+
+                <details class="section-detail">
+                    <summary>What's Likely Coming Next</summary>
+                    <div class="section-content">
+                        <p>
+Expect: (1) "model routing" becomes a standard line in enterprise AI architecture, the way CDN/caching became standard for web; (2) a wave of routing/eval tooling (some already here — LangChain, OpenRouter-style gateways); (3) procurement conversations shifting from "which single model do we standardize on" to "which portfolio do we route across"; (4) the frontier labs respond with their own cheaper tiers and prompt-caching defaults to defend volume. Second-order: vendor-neutrality becomes a buying criterion — clients won't want to be locked to one lab.
+</p>
+                    </div>
+                </details>
+
+                <details class="section-detail">
+                    <summary>Attention Is All You Need</summary>
+                    <div class="section-content">
+                        <p>
+Foundational sources to pull for client material:
+</p>
+<ul>
+<li>Brian Armstrong's original thread (the "better defaults, not usage caps" framing) — the cleanest executive articulation.</li>
+<li>Gergely Orosz / The Pragmatic Engineer — credible corroboration and the IPO-risk angle.</li>
+<li>Prompt caching docs (Anthropic) — the caching half of the equation, since static-context caching is the cheapest win most clients haven't turned on.</li>
+<li>Entry 122 (open-weights comeback) as the precursor.</li>
+</ul>
+                    </div>
+                </details>
+
+                <details class="section-detail">
+                    <summary>What This Means for Every Consulting</summary>
+                    <div class="section-content">
+                        <p>
+This is a concrete, ready-made client offering: an <strong>"AI cost engineering" mini-engagement or module</strong> — audit a client's AI spend, find the requests that can safely route to cheaper/open models, turn on prompt caching, and stand up the evals that make routing safe. It maps cleanly onto the existing discovery-to-delivery shape. For non-technical clients (Brooker's vertical), the headline is reassuring: "you don't control AI spend with usage caps and guilt; you control it with architecture." For technical clients (Mike's vertical), it's a hands-on workshop: routers, caching, eval gates.
+</p>
+<p>
+The trap to avoid in client advice: don't sell "switch to the cheap model." Sell "measure, then route." The differentiator — and the reason a client can't just read Armstrong's tweet and DIY it — is the eval discipline that decides <em>which</em> requests can drop tiers without quality loss. That's the trainers-who-build moat applied to cost.
+</p>
+<p>
+Internally, it's also a nudge for Claudie's own setup: most of my calls reuse a large static context (CLAUDE.md, teammate files) every turn — prompt caching and tier-routing escalation points (Daniel San / Dmitry Shapiro made this exact point today) are worth Nityesh's attention.
+</p>
+                    </div>
+                </details>
+            <div class="links">
+                <a href="https://x.com/GergelyOrosz/status/2070735111226847242" target="_blank" rel="noopener">View on X</a>
+                <a href="https://x.com/brian_armstrong/status/2070670000000000000" target="_blank" rel="noopener">Read Article</a>
+            </div>
+        </article>
 
         <article class="entry">
             <span class="signal-tag key-shift">Key Shift</span>
@@ -14426,7 +14515,7 @@ The printing press analogy Boris uses is instructive: scribes didn't disappear, 
                 <li><strong>The platform shift happened in 4 weeks.</strong> Ejaaz&rsquo;s catalog shows Claude Code crossed from developer tool to knowledge-worker platform in a single shipping sprint. Clients who evaluated it even two months ago saw a fundamentally different product.</li>
             </ol>
 
-            <p class="coda">148 of 149 sources tagged as Key Shift. The dominant theme: Claude Code&rsquo;s memory, personalization, and autonomous capabilities represent a genuine platform shift &mdash; not incremental improvement.</p>
+            <p class="coda">149 of 150 sources tagged as Key Shift. The dominant theme: Claude Code&rsquo;s memory, personalization, and autonomous capabilities represent a genuine platform shift &mdash; not incremental improvement.</p>
         </section>
 
         <footer>
