@@ -398,6 +398,91 @@
 
         <article class="entry">
             <span class="signal-tag key-shift">Key Shift</span>
+            <h2><a href="https://x.com/aakashgupta/status/2071322501003759624" target="_blank" rel="noopener">The spreadsheet is the company: capturing operator judgment as a labeled dataset</a></h2>
+            <p class="author">Aakash Gupta (@aakashgupta)</p>
+            <p class="summary">AI adoption's real bottleneck isn't tooling — it's that one operator's judgment lives in their head. The fix: write every function's work as task rows with a positive AND a negative example, turning the company's own work into a labeled dataset agents and new hires can look up.</p>
+            
+                <details class="section-detail">
+                    <summary>Worth Your Time?</summary>
+                    <div class="section-content">
+                        <p>
+<strong>Read</strong> — especially Natalia, Brooker, and Nityesh. This is the clearest articulation yet of <em>what Every actually sells</em> and where the next product margin sits. One-line verdict: the moat in AI adoption is not the tool, it's the labeled judgment, and Every is one CSV column away from owning that surface.
+</p>
+                    </div>
+                </details>
+
+                <details class="section-detail">
+                    <summary>What's Actually Happening</summary>
+                    <div class="section-content">
+                        <p>
+A PM named Laurel documented her company's work as a spreadsheet: every function → Categories → Tasks, each task with a one-line description and — the load-bearing part — a <strong>Negative Example</strong>, the explicitly defined wrong version of the task sitting next to the right one. Across 200+ rows that produces positive/negative pairs: the exact structure you use to teach a model a boundary.
+</p>
+<p>
+The structural reality: the company turned its tacit operating knowledge into a labeled dataset. Two payoffs fall out at once — (1) an agent can read an inbound request and route it correctly because the edges are drawn with negatives, and (2) a brand-new hire runs the same lookup and gets the same answer the resident expert would give. The incentive shift is the headline: most orgs are still <em>hunting for the tool</em> that spreads AI across the company. Laurel spent the weeks instead <em>defining the work</em>. The tooling was the easy part.
+</p>
+<p>
+This is a shift, not noise: it relocates the bottleneck of AI adoption from "do people use the tool" to "is anyone's judgment written down precisely enough for a machine to check." That reframing is durable across model generations.
+</p>
+                    </div>
+                </details>
+
+                <details class="section-detail">
+                    <summary>What's Not Being Said</summary>
+                    <div class="section-content">
+                        <p>
+The hard part is hidden in the word "weeks." Negative examples are <em>expensive</em> — they require an expert to articulate the wrong-but-plausible version, which is exactly the tacit knowledge that resists being written down. The tweet makes it look like a documentation exercise; it's really an elicitation problem. That's precisely where an outside facilitator (read: a consultant) earns the fee. The contrarian read: most companies <em>won't</em> do this on their own, not because they lack the tool but because they lack the forcing function and the interviewer who can pull the negative example out of the expert's head. The gap is a service, not a template.
+</p>
+                    </div>
+                </details>
+
+                <details class="section-detail">
+                    <summary>Where This Sits in the Bigger Picture</summary>
+                    <div class="section-content">
+                        <p>
+This lands on the AI-adoption trajectory's "second wave." Wave one was access (give everyone ChatGPT/Claude). Wave two is <em>encoding</em> — turning org-specific judgment into machine-checkable form (skills, evals, routing rules, RAG over labeled work). Labor-market angle: it formalizes the "champion" — the 4–5 power users per department who already build tools — and turns their head-knowledge into an asset that survives their departure. It's the corporate-knowledge version of the eval/rubric turn the whole field is taking: stop scoring holistically, define atomic right/wrong boundaries.
+</p>
+                    </div>
+                </details>
+
+                <details class="section-detail">
+                    <summary>What's Likely Coming Next</summary>
+                    <div class="section-content">
+                        <p>
+Precedent: this mirrors how every durable AI system matured — from vibes to written specs to labeled evals. Second-order effects: (1) "AI enablement" engagements start shipping a <em>dataset</em> as the deliverable, not just a training; (2) the negative-example column becomes a standard artifact, and tools will auto-suggest negatives; (3) onboarding and agent-routing collapse into the same lookup table. Expect "turn your company into a dataset" to become a positioning line within a quarter — Every should say it first.
+</p>
+                    </div>
+                </details>
+
+                <details class="section-detail">
+                    <summary>Attention Is All You Need</summary>
+                    <div class="section-content">
+                        <p>
+Foundational source: the original tweet + screenshot (Aakash Gupta, @aakashgupta, https://x.com/aakashgupta/status/2071322501003759624). The deeper root is the positive/negative-pair structure from contrastive learning and the eval-rubric literature (cf. binary LLM-judge / BINEVAL work bookmarked 2026-06-28). Key person to watch: Aakash Gupta for productized PM/AI workflows. Internal source-of-truth: Every's <code>discovery-to-process-map</code> skill and its <code>references/csv-structure.md</code>.
+</p>
+                    </div>
+                </details>
+
+                <details class="section-detail">
+                    <summary>What This Means for Every Consulting</summary>
+                    <div class="section-content">
+                        <p>
+This is net-new product surface, and it sits one column away from what we already ship.
+</p>
+<ul>
+<li><strong>Deliverable:</strong> add a <strong>Negative Example</strong> column to the <code>discovery-to-process-map</code> CSV. Lowest-effort, highest-leverage change — it converts our workflow inventory into a labeled dataset (owner: Nityesh, one-line spec change).</li>
+<li><strong>Sales line (Natalia/Brooker):</strong> "We don't just train your team — we capture your best operator's judgment as a reusable, machine-checkable dataset that survives turnover." This directly answers the recurring "what happens when our champion leaves" objection and justifies the $12K eval-bearing skill tier (priced 2026-06-08 on exactly the "reference files + evaluation layer" rationale).</li>
+<li><strong>Session artifact:</strong> have each client champion fill positive/negative pairs for their top 5 workflows live — instant eval set <em>and</em> a new-hire lookup. Natural anchor for Bloomberg's planned speaker series and the compliance/knowledge-base hackathon.</li>
+<li><strong>Evidence we already hit this wall:</strong> the Nov 2025 Bloomberg office-hours notes flagged "identify AI champions... need a strategy to encourage team-wide sharing." That was the magic-in-one-head problem, unsolved. This is the mechanism that solves it.</li>
+</ul>
+                    </div>
+                </details>
+            <div class="links">
+                <a href="https://x.com/aakashgupta/status/2071322501003759624" target="_blank" rel="noopener">View on X</a>
+            </div>
+        </article>
+
+        <article class="entry">
+            <span class="signal-tag key-shift">Key Shift</span>
             <h2><a href="https://x.com/GergelyOrosz/status/2071126385121452190" target="_blank" rel="noopener">The breakthrough isn't chat — it's AI wired into ALL internal systems that 'just works</a></h2>
             <p class="author">Gergely Orosz (@GergelyOrosz) / Andrej Karpathy (@karpathy)</p>
             <p class="summary">Gergely Orosz, after talking to people inside Anthropic, reframes what Karpathy meant: the breakthrough isn't a chat surface in Slack — it's an always-on cloud AI wired into ALL of a company's internal systems that reliably 'just works.' The locus of value moves from the model to the harness + integration layer.</p>
@@ -14738,7 +14823,7 @@ The printing press analogy Boris uses is instructive: scribes didn't disappear, 
                 <li><strong>The platform shift happened in 4 weeks.</strong> Ejaaz&rsquo;s catalog shows Claude Code crossed from developer tool to knowledge-worker platform in a single shipping sprint. Clients who evaluated it even two months ago saw a fundamentally different product.</li>
             </ol>
 
-            <p class="coda">151 of 152 sources tagged as Key Shift. The dominant theme: Claude Code&rsquo;s memory, personalization, and autonomous capabilities represent a genuine platform shift &mdash; not incremental improvement.</p>
+            <p class="coda">152 of 153 sources tagged as Key Shift. The dominant theme: Claude Code&rsquo;s memory, personalization, and autonomous capabilities represent a genuine platform shift &mdash; not incremental improvement.</p>
         </section>
 
         <footer>
