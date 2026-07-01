@@ -398,6 +398,106 @@
 
         <article class="entry">
             <span class="signal-tag key-shift">Key Shift</span>
+            <h2><a href="https://x.com/simonw/status/2072068898648949184" target="_blank" rel="noopener">Claude Sonnet 5 launches — Opus-class quality, but a new tokenizer quietly reprices everything</a></h2>
+            <p class="author">Anthropic (@claudeai), analysis by Simon Willison (@simonw)</p>
+            <p class="summary">Sonnet 5 lands near Opus 4.8 quality at Sonnet prices, but a new tokenizer produces ~30% more tokens per input — a stealth 1.3–1.4x price hike on English/Spanish/code that stable per-token rates hide.</p>
+            
+                <details class="section-detail">
+                    <summary>Worth Your Time?</summary>
+                    <div class="section-content">
+                        <p>
+<strong>READ.</strong> A frontier Sonnet that approaches Opus 4.8 quality at a fraction of the price is the single most consequential lever on our own automation costs and our clients' AI budgets — and the tokenizer change is the kind of detail that silently blows up a cost model if nobody reads the release notes.
+</p>
+                    </div>
+                </details>
+
+                <details class="section-detail">
+                    <summary>What's Actually Happening</summary>
+                    <div class="section-content">
+                        <p>
+Anthropic shipped <strong>Claude Sonnet 5</strong> on 2026-06-30. The headline: performance "close to that of Opus 4.8, but at lower prices," and the most agentic Sonnet yet — plans, uses browsers/terminals, runs autonomously. Same tool/platform features as Sonnet 4.6, adaptive thinking on by default, 1M-token context, 128K max output.
+</p>
+<p>
+The structural story is underneath the announcement. Simon Willison went straight to the developer docs and found the real shift: <strong>a new tokenizer</strong>. The same input text now produces <strong>~30% more tokens</strong> than Sonnet 4.6. Per-token rates are unchanged ($3/M input, $15/M output; intro discount $2/$10 through Aug 31) — but because you're billed for more tokens, effective cost rises:
+</p>
+<ul>
+<li>English: <strong>1.42x</strong></li>
+<li>Spanish: <strong>1.33x</strong></li>
+<li>Python code: <strong>1.27x</strong></li>
+<li>Simplified Mandarin: <strong>~1.01x</strong> (essentially unchanged)</li>
+</ul>
+<p>
+Also notable: <code>temperature</code>, <code>top_p</code>, <code>top_k</code> are <strong>no longer supported</strong> — a real breaking change for anyone who tuned sampling. Aaron Levie reports Sonnet 5 pulls ahead of Sonnet 4.6 on Box's agentic enterprise-document eval, so the quality claim holds up on real multi-step work.
+</p>
+<p>
+The incentive is clean: sell "Opus quality at Sonnet prices" as the top-line, while a tokenizer change recovers margin in a way that never shows up on the pricing page. That's not sinister — it's just where the real number lives.
+</p>
+                    </div>
+                </details>
+
+                <details class="section-detail">
+                    <summary>What's Not Being Said</summary>
+                    <div class="section-content">
+                        <p>
+The "lower prices" framing is doing a lot of work. For English-heavy workloads the <em>effective</em> price of comparable output is up ~40% versus Sonnet 4.6 unless Sonnet 5's higher quality lets you do the same job in fewer calls or shorter outputs. Whether it's cheaper is now an <strong>empirical question per workload</strong>, not a headline you can trust. Nobody in the launch thread is comparing effective cost on a fixed task — they're comparing sticker rates. The dropped sampling params also quietly signal Anthropic steering everyone toward adaptive thinking and away from hand-tuned determinism.
+</p>
+                    </div>
+                </details>
+
+                <details class="section-detail">
+                    <summary>Where This Sits in the Bigger Picture</summary>
+                    <div class="section-content">
+                        <p>
+This is now a <strong>pattern, not a one-off</strong>: it's a near-exact rerun of the Opus 4.7 tokenizer repricing (bookmarked 2026-04-17, "1.0–1.35x depending on content type"). Tokenizer changes have become a recurring, under-reported lever — the fourth token-economics beat we've tracked (alongside ttunguz's dual-axis cost framing and Levie's model-routing thesis). The quality frontier keeps compressing downward into cheaper tiers (Sonnet approaching last-gen Opus), while the actual cost curve gets murkier as tokenization, thinking budgets, and caching become the real cost drivers instead of the advertised per-token rate. "What model, at what effective cost, for what task" is now a genuine analytical skill — exactly the kind of thing clients pay us to have already figured out.
+</p>
+                    </div>
+                </details>
+
+                <details class="section-detail">
+                    <summary>What's Likely Coming Next</summary>
+                    <div class="section-content">
+                        <p>
+Expect an Opus 4.8 → Opus 5 refresh on the same tokenizer, and a wave of "is Sonnet 5 actually cheaper?" benchmarking over the next week. Teams with multilingual or code-heavy pipelines will re-run cost models; some will find Sonnet 5 net-cheaper (fewer retries, better one-shot), some net-pricier. The intro discount through Aug 31 is a migration nudge — real repricing bites Sept 1.
+</p>
+                    </div>
+                </details>
+
+                <details class="section-detail">
+                    <summary>Attention Is All You Need</summary>
+                    <div class="section-content">
+                        <ul>
+<li><strong>Primary:</strong> Anthropic's Sonnet 5 "what's new" developer docs (the announcement post buries the tokenizer change).</li>
+<li><strong>Best analysis:</strong> Simon Willison, <em>What's new in Claude Sonnet 5</em> — https://simonwillison.net/2026/Jun/30/claude-sonnet-5/</li>
+<li><strong>Independent eval:</strong> Aaron Levie (@levie) on Box's Complex Work Eval — https://x.com/levie/status/2072046374045249671</li>
+</ul>
+                    </div>
+                </details>
+
+                <details class="section-detail">
+                    <summary>What This Means for Every Consulting</summary>
+                    <div class="section-content">
+                        <p>
+<em>(Relevance report from a scan of our conversation logs, memory, and teammate profiles appears in the paired bookmark file: <code>~/bookmarks/2026-06-30-claude-sonnet-5-launch.md</code>.)</em>
+</p>
+<p>
+Headline actions:
+</p>
+<ul>
+<li><strong>Re-cost our own automation.</strong> Our launchd/background jobs and cheaper agent work are candidates to move onto Sonnet 5 — but the ~30% token inflation means "switch to Sonnet to save money" needs a real per-job test, not an assumption. Effective cost, not sticker rate.</li>
+<li><strong>Update the model-selection training module.</strong> Clients need the "effective cost ≠ per-token rate" lesson explicitly; the tokenizer story is the perfect concrete example.</li>
+<li><strong>Flag it to any client budgeting Claude API spend.</strong> English- and code-heavy pipelines see a stealth ~1.3–1.4x increase Sept 1 when the intro discount ends. Better they hear it from us now.</li>
+<li><strong>Warn engineering-track clients</strong> about the dropped <code>temperature</code>/<code>top_p</code>/<code>top_k</code> — anyone relying on deterministic sampling has a breaking change.</li>
+</ul>
+                    </div>
+                </details>
+            <div class="links">
+                <a href="https://x.com/simonw/status/2072068898648949184" target="_blank" rel="noopener">View on X</a>
+                <a href="https://simonwillison.net/2026/Jun/30/claude-sonnet-5/" target="_blank" rel="noopener">Read Article</a>
+            </div>
+        </article>
+
+        <article class="entry">
+            <span class="signal-tag key-shift">Key Shift</span>
             <h2><a href="https://x.com/WesRoth/status/2071805931445538858" target="_blank" rel="noopener">Claude goes GA in Microsoft Foundry — Azure becomes the neutral OS for frontier AI</a></h2>
             <p class="author">Wes Roth (@WesRoth)</p>
             <p class="summary">Claude is now generally available in Microsoft Foundry on Azure — the only cloud offering both Claude and GPT frontier models inside one enterprise governance, identity, and billing perimeter.</p>
@@ -15145,7 +15245,7 @@ The printing press analogy Boris uses is instructive: scribes didn't disappear, 
                 <li><strong>The platform shift happened in 4 weeks.</strong> Ejaaz&rsquo;s catalog shows Claude Code crossed from developer tool to knowledge-worker platform in a single shipping sprint. Clients who evaluated it even two months ago saw a fundamentally different product.</li>
             </ol>
 
-            <p class="coda">155 of 156 sources tagged as Key Shift. The dominant theme: Claude Code&rsquo;s memory, personalization, and autonomous capabilities represent a genuine platform shift &mdash; not incremental improvement.</p>
+            <p class="coda">156 of 157 sources tagged as Key Shift. The dominant theme: Claude Code&rsquo;s memory, personalization, and autonomous capabilities represent a genuine platform shift &mdash; not incremental improvement.</p>
         </section>
 
         <footer>
